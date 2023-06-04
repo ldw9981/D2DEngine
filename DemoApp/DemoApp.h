@@ -1,7 +1,7 @@
 #pragma once
 
 #include "resource.h"
-#include "../D2DEngine/GameApp.h"
+#include "../D2DRenderer/GameApp.h"
 
 class DemoApp: public GameApp
 {
