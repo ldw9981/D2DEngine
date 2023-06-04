@@ -9,7 +9,7 @@ class GameApp
 public:
 	GameApp(HINSTANCE hInstance, int nCmdShow);
 	~GameApp();
-
+protected:
 	HACCEL m_hAccelTable;
 	MSG m_msg;
 	HINSTANCE m_hInstance;                                // 현재 인스턴스입니다.
@@ -18,16 +18,12 @@ public:
 	WNDCLASSEXW m_wcex;
 	HWND m_hWnd;
 	int  m_nCmdShow;
-
+public:
 	//static GameApp* m_pInstance;
-
-
-
 	void Initialize();
 	void Loop();
-
-	void Update();
-	void Render();
+	virtual void Update();
+	virtual void Render();
 	void Finalize();
 
 

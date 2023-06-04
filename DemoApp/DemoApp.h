@@ -7,6 +7,4 @@ class DemoApp: public GameApp
 {
 public:
 	DemoApp(HINSTANCE hInstance,int nCmdShow);
-
-	HWND mem;
 };

@@ -24,17 +24,17 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
+    <ClInclude Include="D2DBrushAndShape.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp">
+    <ClCompile Include="D2DBrushAndShape.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Test.rc">
+    <ResourceCompile Include="D2DBrushAndShape.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -42,7 +42,7 @@
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Test.ico">
+    <Image Include="D2DBrushAndShape.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

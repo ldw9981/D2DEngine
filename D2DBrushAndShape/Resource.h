@@ -1,17 +1,17 @@
 ﻿//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++에서 생성한 포함 파일입니다.
-// 다음에서 사용 BasicD2D.rc
+// 다음에서 사용 D2DBrushAndShape.rc
 
 #define IDS_APP_TITLE			103
 
 #define IDR_MAINFRAME			128
-#define IDD_BASICD2D_DIALOG	102
+#define IDD_D2DBRUSHANDSHAPE_DIALOG	102
 #define IDD_ABOUTBOX			103
 #define IDM_ABOUT				104
 #define IDM_EXIT				105
-#define IDI_BASICD2D			107
+#define IDI_D2DBRUSHANDSHAPE			107
 #define IDI_SMALL				108
-#define IDC_BASICD2D			109
+#define IDC_D2DBRUSHANDSHAPE			109
 #define IDC_MYICON				2
 #ifndef IDC_STATIC
 #define IDC_STATIC				-1

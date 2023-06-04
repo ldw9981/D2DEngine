@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="pch.h" />
