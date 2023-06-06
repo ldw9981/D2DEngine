@@ -19,15 +19,14 @@ protected:
 	HWND m_hWnd;
 	int  m_nCmdShow;
 public:
-	//static GameApp* m_pInstance;
-	void Initialize();
-	void Loop();
+	static GameApp* m_pInstance;
+	virtual bool Initialize();
+	virtual void Loop();
 	virtual void Update();
 	virtual void Render();
-	void Finalize();
+	virtual void Finalize();
 
 
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	static INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);	
 };
 

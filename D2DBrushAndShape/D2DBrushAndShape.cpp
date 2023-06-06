@@ -16,10 +16,13 @@ WCHAR           szWindowClass[MAX_LOADSTRING];            // 기본 창 클래�
 
 //  D2D 개체 인터페이스 포인터 변수
 ID2D1Factory* g_pD2DFactory;
+
+//무언가 그릴수있는 렌더타겟, 장치 의존 리소스
 ID2D1HwndRenderTarget* g_pRenderTarget;
+
+// 렌더타겟이 생성하는 리소스 역시 장치의존
 ID2D1SolidColorBrush* g_pBlackBrush;
 ID2D1SolidColorBrush* g_pGrayBrush;
-
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -69,7 +72,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	g_hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
 	g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+		CW_USEDEFAULT, 0, 800, 600, nullptr, nullptr, hInstance, nullptr);
 
 	if (!g_hWnd)
 	{
@@ -101,9 +104,7 @@ BOOL InitDirect2D()
 
 
 	/*
-		Direct3D 장치에 바인딩된 리소스를 만듭니다.
-		Direct3D 장치가 손실된 경우(예: 디스플레이 변경, 원격, 비디오 카드 제거 등)
-		리소스를 다시 생성해야 하는 경우를 대비하여 모두 여기에 중앙 집중화되어 있습니다.
+		Direct3D 장치에 바인딩된 리소스를 만듭니다.		
 	*/
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
@@ -179,20 +180,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			D2D1_SIZE_F size = g_pRenderTarget->GetSize();
-
-
 			g_pRenderTarget->BeginDraw();
 			g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
 
-			g_pRenderTarget->DrawRectangle()
+			D2D1_SIZE_F size = g_pRenderTarget->GetSize();
+			for (float y=0 ; y< size.height ; y+=10 )
+			{
+				g_pRenderTarget->DrawLine(
+					D2D1::Point2F(0.0f,y),
+					D2D1::Point2F(size.width ,y),
+					g_pBlackBrush, 0.5f
 
+				);
+			}
+
+			g_pRenderTarget->FillRectangle(
+				D2D1::RectF(size.width / 2 - 150.0f, size.height / 2 - 150.0f,
+					size.width / 2 + 150.0f, size.height / 2 + 150.0f), g_pGrayBrush);
+		
 			g_pRenderTarget->DrawRectangle(
 				D2D1::RectF(size.width/2 - 50.0f , size.height / 2 - 50.0f,
 				size.width / 2 + 50.0f, size.height / 2 + 50.0f),g_pBlackBrush	);
-			
 
 			g_pRenderTarget->EndDraw();
+			
 		}
 	}
 

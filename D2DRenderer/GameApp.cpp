@@ -1,16 +1,23 @@
 #include "pch.h"
 #include "GameApp.h"
 
-//GameApp* GameApp::m_pInstance=nullptr;
+GameApp* GameApp::m_pInstance = nullptr;
+
+
+
+LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	return  GameApp::m_pInstance->WndProc(hWnd,message,wParam,lParam);
+}
 
 GameApp::GameApp(HINSTANCE hInstance, int nCmdShow)
 	:m_nCmdShow(nCmdShow), m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp")
 {
-	//GameApp::m_pInstance = this;
+	GameApp::m_pInstance = this;
 	m_wcex.hInstance = hInstance;
 	m_wcex.cbSize = sizeof(WNDCLASSEX);
 	m_wcex.style = CS_HREDRAW | CS_VREDRAW;
-	m_wcex.lpfnWndProc = GameApp::WndProc;
+	m_wcex.lpfnWndProc = DefaultWndProc;
 	m_wcex.cbClsExtra = 0;
 	m_wcex.cbWndExtra = 0;
 	m_wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
@@ -24,7 +31,7 @@ GameApp::~GameApp()
 }
 
 // 윈도우 정보는 게임 마다 다를수 있으므로 등록,생성,보이기만 한다.
-void GameApp::Initialize()
+bool GameApp::Initialize()
 {
 	// 등록
 	RegisterClassExW(&m_wcex);
@@ -37,12 +44,13 @@ void GameApp::Initialize()
 
 	if (!m_hWnd)
 	{
-		return;
+		return false;
 	}
 
 	// 윈도우 보이기
 	ShowWindow(m_hWnd, m_nCmdShow);
 	UpdateWindow(m_hWnd);
+	return true;
 }
 
 void GameApp::Loop()
@@ -153,24 +161,4 @@ LRESULT CALLBACK GameApp::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
 	}
 
 	return 0;
-}
-
-// 정보 대화 상자의 메시지 처리기입니다.
-INT_PTR CALLBACK GameApp::About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	UNREFERENCED_PARAMETER(lParam);
-	switch (message)
-	{
-	case WM_INITDIALOG:
-		return (INT_PTR)TRUE;
-
-	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-		{
-			EndDialog(hDlg, LOWORD(wParam));
-			return (INT_PTR)TRUE;
-		}
-		break;
-	}
-	return (INT_PTR)FALSE;
 }

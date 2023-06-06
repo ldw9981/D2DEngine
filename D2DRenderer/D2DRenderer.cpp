@@ -19,9 +19,9 @@ D2DRenderer::~D2DRenderer()
 {
 }
 
-BOOL D2DRenderer::Initialize()
+bool D2DRenderer::Initialize()
 {
-
+	return true;
 }
 
 void D2DRenderer::UnInitialize()
