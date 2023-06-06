@@ -3,19 +3,84 @@
 
 #include "framework.h"
 #include "D2DDrawBitmap.h"
+#include <d2d1.h>
+#include <wincodec.h>
 
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HINSTANCE g_hInst;                                // 현재 인스턴스입니다.
+HWND g_hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+
+//  D2D 개체 인터페이스 포인터 변수
+ID2D1Factory* g_pD2DFactory;
+ID2D1HwndRenderTarget* g_pRenderTarget;
+
+
+IWICImagingFactory* g_pIWICFactory;
+ID2D1Bitmap* g_pD2DBitmap;
+IWICFormatConverter* g_pConvertedSourceBitmap;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+
+
+BOOL InitDirect2D()
+{
+    HRESULT hr = S_OK;
+    // COM 사용 시작
+    hr = CoInitialize(NULL);
+    if (FAILED(hr))
+        return FALSE;
+
+    /*	장치에 바인딩되지 않은 리소스를 만듭니다.수명은 앱이 지속되는 동안 효과적으로 연장됩니다.
+        이러한 리소스에는 Direct2D 및 DirectWrite 팩터리와
+        DirectWrite 텍스트 형식 개체(특정 글꼴 특성을 식별하는 데 사용됨)가 포함됩니다.
+    */
+    hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &g_pD2DFactory);
+    if (FAILED(hr))
+        return FALSE;
+
+
+    /*
+        Direct3D 장치에 바인딩된 리소스를 만듭니다.
+        Direct3D 장치가 손실된 경우(예: 디스플레이 변경, 원격, 비디오 카드 제거 등)
+        리소스를 다시 생성해야 하는 경우를 대비하여 모두 여기에 중앙 집중화되어 있습니다.
+    */
+    RECT rc;
+    GetClientRect(g_hWnd, &rc);
+
+    D2D1_SIZE_U size = D2D1::SizeU(
+        rc.right - rc.left,
+        rc.bottom - rc.top);
+
+    // Create a Direct2D render target.
+    hr = g_pD2DFactory->CreateHwndRenderTarget(
+        D2D1::RenderTargetProperties(),
+        D2D1::HwndRenderTargetProperties(g_hWnd, size),
+        &g_pRenderTarget);
+
+    if (FAILED(hr))
+        return FALSE;
+
+    return TRUE;
+}
+
+void UninitDirect2D()
+{
+    if (g_pRenderTarget) g_pRenderTarget->Release();
+    if (g_pD2DFactory) g_pD2DFactory->Release();
+
+    // COM 사용 끝
+    CoUninitialize();
+}
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -38,6 +103,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    InitDirect2D();
+
+
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_D2DDRAWBITMAP));
 
     MSG msg;
@@ -51,6 +119,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+
+    UninitDirect2D();
 
     return (int) msg.wParam;
 }
@@ -95,18 +166,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+   g_hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!g_hWnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(g_hWnd, nCmdShow);
+   UpdateWindow(g_hWnd);
 
    return TRUE;
 }
