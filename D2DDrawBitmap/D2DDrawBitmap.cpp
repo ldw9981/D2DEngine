@@ -205,17 +205,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			g_pRenderTarget->BeginDraw();
-			g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
+            g_pRenderTarget->BeginDraw();
+            g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
 
+            // SetTransform을 사용한다면  기본 단위행렬로 초기 해야한다.
+            g_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+			D2D1_VECTOR_2F pos{0,0};
+			D2D1_SIZE_F size = g_pD2DBitmap->GetSize();
+			D2D1_RECT_F rect = { pos.x , pos.y, pos.x + size.width,pos.y+size.height };
+			g_pRenderTarget->DrawBitmap(g_pD2DBitmap, rect);            
+            
+            
+            g_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 300));
+            g_pRenderTarget->DrawBitmap(g_pD2DBitmap);
+           
 
-            
-            
-            D2D1_VECTOR_2F pos{500.0f,250.0f};
-            D2D1_SIZE_F size = g_pD2DBitmap->GetSize();
-            D2D1_RECT_F rect = { pos.x,pos.y, pos.x + size.width,pos.y+size.height };
-            g_pRenderTarget->DrawBitmap(g_pD2DBitmap, rect);
-            
 			g_pRenderTarget->EndDraw();
 		}
 	}
