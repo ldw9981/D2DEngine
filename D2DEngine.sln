@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2DBrushAndShape", "D2DBrus
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2DDrawText", "D2DDrawText\D2DDrawText.vcxproj", "{1CE95581-86B7-4700-8451-A8834B27DD23}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2DDrawBitmap", "D2DDrawBitmap\D2DDrawBitmap.vcxproj", "{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{1CE95581-86B7-4700-8451-A8834B27DD23}.Release|x64.Build.0 = Release|x64
 		{1CE95581-86B7-4700-8451-A8834B27DD23}.Release|x86.ActiveCfg = Release|Win32
 		{1CE95581-86B7-4700-8451-A8834B27DD23}.Release|x86.Build.0 = Release|Win32
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Debug|x64.ActiveCfg = Debug|x64
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Debug|x64.Build.0 = Debug|x64
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Debug|x86.ActiveCfg = Debug|Win32
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Debug|x86.Build.0 = Debug|Win32
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Release|x64.ActiveCfg = Release|x64
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Release|x64.Build.0 = Release|x64
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Release|x86.ActiveCfg = Release|Win32
+		{40EA5564-8DD4-4584-BD2F-98B1AF4097B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
