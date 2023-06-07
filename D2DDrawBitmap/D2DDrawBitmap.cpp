@@ -6,6 +6,7 @@
 #include <d2d1.h>
 #include <wincodec.h>
 #include <comdef.h>
+#include <d2d1_1helper.h>
 
 #define MAX_LOADSTRING 100
 
@@ -75,6 +76,8 @@ HRESULT CreateD2DBitmapFromFile(const WCHAR* szFilePath,ID2D1Bitmap** ppID2D1Bit
 		hr = g_pRenderTarget->CreateBitmapFromWicBitmap(pConverter, NULL, ppID2D1Bitmap);
 	}
 
+
+    // 파일을 사용할때마다 다시 만든다.
     if(pConverter)  
         pConverter->Release();
        
@@ -92,7 +95,7 @@ BOOL InitDirect2D()
 	WCHAR buffer[MAX_PATH];
 	// Get the current working directory
 	DWORD result = GetCurrentDirectory(MAX_PATH, buffer);
-    ::MessageBox(g_hWnd, buffer, L"WORKING", MB_OK);
+    OutputDebugString(buffer);
 
     HRESULT hr = S_OK;
     // COM 사용 시작
@@ -152,8 +155,7 @@ BOOL InitDirect2D()
 }
 
 void UninitDirect2D()
-{
-    
+{    
     if (g_pD2DBitmap)   g_pD2DBitmap->Release();
     if (g_pWICFactory) g_pWICFactory->Release();
     if (g_pRenderTarget) g_pRenderTarget->Release();
@@ -206,8 +208,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			g_pRenderTarget->BeginDraw();
 			g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
 
-            g_pRenderTarget->DrawBitmap(g_pD2DBitmap);
 
+            
+            
+            D2D1_VECTOR_2F pos{500.0f,250.0f};
+            D2D1_SIZE_F size = g_pD2DBitmap->GetSize();
+            D2D1_RECT_F rect = { pos.x,pos.y, pos.x + size.width,pos.y+size.height };
+            g_pRenderTarget->DrawBitmap(g_pD2DBitmap, rect);
+            
 			g_pRenderTarget->EndDraw();
 		}
 	}
