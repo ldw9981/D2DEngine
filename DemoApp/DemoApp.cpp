@@ -69,7 +69,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     
     
     //GameApp App(hInstance, nCmdShow);   // 기본클래스도 윈도우 생성,메시지 루프 잘작동한다.
-    DemoApp App(hInstance,nCmdShow);  // 생성자에서 아이콘,윈도우 이름만 바꾼다
+    DemoApp App(hInstance);  // 생성자에서 아이콘,윈도우 이름만 바꾼다
 
     App.Initialize();
     App.Loop();

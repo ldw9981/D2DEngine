@@ -7,7 +7,7 @@
 class DemoApp: public GameApp
 {
 public:
-	DemoApp(HINSTANCE hInstance,int nCmdShow);
+	DemoApp(HINSTANCE hInstance);
 
 	ID2D1Bitmap* m_pD2DBitmap = nullptr;
 
