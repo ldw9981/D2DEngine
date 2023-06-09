@@ -10,7 +10,7 @@ class D2DRenderer;
 class GameApp
 {
 public:
-	GameApp(HINSTANCE hInstance, int nCmdShow);
+	GameApp(HINSTANCE hInstance);
 	~GameApp();
 
 	

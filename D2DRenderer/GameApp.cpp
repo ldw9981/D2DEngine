@@ -11,8 +11,8 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 	return  GameApp::m_pInstance->WndProc(hWnd,message,wParam,lParam);
 }
 
-GameApp::GameApp(HINSTANCE hInstance, int nCmdShow)
-	:m_nCmdShow(nCmdShow), m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp")
+GameApp::GameApp(HINSTANCE hInstance)
+	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp")
 {
 	GameApp::m_pInstance = this;
 	m_wcex.hInstance = hInstance;
@@ -49,7 +49,7 @@ bool GameApp::Initialize()
 	}
 
 	// 윈도우 보이기
-	ShowWindow(m_hWnd, m_nCmdShow);
+	ShowWindow(m_hWnd,SW_SHOW);
 	UpdateWindow(m_hWnd);
 
 	m_pD2DRenderer = new D2DRenderer;
