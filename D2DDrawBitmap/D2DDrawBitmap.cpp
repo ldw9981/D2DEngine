@@ -212,7 +212,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             g_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 			D2D1_VECTOR_2F pos{0,0};
 			D2D1_SIZE_F size = g_pD2DBitmap->GetSize();
-			D2D1_RECT_F rect = { pos.x , pos.y, pos.x + size.width,pos.y+size.height };
+			D2D1_RECT_F rect = { pos.x , pos.y, pos.x + size.width*1.5f,pos.y+size.height*1.5f };
 			g_pRenderTarget->DrawBitmap(g_pD2DBitmap, rect);            
             
             

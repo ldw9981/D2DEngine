@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "GameApp.h"
+#include "D2DRenderer.h"
 
 GameApp* GameApp::m_pInstance = nullptr;
-
+HWND GameApp::m_hWnd;
 
 
 LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -50,6 +51,14 @@ bool GameApp::Initialize()
 	// 윈도우 보이기
 	ShowWindow(m_hWnd, m_nCmdShow);
 	UpdateWindow(m_hWnd);
+
+	m_pD2DRenderer = new D2DRenderer;
+	HRESULT hr = m_pD2DRenderer->Initialize();
+	if (FAILED(hr))
+	{
+		MessageBoxComError(hr);
+	}
+
 	return true;
 }
 
@@ -99,15 +108,32 @@ void GameApp::Update()
 void GameApp::Render()
 {
 
+	D2DRenderer::m_pRenderTarget->BeginDraw();
+	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
+
+	m_pD2DRenderer->EndDraw();
 }
 
 void GameApp::Finalize()
 {
-
+	m_pD2DRenderer->Finalize();
+	delete m_pD2DRenderer;
+	m_pD2DRenderer=nullptr;
 }
 
 
 
+
+BOOL GameApp::GetClientRect(LPRECT lpRect)
+{
+	return ::GetClientRect(m_hWnd, lpRect);
+}
+
+int GameApp::MessageBoxComError(HRESULT hr)
+{
+	_com_error err(hr);
+	return ::MessageBox(m_hWnd, err.ErrorMessage(), L"FAILED", MB_OK);
+}
 
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)

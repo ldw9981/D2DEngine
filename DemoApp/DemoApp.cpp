@@ -3,6 +3,8 @@
 
 #include "framework.h"
 #include "DemoApp.h"
+#include "../D2DRenderer/D2DRenderer.h"
+#include <d2d1.h>
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 
@@ -22,6 +24,40 @@ DemoApp::DemoApp(HINSTANCE hInstance,int nCmdShow)
     m_hAccelTable = LoadAccelerators(m_hInstance, MAKEINTRESOURCE(IDC_DEMOAPP));
 }
 
+
+bool DemoApp::Initialize()
+{
+    bool bRet = GameApp::Initialize();
+	if (!bRet)
+	    return false;
+
+    HRESULT hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap);
+    if (FAILED(hr))
+    {
+        MessageBoxComError(hr);
+        return false;
+    }	
+    return true;
+}
+
+void DemoApp::Finalize()
+{
+    if(m_pD2DBitmap!=nullptr)
+        m_pD2DBitmap->Release();
+
+    GameApp::Finalize();
+}
+
+void DemoApp::Render()
+{
+    D2DRenderer::m_pRenderTarget->BeginDraw();
+    D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
+
+    if(m_pD2DBitmap)
+        D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap);
+	
+    m_pD2DRenderer->EndDraw();
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
