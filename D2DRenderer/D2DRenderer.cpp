@@ -7,16 +7,13 @@
 #include "GameApp.h"
 
 #pragma comment(lib,"d2d1.lib")
+#pragma comment(lib,"dwrite.lib")
 
-// TODO: 라이브러리 함수의 예제입니다.
-void fnD2DRenderer()
-{
-}
 
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 
 D2DRenderer::D2DRenderer()
-    :m_pD2DFactory(nullptr),m_pWICFactory(nullptr)
+    :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr)
 {
 
 }
@@ -53,6 +50,7 @@ HRESULT D2DRenderer::Initialize()
             rc.right - rc.left,
             rc.bottom - rc.top);
 
+		
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
@@ -71,8 +69,35 @@ HRESULT D2DRenderer::Initialize()
         );
     }
 
+	if (SUCCEEDED(hr))
+	{
+		// DirectWrite 팩터리를 만듭니다.
+		hr = DWriteCreateFactory(
+			DWRITE_FACTORY_TYPE_SHARED,
+			__uuidof(m_pDWriteFactory),
+			reinterpret_cast<IUnknown**>(&m_pDWriteFactory));
+	}
+	if (SUCCEEDED(hr))
+	{
+		// DirectWrite 텍스트 형식 개체를 만듭니다.
+		hr = m_pDWriteFactory->CreateTextFormat(
+			L"Cooper", // FontName    제어판-모든제어판-항목-글꼴-클릭 으로 글꼴이름 확인가능
+			NULL,
+			DWRITE_FONT_WEIGHT_NORMAL,
+			DWRITE_FONT_STYLE_NORMAL,
+			DWRITE_FONT_STRETCH_NORMAL,
+			20.0f,   // Font Size
+			L"", //locale
+			&m_pDWriteTextFormat
+		);
+	}	
 
-
+	if (SUCCEEDED(hr))
+	{
+		// 텍스트를 수평 및 수직으로 중앙에 맞춥니다.
+		//m_pDWriteTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+		//m_pDWriteTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+	}
     return hr;
 }
 
@@ -86,6 +111,19 @@ void D2DRenderer::EndDraw()
 HRESULT D2DRenderer::CreateD2DBitmapFromFile(const WCHAR* szFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {
 	HRESULT hr;
+	std::wstring strPath(szFilePath);
+	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapContainer.find(strPath);
+	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
+	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
+	if (it != m_BitmapContainer.end())
+	{
+		ID2D1Bitmap* pBitmap = (*it).second;
+		*ppID2D1Bitmap = pBitmap;
+		pBitmap->AddRef();
+		hr=S_OK;
+		return hr;
+	}
+
 	// Create a decoder
 	IWICBitmapDecoder* pDecoder = NULL;
 	IWICFormatConverter* pConverter = NULL;

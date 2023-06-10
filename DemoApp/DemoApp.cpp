@@ -31,7 +31,18 @@ bool DemoApp::Initialize()
 	if (!bRet)
 	    return false;
 
-    HRESULT hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap);
+    HRESULT hr;
+
+    hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
+    if (SUCCEEDED(hr))
+    {
+        hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
+    }
+
+    //ULONG count = m_pD2DBitmap->AddRef();
+
+    //m_pD2DBitmap->Release();
+
     if (FAILED(hr))
     {
         MessageBoxComError(hr);
@@ -42,19 +53,32 @@ bool DemoApp::Initialize()
 
 void DemoApp::Finalize()
 {
-    if(m_pD2DBitmap!=nullptr)
-        m_pD2DBitmap->Release();
+    if(m_pD2DBitmap1!=nullptr)
+        m_pD2DBitmap1->Release();
+
+	
+ULONG ret= 	m_pD2DBitmap2->Release();
 
     GameApp::Finalize();
 }
 
 void DemoApp::Render()
 {
+    D2D1::Matrix3x2F Pos(D2D1::Matrix3x2F::Identity()), Cam(D2D1::Matrix3x2F::Translation(100, 0));
+    
+  
+    Pos = D2D1::Matrix3x2F::Translation(100,0);
+  
+    Cam.Invert();
+
+    Pos = Pos * Cam;
+
+
     D2DRenderer::m_pRenderTarget->BeginDraw();
     D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
-
-    if(m_pD2DBitmap)
-        D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap);
+ 
+    if(m_pD2DBitmap1)
+        D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap1);
 	
     m_pD2DRenderer->EndDraw();
 }

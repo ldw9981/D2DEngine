@@ -52,6 +52,8 @@ bool GameApp::Initialize()
 	ShowWindow(m_hWnd,SW_SHOW);
 	UpdateWindow(m_hWnd);
 
+	m_currentTime = m_previousTime = (float)GetTickCount64() / 1000.0f;
+
 	m_pD2DRenderer = new D2DRenderer;
 	HRESULT hr = m_pD2DRenderer->Initialize();
 	if (FAILED(hr))
@@ -64,19 +66,6 @@ bool GameApp::Initialize()
 
 void GameApp::Loop()
 {
-	// 기본 메시지 루프입니다:
-	/*
-	// GetMessage는 메세지가 발생할때까지 리턴하지 않으므로 매프레임 화면갱신,업데이트를 위한 게임과는 맞지않다.
-	while (GetMessage(&m_msg, nullptr, 0, 0))
-	{
-		if (!TranslateAccelerator(m_msg.hwnd, m_hAccelTable, &m_msg))
-		{
-			TranslateMessage(&m_msg);  // 키입력관련 메시지 변환  WM_KEYDOWN -> WM_CHAR
-			DispatchMessage(&m_msg);
-		}
-	}
-	*/
-
 	// PeekMessage 메세지가 있으면 true,없으면 false
 	while (TRUE)
 	{
@@ -102,7 +91,44 @@ void GameApp::Loop()
 
 void GameApp::Update()
 {
+	m_previousTime = m_currentTime;
+	m_currentTime = (float)GetTickCount64() / 1000.0f;
+	m_deltaTime = m_currentTime - m_previousTime;
+	CalculateFrameStats();
+}
 
+void GameApp::CalculateFrameStats()
+{
+	//해당 코드는 초당 프레임을 계산하고, 1프레임 렌더시 걸리는 시간의 평균을 계산한다.
+	//해당 수치들은 창의 제목표시줄에 추가된다.
+
+	static int frameCnt = -1;
+	static float timeElapsed = 0.0f;
+
+	frameCnt++;
+	if(frameCnt==0)
+		return;
+
+	timeElapsed+= m_deltaTime;
+
+	//1초동안의 프레임 시간의 평균을 계산합니다.
+	if ( timeElapsed >= 1.0f)
+	{
+		float fps = (float)frameCnt;  //Frame Per Second
+		float spf = 1000.0f / fps;   // MilliSecond Per Frame
+
+		wstring windowText;
+		windowText.append(m_szTitle);
+		windowText.append(L"  FPS: ");
+		windowText.append(to_wstring(fps));
+		windowText.append(L"  SPF: ");
+		windowText.append(to_wstring(spf));
+		SetWindowText(m_hWnd, windowText.c_str());
+
+		//다음 계산을위해 리셋
+		frameCnt = 0;
+		timeElapsed -= 1.0f;
+	}
 }
 
 void GameApp::Render()

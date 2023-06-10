@@ -21,5 +21,9 @@
 #include <wincodec.h>
 #include <comdef.h>
 #include <d2d1_1helper.h>
+#include <dwrite.h>
+#include <sysinfoapi.h>
+#include <string>
+
 
 #endif //PCH_H

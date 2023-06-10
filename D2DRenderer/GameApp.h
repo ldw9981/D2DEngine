@@ -26,6 +26,10 @@ protected:
 
 	int  m_nCmdShow;
 	D2DRenderer* m_pD2DRenderer;
+
+	float m_previousTime;
+	float m_currentTime;
+	float m_deltaTime;
 public:
 
 	virtual bool Initialize();
@@ -36,6 +40,7 @@ public:
 
 	BOOL GetClientRect(LPRECT lpRect);
 	int MessageBoxComError(HRESULT hr);
+	void CalculateFrameStats();
 
 	virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);	
 };
