@@ -80,7 +80,7 @@ void GameApp::Loop()
 		}
 		else
 		{
-			Update();
+			Update();			
 			Render();
 		}
 	}
@@ -91,6 +91,7 @@ void GameApp::Loop()
 
 void GameApp::Update()
 {
+	// 어떤 게임이라도 시간업데이트는 한다.
 	m_previousTime = m_currentTime;
 	m_currentTime = (float)GetTickCount64() / 1000.0f;
 	m_deltaTime = m_currentTime - m_previousTime;
