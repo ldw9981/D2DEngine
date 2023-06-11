@@ -5,17 +5,19 @@
 #include "framework.h"
 #include "D2DRenderer.h"
 #include "GameApp.h"
+#include "Animation.h"
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
 
 
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
+D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr)
 {
-
+	m_Instance = this;
 }
 
 D2DRenderer::~D2DRenderer()
@@ -108,14 +110,13 @@ void D2DRenderer::EndDraw()
 	// 실패시 렌더타겟 재성성이지만 실패는 그래픽아답터 제거
 }
 
-HRESULT D2DRenderer::CreateD2DBitmapFromFile(const WCHAR* szFilePath, ID2D1Bitmap** ppID2D1Bitmap)
+HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {
 	HRESULT hr;
-	std::wstring strPath(szFilePath);
-	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapContainer.find(strPath);
+	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapResourceContainer.find(strFilePath);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
-	if (it != m_BitmapContainer.end())
+	if (it != m_BitmapResourceContainer.end())
 	{
 		ID2D1Bitmap* pBitmap = (*it).second;
 		*ppID2D1Bitmap = pBitmap;
@@ -129,7 +130,7 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(const WCHAR* szFilePath, ID2D1Bitma
 	IWICFormatConverter* pConverter = NULL;
 
 	hr = m_pWICFactory->CreateDecoderFromFilename(
-		szFilePath,                      // Image to be decoded
+		strFilePath.c_str(),                      // Image to be decoded
 		NULL,                            // Do not prefer a particular vendor
 		GENERIC_READ,                    // Desired read access to the file
 		WICDecodeMetadataCacheOnDemand,  // Cache metadata when needed
@@ -178,6 +179,25 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(const WCHAR* szFilePath, ID2D1Bitma
 		pFrame->Release();
 
 	return hr;
+}
+
+
+AnimationInfo* D2DRenderer::CreateAnimationInfo(std::wstring key)
+{
+	std::map<std::wstring, AnimationInfo*>::iterator it = m_AnimationInfoResources.find(key);
+	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
+	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
+	AnimationInfo* pAnimationInfo=nullptr;
+	if (it != m_AnimationInfoResources.end())
+	{
+		pAnimationInfo = (*it).second;
+		pAnimationInfo->AddRef();
+		return pAnimationInfo;
+	}
+	pAnimationInfo = new AnimationInfo();
+	m_AnimationInfoResources[key] = pAnimationInfo;
+	pAnimationInfo->AddRef();
+	return pAnimationInfo;
 }
 
 

@@ -11,7 +11,7 @@ class GameApp
 {
 public:
 	GameApp(HINSTANCE hInstance);
-	~GameApp();
+	virtual ~GameApp();
 
 	
 	static HWND m_hWnd;		//자주필요하니 포인터 간접접근을 피하기위해 정적멤버로 만들었다.
@@ -27,6 +27,8 @@ protected:
 	int  m_nCmdShow;
 	D2DRenderer* m_pD2DRenderer;
 
+	int m_nWidth;
+	int m_nHeight;
 	float m_previousTime;
 	float m_currentTime;
 	float m_deltaTime;

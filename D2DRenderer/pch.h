@@ -24,6 +24,6 @@
 #include <dwrite.h>
 #include <sysinfoapi.h>
 #include <string>
-
+#include <assert.h>
 
 #endif //PCH_H

@@ -1,0 +1,15 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="run.png" transparentColor="">
+ <animation title="Default animation" delay="150">
+  <cut w="91" x="458" y="31" h="89" row="1" col="1"/>
+  <cut w="76" x="899" y="31" h="89" row="1" col="1"/>
+  <cut w="76" x="363" y="32" h="88" row="1" col="1"/>
+  <cut w="85" x="686" y="32" h="88" row="1" col="1"/>
+  <cut w="86" x="792" y="32" h="88" row="1" col="1"/>
+  <cut w="92" x="993" y="33" h="87" row="1" col="1"/>
+  <cut w="87" x="255" y="34" h="86" row="1" col="1"/>
+  <cut w="103" x="28" y="36" h="84" row="1" col="1"/>
+  <cut w="86" x="148" y="36" h="84" row="1" col="1"/>
+  <cut w="103" x="567" y="40" h="80" row="1" col="1"/>
+ </animation>
+</sprites>

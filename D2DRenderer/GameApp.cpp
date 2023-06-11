@@ -12,7 +12,7 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 }
 
 GameApp::GameApp(HINSTANCE hInstance)
-	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp")
+	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"), m_nHeight(768),m_nWidth(1024)
 {
 	GameApp::m_pInstance = this;
 	m_wcex.hInstance = hInstance;
@@ -28,7 +28,7 @@ GameApp::GameApp(HINSTANCE hInstance)
 
 GameApp::~GameApp()
 {
-
+	OutputDebugString(L"GameApp::~GameApp()\n");
 }
 
 // 윈도우 정보는 게임 마다 다를수 있으므로 등록,생성,보이기만 한다.
@@ -40,7 +40,7 @@ bool GameApp::Initialize()
 	//생성
 	m_hWnd = CreateWindowW(m_szWindowClass, m_szTitle, WS_OVERLAPPEDWINDOW,
 		100, 100,	// 시작 위치
-		800, 600,	// 가로,세로
+		m_nWidth, m_nHeight,	// 가로,세로
 		nullptr, nullptr, m_hInstance, nullptr);
 
 	if (!m_hWnd)
@@ -118,12 +118,12 @@ void GameApp::CalculateFrameStats()
 		float fps = (float)frameCnt;  //Frame Per Second
 		float spf = 1000.0f / fps;   // MilliSecond Per Frame
 
-		wstring windowText;
+		std::wstring windowText;
 		windowText.append(m_szTitle);
 		windowText.append(L"  FPS: ");
-		windowText.append(to_wstring(fps));
+		windowText.append(std::to_wstring(fps));
 		windowText.append(L"  SPF: ");
-		windowText.append(to_wstring(spf));
+		windowText.append(std::to_wstring(spf));
 		SetWindowText(m_hWnd, windowText.c_str());
 
 		//다음 계산을위해 리셋
@@ -145,7 +145,7 @@ void GameApp::Finalize()
 {
 	m_pD2DRenderer->Finalize();
 	delete m_pD2DRenderer;
-	m_pD2DRenderer=nullptr;
+	m_pD2DRenderer = nullptr;
 }
 
 
