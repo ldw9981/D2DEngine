@@ -24,9 +24,24 @@ DemoApp::DemoApp(HINSTANCE hInstance)
     m_hAccelTable = LoadAccelerators(m_hInstance, MAKEINTRESOURCE(IDC_DEMOAPP));
 }
 
+// DemoApp의 파괴자 -> 멤버변수로 사용한 클래스의 파괴자 -> GameApp의 파괴자  순으로 호출된다.
 DemoApp::~DemoApp()
 {
     OutputDebugString(L"DemoApp::~DemoApp()\n");
+	
+	if (m_pAnimationAsset != nullptr)
+	{
+		m_pAnimationAsset->Release();
+	}
+
+
+
+	if (m_pD2DBitmap1 != nullptr)
+		m_pD2DBitmap1->Release();
+
+
+	if (m_pD2DBitmap2 != nullptr)
+		m_pD2DBitmap2->Release();
 }
 
 
@@ -38,14 +53,14 @@ bool DemoApp::Initialize()
 
     HRESULT hr;
 
-    hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
+    hr = m_pD2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
     if (SUCCEEDED(hr))
     {
-        hr = m_pD2DRenderer->CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
+        hr = m_pD2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
     }
 
-    m_pAnimationInfo = m_pD2DRenderer->CreateAnimationInfo(L"Test");
-    m_pAnimationInfo->LoadBitmap(L"../Resource/run.png");
+    m_pAnimationAsset = m_pD2DRenderer.CreateAnimationInfo(L"Test");
+    m_pAnimationAsset->LoadBitmap(L"../Resource/run.png");
     std::vector<FRAME_INFO> Frames;
     Frames.push_back(FRAME_INFO(28, 36, 103, 84, 0.1f));
 	Frames.push_back(FRAME_INFO(148, 36, 86, 84, 0.1f));
@@ -57,11 +72,12 @@ bool DemoApp::Initialize()
     Frames.push_back(FRAME_INFO(792, 32,  86, 88, 0.1f));
     Frames.push_back(FRAME_INFO(899, 31, 76, 89,  0.1f));
     Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));    
-    m_pAnimationInfo->m_Animations.push_back(Frames);
+    m_pAnimationAsset->m_Animations.push_back(Frames);
 
-    m_pAnimationInstance = new AnimationInstance;
-    m_pAnimationInstance->SetAnimationInfo(m_pAnimationInfo);
-    m_pAnimationInstance->ChangeAnimationIndex(0,true);
+
+    m_AnimationInstance.SetAnimationInfo(m_pAnimationAsset);
+    m_AnimationInstance.ChangeAnimationIndex(0,true);
+    m_AnimationInstance.SetSpeed(1.5f);
 
     if (FAILED(hr))
     {
@@ -71,30 +87,8 @@ bool DemoApp::Initialize()
     return true;
 }
 
-void DemoApp::Finalize()
-{
-    delete m_pAnimationInstance;
-    if (m_pAnimationInfo != nullptr)
-    {
-        m_pAnimationInfo->Release();
-    }
-        
-
-
-    if(m_pD2DBitmap1!=nullptr)
-        m_pD2DBitmap1->Release();
-
-	
-    if (m_pD2DBitmap2 != nullptr)
-        m_pD2DBitmap2->Release();
-
-    GameApp::Finalize();
-}
-
 void DemoApp::Render()
 {
-
-
     D2DRenderer::m_pRenderTarget->BeginDraw();
     D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
  
@@ -120,16 +114,16 @@ void DemoApp::Render()
     D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap2, rectSrc,1.0f,D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rectSrc);
 
 
-    m_pAnimationInstance->Render(D2DRenderer::m_pRenderTarget,100,50);
+    m_AnimationInstance.Render(D2DRenderer::m_pRenderTarget,500,500);
 
-    m_pD2DRenderer->EndDraw();
+    m_pD2DRenderer.EndDraw();
 }
 
 void DemoApp::Update()
 {
     GameApp::Update();
 
-    m_pAnimationInstance->Update(m_deltaTime);
+    m_AnimationInstance.Update(m_deltaTime);
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -146,7 +140,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     App.Initialize();
     App.Loop();
-    App.Finalize();
 }
 
 

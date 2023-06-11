@@ -26,12 +26,12 @@ struct FRAME_INFO
 /*
 	애니메이션에 관련된 변하지 않는 정보
 */
-class AnimationInfo: public ReferenceCounter
+class AnimationAsset: public ReferenceCounter
 {
 public:
-	AnimationInfo();
+	AnimationAsset();
 protected:
-	virtual ~AnimationInfo();
+	virtual ~AnimationAsset();
 public:
 	ID2D1Bitmap* m_pBitmap;
 	std::wstring m_ImageFilePath;
@@ -49,20 +49,19 @@ class AnimationInstance
 public:
 	AnimationInstance();
 	~AnimationInstance();
-
-public:	
-	AnimationInfo* m_pAnimationInfo;			// 그리기위한 기본 정보(내부에 D2D1Bitmap)
+protected:
+	AnimationAsset* m_pAnimationInfo;			// 그리기위한 기본 정보(내부에 D2D1Bitmap)
 	size_t m_AnimationIndex;
 	size_t m_FrameIndex;
 	float m_ProgressTime;
 	D2D1_RECT_F m_BitmapSourceRect;			// 시간에 따른 D2D1Bitmap의 Source 영역
 	bool m_Flip;
-
-	void SetAnimationInfo(AnimationInfo* pAnimationInfo);
-
+	float m_Speed;
+public:
+	void SetSpeed(float val) { m_Speed = val; }
+	void SetAnimationInfo(AnimationAsset* pAnimationInfo);
 	void Update(float deltaTime);
-
-	void Render(ID2D1RenderTarget* pRenderTarget,float x,float y);
+	void Render(ID2D1RenderTarget* pRenderTarget, float x, float y);
 	void ChangeAnimationIndex(int index, bool Flip);
 };
 

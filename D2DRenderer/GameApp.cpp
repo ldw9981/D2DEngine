@@ -29,6 +29,7 @@ GameApp::GameApp(HINSTANCE hInstance)
 GameApp::~GameApp()
 {
 	OutputDebugString(L"GameApp::~GameApp()\n");
+	
 }
 
 // 윈도우 정보는 게임 마다 다를수 있으므로 등록,생성,보이기만 한다.
@@ -54,8 +55,8 @@ bool GameApp::Initialize()
 
 	m_currentTime = m_previousTime = (float)GetTickCount64() / 1000.0f;
 
-	m_pD2DRenderer = new D2DRenderer;
-	HRESULT hr = m_pD2DRenderer->Initialize();
+
+	HRESULT hr = m_pD2DRenderer.Initialize();
 	if (FAILED(hr))
 	{
 		MessageBoxComError(hr);
@@ -138,16 +139,8 @@ void GameApp::Render()
 	D2DRenderer::m_pRenderTarget->BeginDraw();
 	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
 
-	m_pD2DRenderer->EndDraw();
+	m_pD2DRenderer.EndDraw();
 }
-
-void GameApp::Finalize()
-{
-	m_pD2DRenderer->Finalize();
-	delete m_pD2DRenderer;
-	m_pD2DRenderer = nullptr;
-}
-
 
 
 

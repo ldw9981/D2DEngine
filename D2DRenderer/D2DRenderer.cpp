@@ -22,6 +22,13 @@ D2DRenderer::D2DRenderer()
 
 D2DRenderer::~D2DRenderer()
 {
+	OutputDebugString(L"D2DRenderer::~D2DRenderer()\n");
+	if (m_pWICFactory) m_pWICFactory->Release();
+	if (m_pRenderTarget) m_pRenderTarget->Release();
+	if (m_pD2DFactory) m_pD2DFactory->Release();
+
+	// COM 사용 끝
+	CoUninitialize();
 }
 
 HRESULT D2DRenderer::Initialize()
@@ -182,31 +189,20 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 }
 
 
-AnimationInfo* D2DRenderer::CreateAnimationInfo(std::wstring key)
+AnimationAsset* D2DRenderer::CreateAnimationInfo(std::wstring key)
 {
-	std::map<std::wstring, AnimationInfo*>::iterator it = m_AnimationInfoResources.find(key);
+	std::map<std::wstring, AnimationAsset*>::iterator it = m_AnimationInfoResources.find(key);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
-	AnimationInfo* pAnimationInfo=nullptr;
+	AnimationAsset* pAnimationInfo=nullptr;
 	if (it != m_AnimationInfoResources.end())
 	{
 		pAnimationInfo = (*it).second;
 		pAnimationInfo->AddRef();
 		return pAnimationInfo;
 	}
-	pAnimationInfo = new AnimationInfo();
+	pAnimationInfo = new AnimationAsset();
 	m_AnimationInfoResources[key] = pAnimationInfo;
 	pAnimationInfo->AddRef();
 	return pAnimationInfo;
-}
-
-
-void D2DRenderer::Finalize()
-{
-	if (m_pWICFactory) m_pWICFactory->Release();
-	if (m_pRenderTarget) m_pRenderTarget->Release();
-	if (m_pD2DFactory) m_pD2DFactory->Release();
-
-	// COM 사용 끝
-	CoUninitialize();
 }

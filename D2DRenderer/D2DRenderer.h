@@ -2,8 +2,9 @@
 
 #include <map>
 #include <string>
+#include "TestClass.h"
 
-class AnimationInfo;
+class AnimationAsset;
 class D2DRenderer
 {
 public:
@@ -19,7 +20,7 @@ public:
 	IDWriteTextFormat* m_pDWriteTextFormat; // 기본 텍스트 출력을 위한 Format
 
 	std::map<std::wstring,ID2D1Bitmap*>		m_BitmapResourceContainer;
-	std::map<std::wstring, AnimationInfo*>	m_AnimationInfoResources;
+	std::map<std::wstring, AnimationAsset*>	m_AnimationInfoResources;
 public:
 	HRESULT Initialize();
 
@@ -27,9 +28,6 @@ public:
 
 	HRESULT CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
 
-	AnimationInfo* CreateAnimationInfo(std::wstring key);
-	//AnimationInstance* CreateAnimationInstance();
-
-	void Finalize();
+	AnimationAsset* CreateAnimationInfo(std::wstring key);
 };
 

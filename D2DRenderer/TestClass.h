@@ -1,14 +1,42 @@
 #pragma once
-class TestClass
+class TestClass0
 {
 public:
-	TestClass()
+	TestClass0()
 	{
 
 	}
-	virtual ~TestClass()
+	virtual ~TestClass0()
 	{
-		OutputDebugString(L"TestClass::~TestClass()\n");
+		OutputDebugString(L"TestClass0::~TestClass0()\n");
+	}
+
+};
+
+class TestClass1
+{
+public:
+	TestClass1()
+	{
+
+	}
+	virtual ~TestClass1()
+	{
+		OutputDebugString(L"TestClass1::~TestClass1()\n");
+	}
+
+};
+
+class TestClass2
+{
+public:
+	TestClass2()
+	{
+
+	}
+	virtual ~TestClass2()
+	{
+		OutputDebugString(L"TestClass2::~TestClass2()\n");
 	}
 
 };
