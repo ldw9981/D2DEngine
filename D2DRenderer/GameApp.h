@@ -6,7 +6,6 @@
 	GameApp클래스를 만든 이유는 윈도우 메시지 처리 또는 모든 게임에서 공통적으로 사용하는
 	부분을 구현하기위해 부모 클래스로 만들었다. 
 */
-#include "../D2DRenderer/TestClass.h"
 #include "../D2DRenderer/D2DRenderer.h"
 
 class D2DRenderer;

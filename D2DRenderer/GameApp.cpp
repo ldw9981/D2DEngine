@@ -14,6 +14,10 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 GameApp::GameApp(HINSTANCE hInstance)
 	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"), m_nHeight(768),m_nWidth(1024)
 {
+	std::wstring str(__FUNCTIONW__);
+	str += L"\n";
+	OutputDebugString(str.c_str());
+
 	GameApp::m_pInstance = this;
 	m_wcex.hInstance = hInstance;
 	m_wcex.cbSize = sizeof(WNDCLASSEX);
@@ -28,7 +32,9 @@ GameApp::GameApp(HINSTANCE hInstance)
 
 GameApp::~GameApp()
 {
-	OutputDebugString(L"GameApp::~GameApp()\n");
+	std::wstring str(__FUNCTIONW__);
+	str += L"\n";
+	OutputDebugString(str.c_str());
 	
 }
 

@@ -2,7 +2,6 @@
 
 #include <map>
 #include <string>
-#include "TestClass.h"
 
 class AnimationAsset;
 class D2DRenderer
@@ -28,6 +27,6 @@ public:
 
 	HRESULT CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
 
-	AnimationAsset* CreateAnimationInfo(std::wstring key);
+	AnimationAsset* CreateAnimationAsset(std::wstring key);
 };
 

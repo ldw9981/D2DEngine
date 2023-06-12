@@ -5,7 +5,8 @@
 #include "framework.h"
 #include "D2DRenderer.h"
 #include "GameApp.h"
-#include "Animation.h"
+#include "AnimationAsset.h"
+#include "AnimationInstance.h"
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
@@ -17,6 +18,7 @@ D2DRenderer* D2DRenderer::m_Instance = nullptr;
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr)
 {
+	OutputDebugString(L"D2DRenderer::D2DRenderer()\n");
 	m_Instance = this;
 }
 
@@ -189,20 +191,21 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 }
 
 
-AnimationAsset* D2DRenderer::CreateAnimationInfo(std::wstring key)
+AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 {
 	std::map<std::wstring, AnimationAsset*>::iterator it = m_AnimationInfoResources.find(key);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
-	AnimationAsset* pAnimationInfo=nullptr;
+	AnimationAsset* pAnimationAsset=nullptr;
 	if (it != m_AnimationInfoResources.end())
 	{
-		pAnimationInfo = (*it).second;
-		pAnimationInfo->AddRef();
-		return pAnimationInfo;
+		pAnimationAsset = (*it).second;
+		pAnimationAsset->AddRef();
+		return pAnimationAsset;
 	}
-	pAnimationInfo = new AnimationAsset();
-	m_AnimationInfoResources[key] = pAnimationInfo;
-	pAnimationInfo->AddRef();
-	return pAnimationInfo;
+	pAnimationAsset = new AnimationAsset();
+	m_AnimationInfoResources[key] = pAnimationAsset;
+	pAnimationAsset->AddRef();
+	return pAnimationAsset;
 }
+
