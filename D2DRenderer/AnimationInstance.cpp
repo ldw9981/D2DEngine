@@ -5,8 +5,12 @@
 
 
 AnimationInstance::AnimationInstance()
-	:m_pAnimationAsset(nullptr), m_AnimationIndex(-1), m_FrameIndex(-1), m_ProgressTime(0), m_SrcRect({ 0.0f,0.0f,0.0f,0.0f }), m_Flip(false), m_Speed(1.0f)
+	:m_pAnimationAsset(nullptr), m_AnimationIndex(-1), m_FrameIndex(-1), m_ProgressTime(0), m_bMirror(false), m_Speed(1.0f)
 {
+	m_SrcRect = { 0.0f,0.0f,0.0f,0.0f };
+	m_DstRect = { 0.0f,0.0f,0.0f,0.0f };
+	m_Position = { 0.0f,0.0f };
+	m_Transform = D2D1::Matrix3x2F::Identity();
 
 }
 
@@ -45,29 +49,27 @@ void AnimationInstance::Update(float deltaTime)
 	}
 	// 이지미에서의 프레임 영역
 	m_SrcRect = m_pAnimationAsset->m_Animations[m_AnimationIndex][m_FrameIndex].Source;
-}
-
-void AnimationInstance::Render(ID2D1RenderTarget* pRenderTarget, float x, float y)
-{
 	// 그릴 영역을 0,0,with,height으로 설정하고 실제 위치는 Transform으로 설정
-	D2D1_RECT_F DstRect = { 0,0,m_SrcRect.right - m_SrcRect.left,m_SrcRect.bottom - m_SrcRect.top };
-
-	if (m_Flip)
+	m_DstRect = { 0,0,m_SrcRect.right - m_SrcRect.left,m_SrcRect.bottom - m_SrcRect.top };
+	if (m_bMirror)
 	{
 		D2D1_MATRIX_3X2_F Scale(D2D1::Matrix3x2F::Scale(-1.0f, 1.0f, D2D1::Point2F(0, 0)));
-		D2D1_MATRIX_3X2_F Translation(D2D1::Matrix3x2F::Translation(x + DstRect.right, y));
-		pRenderTarget->SetTransform(Scale * Translation);
+		D2D1_MATRIX_3X2_F Translation(D2D1::Matrix3x2F::Translation(m_Position.x + m_DstRect.right, m_Position.y));
+		m_Transform = Scale * Translation;
 	}
 	else
 	{
-		pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(x, y));
+		m_Transform = D2D1::Matrix3x2F::Translation(m_Position.x, m_Position.y);
 	}
-
-	// 이미지 크기를 조정하거나 회전할 때 사용되는 알고리즘을 지정합니다.
-	pRenderTarget->DrawBitmap(m_pAnimationAsset->m_pBitmap, DstRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, m_SrcRect);
 }
 
-void AnimationInstance::ChangeAnimationIndex(int index, bool Flip)
+void AnimationInstance::Render(ID2D1RenderTarget* pRenderTarget)
+{
+	pRenderTarget->SetTransform(m_Transform);
+	pRenderTarget->DrawBitmap(m_pAnimationAsset->m_pBitmap, m_DstRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, m_SrcRect);
+}
+
+void AnimationInstance::ChangeAnimationIndex(int index, bool bMirror)
 {
 	assert(m_pAnimationAsset != nullptr);
 	assert(m_pAnimationAsset->m_Animations.size() > index);
@@ -75,5 +77,6 @@ void AnimationInstance::ChangeAnimationIndex(int index, bool Flip)
 	m_AnimationIndex = index;
 	m_FrameIndex = 0;
 	m_ProgressTime = 0.0f;
-	m_Flip = Flip;
+	m_bMirror = bMirror;
 }
+
