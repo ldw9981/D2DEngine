@@ -15,7 +15,9 @@ public:
 	ID2D1Bitmap* m_pD2DBitmap1 = nullptr;
 	ID2D1Bitmap* m_pD2DBitmap2 = nullptr;
 	AnimationAsset* m_pAnimationAsset;
-	AnimationInstance m_AnimationInstance;
+	AnimationInstance m_AnimationInstance1;
+
+	AnimationInstance m_AnimationInstance2;
 
 	TestClass1 A;	// TestClass1::~TestClass1()는 DemoApp::~DemoApp 호출 뒤에 호출된다. 
 	TestClass2 B;	// 생성자 역순으로 밑에 있는 파괴자가 먼저 호출된다. 

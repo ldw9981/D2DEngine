@@ -13,7 +13,10 @@ AnimationAsset::~AnimationAsset()
 	int a = m_pBitmap->Release();
 }
 
-void AnimationAsset::LoadBitmap()
+/*
+	데이터를 가지고 새로운 데이터를 만들어내는것
+*/
+void AnimationAsset::Build()
 {
 	D2DRenderer::m_Instance->CreateD2DBitmapFromFile(m_BitmapFilePath, &m_pBitmap);
 }

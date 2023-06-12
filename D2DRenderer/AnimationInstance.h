@@ -13,7 +13,7 @@ class AnimationInstance
 public:
 	AnimationInstance();
 	~AnimationInstance();
-	friend D2DRenderer;
+		
 protected:
 	AnimationAsset* m_pAnimationAsset;		// 애니메이션을 위한 기본 데이터 자산 (내부에 D2D1Bitmap)
 	size_t m_AnimationIndex;		// 현재 애니메이션 인덱스
@@ -23,6 +23,7 @@ protected:
 	bool m_Flip;
 	float m_Speed;
 public:
+	void SetProgressTime(float val) { m_ProgressTime = val; }
 	void SetSpeed(float val) { m_Speed = val; }
 	void SetAnimationInfo(AnimationAsset* pAnimationInfo);
 	void Update(float deltaTime);

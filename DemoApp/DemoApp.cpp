@@ -83,9 +83,15 @@ bool DemoApp::Initialize()
     m_pAnimationAsset->m_Animations.push_back(Frames);
 
 
-    m_AnimationInstance.SetAnimationInfo(m_pAnimationAsset);
-    m_AnimationInstance.ChangeAnimationIndex(0,true);
-    m_AnimationInstance.SetSpeed(1.5f);
+    m_AnimationInstance1.SetAnimationInfo(m_pAnimationAsset);
+    m_AnimationInstance1.ChangeAnimationIndex(0,true);
+    m_AnimationInstance1.SetSpeed(1.0f);
+
+	m_AnimationInstance2.SetAnimationInfo(m_pAnimationAsset);
+	m_AnimationInstance2.ChangeAnimationIndex(0, false);
+	m_AnimationInstance2.SetSpeed(1.0f);
+    m_AnimationInstance2.SetProgressTime(0.5f);
+
 
     if (FAILED(hr))
     {
@@ -122,7 +128,9 @@ void DemoApp::Render()
     D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap2, rectSrc,1.0f,D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rectSrc);
 
 
-    m_AnimationInstance.Render(D2DRenderer::m_pRenderTarget,500,500);
+    m_AnimationInstance1.Render(D2DRenderer::m_pRenderTarget,500,500);
+
+    m_AnimationInstance2.Render(D2DRenderer::m_pRenderTarget, 200, 500);
 
     m_pD2DRenderer.EndDraw();
 }
@@ -131,7 +139,9 @@ void DemoApp::Update()
 {
     GameApp::Update();
 
-    m_AnimationInstance.Update(m_deltaTime);
+    m_AnimationInstance1.Update(m_deltaTime);
+    m_AnimationInstance2.Update(m_deltaTime);
+
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

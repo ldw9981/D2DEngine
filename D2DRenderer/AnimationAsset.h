@@ -38,6 +38,6 @@ public:
 	std::wstring m_BitmapFilePath;
 	std::vector<std::vector<FRAME_INFO>> m_Animations;
 
-	void LoadBitmap();
+	void Build();
 	void SetBitmapFilePath(const WCHAR* szFilePath);
 };
