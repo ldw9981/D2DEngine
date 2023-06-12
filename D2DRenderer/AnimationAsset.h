@@ -7,20 +7,20 @@
 struct FRAME_INFO
 {
 	D2D1_RECT_F Source;
-	float		DelayTime;
+	float		RenderTime;
 
-	FRAME_INFO(float x, float y, float with, float height, float delay)
+	FRAME_INFO(float x, float y, float with, float height, float time)
 	{
 		Source.left = x;
 		Source.top = y;
 		Source.right = x + with;
 		Source.bottom = y + height;
-		DelayTime = delay;
+		RenderTime = time;
 	}
-	FRAME_INFO(D2D1_RECT_F rect, float delay)
+	FRAME_INFO(D2D1_RECT_F rect, float time)
 	{
 		Source = rect;
-		DelayTime = delay;
+		RenderTime = time;
 	}
 };
 

@@ -38,9 +38,9 @@ void AnimationInstance::Update(float deltaTime)
 	m_ProgressTime += deltaTime * m_Speed;
 
 
-	while (Frames[m_FrameIndex].DelayTime < m_ProgressTime)
+	while (Frames[m_FrameIndex].RenderTime < m_ProgressTime)
 	{
-		m_ProgressTime -= Frames[m_FrameIndex].DelayTime;
+		m_ProgressTime -= Frames[m_FrameIndex].RenderTime;
 		m_FrameIndex = (m_FrameIndex + 1) % MaxFrameIndex;
 	}
 	// 이지미에서의 프레임 영역
