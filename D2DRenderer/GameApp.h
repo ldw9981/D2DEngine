@@ -28,7 +28,7 @@ protected:
 	WNDCLASSEXW m_wcex;
 
 	int  m_nCmdShow;
-	D2DRenderer m_pD2DRenderer;
+	D2DRenderer m_D2DRenderer;
 
 	int m_nWidth;
 	int m_nHeight;

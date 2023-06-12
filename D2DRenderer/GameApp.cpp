@@ -62,7 +62,7 @@ bool GameApp::Initialize()
 	m_currentTime = m_previousTime = (float)GetTickCount64() / 1000.0f;
 
 
-	HRESULT hr = m_pD2DRenderer.Initialize();
+	HRESULT hr = m_D2DRenderer.Initialize();
 	if (FAILED(hr))
 	{
 		MessageBoxComError(hr);
@@ -145,7 +145,7 @@ void GameApp::Render()
 	D2DRenderer::m_pRenderTarget->BeginDraw();
 	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
 
-	m_pD2DRenderer.EndDraw();
+	m_D2DRenderer.EndDraw();
 }
 
 

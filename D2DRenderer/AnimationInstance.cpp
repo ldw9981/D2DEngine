@@ -5,7 +5,7 @@
 
 
 AnimationInstance::AnimationInstance()
-	:m_pAnimationAsset(nullptr), m_AnimationIndex(-1), m_FrameIndex(-1), m_ProgressTime(0), m_bMirror(false), m_Speed(1.0f)
+	:m_pAnimationAsset(nullptr), m_AnimationIndex(0), m_FrameIndex(0), m_ProgressTime(0), m_bMirror(false), m_Speed(1.0f)
 {
 	m_SrcRect = { 0.0f,0.0f,0.0f,0.0f };
 	m_DstRect = { 0.0f,0.0f,0.0f,0.0f };
@@ -69,7 +69,7 @@ void AnimationInstance::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->DrawBitmap(m_pAnimationAsset->m_pBitmap, m_DstRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, m_SrcRect);
 }
 
-void AnimationInstance::ChangeAnimationIndex(int index, bool bMirror)
+void AnimationInstance::SetAnimationIndex(size_t index, bool bMirror)
 {
 	assert(m_pAnimationAsset != nullptr);
 	assert(m_pAnimationAsset->m_Animations.size() > index);

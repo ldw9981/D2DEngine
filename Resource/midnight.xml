@@ -1,0 +1,9 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="midnight.png" transparentColor="">
+ <animation title="Default animation" delay="150">
+  <cut w="784" x="0" y="0" h="320" row="1" col="1"/>
+  <cut w="784" x="789" y="0" h="320" row="1" col="1"/>
+  <cut w="784" x="0" y="325" h="320" row="1" col="1"/>
+  <cut w="784" x="789" y="325" h="320" row="1" col="1"/>
+ </animation>
+</sprites>

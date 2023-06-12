@@ -13,8 +13,6 @@ class AnimationInstance
 public:
 	AnimationInstance();
 	~AnimationInstance();
-		
-
 
 protected:
 	AnimationAsset* m_pAnimationAsset;		// 애니메이션을 위한 기본 데이터 자산 (내부에 D2D1Bitmap)
@@ -34,7 +32,7 @@ public:
 	void SetAnimationInfo(AnimationAsset* pAnimationInfo);
 	void Update(float deltaTime);
 	void Render(ID2D1RenderTarget* pRenderTarget);
-	void ChangeAnimationIndex(int index, bool Flip);
+	void SetAnimationIndex(size_t index, bool Flip);
 	void SetPosition(float x,float y) { m_Position = {x,y}; }
 };
 

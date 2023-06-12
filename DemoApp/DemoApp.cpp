@@ -60,38 +60,49 @@ bool DemoApp::Initialize()
 
     HRESULT hr;
 
-    hr = m_pD2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
+    hr = m_D2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
     if (SUCCEEDED(hr))
     {
-        hr = m_pD2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
+        hr = m_D2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
     }
 
-    m_pAnimationAsset = m_pD2DRenderer.CreateAnimationAsset(L"Test");
+    std::vector<FRAME_INFO> Frames;
+    m_pAnimAssetMidNight = m_D2DRenderer.CreateAnimationAsset(L"MidNight");
+    m_pAnimAssetMidNight->SetBitmapFilePath(L"../Resource/midnight.png");
+    m_pAnimAssetMidNight->Build();
+	Frames.push_back(FRAME_INFO(  0,  0, 784,320, 0.2f));
+	Frames.push_back(FRAME_INFO(789,  0, 784,320, 0.2f));
+	Frames.push_back(FRAME_INFO(  0,325, 784,320, 0.2f));
+	Frames.push_back(FRAME_INFO(789,325, 784,320, 0.2f));
+    m_pAnimAssetMidNight->m_Animations.push_back(Frames);
+    m_Background.SetAnimationInfo(m_pAnimAssetMidNight);
+
+
+    m_pAnimationAsset = m_D2DRenderer.CreateAnimationAsset(L"Test");
     m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
     m_pAnimationAsset->Build();
-
-    std::vector<FRAME_INFO> Frames;
-    Frames.push_back(FRAME_INFO(28, 36, 103, 84, 0.1f));
-	Frames.push_back(FRAME_INFO(148, 36, 86, 84, 0.1f));
-	Frames.push_back(FRAME_INFO(255, 34, 87, 86, 0.1f));
-    Frames.push_back(FRAME_INFO(363, 32, 76, 88, 0.1f));
+    Frames.clear();
+    Frames.push_back(FRAME_INFO( 28, 36, 103, 84, 0.1f));
+	Frames.push_back(FRAME_INFO(148, 36,  86, 84, 0.1f));
+	Frames.push_back(FRAME_INFO(255, 34,  87, 86, 0.1f));
+    Frames.push_back(FRAME_INFO(363, 32,  76, 88, 0.1f));
     Frames.push_back(FRAME_INFO(458, 31,  91, 89, 0.1f));
     Frames.push_back(FRAME_INFO(567, 40, 103, 80, 0.1f));
     Frames.push_back(FRAME_INFO(686, 32,  85, 88, 0.1f));
     Frames.push_back(FRAME_INFO(792, 32,  86, 88, 0.1f));
-    Frames.push_back(FRAME_INFO(899, 31, 76, 89,  0.1f));
+    Frames.push_back(FRAME_INFO(899, 31,  76, 89, 0.1f));
     Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));    
     m_pAnimationAsset->m_Animations.push_back(Frames);
 
 
     m_AnimationInstance1.SetAnimationInfo(m_pAnimationAsset);
-    m_AnimationInstance1.ChangeAnimationIndex(0,true);
+    m_AnimationInstance1.SetAnimationIndex(0,true);
     m_AnimationInstance1.SetSpeed(1.0f);
     m_AnimationInstance1.SetPosition(500.0f,500.0f);
 
 	m_AnimationInstance2.SetAnimationInfo(m_pAnimationAsset);
-	m_AnimationInstance2.ChangeAnimationIndex(0, false);
-	m_AnimationInstance2.SetSpeed(1.0f);
+	m_AnimationInstance2.SetAnimationIndex(0, false);
+	m_AnimationInstance2.SetSpeed(2.0f);
     m_AnimationInstance2.SetProgressTime(0.5f);
     m_AnimationInstance2.SetPosition(200.0f, 500.0f);
 
@@ -107,7 +118,8 @@ void DemoApp::Render()
 {
     D2DRenderer::m_pRenderTarget->BeginDraw();
     D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
- 
+    
+    m_Background.Render(D2DRenderer::m_pRenderTarget);
 
     D2DRenderer::m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 0));
     D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap1);
@@ -132,13 +144,14 @@ void DemoApp::Render()
     m_AnimationInstance1.Render(D2DRenderer::m_pRenderTarget);
     m_AnimationInstance2.Render(D2DRenderer::m_pRenderTarget);
 
-    m_pD2DRenderer.EndDraw();
+    m_D2DRenderer.EndDraw();
 }
 
 void DemoApp::Update()
 {
     GameApp::Update();
 
+    m_Background.Update(m_deltaTime);
     m_AnimationInstance1.Update(m_deltaTime);
     m_AnimationInstance2.Update(m_deltaTime);
 
