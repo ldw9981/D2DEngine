@@ -4,6 +4,7 @@
 #include "../D2DRenderer/GameApp.h"
 #include "../D2DRenderer/AnimationInstance.h"
 #include "TestClass.h"
+#include "../D2DRenderer/AnimationAsset.h"
 
 class AnimationAsset;
 class DemoApp: public GameApp
@@ -16,7 +17,6 @@ public:
 	ID2D1Bitmap* m_pD2DBitmap2 = nullptr;
 	AnimationAsset* m_pAnimationAsset;
 	AnimationInstance m_AnimationInstance1;
-
 	AnimationInstance m_AnimationInstance2;
 
 	TestClass1 A;	// TestClass1::~TestClass1()는 DemoApp::~DemoApp 호출 뒤에 호출된다. 

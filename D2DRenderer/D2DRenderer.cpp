@@ -203,7 +203,7 @@ AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 		pAnimationAsset->AddRef();
 		return pAnimationAsset;
 	}
-	pAnimationAsset = new AnimationAsset();
+	pAnimationAsset = new AnimationAsset;
 	m_AnimationInfoResources[key] = pAnimationAsset;
 	pAnimationAsset->AddRef();
 	return pAnimationAsset;

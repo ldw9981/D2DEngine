@@ -29,10 +29,11 @@ struct FRAME_INFO
 */
 class AnimationAsset : public ReferenceCounter
 {
-public:
-	AnimationAsset();
+	// 파괴는 Release로 , 생성은 D2DRenderer가 하게한다.
 protected:
+	AnimationAsset();
 	virtual ~AnimationAsset();
+	friend class D2DRenderer;			
 public:
 	ID2D1Bitmap* m_pBitmap;
 	std::wstring m_BitmapFilePath;

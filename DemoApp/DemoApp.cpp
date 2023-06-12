@@ -68,7 +68,8 @@ bool DemoApp::Initialize()
 
     m_pAnimationAsset = m_pD2DRenderer.CreateAnimationAsset(L"Test");
     m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
-    m_pAnimationAsset->LoadBitmap();
+    m_pAnimationAsset->Build();
+
     std::vector<FRAME_INFO> Frames;
     Frames.push_back(FRAME_INFO(28, 36, 103, 84, 0.1f));
 	Frames.push_back(FRAME_INFO(148, 36, 86, 84, 0.1f));
@@ -91,7 +92,6 @@ bool DemoApp::Initialize()
 	m_AnimationInstance2.ChangeAnimationIndex(0, false);
 	m_AnimationInstance2.SetSpeed(1.0f);
     m_AnimationInstance2.SetProgressTime(0.5f);
-
 
     if (FAILED(hr))
     {
