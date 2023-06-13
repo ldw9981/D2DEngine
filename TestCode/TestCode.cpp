@@ -8,11 +8,23 @@
 
 int main()
 {
-   ClassParent* p = new ClassChild;
 
-   p->Function();
+	// 부모클래스와 자식클래스의 파괴자가 모두 문제없이 호출됨 	
+	//	ClassChild B;  
 
-   delete p;
+
+	// 부모클래스와 자식클래스의 파괴자가 모두 문제없이 호출됨 
+	//	ClassChild* p = new ClassChild;
+	//	delete p;
+
+
+	// 부모클래스의 파괴자가 virtual 키워드를 사용하지않으면 ClassParent의 파괴자만 호출됨
+	// vitual 키워드를 사용하면 가상함수 테이블에 있는 자식클래스의 파괴자호출하고 이후 부모클래스의 파괴자까지 호출됨 
+	// 예를들면 보통 일괄처리위해 WorldClass 의 멤버로 list<GameObject*> m_GameObjects;  이런식으로 자식클래스를 부모타입의 포인터로 보관함
+	
+	ClassParent* p = new ClassChild;
+	p->Function();
+	delete p;
 
 }
 

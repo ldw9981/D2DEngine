@@ -122,7 +122,7 @@ void D2DRenderer::EndDraw()
 HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {
 	HRESULT hr;
-	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapResourceContainer.find(strFilePath);
+	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapResourceContainer.find(strFilePath); 
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
 	if (it != m_BitmapResourceContainer.end())
