@@ -19,13 +19,12 @@ public:
 	unsigned int Release() {
 		m_RefCount--;
 		if (m_RefCount == 0) {
-			// 파괴자에 virtual 키워드를 사용했으므로 자식클래스의 파괴자가 호출된다. 
+			// 파괴자에 virtual 키워드를 사용했으므로 자식클래스의 파괴자가 호출된다. 		
 			delete this;				
 			return 0;
 		}
 		return m_RefCount;
 	}
-
 	unsigned int GetRefCount() {		
 		return m_RefCount;
 	}

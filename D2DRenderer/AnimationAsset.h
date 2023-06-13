@@ -3,6 +3,8 @@
 #include "ReferenceCounter.h"
 #include <vector>
 
+
+
 // 애니메이션 기본 프레임의 기본 정보
 struct FRAME_INFO
 {
@@ -37,8 +39,12 @@ protected:
 public:
 	ID2D1Bitmap* m_pBitmap;
 	std::wstring m_BitmapFilePath;
+
 	std::vector<std::vector<FRAME_INFO>> m_Animations;
 
 	void Build();
+	void SetKey(std::wstring val) { m_Key = val; }
 	void SetBitmapFilePath(const WCHAR* szFilePath);
+private:
+	std::wstring m_Key;
 };

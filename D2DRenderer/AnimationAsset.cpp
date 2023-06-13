@@ -10,7 +10,8 @@ AnimationAsset::AnimationAsset()
 
 AnimationAsset::~AnimationAsset()
 {
-	int a = m_pBitmap->Release();
+	// 참조카운터가 0이면 완전히 제거되기전에  Factory에 더 이상 공유하지않는다고 알린다 .
+	D2DRenderer::m_Instance->ReleaseD2DBitmapFromFile(m_pBitmap);	
 }
 
 /*
@@ -25,3 +26,4 @@ void AnimationAsset::SetBitmapFilePath(const WCHAR* szFilePath)
 {
 	m_BitmapFilePath = szFilePath;
 }
+

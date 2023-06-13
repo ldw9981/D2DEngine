@@ -6,6 +6,7 @@
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
 #include <d2d1.h>
+#include <memory>
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 
@@ -38,17 +39,24 @@ DemoApp::~DemoApp()
 	
 	if (m_pAnimationAsset != nullptr)
 	{
-		m_pAnimationAsset->Release();
+        m_D2DRenderer.ReleaseAnimationAsset(m_pAnimationAsset);
 	}
 
+	if (m_pAnimAssetMidNight != nullptr)
+	{
+        m_D2DRenderer.ReleaseAnimationAsset(m_pAnimAssetMidNight);
+	}
 
+    if (m_pD2DBitmap1 != nullptr)
+    {
+        m_D2DRenderer.ReleaseD2DBitmapFromFile(m_pD2DBitmap1);
+    }
+	
 
-	if (m_pD2DBitmap1 != nullptr)
-		m_pD2DBitmap1->Release();
-
-
-	if (m_pD2DBitmap2 != nullptr)
-		m_pD2DBitmap2->Release();
+    if (m_pD2DBitmap2 != nullptr)
+    {
+        m_D2DRenderer.ReleaseD2DBitmapFromFile(m_pD2DBitmap2);
+    }
 }
 
 

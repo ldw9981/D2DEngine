@@ -122,10 +122,10 @@ void D2DRenderer::EndDraw()
 HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {
 	HRESULT hr;
-	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_BitmapResourceContainer.find(strFilePath); 
+	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_SharingBitmaps.find(strFilePath); 
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
-	if (it != m_BitmapResourceContainer.end())
+	if (it != m_SharingBitmaps.end())
 	{
 		ID2D1Bitmap* pBitmap = (*it).second;
 		*ppID2D1Bitmap = pBitmap;
@@ -187,24 +187,65 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 	if (pFrame)
 		pFrame->Release();
 
+
+	m_SharingBitmaps[strFilePath] = *ppID2D1Bitmap;
+	m_SharingBitmapKeys[*ppID2D1Bitmap] = strFilePath;
 	return hr;
 }
 
 
 AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 {
-	std::map<std::wstring, AnimationAsset*>::iterator it = m_AnimationInfoResources.find(key);
+	std::map<std::wstring, AnimationAsset*>::iterator it = m_SharingAnimationAssets.find(key);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
 	AnimationAsset* pAnimationAsset=nullptr;
-	if (it != m_AnimationInfoResources.end())
+	if (it != m_SharingAnimationAssets.end())
 	{
 		pAnimationAsset = (*it).second;
 		pAnimationAsset->AddRef();
 		return pAnimationAsset;
 	}
 	pAnimationAsset = new AnimationAsset;
-	m_AnimationInfoResources[key] = pAnimationAsset;
+	pAnimationAsset->SetKey(key);
+
+	m_SharingAnimationAssets[key] = pAnimationAsset;
+	m_SharingAnimationAssetKeys[pAnimationAsset] = key;
+
 	pAnimationAsset->AddRef();
 	return pAnimationAsset;
 }
+
+void D2DRenderer::ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap)
+{
+	int cnt = pBitmap->Release();
+
+	if (cnt > 0)
+		return;
+
+	auto it = m_SharingBitmapKeys.find(pBitmap);
+	assert(it != m_SharingBitmapKeys.end());
+	if (it != m_SharingBitmapKeys.end())
+	{
+		size_t result = m_SharingBitmaps.erase(it->second);
+		assert(result == 1);
+		m_SharingBitmapKeys.erase(pBitmap);
+	}
+}
+
+void D2DRenderer::ReleaseAnimationAsset(AnimationAsset* pAnimationAsset)
+{
+	int cnt = pAnimationAsset->Release();
+	if (cnt > 0)
+		return;
+
+	auto it = m_SharingAnimationAssetKeys.find(pAnimationAsset);
+	assert(it != m_SharingAnimationAssetKeys.end());
+	if (it != m_SharingAnimationAssetKeys.end())
+	{
+		size_t result = m_SharingAnimationAssets.erase(it->second);
+		assert(result == 1);
+		m_SharingAnimationAssetKeys.erase(pAnimationAsset);
+	}
+}
+

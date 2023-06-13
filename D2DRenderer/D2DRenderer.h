@@ -18,15 +18,23 @@ public:
 	IDWriteFactory* m_pDWriteFactory;	// TextFormat생성을 위한 팩토리
 	IDWriteTextFormat* m_pDWriteTextFormat; // 기본 텍스트 출력을 위한 Format
 
-	std::map<std::wstring,ID2D1Bitmap*>		m_BitmapResourceContainer;
-	std::map<std::wstring, AnimationAsset*>	m_AnimationInfoResources;
+	std::map<std::wstring,ID2D1Bitmap*>		m_SharingBitmaps;
+	std::map<ID2D1Bitmap*,std::wstring>		m_SharingBitmapKeys;
+
+	std::map<std::wstring, AnimationAsset*>	m_SharingAnimationAssets;
+	std::map<AnimationAsset*,std::wstring>	m_SharingAnimationAssetKeys;
 public:
 	HRESULT Initialize();
 
 	void EndDraw();
 
+	// 공유하는 비트맵 생성
 	HRESULT CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
-
 	AnimationAsset* CreateAnimationAsset(std::wstring key);
+
+	// 릴리즈를 대신 호출하면서 카운터가 0이되면 공유중인 목록에서 제거한다.
+	void ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap);
+	void ReleaseAnimationAsset(AnimationAsset* pAnimationAsset);
+
 };
 
