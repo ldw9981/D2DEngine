@@ -120,11 +120,18 @@ void D2DRenderer::EndDraw()
 }
 
 HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
-{
-	HRESULT hr;
-	std::map<std::wstring,ID2D1Bitmap*>::iterator it = m_SharingBitmaps.find(strFilePath); 
+{	
+	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
+	auto it = std::find_if(m_SharingBitmaps.begin(), m_SharingBitmaps.end(), 
+		[strFilePath](std::pair<std::wstring, ID2D1Bitmap*> ContainerData)
+		{
+			return ( ContainerData.first == strFilePath);
+		}
+	);
+
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
+	HRESULT hr;
 	if (it != m_SharingBitmaps.end())
 	{
 		ID2D1Bitmap* pBitmap = (*it).second;
@@ -188,15 +195,20 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 		pFrame->Release();
 
 
-	m_SharingBitmaps[strFilePath] = *ppID2D1Bitmap;
-	m_SharingBitmapKeys[*ppID2D1Bitmap] = strFilePath;
+	m_SharingBitmaps.push_back(std::pair<std::wstring, ID2D1Bitmap*>(strFilePath,*ppID2D1Bitmap));
 	return hr;
 }
 
 
 AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 {
-	std::map<std::wstring, AnimationAsset*>::iterator it = m_SharingAnimationAssets.find(key);
+	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
+	auto it = std::find_if(m_SharingAnimationAssets.begin(), m_SharingAnimationAssets.end(),
+		[key](std::pair<std::wstring, AnimationAsset*> ContainerData)
+		{
+			return (ContainerData.first == key);
+		}
+	);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
 	// 즉 기존 비트맵의 레퍼런스 증가시키고 포인터 변수에 값을 넣는다.
 	AnimationAsset* pAnimationAsset=nullptr;
@@ -209,8 +221,7 @@ AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 	pAnimationAsset = new AnimationAsset;
 	pAnimationAsset->SetKey(key);
 
-	m_SharingAnimationAssets[key] = pAnimationAsset;
-	m_SharingAnimationAssetKeys[pAnimationAsset] = key;
+	m_SharingAnimationAssets.push_back(std::pair<std::wstring, AnimationAsset*>(key, pAnimationAsset));
 
 	pAnimationAsset->AddRef();
 	return pAnimationAsset;
@@ -223,13 +234,16 @@ void D2DRenderer::ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap)
 	if (cnt > 0)
 		return;
 
-	auto it = m_SharingBitmapKeys.find(pBitmap);
-	assert(it != m_SharingBitmapKeys.end());
-	if (it != m_SharingBitmapKeys.end())
+	// 문자열과 포인터 쌍에서 포인터만 같으면 원소를 찾아서 지운다.
+	auto it = std::find_if(m_SharingBitmaps.begin(), m_SharingBitmaps.end(),
+		[pBitmap](std::pair<std::wstring, ID2D1Bitmap*> ContainerData)
+		{
+			return (ContainerData.second == pBitmap);
+		}
+	);
+	if (it != m_SharingBitmaps.end())
 	{
-		size_t result = m_SharingBitmaps.erase(it->second);
-		assert(result == 1);
-		m_SharingBitmapKeys.erase(pBitmap);
+		m_SharingBitmaps.erase(it);		
 	}
 }
 
@@ -239,13 +253,16 @@ void D2DRenderer::ReleaseAnimationAsset(AnimationAsset* pAnimationAsset)
 	if (cnt > 0)
 		return;
 
-	auto it = m_SharingAnimationAssetKeys.find(pAnimationAsset);
-	assert(it != m_SharingAnimationAssetKeys.end());
-	if (it != m_SharingAnimationAssetKeys.end())
+	// 문자열과 포인터 쌍에서 포인터만 같으면 원소를 찾아서 지운다.
+	auto it = std::find_if(m_SharingAnimationAssets.begin(), m_SharingAnimationAssets.end(),
+		[pAnimationAsset](std::pair<std::wstring, AnimationAsset*> ContainerData)
+		{
+			return (ContainerData.second == pAnimationAsset);
+		}
+	);
+	if (it != m_SharingAnimationAssets.end())
 	{
-		size_t result = m_SharingAnimationAssets.erase(it->second);
-		assert(result == 1);
-		m_SharingAnimationAssetKeys.erase(pAnimationAsset);
+		m_SharingAnimationAssets.erase(it);
 	}
 }
 

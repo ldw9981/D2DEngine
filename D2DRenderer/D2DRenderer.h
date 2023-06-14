@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 
+#include <list>
+
 class AnimationAsset;
 class D2DRenderer
 {
@@ -18,11 +20,8 @@ public:
 	IDWriteFactory* m_pDWriteFactory;	// TextFormat생성을 위한 팩토리
 	IDWriteTextFormat* m_pDWriteTextFormat; // 기본 텍스트 출력을 위한 Format
 
-	std::map<std::wstring,ID2D1Bitmap*>		m_SharingBitmaps;
-	std::map<ID2D1Bitmap*,std::wstring>		m_SharingBitmapKeys;
-
-	std::map<std::wstring, AnimationAsset*>	m_SharingAnimationAssets;
-	std::map<AnimationAsset*,std::wstring>	m_SharingAnimationAssetKeys;
+	std::list<std::pair<std::wstring, ID2D1Bitmap*>> m_SharingBitmaps;
+	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;
 public:
 	HRESULT Initialize();
 
