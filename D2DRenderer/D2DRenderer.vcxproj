@@ -141,15 +141,17 @@
   <ItemGroup>
     <ClInclude Include="AnimationAsset.h" />
     <ClInclude Include="AnimationInstance.h" />
+    <ClInclude Include="D2DBitmap.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ReferenceCounter.h" />
+    <ClInclude Include="FactoryResource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationAsset.cpp" />
     <ClCompile Include="AnimationInstance.cpp" />
+    <ClCompile Include="D2DBitmap.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="pch.cpp">
@@ -158,7 +160,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ReferenceCounter.cpp" />
+    <ClCompile Include="FactoryResource.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

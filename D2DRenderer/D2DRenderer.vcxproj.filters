@@ -27,13 +27,16 @@
     <ClInclude Include="D2DRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ReferenceCounter.h">
+    <ClInclude Include="FactoryResource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="AnimationAsset.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="AnimationInstance.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DBitmap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,13 +50,16 @@
     <ClCompile Include="GameApp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ReferenceCounter.cpp">
+    <ClCompile Include="FactoryResource.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AnimationAsset.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AnimationInstance.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DBitmap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

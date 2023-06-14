@@ -200,13 +200,13 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 }
 
 
-AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
+AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring strFilePath)
 {
 	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
 	auto it = std::find_if(m_SharingAnimationAssets.begin(), m_SharingAnimationAssets.end(),
-		[key](std::pair<std::wstring, AnimationAsset*> ContainerData)
+		[strFilePath](std::pair<std::wstring, AnimationAsset*> ContainerData)
 		{
-			return (ContainerData.first == key);
+			return (ContainerData.first == strFilePath);
 		}
 	);
 	// 컨테이너에 이미 같은 경로가 있으면 다시 만들지 않는다. 
@@ -219,10 +219,7 @@ AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring key)
 		return pAnimationAsset;
 	}
 	pAnimationAsset = new AnimationAsset;
-	pAnimationAsset->SetKey(key);
-
-	m_SharingAnimationAssets.push_back(std::pair<std::wstring, AnimationAsset*>(key, pAnimationAsset));
-
+	m_SharingAnimationAssets.push_back(std::pair<std::wstring, AnimationAsset*>(strFilePath, pAnimationAsset));
 	pAnimationAsset->AddRef();
 	return pAnimationAsset;
 }
