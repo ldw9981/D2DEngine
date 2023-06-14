@@ -1,7 +1,7 @@
 #pragma once
 /*
-	Factory -> Product(Resource) 개념에서 하나의 리소스를 참조하는 횟수를 추적하기위한 시스템
-	리소스의 참조 카운트가 0이되면 리소스는 해제 된다.
+	이 프로젝트의 Factory -> Product(Resource) 개념에서 
+	하나의 리소스를 참조하는 횟수를 추적하여 해제 하기위한 시스템
 */
 class FactoryResource {
 private:
