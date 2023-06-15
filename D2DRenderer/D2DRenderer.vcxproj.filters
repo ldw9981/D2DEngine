@@ -27,7 +27,7 @@
     <ClInclude Include="D2DRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FactoryResource.h">
+    <ClInclude Include="ReferenceCounter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="AnimationAsset.h">
@@ -50,7 +50,7 @@
     <ClCompile Include="GameApp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FactoryResource.cpp">
+    <ClCompile Include="ReferenceCounter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AnimationAsset.cpp">

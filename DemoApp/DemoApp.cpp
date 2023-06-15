@@ -74,33 +74,33 @@ bool DemoApp::Initialize()
         hr = m_D2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
     }
 
-    std::vector<FRAME_INFO> Frames;
+    ANIMATION_INFO Animation;
     m_pAnimAssetMidNight = m_D2DRenderer.CreateAnimationAsset(L"MidNight");
     m_pAnimAssetMidNight->SetBitmapFilePath(L"../Resource/midnight.png");
     m_pAnimAssetMidNight->Build();
-	Frames.push_back(FRAME_INFO(  0,  0, 784,320, 0.2f));
-	Frames.push_back(FRAME_INFO(789,  0, 784,320, 0.2f));
-	Frames.push_back(FRAME_INFO(  0,325, 784,320, 0.2f));
-	Frames.push_back(FRAME_INFO(789,325, 784,320, 0.2f));
-    m_pAnimAssetMidNight->m_Animations.push_back(Frames);
+    Animation.m_Frames.push_back(FRAME_INFO(0, 0, 784, 320, 0.2f));
+    Animation.m_Frames.push_back(FRAME_INFO(789,  0, 784,320, 0.2f));
+    Animation.m_Frames.push_back(FRAME_INFO(  0,325, 784,320, 0.2f));
+    Animation.m_Frames.push_back(FRAME_INFO(789,325, 784,320, 0.2f));
+    m_pAnimAssetMidNight->m_Animations.push_back(Animation);
     m_Background.SetAnimationInfo(m_pAnimAssetMidNight);
 
 
     m_pAnimationAsset = m_D2DRenderer.CreateAnimationAsset(L"Test");
     m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
     m_pAnimationAsset->Build();
-    Frames.clear();
-    Frames.push_back(FRAME_INFO( 28, 36, 103, 84, 0.1f));
-	Frames.push_back(FRAME_INFO(148, 36,  86, 84, 0.1f));
-	Frames.push_back(FRAME_INFO(255, 34,  87, 86, 0.1f));
-    Frames.push_back(FRAME_INFO(363, 32,  76, 88, 0.1f));
-    Frames.push_back(FRAME_INFO(458, 31,  91, 89, 0.1f));
-    Frames.push_back(FRAME_INFO(567, 40, 103, 80, 0.1f));
-    Frames.push_back(FRAME_INFO(686, 32,  85, 88, 0.1f));
-    Frames.push_back(FRAME_INFO(792, 32,  86, 88, 0.1f));
-    Frames.push_back(FRAME_INFO(899, 31,  76, 89, 0.1f));
-    Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));    
-    m_pAnimationAsset->m_Animations.push_back(Frames);
+    Animation.m_Frames.clear();
+    Animation.m_Frames.push_back(FRAME_INFO( 28, 36, 103, 84, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(148, 36,  86, 84, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(255, 34,  87, 86, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(363, 32,  76, 88, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(458, 31,  91, 89, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(567, 40, 103, 80, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(686, 32,  85, 88, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(792, 32,  86, 88, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(899, 31,  76, 89, 0.1f));
+    Animation.m_Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));
+    m_pAnimationAsset->m_Animations.push_back(Animation);
 
 
     m_AnimationInstance1.SetAnimationInfo(m_pAnimationAsset);

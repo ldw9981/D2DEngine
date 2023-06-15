@@ -1,5 +1,5 @@
 #pragma once
-#include "FactoryResource.h"
+#include "ReferenceCounter.h"
 
 class D2DRenderer;
 class AnimationAsset;

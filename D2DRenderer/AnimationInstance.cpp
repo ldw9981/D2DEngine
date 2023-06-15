@@ -33,19 +33,21 @@ void AnimationInstance::Update(float deltaTime)
 {
 	assert(m_pAnimationAsset != nullptr);
 	assert(m_pAnimationAsset != nullptr);
-	const std::vector<FRAME_INFO>& Frames = m_pAnimationAsset->m_Animations[m_AnimationIndex];
-	size_t MaxFrameIndex = Frames.size();
+
+	const ANIMATION_INFO& Animation = m_pAnimationAsset->m_Animations[m_AnimationIndex];
+	const FRAME_INFO& Frame = Animation.m_Frames[m_FrameIndex];
+	size_t MaxFrameIndex = Animation.m_Frames.size();
 
 	m_ProgressTime += deltaTime * m_Speed;
 
 
-	while (Frames[m_FrameIndex].RenderTime < m_ProgressTime)
+	while (Frame.RenderTime < m_ProgressTime)
 	{
-		m_ProgressTime -= Frames[m_FrameIndex].RenderTime;
+		m_ProgressTime -= Frame.RenderTime;
 		m_FrameIndex = (m_FrameIndex + 1) % MaxFrameIndex;
 	}
 	// 이지미에서의 프레임 영역
-	m_SrcRect = m_pAnimationAsset->m_Animations[m_AnimationIndex][m_FrameIndex].Source;
+	m_SrcRect = Frame.Source;
 	// 그릴 영역을 0,0,with,height으로 설정하고 실제 위치는 Transform으로 설정
 	m_DstRect = { 0,0,m_SrcRect.right - m_SrcRect.left,m_SrcRect.bottom - m_SrcRect.top };
 	if (m_bMirror)

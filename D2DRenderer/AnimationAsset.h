@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FactoryResource.h"
+#include "ReferenceCounter.h"
 #include <vector>
 
 
@@ -26,10 +26,16 @@ struct FRAME_INFO
 	}
 };
 
+struct ANIMATION_INFO
+{
+	std::vector<FRAME_INFO> m_Frames;
+	bool m_Loop;
+};
+
 /*
 	애니메이션에 필요한 변하지않는 데이터 자산
 */
-class AnimationAsset : public FactoryResource
+class AnimationAsset : public ReferenceCounter
 {
 	// 파괴는 Release로 , 생성은 D2DRenderer가 하게한다.
 protected:
@@ -40,7 +46,7 @@ public:
 	ID2D1Bitmap* m_pBitmap;
 	std::wstring m_BitmapFilePath;
 
-	std::vector<std::vector<FRAME_INFO>> m_Animations;
+	std::vector<ANIMATION_INFO> m_Animations;
 
 	void Build();
 	void SetBitmapFilePath(const WCHAR* szFilePath);
