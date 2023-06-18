@@ -5,15 +5,18 @@
 #include "DemoApp.h"
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
+#include "DemoObject.h"
 #include <d2d1.h>
 #include <memory>
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
-
-DemoApp::DemoApp(HINSTANCE hInstance)
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
-:GameApp::GameApp(hInstance)
+DemoApp::DemoApp(HINSTANCE hInstance)
+    :GameApp::GameApp(hInstance), 
+        m_pAnimationAsset(nullptr),
+        m_pDemoObject(nullptr)
 { 
+
 	std::wstring str(__FUNCTIONW__);
 	str += L"\n";
 	OutputDebugString(str.c_str());
@@ -42,21 +45,9 @@ DemoApp::~DemoApp()
         m_D2DRenderer.ReleaseAnimationAsset(m_pAnimationAsset);
 	}
 
-	if (m_pAnimAssetMidNight != nullptr)
-	{
-        m_D2DRenderer.ReleaseAnimationAsset(m_pAnimAssetMidNight);
-	}
 
-    if (m_pD2DBitmap1 != nullptr)
-    {
-        m_D2DRenderer.ReleaseD2DBitmapFromFile(m_pD2DBitmap1);
-    }
-	
 
-    if (m_pD2DBitmap2 != nullptr)
-    {
-        m_D2DRenderer.ReleaseD2DBitmapFromFile(m_pD2DBitmap2);
-    }
+   
 }
 
 
@@ -66,15 +57,8 @@ bool DemoApp::Initialize()
 	if (!bRet)
 	    return false;
 
-    HRESULT hr;
-
-    hr = m_D2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap1);
-    if (SUCCEEDED(hr))
-    {
-        hr = m_D2DRenderer.CreateD2DBitmapFromFile(L"../Resource/atk_1.png", &m_pD2DBitmap2);
-    }
-
     ANIMATION_INFO Animation;
+    /*
     m_pAnimAssetMidNight = m_D2DRenderer.CreateAnimationAsset(L"MidNight");
     m_pAnimAssetMidNight->SetBitmapFilePath(L"../Resource/midnight.png");
     m_pAnimAssetMidNight->Build();
@@ -83,8 +67,7 @@ bool DemoApp::Initialize()
     Animation.m_Frames.push_back(FRAME_INFO(  0,325, 784,320, 0.2f));
     Animation.m_Frames.push_back(FRAME_INFO(789,325, 784,320, 0.2f));
     m_pAnimAssetMidNight->m_Animations.push_back(Animation);
-    m_Background.SetAnimationInfo(m_pAnimAssetMidNight);
-
+   */
 
     m_pAnimationAsset = m_D2DRenderer.CreateAnimationAsset(L"Test");
     m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
@@ -103,87 +86,12 @@ bool DemoApp::Initialize()
     m_pAnimationAsset->m_Animations.push_back(Animation);
 
 
-    m_AnimationInstance1.SetAnimationInfo(m_pAnimationAsset);
-    m_AnimationInstance1.SetAnimationIndex(0,true);
-    m_AnimationInstance1.SetSpeed(1.0f);
-  
 
-	m_AnimationInstance2.SetAnimationInfo(m_pAnimationAsset);
-	m_AnimationInstance2.SetAnimationIndex(0, false);
-	m_AnimationInstance2.SetSpeed(2.0f);
-    m_AnimationInstance2.SetProgressTime(0.5f);
+    m_pDemoObject = m_World.CreateGameObject<DemoObject>();
+    m_pDemoObject->Init();
 
-
-    m_SceneComponent1.SetPosition(500.0f, 500.0f);
-    m_pSceneComponent2 = m_SceneComponent1.CreateChild<SceneComponent>();
-    m_pSceneComponent2->SetPosition(200.0f,0.0f);
-
-	m_pSceneComponent3 = m_SceneComponent1.CreateChild<SceneComponent>();
-	m_pSceneComponent3->SetPosition(10.0f, 0.0f);
-
-
-    m_pAnimationComponent = m_pSceneComponent2->CreateChild<AnimationComponent>();
-    m_pAnimationComponent->m_strAnimationAsset = std::wstring(L"Test");
-    m_pAnimationComponent->Init();
-
-    if (FAILED(hr))
-    {
-        MessageBoxComError(hr);
-        return false;
-    }	
+       
     return true;
-}
-
-void DemoApp::Render()
-{
-    D2DRenderer::m_pRenderTarget->BeginDraw();
-    //D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
-    
-    m_Background.Render(D2DRenderer::m_pRenderTarget);
-
-    D2DRenderer::m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 0));
-    D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap1);
-	
-      /*
-	  STDMETHOD_(void, DrawBitmap)(
-		_In_ ID2D1Bitmap *bitmap,
-		_In_opt_ CONST D2D1_RECT_F *destinationRectangle = NULL,
-		FLOAT opacity = 1.0f,
-		D2D1_BITMAP_INTERPOLATION_MODE interpolationMode = D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
-		_In_opt_ CONST D2D1_RECT_F *sourceRectangle = NULL
-		) PURE;
-     */
-
-    D2D1_RECT_F rectSrc = { 0.0f,0.0f,100.0f,100.0f};
-    D2D1_RECT_F rectDst = { 0.0f,0.0f,100.0f,100.0f };
-
-    
-    D2DRenderer::m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0,30));
-    D2DRenderer::m_pRenderTarget->DrawBitmap(m_pD2DBitmap2, rectSrc,1.0f,D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rectSrc);
-
-    m_AnimationInstance1.Render(D2DRenderer::m_pRenderTarget);
-    m_AnimationInstance2.Render(D2DRenderer::m_pRenderTarget);
-
-    
-    m_SceneComponent1.Render(D2DRenderer::m_pRenderTarget);
-
-    m_D2DRenderer.EndDraw();
-}
-
-void DemoApp::Update()
-{
-    GameApp::Update();
-
-    m_Background.Update();
-    m_AnimationInstance1.Update();
-    m_AnimationInstance2.Update();
-
-    static float rotation;
-    rotation += 20.0f * GameApp::m_deltaTime ;
-    rotation = rotation > 360.0f ? 0.0f : rotation;
-    m_SceneComponent1.SetRotation(rotation);
-    m_pSceneComponent2->SetRotation(rotation);
-    m_SceneComponent1.Update();
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

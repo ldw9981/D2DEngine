@@ -16,11 +16,11 @@ public:
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 	
 public:	
-	std::wstring m_strAnimationAsset;
+	std::wstring m_strAnimationAssetPath;
 	AnimationInstance* m_pAnimationInstance;
 	AnimationAsset* m_pAnimationAsset;
 
-	std::vector<D2D1_RECT_F> m_vecHitBox;
-	std::vector<D2D1_RECT_F> m_vecAttackBox;
+public:
+	void SetAnimationAssetPath(const std::wstring& strAssetKey) { m_strAnimationAssetPath = strAssetKey; }
 };
 

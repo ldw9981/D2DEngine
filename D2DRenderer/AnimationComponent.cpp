@@ -28,9 +28,9 @@ bool AnimationComponent::Init()
 {
 	m_pAnimationInstance = new AnimationInstance();
 	m_pAnimationInstance->SetAnimationComponent(this);
-	if (!m_strAnimationAsset.empty())
+	if (!m_strAnimationAssetPath.empty())
 	{
-		m_pAnimationAsset = D2DRenderer::m_Instance->CreateAnimationAsset(m_strAnimationAsset);
+		m_pAnimationAsset = D2DRenderer::m_Instance->CreateAnimationAsset(m_strAnimationAssetPath);
 		m_pAnimationInstance->SetAnimationInfo(m_pAnimationAsset);
 	}
 	return m_pAnimationInstance->Init();
@@ -38,10 +38,16 @@ bool AnimationComponent::Init()
 
 void AnimationComponent::Update()
 {
-	SceneComponent::Update();
+	UpdateTrasnform();
+
 	if (m_pAnimationInstance)
 	{
 		m_pAnimationInstance->Update();
+	}
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->Update();
 	}
 }
 

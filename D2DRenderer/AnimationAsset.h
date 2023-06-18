@@ -30,6 +30,12 @@ struct ANIMATION_INFO
 {
 	std::vector<FRAME_INFO> m_Frames;
 	bool m_Loop;
+
+	ANIMATION_INFO()
+	:m_Loop(false)
+	{
+		
+	}
 };
 
 /*

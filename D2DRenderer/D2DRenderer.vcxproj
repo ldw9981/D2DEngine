@@ -142,6 +142,7 @@
     <ClInclude Include="AnimationAsset.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationInstance.h" />
+    <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DBitmap.h" />
     <ClInclude Include="D2DRenderer.h" />
@@ -153,11 +154,15 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ReferenceCounter.h" />
     <ClInclude Include="SceneComponent.h" />
+    <ClInclude Include="SphereComponent.h" />
+    <ClInclude Include="TextComponent.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationAsset.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationInstance.cpp" />
+    <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DBitmap.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
@@ -173,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="ReferenceCounter.cpp" />
     <ClCompile Include="SceneComponent.cpp" />
+    <ClCompile Include="SphereComponent.cpp" />
+    <ClCompile Include="TextComponent.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

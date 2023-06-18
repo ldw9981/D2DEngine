@@ -15,7 +15,7 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 }
 
 GameApp::GameApp(HINSTANCE hInstance)
-	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"), m_nHeight(768),m_nWidth(1024)
+	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768})
 {
 	std::wstring str(__FUNCTIONW__);
 	str += L"\n";
@@ -50,7 +50,7 @@ bool GameApp::Initialize()
 	//생성
 	m_hWnd = CreateWindowW(m_szWindowClass, m_szTitle, WS_OVERLAPPEDWINDOW,
 		100, 100,	// 시작 위치
-		m_nWidth, m_nHeight,	// 가로,세로
+		m_ClientSize.width, m_ClientSize.height,	// 가로,세로
 		nullptr, nullptr, m_hInstance, nullptr);
 
 	if (!m_hWnd)
@@ -106,6 +106,7 @@ void GameApp::Update()
 	m_currentTime = (float)GetTickCount64() / 1000.0f;
 	m_deltaTime = m_currentTime - m_previousTime;
 	CalculateFrameStats();
+	m_World.Update();
 }
 
 void GameApp::CalculateFrameStats()
@@ -144,10 +145,9 @@ void GameApp::CalculateFrameStats()
 
 void GameApp::Render()
 {
-
 	D2DRenderer::m_pRenderTarget->BeginDraw();
-	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
-
+	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
+	m_World.Render(D2DRenderer::m_pRenderTarget);
 	m_D2DRenderer.EndDraw();
 }
 

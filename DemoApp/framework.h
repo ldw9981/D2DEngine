@@ -18,3 +18,4 @@
 #include <comdef.h>
 #include <d2d1_1helper.h>
 #include <string>
+#include <dcommon.h>

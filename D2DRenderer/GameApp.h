@@ -7,6 +7,7 @@
 	부분을 구현하기위해 부모 클래스로 만들었다. 
 */
 #include "../D2DRenderer/D2DRenderer.h"
+#include "../D2DRenderer/World.h"
 
 class D2DRenderer;
 class GameApp
@@ -29,12 +30,12 @@ protected:
 
 	int  m_nCmdShow;
 	D2DRenderer m_D2DRenderer;
+	D2D_SIZE_U m_ClientSize;
 
-	int m_nWidth;
-	int m_nHeight;
 	float m_previousTime;
 	float m_currentTime;
 	
+	World m_World;
 public:
 
 	virtual bool Initialize();
@@ -42,7 +43,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 
-
+	const D2D_SIZE_U& GetClientSize() { return m_ClientSize; 	}
 	BOOL GetClientRect(LPRECT lpRect);
 	int MessageBoxComError(HRESULT hr);
 	void CalculateFrameStats();

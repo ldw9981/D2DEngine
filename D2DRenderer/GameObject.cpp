@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "GameObject.h"
+#include "D2DRenderer.h"
 #include "GameApp.h"
+#include "SceneComponent.h"
+#include "Component.h"
+
 
 GameObject::GameObject()
 :m_pRootComponent(nullptr)
@@ -10,11 +14,11 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	if (m_pRootComponent)
+	for (auto& pComponent : m_OwnedComponent)
 	{
-		delete m_pRootComponent;
-		m_pRootComponent = nullptr;
+		delete pComponent;
 	}
+	m_OwnedComponent.clear();
 }
 
 void GameObject::SetRootComponent(SceneComponent* pRootComponent)
@@ -29,9 +33,9 @@ SceneComponent* GameObject::GetRootComponent() const
 
 void GameObject::Update()
 {
-	if (m_pRootComponent)
+	for (auto& pComponent : m_OwnedComponent)
 	{
-		m_pRootComponent->Update();
+		pComponent->Update();
 	}
 }
 

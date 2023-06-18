@@ -16,7 +16,7 @@ ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
 D2DRenderer::D2DRenderer()
-    :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr)
+    :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr), m_pBrush(nullptr)
 {
 	OutputDebugString(L"D2DRenderer::D2DRenderer()\n");
 	m_Instance = this;
@@ -25,6 +25,7 @@ D2DRenderer::D2DRenderer()
 D2DRenderer::~D2DRenderer()
 {
 	OutputDebugString(L"D2DRenderer::~D2DRenderer()\n");
+	if (m_pBrush) m_pBrush->Release();
 	if (m_pWICFactory) m_pWICFactory->Release();
 	if (m_pRenderTarget) m_pRenderTarget->Release();
 	if (m_pD2DFactory) m_pD2DFactory->Release();
@@ -69,6 +70,11 @@ HRESULT D2DRenderer::Initialize()
             &m_pRenderTarget);
     }
 
+	if (SUCCEEDED(hr))
+	{
+		hr = m_pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black), &m_pBrush);
+	}
+
     if (SUCCEEDED(hr))
     {
         // Create WIC factory
@@ -112,6 +118,12 @@ HRESULT D2DRenderer::Initialize()
     return hr;
 }
 
+
+void D2DRenderer::DrawRectangle(ID2D1RenderTarget* pRenderTarget,D2D1_RECT_F rect, D2D1_COLOR_F color)
+{
+	m_pBrush->SetColor(color);
+	pRenderTarget->DrawRectangle(rect, m_pBrush);
+}
 
 void D2DRenderer::EndDraw()
 {

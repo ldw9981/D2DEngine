@@ -18,7 +18,11 @@ AnimationInstance::AnimationInstance()
 
 AnimationInstance::~AnimationInstance()
 {
-	D2DRenderer::m_Instance->ReleaseAnimationAsset(m_pAnimationAsset);
+	if (m_pAnimationAsset)
+	{
+		D2DRenderer::m_Instance->ReleaseAnimationAsset(m_pAnimationAsset);
+	}
+
 }
 
 bool AnimationInstance::Init()
@@ -34,10 +38,6 @@ bool AnimationInstance::Init()
 
 void AnimationInstance::SetAnimationInfo(AnimationAsset* pAnimationInfo)
 {
-	if (m_pAnimationAsset != nullptr)
-	{
-		D2DRenderer::m_Instance->ReleaseAnimationAsset(m_pAnimationAsset);
-	}
 	m_pAnimationAsset = pAnimationInfo;
 	pAnimationInfo->AddRef();
 }

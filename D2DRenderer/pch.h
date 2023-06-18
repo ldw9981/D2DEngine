@@ -18,6 +18,7 @@
 #include <tchar.h>
 
 #include <d2d1.h>
+#include <d2d1_1.h>
 #include <wincodec.h>
 #include <comdef.h>
 #include <d2d1_1helper.h>
@@ -25,6 +26,7 @@
 #include <sysinfoapi.h>
 #include <string>
 #include <assert.h>
+#include <dcommon.h>
 
 using namespace D2D1;
 

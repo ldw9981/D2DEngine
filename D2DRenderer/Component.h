@@ -8,12 +8,12 @@ public:
 	Component() : m_pOwner(nullptr)
 	{
 	}
-	virtual ~Component() = 0;
+	virtual ~Component() {};
 
 protected:
 	GameObject* m_pOwner;
 public:
-	virtual void Update(float DeltaTime) = 0;
+	virtual void Update() = 0;
 	void SetOwner(GameObject* pOwner) { m_pOwner = pOwner; }
 };
 
