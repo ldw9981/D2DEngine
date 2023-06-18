@@ -26,4 +26,6 @@
 #include <string>
 #include <assert.h>
 
+using namespace D2D1;
+
 #endif //PCH_H

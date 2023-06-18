@@ -18,7 +18,7 @@ public:
 	
 	static HWND m_hWnd;		//자주필요하니 포인터 간접접근을 피하기위해 정적멤버로 만들었다.
 	static GameApp* m_pInstance;			// 생성자에서 인스턴스 포인터를 보관한다.
-	
+	static float m_deltaTime;
 protected:
 	HACCEL m_hAccelTable;
 	MSG m_msg;
@@ -34,7 +34,7 @@ protected:
 	int m_nHeight;
 	float m_previousTime;
 	float m_currentTime;
-	float m_deltaTime;
+	
 public:
 
 	virtual bool Initialize();

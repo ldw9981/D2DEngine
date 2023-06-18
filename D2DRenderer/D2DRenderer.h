@@ -5,6 +5,26 @@
 
 #include <list>
 
+template <typename T>
+void SAFE_RELEASE(T* p)
+{
+	if (p)
+	{
+		p->Release();
+		p = nullptr;
+	}
+}
+
+template <typename T>
+void SAFE_DELETE(T* p)
+{
+	if (p)
+	{
+		delete p;
+		p = nullptr;
+	}
+}
+
 class AnimationAsset;
 class D2DRenderer
 {

@@ -140,20 +140,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationAsset.h" />
+    <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationInstance.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="D2DBitmap.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApp.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ReferenceCounter.h" />
+    <ClInclude Include="SceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationAsset.cpp" />
+    <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationInstance.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DBitmap.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -161,6 +172,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ReferenceCounter.cpp" />
+    <ClCompile Include="SceneComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

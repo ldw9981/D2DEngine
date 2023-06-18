@@ -106,13 +106,25 @@ bool DemoApp::Initialize()
     m_AnimationInstance1.SetAnimationInfo(m_pAnimationAsset);
     m_AnimationInstance1.SetAnimationIndex(0,true);
     m_AnimationInstance1.SetSpeed(1.0f);
-    m_AnimationInstance1.SetPosition(500.0f,500.0f);
+  
 
 	m_AnimationInstance2.SetAnimationInfo(m_pAnimationAsset);
 	m_AnimationInstance2.SetAnimationIndex(0, false);
 	m_AnimationInstance2.SetSpeed(2.0f);
     m_AnimationInstance2.SetProgressTime(0.5f);
-    m_AnimationInstance2.SetPosition(200.0f, 500.0f);
+
+
+    m_SceneComponent1.SetPosition(500.0f, 500.0f);
+    m_pSceneComponent2 = m_SceneComponent1.CreateChild<SceneComponent>();
+    m_pSceneComponent2->SetPosition(200.0f,0.0f);
+
+	m_pSceneComponent3 = m_SceneComponent1.CreateChild<SceneComponent>();
+	m_pSceneComponent3->SetPosition(10.0f, 0.0f);
+
+
+    m_pAnimationComponent = m_pSceneComponent2->CreateChild<AnimationComponent>();
+    m_pAnimationComponent->m_strAnimationAsset = std::wstring(L"Test");
+    m_pAnimationComponent->Init();
 
     if (FAILED(hr))
     {
@@ -125,7 +137,7 @@ bool DemoApp::Initialize()
 void DemoApp::Render()
 {
     D2DRenderer::m_pRenderTarget->BeginDraw();
-    D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
+    //D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));
     
     m_Background.Render(D2DRenderer::m_pRenderTarget);
 
@@ -152,6 +164,9 @@ void DemoApp::Render()
     m_AnimationInstance1.Render(D2DRenderer::m_pRenderTarget);
     m_AnimationInstance2.Render(D2DRenderer::m_pRenderTarget);
 
+    
+    m_SceneComponent1.Render(D2DRenderer::m_pRenderTarget);
+
     m_D2DRenderer.EndDraw();
 }
 
@@ -159,10 +174,16 @@ void DemoApp::Update()
 {
     GameApp::Update();
 
-    m_Background.Update(m_deltaTime);
-    m_AnimationInstance1.Update(m_deltaTime);
-    m_AnimationInstance2.Update(m_deltaTime);
+    m_Background.Update();
+    m_AnimationInstance1.Update();
+    m_AnimationInstance2.Update();
 
+    static float rotation;
+    rotation += 20.0f * GameApp::m_deltaTime ;
+    rotation = rotation > 360.0f ? 0.0f : rotation;
+    m_SceneComponent1.SetRotation(rotation);
+    m_pSceneComponent2->SetRotation(rotation);
+    m_SceneComponent1.Update();
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

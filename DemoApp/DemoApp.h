@@ -6,6 +6,9 @@
 #include "TestClass.h"
 #include "../D2DRenderer/AnimationAsset.h"
 
+#include "../D2DRenderer/AnimationComponent.h"
+#include "../D2DRenderer/SceneComponent.h"
+
 class AnimationAsset;
 class DemoApp: public GameApp
 {
@@ -23,6 +26,12 @@ public:
 	AnimationInstance m_AnimationInstance2;
 
 	AnimationInstance m_Background;
+
+	
+	SceneComponent m_SceneComponent1;
+	SceneComponent* m_pSceneComponent2;
+	SceneComponent* m_pSceneComponent3;
+	AnimationComponent* m_pAnimationComponent;
 
 	TestClass1 A;	// TestClass1::~TestClass1()는 DemoApp::~DemoApp 호출 뒤에 호출된다. 
 	TestClass2 B;	// 생성자 역순으로 밑에 있는 파괴자가 먼저 호출된다. 

@@ -3,6 +3,9 @@
 #include "D2DRenderer.h"
 
 GameApp* GameApp::m_pInstance = nullptr;
+
+float GameApp::m_deltaTime = 0.0f;
+
 HWND GameApp::m_hWnd;
 
 
