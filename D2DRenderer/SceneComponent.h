@@ -47,7 +47,5 @@ public:
 	void SetParent(SceneComponent* pParent) { m_pParent = pParent; }
 
 	const D2D_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
-
-	D2D_VECTOR_2F ExtractScaleFromTransform(const D2D1_MATRIX_3X2_F& Transform);
 };
 
