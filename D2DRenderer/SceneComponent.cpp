@@ -45,8 +45,10 @@ void SceneComponent::UpdateTrasnform()
 	m_RelativeTransform = Matrix3x2F::Scale(D2D1::SizeF(m_RelativeScale.x, m_RelativeScale.y)) *
 		Matrix3x2F::Rotation(m_RelativeRotation) *
 		Matrix3x2F::Translation(m_RelativeLocation.x, m_RelativeLocation.y);
+
 	if (m_pParent != nullptr)
-	{
+	{	
+		// 자식변환을 먼저 적용한다.
 		m_WorldTransform = m_RelativeTransform * m_pParent->m_WorldTransform;
 	}
 	else
@@ -86,9 +88,9 @@ void SceneComponent::AddRelativePosition(float x, float y)
 	m_RelativeLocation = { m_RelativeLocation.x + x,m_RelativeLocation.y + y };
 }
 
-D2D1_VECTOR_2F SceneComponent::ExtractScaleFromTransform(const D2D1_MATRIX_3X2_F& Transform)
+D2D_VECTOR_2F SceneComponent::ExtractScaleFromTransform(const D2D1_MATRIX_3X2_F& Transform)
 {
-	D2D1_VECTOR_2F Scale;
+	D2D_VECTOR_2F Scale;
 	Scale.x = sqrtf(Transform._11 * Transform._11 + Transform._12 * Transform._12);
 	Scale.y = sqrtf(Transform._21 * Transform._21 + Transform._22 * Transform._22);
 	return Scale;

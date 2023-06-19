@@ -42,8 +42,14 @@ void AnimationComponent::Update()
 
 	if (m_pAnimationInstance)
 	{
+		// 애니메이션 결과에 따라 히트박스 정보가 변한다.
 		m_pAnimationInstance->Update();
 	}
+
+	/*
+		Todo: 애니메이션의 결과와 월드변환으로 히트박스의 위치를 업데이트 해줘야함
+	*/
+
 
 	for (auto& pChild : m_Children)
 	{

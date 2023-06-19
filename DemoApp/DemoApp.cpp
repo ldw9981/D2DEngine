@@ -90,7 +90,15 @@ bool DemoApp::Initialize()
     m_pDemoObject = m_World.CreateGameObject<DemoObject>();
     m_pDemoObject->Init();
 
-       
+
+    D2D1_POINT_2F Position {1.0f,1.0f};
+    D2D1::Matrix3x2F Transform = D2D1::Matrix3x2F::Rotation(90.0f);
+    Position = Transform.TransformPoint(Position);
+   
+
+
+    //Transform.TransformPoint(Position);
+   
     return true;
 }
 

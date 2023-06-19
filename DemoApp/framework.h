@@ -19,3 +19,5 @@
 #include <d2d1_1helper.h>
 #include <string>
 #include <dcommon.h>
+
+using namespace D2D1;

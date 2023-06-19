@@ -4,9 +4,10 @@
 
 /*
 	DemoObject Hierachy
-		- BoxComponent
-			- SphereComponent
-				- AnimationComponent
+
+	- [Root]BoxComponent
+		- SphereComponent
+			- AnimationComponent
 				
  */
 class BoxComponent;

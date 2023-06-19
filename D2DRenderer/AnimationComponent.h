@@ -2,6 +2,10 @@
 #include "SceneComponent.h"
 #include "RenderComponent.h"
 
+/*
+	애니메이션 인스턴스와 다른점은 히트박스를 가지고 있다는 점이다.
+*/
+
 class AnimationInstance;
 class AnimationAsset;
 class AnimationComponent :
@@ -20,6 +24,10 @@ public:
 	AnimationInstance* m_pAnimationInstance;
 	AnimationAsset* m_pAnimationAsset;
 
+	// 공격	영역
+	std::vector<D2D1_RECT_F> m_AttackHitBoxes;
+	// 데미지 영역
+	std::vector<D2D1_RECT_F> m_DamgageHitBoxes;
 public:
 	void SetAnimationAssetPath(const std::wstring& strAssetKey) { m_strAnimationAssetPath = strAssetKey; }
 };

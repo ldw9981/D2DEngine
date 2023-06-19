@@ -18,10 +18,6 @@ public:
 	// override는 부모의 가상함수를 재정의 한다고 명확히 명시하여 새로 가상함수를 만드는 실수를 방지한다. 
 	virtual bool Initialize() override;
 
-	ID2D1Bitmap* m_pD2DBitmap1 = nullptr;
-	ID2D1Bitmap* m_pD2DBitmap2 = nullptr;
 	AnimationAsset* m_pAnimationAsset;
-
-
 	DemoObject* m_pDemoObject;
 };
