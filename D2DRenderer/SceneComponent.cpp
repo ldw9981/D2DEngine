@@ -2,7 +2,7 @@
 #include "SceneComponent.h"
 
 SceneComponent::SceneComponent()
-	:m_RelativeScale({ 1.0f,1.0f }),m_RelativeRotation(0.0f), m_RelativeLocation({ 0.0f,0.0f }), m_RelativeTransform(Matrix3x2F::Identity()), m_pParent(nullptr),m_WorldTransform(Matrix3x2F::Identity())
+	:m_RelativeScale({ 1.0f,1.0f }),m_RelativeRotation(0.0f), m_RelativeLocation({ 0.0f,0.0f }), m_RelativeTransform(Matrix3x2F::Identity()), m_pParentScene(nullptr),m_WorldTransform(Matrix3x2F::Identity())
 {
 
 }
@@ -46,10 +46,10 @@ void SceneComponent::UpdateTrasnform()
 		Matrix3x2F::Rotation(m_RelativeRotation) *
 		Matrix3x2F::Translation(m_RelativeLocation.x, m_RelativeLocation.y);
 
-	if (m_pParent != nullptr)
+	if (m_pParentScene != nullptr)
 	{	
 		// 자식변환을 먼저 적용한다.
-		m_WorldTransform = m_RelativeTransform * m_pParent->m_WorldTransform;
+		m_WorldTransform = m_RelativeTransform * m_pParentScene->m_WorldTransform;
 	}
 	else
 	{

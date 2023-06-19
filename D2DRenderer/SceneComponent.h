@@ -10,7 +10,7 @@ public:
 	virtual ~SceneComponent();
 
 protected:
-	SceneComponent*		m_pParent;
+	SceneComponent*		m_pParentScene;
 	std::vector<SceneComponent*> m_Children;
 
 	D2D1_VECTOR_2F		m_RelativeScale;
@@ -29,7 +29,7 @@ public:
 	{
 		bool bIsBase = std::is_base_of<SceneComponent, T>::value;		
 		T* pChild = new T();		
-		pChild->SetParent(this);
+		pChild->SetParentScene(this);
 		m_Children.push_back(pChild);
 		return pChild;
 	}
@@ -44,7 +44,7 @@ public:
 	void SetRelativePosition(float x, float y);
 	void AddRelativePosition(float x, float y);
 
-	void SetParent(SceneComponent* pParent) { m_pParent = pParent; }
+	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 
 	const D2D_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
 };
