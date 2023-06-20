@@ -27,7 +27,7 @@ protected:
 	float m_Speed;
 	D2D1_MATRIX_3X2_F m_RenderTransform;
 public:
-	virtual bool Init() override;
+	virtual bool Initialize() override;
 	void SetProgressTime(float val) { m_ProgressTime = val; }
 	void SetSpeed(float val) { m_Speed = val; }
 	void SetAnimationInfo(AnimationAsset* pAnimationInfo);

@@ -18,10 +18,9 @@ DemoObject::~DemoObject()
 
 }
 
-bool DemoObject::Init()
+bool DemoObject::Initialize()
 {
 	const D2D_SIZE_U& size = GameApp::m_pInstance->GetClientSize();
-
 
 	m_pSphereComponent = CreateComponent<SphereComponent>();
 	SetRootComponent(m_pSphereComponent);
@@ -29,23 +28,15 @@ bool DemoObject::Init()
 	m_pSphereComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Yellow);
 	m_pSphereComponent->SetRelativePosition((float)size.width / 2, (float)size.height / 2);
 
-
-
 	m_pBoxComponent = m_pSphereComponent->CreateChild<BoxComponent>();
 	m_pBoxComponent->m_Rect = D2D1_RECT_F{ -25.0f,-25.0f,25.0f,25.0f };
 	m_pBoxComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Red);
 	m_pBoxComponent->SetRelativePosition(100.0f, 0.0f);
 
-
-
-
-
-
 	m_pAnimationComponent = m_pBoxComponent->CreateChild<AnimationComponent>();
 	m_pAnimationComponent->SetAnimationAssetPath(std::wstring(L"Test"));
 	m_pAnimationComponent->SetRelativePosition(100.0f,0.0f);
-	m_pAnimationComponent->Init();
-
+	m_pAnimationComponent->Initialize();
 	
 	return true;
 }

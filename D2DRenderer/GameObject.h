@@ -24,6 +24,9 @@ public:
 	virtual void Update();
 	virtual void Render(ID2D1RenderTarget* pRenderTarget);
 
+	D2D_VECTOR_2F GetLocation();
+	void SetLocation(float x, float y);
+
 	template<typename T>
 	T* CreateComponent()
 	{

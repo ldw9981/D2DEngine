@@ -15,7 +15,7 @@ public:
 	AnimationComponent();
 	virtual ~AnimationComponent();
 
-	virtual bool Init() override;
+	virtual bool Initialize() override;
 	virtual void Update() override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 	

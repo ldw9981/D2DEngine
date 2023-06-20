@@ -7,21 +7,21 @@ World::World()
 
 World::~World()
 {
-	for (auto& gameObject : m_GameObjectContainer)
+	for (auto& gameObject : m_GameObjects)
 	{
 		delete gameObject;
 	}	
-	m_GameObjectContainer.clear();
+	m_GameObjects.clear();
 }
 
-bool World::Init()
+bool World::Initialize()
 {
 	return true;
 }
 
 void World::Update()
 {
-	for (auto& gameObject : m_GameObjectContainer)
+	for (auto& gameObject : m_GameObjects)
 	{
 		gameObject->Update();
 	}
@@ -29,7 +29,7 @@ void World::Update()
 
 void World::Render(ID2D1RenderTarget* pRernderTarget)
 {
-	for (auto& gameObject : m_GameObjectContainer)
+	for (auto& gameObject : m_GameObjects)
 	{
 		gameObject->Render(pRernderTarget);
 	}

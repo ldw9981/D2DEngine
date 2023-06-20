@@ -220,6 +220,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             g_pRenderTarget->DrawBitmap(g_pD2DBitmap);
            
 
+            D2D1_MATRIX_3X2_F Matrix = D2D1::Matrix3x2F::Scale(-1.0f, 1.0f, D2D1::Point2F(0, 0));
+            g_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
 			g_pRenderTarget->EndDraw();
 		}
 	}

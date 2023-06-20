@@ -25,7 +25,7 @@ AnimationInstance::~AnimationInstance()
 
 }
 
-bool AnimationInstance::Init()
+bool AnimationInstance::Initialize()
 {
 	assert(m_pAnimationAsset!=nullptr);
 	assert(m_pAnimationAsset->m_Animations.empty() == false);

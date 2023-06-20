@@ -21,7 +21,7 @@ SceneComponent::~SceneComponent()
 	m_Children.clear();
 }
 
-bool SceneComponent::Init()
+bool SceneComponent::Initialize()
 {
 	return true;
 }

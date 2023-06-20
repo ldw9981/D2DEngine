@@ -24,7 +24,7 @@ public:
 	SphereComponent* m_pSphereComponent;
 	AnimationComponent* m_pAnimationComponent;
 public:
-	virtual bool Init() override;
+	virtual bool Initialize() override;
 	virtual void Update() override;
 };
 

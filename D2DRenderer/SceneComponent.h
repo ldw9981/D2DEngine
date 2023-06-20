@@ -20,7 +20,7 @@ protected:
 
 	D2D1_MATRIX_3X2_F	m_WorldTransform;
 public:
-	virtual bool Init();
+	virtual bool Initialize();
 	virtual void Update() override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget);
 
@@ -37,12 +37,15 @@ public:
 	void UpdateTrasnform();
 	void SetRelativeScale(float x, float y);
 	void AddRelativeScale(float x, float y);
+	D2D1_VECTOR_2F GetRelativeScale() { return m_RelativeScale; }
 
 	void SetRelativeRotation(float Rotation);
 	void AddRelativeRotation(float Rotation);
+	float GetRelativeRotation() { return m_RelativeRotation; }
 
-	void SetRelativePosition(float x, float y);
-	void AddRelativePosition(float x, float y);
+	void SetRelativeLocation(float x, float y);
+	void AddRelativeLocation(float x, float y);
+	D2D1_VECTOR_2F GetRelativeLocation() { return m_RelativeLocation; }
 
 	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 

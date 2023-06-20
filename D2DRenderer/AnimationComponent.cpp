@@ -24,7 +24,7 @@ AnimationComponent::~AnimationComponent()
 	}
 }
 
-bool AnimationComponent::Init()
+bool AnimationComponent::Initialize()
 {
 	m_pAnimationInstance = new AnimationInstance();
 	m_pAnimationInstance->SetAnimationComponent(this);
@@ -33,7 +33,7 @@ bool AnimationComponent::Init()
 		m_pAnimationAsset = D2DRenderer::m_Instance->CreateAnimationAsset(m_strAnimationAssetPath);
 		m_pAnimationInstance->SetAnimationInfo(m_pAnimationAsset);
 	}
-	return m_pAnimationInstance->Init();
+	return m_pAnimationInstance->Initialize();
 }
 
 void AnimationComponent::Update()

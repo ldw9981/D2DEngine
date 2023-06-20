@@ -88,7 +88,7 @@ bool DemoApp::Initialize()
 
 
     m_pDemoObject = m_World.CreateGameObject<DemoObject>();
-    m_pDemoObject->Init();
+    m_pDemoObject->Initialize();
 
 
     D2D1_POINT_2F Position {1.0f,1.0f};

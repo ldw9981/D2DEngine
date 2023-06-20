@@ -46,3 +46,16 @@ void GameObject::Render(ID2D1RenderTarget* pRenderTarget)
 		m_pRootComponent->Render(pRenderTarget);
 	}
 }
+
+D2D_VECTOR_2F GameObject::GetLocation()
+{
+	return m_pRootComponent ? m_pRootComponent->GetRelativeLocation() : D2D_VECTOR_2F();
+}
+
+void GameObject::SetLocation(float x, float y)
+{
+	if (m_pRootComponent)
+	{
+		m_pRootComponent->SetRelativeLocation(x, y);
+	}
+}
