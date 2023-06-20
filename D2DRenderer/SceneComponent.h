@@ -28,6 +28,7 @@ public:
 	T* CreateChild()
 	{
 		bool bIsBase = std::is_base_of<SceneComponent, T>::value;		
+		assert(bIsBase == true);
 		T* pChild = new T();		
 		pChild->SetParentScene(this);
 		m_Children.push_back(pChild);

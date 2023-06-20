@@ -19,6 +19,8 @@ public:
     template<typename T>
 	T* CreateGameObject()
 	{
+		bool bIsBase = std::is_base_of<GameObject, T>::value;
+		assert(bIsBase == true);
 		T* newObject = new T();
 		m_GameObjects.push_back(newObject);
 		return newObject;

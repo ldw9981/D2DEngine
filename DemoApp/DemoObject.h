@@ -5,8 +5,8 @@
 /*
 	DemoObject Hierachy
 
-	- [Root]BoxComponent
-		- SphereComponent
+	- [Root] SphereComponent
+		- BoxComponent
 			- AnimationComponent
 				
  */

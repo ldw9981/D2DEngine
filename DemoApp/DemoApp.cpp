@@ -57,6 +57,7 @@ bool DemoApp::Initialize()
 	if (!bRet)
 	    return false;
 
+    // 애니메이션 정보는 파일에서 읽어야 하나 여기서는 하드코딩으로 만들어서 사용한다.
     ANIMATION_INFO Animation;
     /*
     m_pAnimAssetMidNight = m_D2DRenderer.CreateAnimationAsset(L"MidNight");
@@ -85,19 +86,14 @@ bool DemoApp::Initialize()
     Animation.m_Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));
     m_pAnimationAsset->m_Animations.push_back(Animation);
 
-
-
+    	
+	// DemoObject를 생성하고 초기화한다.
+    // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     m_pDemoObject = m_World.CreateGameObject<DemoObject>();
     m_pDemoObject->Initialize();
+    // RootSceneComponent의 Location을 중앙위치로 설정
+    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, (float)m_ClientSize.height / 2);
 
-
-    D2D1_POINT_2F Position {1.0f,1.0f};
-    D2D1::Matrix3x2F Transform = D2D1::Matrix3x2F::Rotation(90.0f);
-    Position = Transform.TransformPoint(Position);
-   
-
-
-    //Transform.TransformPoint(Position);
    
     return true;
 }
