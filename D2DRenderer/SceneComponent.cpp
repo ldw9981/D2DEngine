@@ -83,12 +83,12 @@ void SceneComponent::AddRelativeRotation(float Rotation)
 	m_RelativeRotation = fmodf(m_RelativeRotation, 360.0f);
 }
 
-void SceneComponent::SetRelativePosition(float x, float y)
+void SceneComponent::SetRelativeLocation(float x, float y)
 {
 	m_RelativeLocation = { x,y };
 }
 
-void SceneComponent::AddRelativePosition(float x, float y)
+void SceneComponent::AddRelativeLocation(float x, float y)
 {
 	m_RelativeLocation = { m_RelativeLocation.x + x,m_RelativeLocation.y + y };
 }
