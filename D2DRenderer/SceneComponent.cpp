@@ -2,7 +2,12 @@
 #include "SceneComponent.h"
 
 SceneComponent::SceneComponent()
-	:m_RelativeScale({ 1.0f,1.0f }),m_RelativeRotation(0.0f), m_RelativeLocation({ 0.0f,0.0f }), m_RelativeTransform(Matrix3x2F::Identity()), m_pParentScene(nullptr),m_WorldTransform(Matrix3x2F::Identity())
+	:m_RelativeScale({ 1.0f,1.0f }),
+	m_RelativeRotation(0.0f), 
+	m_RelativeLocation({ 0.0f,0.0f }), 
+	m_RelativeTransform(Matrix3x2F::Identity()), 
+	m_pParentScene(nullptr),
+	m_WorldTransform(Matrix3x2F::Identity())
 {
 
 }
@@ -87,4 +92,3 @@ void SceneComponent::AddRelativePosition(float x, float y)
 {
 	m_RelativeLocation = { m_RelativeLocation.x + x,m_RelativeLocation.y + y };
 }
-
