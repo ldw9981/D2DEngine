@@ -12,18 +12,18 @@ public:
 	GameObject();
 	virtual ~GameObject()
 	{
-		for (auto& pComponent : m_OwnedComponent)
+		for (auto& pComponent : m_OwnedComponents)
 		{
 			delete pComponent;
 		}
-		m_OwnedComponent.clear();
+		m_OwnedComponents.clear();
 	}
 
 protected:
 	SceneComponent* m_pRootComponent;
 	GameObject* m_pParentObject;
 
-	std::vector<Component*> m_OwnedComponent;
+	std::vector<Component*> m_OwnedComponents;
 public:
 	void SetRootComponent(SceneComponent* pRootComponent);
 	SceneComponent* GetRootComponent() const;
@@ -41,7 +41,7 @@ public:
 		assert(bIsBase == true);
 		T* pComponent = new T;
 		pComponent->SetOwner(this);
-		m_OwnedComponent.push_back(pComponent);
+		m_OwnedComponents.push_back(pComponent);
 		return pComponent;
 	}
 

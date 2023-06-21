@@ -59,17 +59,6 @@ bool DemoApp::Initialize()
 
     // 애니메이션 정보는 파일에서 읽어야 하나 여기서는 하드코딩으로 만들어서 사용한다.
     ANIMATION_INFO Animation;
-    /*
-    m_pAnimAssetMidNight = m_D2DRenderer.CreateAnimationAsset(L"MidNight");
-    m_pAnimAssetMidNight->SetBitmapFilePath(L"../Resource/midnight.png");
-    m_pAnimAssetMidNight->Build();
-    Animation.m_Frames.push_back(FRAME_INFO(0, 0, 784, 320, 0.2f));
-    Animation.m_Frames.push_back(FRAME_INFO(789,  0, 784,320, 0.2f));
-    Animation.m_Frames.push_back(FRAME_INFO(  0,325, 784,320, 0.2f));
-    Animation.m_Frames.push_back(FRAME_INFO(789,325, 784,320, 0.2f));
-    m_pAnimAssetMidNight->m_Animations.push_back(Animation);
-   */
-
     m_pAnimationAsset = m_D2DRenderer.CreateAnimationAsset(L"Test");
     m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
     m_pAnimationAsset->Build();
@@ -85,16 +74,13 @@ bool DemoApp::Initialize()
     Animation.m_Frames.push_back(FRAME_INFO(899, 31,  76, 89, 0.1f));
     Animation.m_Frames.push_back(FRAME_INFO(993, 33,  92, 87, 0.1f));
     m_pAnimationAsset->m_Animations.push_back(Animation);
-
     	
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     m_pDemoObject = m_World.CreateGameObject<DemoObject>();
     m_pDemoObject->Initialize();
     // RootSceneComponent의 Location을 중앙위치로 설정
-    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, (float)m_ClientSize.height / 2);
-
-   
+    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, (float)m_ClientSize.height / 2);   
     return true;
 }
 

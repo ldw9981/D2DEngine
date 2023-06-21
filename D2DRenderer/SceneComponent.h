@@ -7,14 +7,7 @@ class SceneComponent : public Component
 {
 public:
 	SceneComponent();
-	virtual ~SceneComponent()
-	{
-		for (auto& pChild : m_Children)
-		{
-			delete pChild;
-		}
-		m_Children.clear();
-	}
+	virtual ~SceneComponent() {};
 
 protected:
 	SceneComponent*		m_pParentScene;
@@ -31,16 +24,6 @@ public:
 	virtual void Update() override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget);
 
-	template<typename T>
-	T* CreateChild()
-	{
-		bool bIsBase = std::is_base_of<SceneComponent, T>::value;		
-		assert(bIsBase == true);
-		T* pChild = new T();		
-		pChild->SetParentScene(this);
-		m_Children.push_back(pChild);
-		return pChild;
-	}
 		
 	void UpdateTrasnform();
 	void SetRelativeScale(float x, float y);
@@ -58,5 +41,8 @@ public:
 	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 
 	const D2D_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
+
+
+	void AttachToComponent(SceneComponent* pParent);
 };
 

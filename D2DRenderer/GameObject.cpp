@@ -25,7 +25,7 @@ SceneComponent* GameObject::GetRootComponent() const
 
 void GameObject::Update()
 {
-	for (auto& pComponent : m_OwnedComponent)
+	for (auto& pComponent : m_OwnedComponents)
 	{
 		pComponent->Update();
 	}
@@ -33,9 +33,14 @@ void GameObject::Update()
 
 void GameObject::Render(ID2D1RenderTarget* pRenderTarget)
 {
-	if (m_pRootComponent)
+	for (auto& pComponent : m_OwnedComponents)
 	{
-		m_pRootComponent->Render(pRenderTarget);
+		// 보관하고 있는 컴포넌트 인스턴스가 SceneComponent 일때만 Render를 호출한다.
+		SceneComponent* pSceneComponent = dynamic_cast<SceneComponent*>(pComponent);
+		if (pSceneComponent)
+		{
+			pSceneComponent->Render(pRenderTarget);	
+		}
 	}
 }
 

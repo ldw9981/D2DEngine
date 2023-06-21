@@ -20,21 +20,12 @@ bool SceneComponent::Initialize()
 
 void SceneComponent::Update()
 {
-	UpdateTrasnform();
-
-	for (auto& pChild : m_Children)
-	{
-		pChild->Update();
-	}
+	UpdateTrasnform();	
 }
 
 void SceneComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
-	for (auto& pChild : m_Children)
-	{
-		pChild->Render(pRenderTarget);
-	}
-	
+
 }
 
 void SceneComponent::UpdateTrasnform()
@@ -83,4 +74,10 @@ void SceneComponent::SetRelativeLocation(float x, float y)
 void SceneComponent::AddRelativeLocation(float x, float y)
 {
 	m_RelativeLocation = { m_RelativeLocation.x + x,m_RelativeLocation.y + y };
+}
+
+void SceneComponent::AttachToComponent(SceneComponent* pParent)
+{
+	m_pParentScene = pParent;
+	pParent->m_Children.push_back(this);
 }
