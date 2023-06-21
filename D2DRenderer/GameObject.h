@@ -10,7 +10,14 @@ class GameObject : public Object
 {
 public:
 	GameObject();
-	virtual ~GameObject();
+	virtual ~GameObject()
+	{
+		for (auto& pComponent : m_OwnedComponent)
+		{
+			delete pComponent;
+		}
+		m_OwnedComponent.clear();
+	}
 
 protected:
 	SceneComponent* m_pRootComponent;

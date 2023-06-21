@@ -7,7 +7,14 @@ class World :
 {
 public:
     World();
-    virtual ~World();
+    virtual ~World()
+	{
+		for (auto& gameObject : m_GameObjects)
+		{
+			delete gameObject;
+		}
+		m_GameObjects.clear();
+	}
 
 	virtual bool Initialize() override;
 	virtual void Update() override;

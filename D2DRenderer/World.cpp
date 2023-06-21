@@ -5,15 +5,6 @@ World::World()
 {
 }
 
-World::~World()
-{
-	for (auto& gameObject : m_GameObjects)
-	{
-		delete gameObject;
-	}	
-	m_GameObjects.clear();
-}
-
 bool World::Initialize()
 {
 	return true;

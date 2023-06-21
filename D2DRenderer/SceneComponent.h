@@ -7,7 +7,14 @@ class SceneComponent : public Component
 {
 public:
 	SceneComponent();
-	virtual ~SceneComponent();
+	virtual ~SceneComponent()
+	{
+		for (auto& pChild : m_Children)
+		{
+			delete pChild;
+		}
+		m_Children.clear();
+	}
 
 protected:
 	SceneComponent*		m_pParentScene;

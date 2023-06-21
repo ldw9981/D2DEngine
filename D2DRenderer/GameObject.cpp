@@ -12,14 +12,6 @@ GameObject::GameObject()
 
 }
 
-GameObject::~GameObject()
-{
-	for (auto& pComponent : m_OwnedComponent)
-	{
-		delete pComponent;
-	}
-	m_OwnedComponent.clear();
-}
 
 void GameObject::SetRootComponent(SceneComponent* pRootComponent)
 {

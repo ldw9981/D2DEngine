@@ -12,14 +12,6 @@ SceneComponent::SceneComponent()
 
 }
 
-SceneComponent::~SceneComponent()
-{
-	for (auto& pChild : m_Children)
-	{
-		delete pChild;
-	}
-	m_Children.clear();
-}
 
 bool SceneComponent::Initialize()
 {
