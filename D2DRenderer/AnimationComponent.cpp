@@ -38,7 +38,7 @@ bool AnimationComponent::Initialize()
 
 void AnimationComponent::Update()
 {
-	UpdateTrasnform();
+	__super::Update();
 
 	if (m_pAnimationInstance)
 	{
@@ -50,11 +50,6 @@ void AnimationComponent::Update()
 		Todo: 애니메이션의 결과와 월드변환으로 히트박스의 위치를 업데이트 해줘야함
 	*/
 
-
-	for (auto& pChild : m_Children)
-	{
-		pChild->Update();
-	}
 }
 
 void AnimationComponent::Render(ID2D1RenderTarget* pRenderTarget)

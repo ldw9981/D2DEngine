@@ -25,6 +25,4 @@ void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pBrush->SetColor(m_Color);	
 	pRenderTarget->SetTransform(m_WorldTransform);
 	pRenderTarget->DrawRectangle(m_Rect,pBrush);	
-
-	__super::Render(pRenderTarget);
 }
