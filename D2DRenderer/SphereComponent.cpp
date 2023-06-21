@@ -23,6 +23,8 @@ void SphereComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pBrush->SetColor(m_Color);
 	pRenderTarget->SetTransform(m_WorldTransform);
 	pRenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(0, 0), m_Radius, m_Radius), pBrush);
-
+		
+	// SceneComponent의 Render를 호출하여
+	//트리로 구성된 자식의 SceneComponent를 그리게 한다.
 	__super::Render(pRenderTarget);
 }

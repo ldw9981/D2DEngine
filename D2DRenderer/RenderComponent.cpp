@@ -10,12 +10,4 @@ RenderComponent::~RenderComponent()
 {
 }
 
-void RenderComponent::Update()
-{
-	__super::Update();
-}
 
-void RenderComponent::Render(ID2D1RenderTarget* pRenderTarget)
-{
-	__super::Render(pRenderTarget);
-}

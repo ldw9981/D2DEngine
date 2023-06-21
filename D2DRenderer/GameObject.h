@@ -38,6 +38,6 @@ public:
 		return pComponent;
 	}
 
-	void SetParentObject(SceneComponent* pSCeneComponent);
+	void SetParentObject(GameObject* pParentObject);
 };
 
