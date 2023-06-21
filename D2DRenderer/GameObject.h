@@ -14,7 +14,8 @@ public:
 
 protected:
 	SceneComponent* m_pRootComponent;
-		
+	GameObject* m_pParentObject;
+
 	std::vector<Component*> m_OwnedComponent;
 public:
 	void SetRootComponent(SceneComponent* pRootComponent);
@@ -36,5 +37,7 @@ public:
 		m_OwnedComponent.push_back(pComponent);
 		return pComponent;
 	}
+
+	void SetParentObject(SceneComponent* pSCeneComponent);
 };
 

@@ -59,3 +59,27 @@ void GameObject::SetLocation(float x, float y)
 		m_pRootComponent->SetRelativeLocation(x, y);
 	}
 }
+
+void GameObject::SetParentObject(GameObject* pParentObject)
+{
+	if (pParentObject == nullptr)
+	{
+		m_pParentObject = nullptr;
+		if (m_pRootComponent)
+		{
+			m_pRootComponent->SetParentScene(nullptr);
+		}
+		return;
+	}
+	
+	// 부모설정하고  루트끼리 부모-자식 연결 시킨다. 
+	m_pParentObject = pParentObject;
+	SceneComponent* pRootComponent = pParentObject->GetRootComponent();
+	assert(pRootComponent != nullptr);
+	assert(m_pRootComponent != nullptr);
+	
+	if (m_pRootComponent)
+	{
+		m_pRootComponent->SetParentScene(pRootComponent);
+	}
+}
