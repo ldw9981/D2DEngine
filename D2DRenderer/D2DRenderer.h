@@ -2,28 +2,7 @@
 
 #include <map>
 #include <string>
-
 #include <list>
-
-template <typename T>
-void SAFE_RELEASE(T* p)
-{
-	if (p)
-	{
-		p->Release();
-		p = nullptr;
-	}
-}
-
-template <typename T>
-void SAFE_DELETE(T* p)
-{
-	if (p)
-	{
-		delete p;
-		p = nullptr;
-	}
-}
 
 class AnimationAsset;
 class D2DRenderer
@@ -40,6 +19,10 @@ public:
 	IDWriteFactory* m_pDWriteFactory;	// TextFormat생성을 위한 팩토리
 	IDWriteTextFormat* m_pDWriteTextFormat; // 기본 텍스트 출력을 위한 Format
 	ID2D1SolidColorBrush* m_pBrush;	// 렌더타겟이 생성하는 리소스 역시 장치의존
+	IDXGIFactory4* m_pDXGIFactory;		// DXGI팩토리
+	IDXGIAdapter3* m_pDXGIAdapter;
+
+
 
 	std::list<std::pair<std::wstring, ID2D1Bitmap*>> m_SharingBitmaps;
 	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;
@@ -59,6 +42,8 @@ public:
 	void ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap);
 	void ReleaseAnimationAsset(AnimationAsset* pAnimationAsset);
 	ID2D1SolidColorBrush* GetBrush() const { return m_pBrush; }
+
+	size_t GetUsedVRAM();
 private:
 
 };

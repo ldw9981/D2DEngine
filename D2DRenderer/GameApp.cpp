@@ -135,6 +135,10 @@ void GameApp::CalculateFrameStats()
 		windowText.append(std::to_wstring(fps));
 		windowText.append(L"  SPF: ");
 		windowText.append(std::to_wstring(spf));
+		windowText.append(L" Used VRAM: ");
+		windowText.append(std::to_wstring(D2DRenderer::m_Instance->GetUsedVRAM()));
+		windowText.append(L"MB");
+
 		SetWindowText(m_hWnd, windowText.c_str());
 
 		//다음 계산을위해 리셋

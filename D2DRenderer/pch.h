@@ -27,6 +27,7 @@
 #include <string>
 #include <assert.h>
 #include <dcommon.h>
+#include <dxgi1_4.h>
 
 using namespace D2D1;
 

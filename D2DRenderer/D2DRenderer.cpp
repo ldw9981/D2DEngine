@@ -7,16 +7,23 @@
 #include "GameApp.h"
 #include "AnimationAsset.h"
 #include "AnimationInstance.h"
+#include "RendererHelper.h"
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
-
+#pragma comment(lib,"dxgi.lib")
 
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
 D2DRenderer::D2DRenderer()
-    :m_pD2DFactory(nullptr),m_pWICFactory(nullptr),m_pDWriteFactory(nullptr), m_pDWriteTextFormat(nullptr), m_pBrush(nullptr)
+    :m_pD2DFactory(nullptr),
+	m_pWICFactory(nullptr),
+	m_pDWriteFactory(nullptr),
+	m_pDWriteTextFormat(nullptr),
+	m_pBrush(nullptr),
+	m_pDXGIFactory(nullptr),
+	m_pDXGIAdapter(nullptr)
 {
 	OutputDebugString(L"D2DRenderer::D2DRenderer()\n");
 	m_Instance = this;
@@ -25,10 +32,15 @@ D2DRenderer::D2DRenderer()
 D2DRenderer::~D2DRenderer()
 {
 	OutputDebugString(L"D2DRenderer::~D2DRenderer()\n");
-	if (m_pBrush) m_pBrush->Release();
-	if (m_pWICFactory) m_pWICFactory->Release();
-	if (m_pRenderTarget) m_pRenderTarget->Release();
-	if (m_pD2DFactory) m_pD2DFactory->Release();
+	
+	SAFE_RELEASE(m_pDXGIAdapter);
+	SAFE_RELEASE(m_pDXGIFactory);
+	SAFE_RELEASE(m_pDWriteTextFormat);	
+	SAFE_RELEASE(m_pDWriteFactory);
+	SAFE_RELEASE(m_pWICFactory);
+	SAFE_RELEASE(m_pBrush);
+	SAFE_RELEASE(m_pRenderTarget);
+	SAFE_RELEASE(m_pD2DFactory);
 
 	// COM 사용 끝
 	CoUninitialize();
@@ -111,10 +123,15 @@ HRESULT D2DRenderer::Initialize()
 
 	if (SUCCEEDED(hr))
 	{
-		// 텍스트를 수평 및 수직으로 중앙에 맞춥니다.
-		//m_pDWriteTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-		//m_pDWriteTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+		// Create DXGI factory
+		hr = CreateDXGIFactory1(__uuidof(IDXGIFactory4), (void**)&m_pDXGIFactory);
 	}
+
+	if (SUCCEEDED(hr))
+	{
+		m_pDXGIFactory->EnumAdapters(0, reinterpret_cast<IDXGIAdapter**>(&m_pDXGIAdapter));
+	}
+
     return hr;
 }
 
@@ -275,3 +292,10 @@ void D2DRenderer::ReleaseAnimationAsset(AnimationAsset* pAnimationAsset)
 	}
 }
 
+
+size_t D2DRenderer::GetUsedVRAM()
+{
+	DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
+	m_pDXGIAdapter->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo);
+	return videoMemoryInfo.CurrentUsage / 1024 / 1024;
+}

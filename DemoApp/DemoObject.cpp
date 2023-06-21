@@ -34,11 +34,13 @@ bool DemoObject::Initialize()
 	m_pBoxComponent->Initialize();
 	m_pBoxComponent->AttachToComponent(m_pSphereComponent);
 
+	
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(); 
 	m_pAnimationComponent->SetAnimationAssetPath(std::wstring(L"Test"));
 	m_pAnimationComponent->SetRelativeLocation(100.0f,0.0f);
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
+	
 	return true;
 }
 
