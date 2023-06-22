@@ -3,7 +3,13 @@
 #include <vector>
 #include "Object.h"
 #include "../D2DRenderer/Component.h"
+/*
+	게임 오브젝트	 클래스
+	World의 CreateGameObject<T>를 통해 생성된다.
 
+	게임 오브젝트는 컴포넌트의 조합으로 이루어진다.
+	게임 오브젝트의 위치는 Root로 설정한 SceneComponent를 통해 결정된다.
+*/
 class SceneComponent;
 class Component;
 class GameObject : public Object

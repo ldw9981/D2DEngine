@@ -1,5 +1,9 @@
 #pragma once
 #include "RenderComponent.h"
+/*
+	Sphere를 그리는 컴포넌트
+
+*/
 class SphereComponent :
     public RenderComponent
 {

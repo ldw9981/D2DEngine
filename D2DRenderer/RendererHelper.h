@@ -1,4 +1,7 @@
 #pragma once
+/*
+	Render에서 유용한 매크로나 함수를 정의한다.
+*/
 
 template <typename T>
 void SAFE_RELEASE(T* p)

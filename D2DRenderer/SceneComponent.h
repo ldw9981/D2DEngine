@@ -3,6 +3,11 @@
 #include "Object.h"
 #include "Component.h"
 
+/*
+	회전, 위치, 크기를 가지는 컴포넌트
+	WorldTransform 을 계산하는것이 최종 목적이다. 
+	참조하는 부모 컴포넌트가 있으면 부모 컴포넌트의 WorldTransform을 참조하여 계산한다.
+*/
 class SceneComponent : public Component
 {
 public:

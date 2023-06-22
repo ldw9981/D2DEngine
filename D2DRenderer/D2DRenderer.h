@@ -4,6 +4,12 @@
 #include <string>
 #include <list>
 
+/*
+	Direct2D의 기본 기능을 래핑한 클래스
+	기본 렌더 타겟을 생성한다.
+	간단한 리소스관리자 로서 공유하는 비트맵과 
+	공유하는 애니메이션 어셋을 생성하는 기능을 제공한다.
+*/
 class AnimationAsset;
 class D2DRenderer
 {
@@ -20,7 +26,7 @@ public:
 	IDWriteTextFormat* m_pDWriteTextFormat; // 기본 텍스트 출력을 위한 Format
 	ID2D1SolidColorBrush* m_pBrush;	// 렌더타겟이 생성하는 리소스 역시 장치의존
 	IDXGIFactory4* m_pDXGIFactory;		// DXGI팩토리
-	IDXGIAdapter3* m_pDXGIAdapter;
+	IDXGIAdapter3* m_pDXGIAdapter;		// 비디오카드 정보에 접근 가능한 인터페이스
 
 
 

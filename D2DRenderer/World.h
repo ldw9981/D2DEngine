@@ -2,6 +2,10 @@
 #include "Object.h"
 #include <list>
 #include "GameObject.h"
+/*
+	월드는 GameObject를 생성하고 파괴하는 역할을 한다.
+	또한 게임 오브젝트들의 Update, Render를 호출한다.
+*/
 class World :
     public Object
 {

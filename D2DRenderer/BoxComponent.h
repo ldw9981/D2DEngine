@@ -1,7 +1,9 @@
 #pragma once
 #include "RenderComponent.h"
 
-
+/*
+	Rect 박스를 그리는 컴포넌트
+*/
 class BoxComponent :
     public RenderComponent
 {
