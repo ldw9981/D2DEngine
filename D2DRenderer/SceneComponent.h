@@ -15,21 +15,20 @@ public:
 	virtual ~SceneComponent() {};
 
 protected:
-	SceneComponent*		m_pParentScene;
-	std::vector<SceneComponent*> m_Children;
+	SceneComponent*		m_pParentScene;		// 부모 Scene 컴포넌트
+	std::vector<SceneComponent*> m_Children; // 단지 참조만 한다. update,render호출안함
 
-	D2D1_VECTOR_2F		m_RelativeScale;
-	float				m_RelativeRotation;
-	D2D1_VECTOR_2F		m_RelativeLocation;
-	D2D1_MATRIX_3X2_F	m_RelativeTransform;
+	D2D1_VECTOR_2F		m_RelativeScale;	// 상대 크기
+	float				m_RelativeRotation; // 상대 회전
+	D2D1_VECTOR_2F		m_RelativeLocation; // 상대 위치
+	D2D1_MATRIX_3X2_F	m_RelativeTransform; // 상대 복합 변환
 
-	D2D1_MATRIX_3X2_F	m_WorldTransform;
+	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
 public:
 	virtual bool Initialize();
-	virtual void Update() override;
 	
-
-		
+	virtual void Update() override;
+	// RelativeTransform과 	m_WorldTransform을 계산한다.
 	void UpdateTrasnform();
 	void SetRelativeScale(float x, float y);
 	void AddRelativeScale(float x, float y);
