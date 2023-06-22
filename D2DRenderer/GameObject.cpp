@@ -3,6 +3,7 @@
 #include "D2DRenderer.h"
 #include "GameApp.h"
 #include "SceneComponent.h"
+#include "RenderComponent.h"
 #include "Component.h"
 
 
@@ -36,10 +37,10 @@ void GameObject::Render(ID2D1RenderTarget* pRenderTarget)
 	for (auto& pComponent : m_OwnedComponents)
 	{
 		// 보관하고 있는 컴포넌트 인스턴스가 SceneComponent 일때만 Render를 호출한다.
-		SceneComponent* pSceneComponent = dynamic_cast<SceneComponent*>(pComponent);
-		if (pSceneComponent)
+		RenderComponent* pRenderComponent = dynamic_cast<RenderComponent*>(pComponent);
+		if (pRenderComponent)
 		{
-			pSceneComponent->Render(pRenderTarget);	
+			pRenderComponent->Render(pRenderTarget);
 		}
 	}
 }

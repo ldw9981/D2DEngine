@@ -22,7 +22,7 @@ protected:
 public:
 	virtual bool Initialize();
 	virtual void Update() override;
-	virtual void Render(ID2D1RenderTarget* pRenderTarget);
+	
 
 		
 	void UpdateTrasnform();

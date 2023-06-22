@@ -23,11 +23,6 @@ void SceneComponent::Update()
 	UpdateTrasnform();	
 }
 
-void SceneComponent::Render(ID2D1RenderTarget* pRenderTarget)
-{
-
-}
-
 void SceneComponent::UpdateTrasnform()
 {
 	m_RelativeTransform = Matrix3x2F::Scale(D2D1::SizeF(m_RelativeScale.x, m_RelativeScale.y)) *
