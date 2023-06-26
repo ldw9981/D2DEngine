@@ -61,6 +61,7 @@ bool DemoObject::Initialize()
 	
 	m_pAnimationComponent = CreateComponent<AnimationComponent>();
 	m_pAnimationComponent->SetAnimationAssetPath(std::wstring(L"Test"));
+	m_pAnimationComponent->SetRelativeLocation(100.0f, 100.0f);
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
 	
@@ -69,7 +70,7 @@ bool DemoObject::Initialize()
 
 void DemoObject::Update()
 {
-	m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
+	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	
 	__super::Update();

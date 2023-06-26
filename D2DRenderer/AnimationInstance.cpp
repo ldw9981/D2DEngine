@@ -82,7 +82,8 @@ void AnimationInstance::Update()
 
 void AnimationInstance::Render(ID2D1RenderTarget* pRenderTarget)
 {
-	D2D_MATRIX_3X2_F Transform = m_RenderTransform * m_pAnimationComponent->GetWorldTransform() * D2DRenderer::m_CameraTransformInv;
+	// 월드->카메라->스크린 좌표계로 변환한다. Screen 의 y스케일이 -1 이므로 거꾸로 그려진다. 제일처음 변환에 -1을 곱해준다.
+	D2D_MATRIX_3X2_F Transform = m_RenderTransform * m_pAnimationComponent->GetWorldTransform() * D2DRenderer::m_CameraTransform * D2DRenderer::m_ScreenTransform;
 	
 	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawBitmap(m_pAnimationAsset->m_pBitmap, m_DstRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, m_SrcRect);

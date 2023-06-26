@@ -17,7 +17,9 @@
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
-Matrix3x2F D2DRenderer::m_CameraTransformInv = Matrix3x2F::Identity();
+Matrix3x2F D2DRenderer::m_CameraTransform = Matrix3x2F::Identity();
+
+D2D1::Matrix3x2F D2DRenderer::m_ScreenTransform = Matrix3x2F::Identity();
 
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),
@@ -53,8 +55,8 @@ void D2DRenderer::SetCameraTransform(const Matrix3x2F& worldTrasnform)
 {
 	// D2D1InvertMatrix 함수로 카메라의 역행렬을 구한다.
 	// 함수의 인자는 입력이자 출력이 된다.
-	m_CameraTransformInv = worldTrasnform;
-	D2D1InvertMatrix(&m_CameraTransformInv); 
+	m_CameraTransform = worldTrasnform;
+	D2D1InvertMatrix(&m_CameraTransform); 
 }
 
 HRESULT D2DRenderer::Initialize()
@@ -84,6 +86,8 @@ HRESULT D2DRenderer::Initialize()
         D2D1_SIZE_U size = D2D1::SizeU(
             rc.right - rc.left,
             rc.bottom - rc.top);
+
+		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, size.height);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(

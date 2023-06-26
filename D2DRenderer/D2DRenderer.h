@@ -21,8 +21,8 @@ public:
 
 	static ID2D1HwndRenderTarget* m_pRenderTarget;
 	static D2DRenderer* m_Instance;
-	static Matrix3x2F m_CameraTransformInv;		// 카메라의 좌표계로 변환하는 행렬
-	
+	static Matrix3x2F m_CameraTransform;		// 카메라의 좌표계로 변환하는 행렬
+	static Matrix3x2F m_ScreenTransform;		// 왼쪽 하단이 0,0인 화면의 좌표계로 변환하는 행렬   
 private:
 	ID2D1Factory* m_pD2DFactory;		// D2D 개체 인터페이스 포인터 변수	
 	IWICImagingFactory* m_pWICFactory;	// D2D비트맵 생성을 위한 이미지 처리 인터페이스
