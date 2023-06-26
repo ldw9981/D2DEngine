@@ -2,14 +2,7 @@
 
 #include "../D2DRenderer/GameObject.h"
 
-/*
-	DemoObject Hierachy
 
-	- [Root] SphereComponent
-		- BoxComponent
-			- AnimationComponent
-				
- */
 class BoxComponent;
 class AnimationComponent;
 class SphereComponent;
@@ -28,7 +21,7 @@ public:
 	TextComponent* m_pTextComponent;
 	SceneComponent* m_pSceneComponent;
 public:
-	virtual bool Initialize() override;
+	virtual bool Initialize() override;	// 컴포넌트를 생성하고 부모자식 연결한다.
 	virtual void Update() override;
 };
 

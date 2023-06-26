@@ -23,6 +23,15 @@ DemoObject::~DemoObject()
 
 }
 
+/*
+	DemoObject Hierachy
+
+	- [Root] SceneComponent
+		+ [Child] ShpereComponent
+		|	+ [Child] BoxComponent
+		|		+ [Child] AnimationComponent
+		+ [Child] TextComponent
+ */
 bool DemoObject::Initialize()
 {
 	m_pSceneComponent = CreateComponent<SceneComponent>();
