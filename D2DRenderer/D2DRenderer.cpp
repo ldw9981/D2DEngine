@@ -8,6 +8,7 @@
 #include "AnimationAsset.h"
 #include "AnimationInstance.h"
 #include "RendererHelper.h"
+#include "RenderComponent.h"
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
@@ -15,6 +16,8 @@
 
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
+
+Matrix3x2F D2DRenderer::m_CameraTransformInv = Matrix3x2F::Identity();
 
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),
@@ -46,6 +49,14 @@ D2DRenderer::~D2DRenderer()
 	CoUninitialize();
 }
 
+void D2DRenderer::SetCameraTransform(const Matrix3x2F& worldTrasnform)
+{
+	// D2D1InvertMatrix 함수로 카메라의 역행렬을 구한다.
+	// 함수의 인자는 입력이자 출력이 된다.
+	m_CameraTransformInv = worldTrasnform;
+	D2D1InvertMatrix(&m_CameraTransformInv); 
+}
+
 HRESULT D2DRenderer::Initialize()
 {
     HRESULT hr = S_OK;
@@ -74,7 +85,6 @@ HRESULT D2DRenderer::Initialize()
             rc.right - rc.left,
             rc.bottom - rc.top);
 
-		
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
@@ -110,12 +120,12 @@ HRESULT D2DRenderer::Initialize()
 	{
 		// DirectWrite 텍스트 형식 개체를 만듭니다.
 		hr = m_pDWriteFactory->CreateTextFormat(
-			L"Cooper", // FontName    제어판-모든제어판-항목-글꼴-클릭 으로 글꼴이름 확인가능
+			L"", // FontName    제어판-모든제어판-항목-글꼴-클릭 으로 글꼴이름 확인가능
 			NULL,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
 			DWRITE_FONT_STRETCH_NORMAL,
-			20.0f,   // Font Size
+			15.0f,   // Font Size
 			L"", //locale
 			&m_pDWriteTextFormat
 		);
@@ -140,6 +150,27 @@ void D2DRenderer::DrawRectangle(ID2D1RenderTarget* pRenderTarget,D2D1_RECT_F rec
 {
 	m_pBrush->SetColor(color);
 	pRenderTarget->DrawRectangle(rect, m_pBrush);
+}
+
+
+void D2DRenderer::DrawCrossLine(ID2D1RenderTarget* pRenderTarget, D2D1_VECTOR_2F point /*= {0.0f,0.0f}*/, D2D1_COLOR_F color /*= D2D1::ColorF(D2D1::ColorF::LightGreen)*/)
+{
+	m_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+	pRenderTarget->DrawLine(D2D1::Point2F(point.x - 10.0f, point.y), D2D1::Point2F(point.x + 10.0f, point.y), m_pBrush, 3.0f);
+	m_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Green));
+	pRenderTarget->DrawLine(D2D1::Point2F(point.x, point.y - 10.0f), D2D1::Point2F(point.x, point.y + 10.0f), m_pBrush, 3.0f);
+}
+
+void D2DRenderer::DrawEllipse(ID2D1RenderTarget* pRenderTarget, D2D1_ELLIPSE ellipse, D2D1_COLOR_F color)
+{
+	m_pBrush->SetColor(color);
+	pRenderTarget->DrawEllipse(ellipse, m_pBrush);
+}
+
+void D2DRenderer::DrawText(ID2D1RenderTarget* pRenderTarget, const std::wstring& string, D2D1_RECT_F rect, D2D1_COLOR_F color)
+{
+	m_pBrush->SetColor(color);
+	pRenderTarget->DrawTextW(string.c_str(),(UINT32) string.length(), m_pDWriteTextFormat, rect, m_pBrush);
 }
 
 void D2DRenderer::EndDraw()
@@ -298,4 +329,14 @@ size_t D2DRenderer::GetUsedVRAM()
 	DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
 	m_pDXGIAdapter->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo);
 	return videoMemoryInfo.CurrentUsage / 1024 / 1024;
+}
+
+void D2DRenderer::RenderQueue(ID2D1RenderTarget* pRenderTarget)
+{
+	while(!m_RenderQueue.empty()) 
+	{
+		RenderComponent* pRenderComponent = m_RenderQueue.top();
+		pRenderComponent->Render(pRenderTarget);
+		m_RenderQueue.pop();
+	}
 }

@@ -14,6 +14,7 @@ public:
 	SceneComponent();
 	virtual ~SceneComponent() {};
 
+
 protected:
 	SceneComponent*		m_pParentScene;		// 부모 Scene 컴포넌트
 	std::vector<SceneComponent*> m_Children; // 단지 참조만 한다. update,render호출안함
@@ -24,6 +25,7 @@ protected:
 	D2D1_MATRIX_3X2_F	m_RelativeTransform; // 상대 복합 변환
 
 	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
+
 public:
 	virtual bool Initialize();
 	
@@ -48,5 +50,13 @@ public:
 
 
 	void AttachToComponent(SceneComponent* pParent);
+
+	D2D1_VECTOR_2F GetWorldLocation()
+	{
+		D2D1_VECTOR_2F v;
+		v.x = m_WorldTransform._31;
+		v.y = m_WorldTransform._32;
+		return v;		
+	}
 };
 

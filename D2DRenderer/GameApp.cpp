@@ -42,15 +42,22 @@ GameApp::~GameApp()
 }
 
 // 윈도우 정보는 게임 마다 다를수 있으므로 등록,생성,보이기만 한다.
-bool GameApp::Initialize()
+bool GameApp::Initialize(UINT Width, UINT Height)
 {
+	m_ClientSize.width = Width;
+	m_ClientSize.height = Height;
+
 	// 등록
 	RegisterClassExW(&m_wcex);
+
+	// 원하는 크기가 조정되어 리턴
+	RECT rcClient = { 0, 0, (LONG)m_ClientSize.width, (LONG)m_ClientSize.height };
+	AdjustWindowRect(&rcClient, WS_OVERLAPPEDWINDOW, FALSE);
 
 	//생성
 	m_hWnd = CreateWindowW(m_szWindowClass, m_szTitle, WS_OVERLAPPEDWINDOW,
 		100, 100,	// 시작 위치
-		m_ClientSize.width, m_ClientSize.height,	// 가로,세로
+		rcClient.right - rcClient.left, rcClient.bottom - rcClient.top,
 		nullptr, nullptr, m_hInstance, nullptr);
 
 	if (!m_hWnd)

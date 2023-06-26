@@ -167,7 +167,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				sc_helloWorld,
 				ARRAYSIZE(sc_helloWorld) - 1,
 				g_pDWriteTextFormat,
-				D2D1::RectF(0, 0, size.width, size.height),
+				D2D1::RectF(0, 0, size.width, size.height/2),
 				g_pBlackBrush
 			);
 

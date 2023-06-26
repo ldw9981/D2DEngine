@@ -16,7 +16,7 @@ public:
 	virtual ~DemoApp();
 
 	// override는 부모의 가상함수를 재정의 한다고 명확히 명시하여 새로 가상함수를 만드는 실수를 방지한다. 
-	virtual bool Initialize() override;
+	virtual bool Initialize(UINT Width,UINT Height) override;
 
 	AnimationAsset* m_pAnimationAsset;
 	DemoObject* m_pDemoObject;

@@ -3,6 +3,7 @@
 #include "AnimationInstance.h"
 #include "AnimationAsset.h"
 #include "D2DRenderer.h"
+#include "RendererHelper.h"
 
 AnimationComponent::AnimationComponent()
 {
@@ -54,6 +55,11 @@ void AnimationComponent::Update()
 
 void AnimationComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
+	D2D1_MATRIX_3X2_F Transform = m_WorldTransform * D2DRenderer::m_CameraTransformInv;
+	
+	pRenderTarget->SetTransform(Transform);	
+	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
+
 	if (m_pAnimationInstance)
 	{
 		m_pAnimationInstance->Render(pRenderTarget);

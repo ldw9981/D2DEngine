@@ -4,6 +4,7 @@
 RenderComponent::RenderComponent()
 :m_bVisible(true),m_iZOrder(0)
 {
+	
 }
 
 RenderComponent::~RenderComponent()

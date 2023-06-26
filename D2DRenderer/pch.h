@@ -28,7 +28,10 @@
 #include <assert.h>
 #include <dcommon.h>
 #include <dxgi1_4.h>
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
+
 
 using namespace D2D1;
-
+using namespace DirectX;
 #endif //PCH_H

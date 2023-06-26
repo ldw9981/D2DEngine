@@ -4,10 +4,11 @@
 #include "AnimationComponent.h"
 #include "D2DRenderer.h"
 #include "GameApp.h"
+#include "RendererHelper.h"
 
 
 AnimationInstance::AnimationInstance()
-	:m_pAnimationAsset(nullptr), m_AnimationIndex(0), m_FrameIndex(0), m_ProgressTime(0), m_bMirror(true), m_Speed(1.0f)
+	:m_pAnimationAsset(nullptr), m_AnimationIndex(0), m_FrameIndex(0), m_ProgressTime(0), m_bMirror(false), m_Speed(1.0f)
 {
 	m_pAnimationComponent=nullptr;
 	m_SrcRect = { 0.0f,0.0f,0.0f,0.0f };
@@ -63,29 +64,32 @@ void AnimationInstance::Update()
 	// 그릴 영역을 0,0,with,height으로 설정하고 실제 위치는 Transform으로 설정
 	m_DstRect = { 0,0,m_SrcRect.right - m_SrcRect.left,m_SrcRect.bottom - m_SrcRect.top };
 
-	
+
+
+	D2D1_VECTOR_2F Location = m_pAnimationComponent->GetWorldLocation();
+
 	if (m_bMirror)
 	{	
-		m_RenderTransform = D2D1::Matrix3x2F::Scale(-1.0f, 1.0f, D2D1::Point2F(0, 0)) * D2D1::Matrix3x2F::Translation(m_DstRect.right, 0.0f);
+		m_RenderTransform = D2D1::Matrix3x2F::Scale(-1.0f,-1.0f, D2D1::Point2F(0, 0)) * D2D1::Matrix3x2F::Translation(m_DstRect.right,0.0f);
 	}
 	else
 	{		
-		m_RenderTransform = D2D1::Matrix3x2F::Identity();
+		m_RenderTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f, D2D1::Point2F(0, 0)) * D2D1::Matrix3x2F::Translation(0.0f, 0.0f);
 	}
 
-	if (m_pAnimationComponent)
-	{
-		m_RenderTransform = m_RenderTransform * m_pAnimationComponent->GetWorldTransform();
-	}
+	
 }
 
 void AnimationInstance::Render(ID2D1RenderTarget* pRenderTarget)
 {
-	pRenderTarget->SetTransform(m_RenderTransform);
+	D2D_MATRIX_3X2_F Transform = m_RenderTransform * m_pAnimationComponent->GetWorldTransform() * D2DRenderer::m_CameraTransformInv;
+	
+	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawBitmap(m_pAnimationAsset->m_pBitmap, m_DstRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, m_SrcRect);
+	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
 
-void AnimationInstance::SetAnimationIndex(size_t index, bool bMirror)
+void AnimationInstance::SetAnimationIndex(size_t index, bool Mirror)
 {
 	assert(m_pAnimationAsset != nullptr);
 	assert(m_pAnimationAsset->m_Animations.size() > index);
@@ -93,6 +97,6 @@ void AnimationInstance::SetAnimationIndex(size_t index, bool bMirror)
 	m_AnimationIndex = index;
 	m_FrameIndex = 0;
 	m_ProgressTime = 0.0f;
-	m_bMirror = bMirror;
+	m_bMirror = Mirror;
 }
 

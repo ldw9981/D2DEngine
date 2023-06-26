@@ -23,9 +23,9 @@ protected:
 	float m_ProgressTime;			// 애니메이션 진행시간
 	D2D1_RECT_F m_SrcRect;			// 시간에 따른 D2D1Bitmap의 Source 영역
 	D2D1_RECT_F m_DstRect;			// 시간에 따른 D2D1Bitmap의 Source 영역		
-	bool m_bMirror;
-	float m_Speed;
-	D2D1_MATRIX_3X2_F m_RenderTransform;
+	bool m_bMirror;					// 좌우 반전 여부
+	float m_Speed;					// 애니메이션 속도
+	D2D1_MATRIX_3X2_F m_RenderTransform;	// 반대 방향으로 뒤집기 위한 행렬 Scale.x = -1.0f , Matrix3x2F::Translation(m_DstRect.right,0.0f)을 적용한다.
 public:
 	virtual bool Initialize() override;
 	void SetProgressTime(float val) { m_ProgressTime = val; }
@@ -33,8 +33,9 @@ public:
 	void SetAnimationInfo(AnimationAsset* pAnimationInfo);
 	void Update();
 	void Render(ID2D1RenderTarget* pRenderTarget);
-	void SetAnimationIndex(size_t index, bool Flip);
+	void SetAnimationIndex(size_t index, bool Mirror);
 
+	// 출력의 기준의 되는 AnimationComponent를 설정한다.
 	void SetAnimationComponent(AnimationComponent* pAnimationComponent) { m_pAnimationComponent = pAnimationComponent; }
 };
 

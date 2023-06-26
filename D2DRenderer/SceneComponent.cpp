@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SceneComponent.h"
-
+#include "RendererHelper.h"
 SceneComponent::SceneComponent()
 	:m_RelativeScale({ 1.0f,1.0f }),
 	m_RelativeRotation(0.0f), 

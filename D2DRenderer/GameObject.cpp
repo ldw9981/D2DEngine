@@ -81,3 +81,5 @@ void GameObject::SetParentObject(GameObject* pParentObject)
 		m_pRootComponent->SetParentScene(pRootComponent);
 	}
 }
+
+

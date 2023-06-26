@@ -14,12 +14,20 @@ class RenderComponent: public SceneComponent
 public:
 	RenderComponent();
 	virtual ~RenderComponent();
+
 protected:
 	int m_iZOrder;		// 그리는 순서
 	bool m_bVisible;	// 그리려는지
+	
 public:
 	void SetZOrder(int zOrder) {  m_iZOrder = zOrder; }
 	void SetVisible(bool visible) { m_bVisible = visible; }
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) = 0;
+	
+	bool operator<(const RenderComponent& rhs)
+	{
+		return m_iZOrder < rhs.m_iZOrder;
+	}
+
 };
 

@@ -12,6 +12,7 @@
 */
 class SceneComponent;
 class Component;
+class World;
 class GameObject : public Object
 {
 public:
@@ -25,9 +26,11 @@ public:
 		m_OwnedComponents.clear();
 	}
 
+
 protected:
 	SceneComponent* m_pRootComponent;
 	GameObject* m_pParentObject;
+	World* m_pOwnerWorld;
 
 	std::vector<Component*> m_OwnedComponents;
 public:
@@ -52,5 +55,7 @@ public:
 	}
 
 	void SetParentObject(GameObject* pParentObject);
+	World* GetOwnerWorld() const { return m_pOwnerWorld; }
+	void SetOwnerWorld(World* val) { m_pOwnerWorld = val; }
 };
 

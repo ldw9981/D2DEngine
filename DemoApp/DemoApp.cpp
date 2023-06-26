@@ -51,9 +51,9 @@ DemoApp::~DemoApp()
 }
 
 
-bool DemoApp::Initialize()
+bool DemoApp::Initialize(UINT Width, UINT Height)
 {
-    bool bRet = GameApp::Initialize();
+    bool bRet = GameApp::Initialize(Width,Height);
 	if (!bRet)
 	    return false;
 
@@ -80,7 +80,7 @@ bool DemoApp::Initialize()
     m_pDemoObject = m_World.CreateGameObject<DemoObject>();
     m_pDemoObject->Initialize();
     // RootSceneComponent의 Location을 중앙위치로 설정
-    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, (float)m_ClientSize.height / 2);   
+    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, 300);
     return true;
 }
 
@@ -96,7 +96,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //GameApp App(hInstance, nCmdShow);   // 기본클래스도 윈도우 생성,메시지 루프 잘작동한다.
     DemoApp App(hInstance);  // 생성자에서 아이콘,윈도우 이름만 바꾼다
 
-    App.Initialize();
+    App.Initialize(1920,1080);
     App.Loop();
 }
 

@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="AnimationAsset.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationInstance.h" />
     <ClInclude Include="BoxComponent.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="RenderComponent.h" />
@@ -154,15 +156,18 @@
     <ClInclude Include="ReferenceCounter.h" />
     <ClInclude Include="RendererHelper.h" />
     <ClInclude Include="SceneComponent.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereComponent.h" />
     <ClInclude Include="TextComponent.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="AnimationAsset.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationInstance.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
@@ -178,6 +183,7 @@
     <ClCompile Include="ReferenceCounter.cpp" />
     <ClCompile Include="RendererHelper.cpp" />
     <ClCompile Include="SceneComponent.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereComponent.cpp" />
     <ClCompile Include="TextComponent.cpp" />
     <ClCompile Include="World.cpp" />
