@@ -66,7 +66,8 @@ void AnimationInstance::Update()
 
 
 
-	D2D1_VECTOR_2F Location = m_pAnimationComponent->GetWorldLocation();
+	D2D1_VECTOR_2F Location;
+	m_pAnimationComponent->GetWorldLocation(&Location);
 
 	if (m_bMirror)
 	{	

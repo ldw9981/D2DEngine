@@ -34,7 +34,7 @@ public:
 	void UpdateTrasnform();
 	void SetRelativeScale(float x, float y);
 	void AddRelativeScale(float x, float y);
-	D2D1_VECTOR_2F GetRelativeScale() { return m_RelativeScale; }
+	const D2D1_VECTOR_2F& GetRelativeScale() { return m_RelativeScale; }
 
 	void SetRelativeRotation(float Rotation);
 	void AddRelativeRotation(float Rotation);
@@ -42,7 +42,7 @@ public:
 
 	void SetRelativeLocation(float x, float y);
 	void AddRelativeLocation(float x, float y);
-	D2D1_VECTOR_2F GetRelativeLocation() { return m_RelativeLocation; }
+	const D2D1_VECTOR_2F& GetRelativeLocation() { return m_RelativeLocation; }
 
 	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 
@@ -51,12 +51,10 @@ public:
 
 	void AttachToComponent(SceneComponent* pParent);
 
-	D2D1_VECTOR_2F GetWorldLocation()
+	void GetWorldLocation(D2D1_VECTOR_2F* out)
 	{
-		D2D1_VECTOR_2F v;
-		v.x = m_WorldTransform._31;
-		v.y = m_WorldTransform._32;
-		return v;		
+		out->x = m_WorldTransform._31;
+		out->y = m_WorldTransform._32;
 	}
 };
 
