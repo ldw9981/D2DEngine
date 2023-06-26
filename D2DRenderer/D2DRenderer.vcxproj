@@ -147,6 +147,7 @@
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApp.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameObject.cpp" />

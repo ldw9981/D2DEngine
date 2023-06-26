@@ -32,7 +32,9 @@ void SetScaleToMatrix(D2D_MATRIX_3X2_F& mat, float ScaleX, float ScaleY)
 	mat._22 = ScaleY;
 }
 
-
+/*
+	회전에 문제가 생겨 사용안함
+*/
 void ModifyMatrixtForBottomUpScreenSpace(ID2D1RenderTarget* pRenderTarget, D2D_MATRIX_3X2_F& in_out)
 {
 	//in_out._32 = pRenderTarget->GetSize().height - in_out._32;

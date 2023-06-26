@@ -70,7 +70,7 @@ bool DemoObject::Initialize()
 void DemoObject::Update()
 {
 	m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
-	m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
+	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	
 	__super::Update();
 }

@@ -78,6 +78,9 @@
     <ClInclude Include="Sphere.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -138,6 +141,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

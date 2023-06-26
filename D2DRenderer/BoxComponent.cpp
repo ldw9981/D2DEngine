@@ -22,7 +22,7 @@ void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pBrush->SetColor(m_Color);	
 	
 	D2D1_MATRIX_3X2_F Transform =  m_WorldTransform * D2DRenderer::m_CameraTransformInv;
-
+	
 
 	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawRectangle(m_Rect,pBrush);	

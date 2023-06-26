@@ -22,7 +22,7 @@ bool TextComponent::Initialize()
 void TextComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	D2D1_MATRIX_3X2_F Transform = m_WorldTransform * D2DRenderer::m_CameraTransformInv;
-	ModifyMatrixtForBottomUpScreenSpace(pRenderTarget, Transform);
+	
 
 	pRenderTarget->SetTransform(Transform);
 	D2DRenderer::m_Instance->DrawText(pRenderTarget, m_String, m_Rect, m_Color);

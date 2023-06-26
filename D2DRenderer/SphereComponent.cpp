@@ -24,7 +24,7 @@ void SphereComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pBrush->SetColor(m_Color);
 
 	D2D1_MATRIX_3X2_F Transform = m_WorldTransform * D2DRenderer::m_CameraTransformInv;
-	ModifyMatrixtForBottomUpScreenSpace(pRenderTarget, Transform);
+	
 
 	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(0, 0), m_Radius, m_Radius), pBrush);
