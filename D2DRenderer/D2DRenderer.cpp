@@ -337,10 +337,9 @@ size_t D2DRenderer::GetUsedVRAM()
 
 void D2DRenderer::RenderQueue(ID2D1RenderTarget* pRenderTarget)
 {
-	while(!m_RenderQueue.empty()) 
+	// 렌더큐를 순회하면서 렌더링한다.
+	for (auto& RenderData : m_RenderQueue)
 	{
-		RenderComponent* pRenderComponent = m_RenderQueue.top();
-		pRenderComponent->Render(pRenderTarget);
-		m_RenderQueue.pop();
+		RenderData->Render(pRenderTarget);
 	}
 }

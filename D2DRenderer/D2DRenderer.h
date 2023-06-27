@@ -36,7 +36,7 @@ private:
 	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;
 
 	
-	std::priority_queue<RenderComponent*> m_RenderQueue;
+	std::vector<RenderComponent*> m_RenderQueue;		// 정렬을 위해 임의 접근이 빠르고 뒤쪽에만 추가하는 컨테이너는 무엇이 좋을까
 	void SetCameraTransform(const Matrix3x2F& worldTrasnform);
 public:
 	HRESULT Initialize();

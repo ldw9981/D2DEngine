@@ -25,6 +25,6 @@ void TextComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	D2D1_MATRIX_3X2_F Transform = Matrix3x2F::Scale(1.0f, -1.0f) * m_WorldTransform * D2DRenderer::m_CameraTransform * D2DRenderer::m_ScreenTransform;
 	
 	pRenderTarget->SetTransform(Transform);
-	D2DRenderer::m_Instance->DrawText(pRenderTarget, m_String, m_Rect, m_Color);
+	D2DRenderer::m_Instance->DrawText(pRenderTarget, m_String, m_Rect, m_Color);  //시간이 엄청 오래 걸립니다.
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
