@@ -30,7 +30,7 @@
 #include <dxgi1_4.h>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-
+#include <cmath>
 
 using namespace D2D1;
 using namespace DirectX;

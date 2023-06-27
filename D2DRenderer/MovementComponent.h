@@ -19,5 +19,6 @@ public:
 	void SetRootComponent(SceneComponent* val) { m_pRootComponent = val; }
 	void SetSpeed(float speed) { m_Speed = speed; };
 	void SetDirection(float x, float y);
+	const D2D_VECTOR_2F& GetDirection() { return m_Direction; };
 };
 

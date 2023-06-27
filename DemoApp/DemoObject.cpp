@@ -7,7 +7,8 @@
 #include "../D2DRenderer/GameApp.h"
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
-
+#include "../D2DRenderer/MovementComponent.h"
+#include <cmath>
 DemoObject::DemoObject()
 	:m_pBoxComponent(nullptr), 
 	m_pAnimationComponent(nullptr), 
@@ -25,7 +26,7 @@ DemoObject::~DemoObject()
 
 /*
 	DemoObject Hierachy
-
+	- MovementComponent
 	- [Root] SceneComponent
 		+ [Child] ShpereComponent
 		|	+ [Child] BoxComponent
@@ -34,9 +35,17 @@ DemoObject::~DemoObject()
  */
 bool DemoObject::Initialize()
 {
+	m_pMovementComponent = CreateComponent<MovementComponent>();
+
 	m_pSceneComponent = CreateComponent<SceneComponent>();
 	m_pSceneComponent->Initialize();
 	SetRootComponent(m_pSceneComponent);
+
+	m_pMovementComponent->SetRootComponent(m_pSceneComponent);
+	m_pMovementComponent->SetSpeed(300.0f);
+	m_pMovementComponent->SetDirection(float(rand()%90)+1, float(rand() % 90)+1);
+	m_pMovementComponent->Initialize();
+
 
 	m_pSphereComponent = CreateComponent<SphereComponent>();
 	m_pSphereComponent->SetRadius(10.0f);
@@ -48,8 +57,6 @@ bool DemoObject::Initialize()
 	m_pTextComponent->SetString(std::wstring(L"Root"));
 	m_pTextComponent->Initialize();
 	m_pTextComponent->AttachToComponent(m_pSceneComponent);
-
-
 
 	m_pBoxComponent = CreateComponent<BoxComponent>();
 	m_pBoxComponent->m_Rect = D2D1_RECT_F{ -25.0f,-25.0f,25.0f,25.0f };
@@ -64,7 +71,7 @@ bool DemoObject::Initialize()
 	m_pAnimationComponent->SetRelativeLocation(100.0f, 100.0f);
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
-	
+
 	return true;
 }
 
@@ -73,5 +80,26 @@ void DemoObject::Update()
 	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	
+	D2D_VECTOR_2F Location,Direction;
+	m_pSceneComponent->GetWorldLocation(&Location);
+	Direction = m_pMovementComponent->GetDirection();
+
+	if ( Location.x  > 2000.0f)
+	{
+		m_pMovementComponent->SetDirection(-1.0f, Direction.y);
+	}
+	else if (Location.x < -2000.0f)
+	{
+		m_pMovementComponent->SetDirection(1.0f, Direction.y);
+	}
+	if (Location.y > 2000.0f)
+	{
+		m_pMovementComponent->SetDirection(Direction.x, -1.0f);
+	}
+	else if (Location.y < -2000.0f)
+	{
+		m_pMovementComponent->SetDirection(Direction.x, 1.0f);
+	}
+
 	__super::Update();
 }

@@ -7,6 +7,8 @@
 #include "../D2DRenderer/AnimationComponent.h"
 #include "../D2DRenderer/SceneComponent.h"
 
+#define MAX_DEMO_OBJECT 100
+
 class AnimationAsset;
 class DemoObject;
 class DemoApp: public GameApp
@@ -19,5 +21,5 @@ public:
 	virtual bool Initialize(UINT Width,UINT Height) override;
 
 	AnimationAsset* m_pAnimationAsset;
-	DemoObject* m_pDemoObject;
+	DemoObject* m_pDemoObject[MAX_DEMO_OBJECT];
 };

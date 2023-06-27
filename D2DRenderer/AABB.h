@@ -1,20 +1,27 @@
 #pragma once
 
-/*
-	  |         +----------------(m_Max.x,m_Max.y)
+/*                         
+	  |         +----------------------max
+	  |         |                      |
+	  |         |		 center        |
+	  |	        |          +           |
 	  |         |                      |
 	  |         |                      |
-	  |   (m_Min.x,m_Min.y)------------+
+	  |         min--------------------+
 	--+--------------------
 */
 class AABB 					
 {	
 public:
-	AABB() : m_Min{0}, m_Max{ 0 } { }
+	AABB() : m_Center{0}, m_Extend{ 0 } { }
 	~AABB() {}
 public:
-	D2D1_POINT_2F m_Min; // x,y 축에서 작은 값들
-	D2D1_POINT_2F m_Max; // x,y 축에서 큰 값들
+	D2D1_VECTOR_2F m_Center; // 중앙
+	D2D1_VECTOR_2F m_Extend; // x,y축 확장값
+	// minX = m_Center.x - m_Extend.x
+	// maxX = m_Center.x + m_Extend.x
+	// minY = m_Center.y - m_Extend.y
+	// maxY = m_Center.y + m_Extend.y
 public:
 };
 

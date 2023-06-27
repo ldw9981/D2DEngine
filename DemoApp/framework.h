@@ -20,5 +20,6 @@
 #include <string>
 #include <dcommon.h>
 #include <dxgi1_4.h>
+#include <cmath>
 
 using namespace D2D1;

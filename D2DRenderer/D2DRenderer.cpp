@@ -83,16 +83,16 @@ HRESULT D2DRenderer::Initialize()
         RECT rc;
         ::GetClientRect(GameApp::m_hWnd, &rc);
 
-        D2D1_SIZE_U size = D2D1::SizeU(
+        D2D1_SIZE_U ScreenSize = D2D1::SizeU(
             rc.right - rc.left,
             rc.bottom - rc.top);
 
-		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, size.height);
+		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, ScreenSize.height);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(GameApp::m_hWnd, size),
+            D2D1::HwndRenderTargetProperties(GameApp::m_hWnd, ScreenSize),
             &m_pRenderTarget);
     }
 

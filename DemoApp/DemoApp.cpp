@@ -6,15 +6,14 @@
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
 #include "DemoObject.h"
-#include <d2d1.h>
-#include <memory>
+
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
 DemoApp::DemoApp(HINSTANCE hInstance)
     :GameApp::GameApp(hInstance), 
         m_pAnimationAsset(nullptr),
-        m_pDemoObject(nullptr)
+        m_pDemoObject {0,}
 { 
 
 	std::wstring str(__FUNCTIONW__);
@@ -77,10 +76,14 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     	
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
-    m_pDemoObject = m_World.CreateGameObject<DemoObject>();
-    m_pDemoObject->Initialize();
-    // RootSceneComponent의 Location을 중앙위치로 설정
-    m_pDemoObject->SetLocation((float)m_ClientSize.width / 2, 300);
+    for (int i=0;i< MAX_DEMO_OBJECT;i++)
+    {
+		m_pDemoObject[i] = m_World.CreateGameObject<DemoObject>();
+		m_pDemoObject[i]->Initialize();
+		// RootSceneComponent의 Location을 중앙위치로 설정
+		m_pDemoObject[i]->SetLocation(rand()%m_ClientSize.width, i);
+    }
+
     return true;
 }
 
@@ -96,7 +99,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //GameApp App(hInstance, nCmdShow);   // 기본클래스도 윈도우 생성,메시지 루프 잘작동한다.
     DemoApp App(hInstance);  // 생성자에서 아이콘,윈도우 이름만 바꾼다
 
-    App.Initialize(1920,1080);
+    App.Initialize(1024,768);
     App.Loop();
 }
 
