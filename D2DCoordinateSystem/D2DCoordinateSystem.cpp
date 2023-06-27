@@ -8,11 +8,13 @@
 #include <comdef.h>
 #include <d2d1_1helper.h>
 #include <string>
+#include <dwrite.h>
 
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
 #pragma comment(lib,"dxgi.lib")
+#pragma comment(lib,"windowscodecs.lib")
 
 #define MAX_LOADSTRING 100
 
@@ -28,6 +30,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 D2D_MATRIX_3X2_F g_matRender = Matrix3x2F::Identity(); // 렌더링 변환을 위한 행렬   
 D2D_MATRIX_3X2_F g_matWorld = Matrix3x2F::Identity(); // 월드 좌표계 변환을 위한 행렬
 
+D2D1_SIZE_U g_ScreenSize;
 float g_locCameraX = 0;
 float g_locCameraY = 0;
 D2D_MATRIX_3X2_F g_matCamera = Matrix3x2F::Identity(); // 카메라 좌표계 변환을 위한 행렬
@@ -39,8 +42,13 @@ ID2D1HwndRenderTarget* g_pRenderTarget;
 
 // D2D1비트맵 생성을 위한 이미지 처리 인터페이스
 IWICImagingFactory* g_pWICFactory;
-
 ID2D1Bitmap* g_pD2DBitmap = nullptr;
+
+// DWrite
+IDWriteFactory* g_pDWriteFactory;
+IDWriteTextFormat* g_pDWriteTextFormat;
+
+ID2D1SolidColorBrush* g_pBrush; // 브러시 개체 인터페이스 포인터 변수
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -107,6 +115,25 @@ HRESULT CreateD2DBitmapFromFile(const WCHAR* szFilePath, ID2D1Bitmap** ppID2D1Bi
     return hr;
 }
 
+void PrintMatrix(const wchar_t* str,D2D_MATRIX_3X2_F& mat,float left,float top)
+{
+	WCHAR buffer[256]={0};
+	swprintf_s(buffer, L"%.2f, %.2f\n%.2f, %.2f\n%.2f, %.2f\n",
+		mat._11, mat._12, mat._21, mat._22, mat._31, mat._32);
+	OutputDebugString(buffer);
+
+    Matrix3x2F matRender = Matrix3x2F::Identity();    
+    g_pRenderTarget->SetTransform(matRender);
+
+    g_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
+    g_pRenderTarget->FillRectangle(RectF(left, top, left + 100, top+150), g_pBrush);
+
+    g_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::White));
+    g_pRenderTarget->DrawTextW(str, wcslen(str), g_pDWriteTextFormat, RectF(left, top, left+300,top+300), g_pBrush);
+    g_pRenderTarget->DrawTextW(buffer,wcslen(buffer),g_pDWriteTextFormat,RectF(left,top+60, left + 300, top+60 + 300),g_pBrush);
+
+}
+
 BOOL InitDirect2D()
 {
     WCHAR buffer[MAX_PATH];
@@ -126,7 +153,7 @@ BOOL InitDirect2D()
         hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &g_pD2DFactory);
     }
 
-    D2D1_SIZE_U size;
+
     if (SUCCEEDED(hr))
     {
         /*
@@ -137,14 +164,14 @@ BOOL InitDirect2D()
         RECT rc;
         GetClientRect(g_hWnd, &rc);
 
-        size = D2D1::SizeU(
+        g_ScreenSize = D2D1::SizeU(
             rc.right - rc.left,
             rc.bottom - rc.top);
 
         // Create a Direct2D render target.
         hr = g_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(g_hWnd, size),
+            D2D1::HwndRenderTargetProperties(g_hWnd, g_ScreenSize),
             &g_pRenderTarget);
     }
 
@@ -159,9 +186,39 @@ BOOL InitDirect2D()
         );
     }
 
+	if (SUCCEEDED(hr))
+	{
+		hr = CreateD2DBitmapFromFile(L"../Resource/tree.jpg", &g_pD2DBitmap);
+	}
+
     if (SUCCEEDED(hr))
     {
-        hr = CreateD2DBitmapFromFile(L"../Resource/tree.jpg", &g_pD2DBitmap);
+		// DirectWrite 팩터리를 만듭니다.
+		hr = DWriteCreateFactory(
+			DWRITE_FACTORY_TYPE_SHARED,
+			__uuidof(g_pDWriteFactory),
+			reinterpret_cast<IUnknown**>(&g_pDWriteFactory));
+    }
+
+	if (SUCCEEDED(hr))
+	{
+	    // DirectWrite 텍스트 형식 개체를 만듭니다.
+	    hr = g_pDWriteFactory->CreateTextFormat(
+		    L"", // FontName    제어판-모든제어판-항목-글꼴-클릭 으로 글꼴이름 확인가능
+		    NULL,
+		    DWRITE_FONT_WEIGHT_NORMAL,
+		    DWRITE_FONT_STYLE_NORMAL,
+		    DWRITE_FONT_STRETCH_NORMAL,
+		    15.0f,   // Font Size
+		    L"", //locale
+		    &g_pDWriteTextFormat
+	    );
+    }
+    
+  
+    if (SUCCEEDED(hr))
+    {
+        hr = g_pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::GreenYellow), &g_pBrush);
     }
 
     if (FAILED(hr))
@@ -171,10 +228,6 @@ BOOL InitDirect2D()
         return false;
     }
 
-	g_matRender = Matrix3x2F::Scale(1.0f, -1.0f); // screen 좌표계에서 y축 반전 하므로  이전에 이미 반전하게한다.    
-	g_matWorld = Matrix3x2F::Translation(0.0f,768); // 왼쪽 하단이 원점이므로 윈도우 상단 부터 그리게한다.
-	g_matCamera = D2D1::Matrix3x2F::Identity(); // 입력에 따라 카메라 월드 위치를 변경하고 역행렬을 저장한다.
-	g_matScreen = Matrix3x2F::Scale(1.0f,-1.0f) * Matrix3x2F::Translation(0.0f, (float)size.height ); // 왼쪽 하단이 원점이 되게하는 변환
 
     return true;
 }
@@ -230,16 +283,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
+        
+            // screen 좌표계에서 y축 반전 하므로  이전에 이미 반전하게한다.  매프레임계산 필요없음
+            g_matRender = Matrix3x2F::Scale(1.0f, -1.0f); 
+
+            // 왼쪽 하단이 원점이 되게하는 변환  매프레임계산 필요없음
+			g_matScreen = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, (float)g_ScreenSize.height); 
+
+            // 카메라의 월드위치로 역행렬을 계산하여 카메라 좌표계로 변환하는 행렬
             g_matCamera = D2D1::Matrix3x2F::Translation(g_locCameraX,g_locCameraY);
             D2D1InvertMatrix(&g_matCamera);
-           
+          
+            // 이미지의 위치는 월드좌표계로 값으로 설정
+            g_matWorld = Matrix3x2F::Translation(0.0f, 768.0f); // 월드좌표 0,0은 스크린의 왼쪽 하단이 될수도 상단이 될수도 있다.
 
             D2D_MATRIX_3X2_F Transform = g_matRender * g_matWorld * g_matCamera * g_matScreen;
-            
+
             g_pRenderTarget->BeginDraw();
-            g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::CadetBlue));            
-            g_pRenderTarget->SetTransform(Transform);
+            g_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));            
+            g_pRenderTarget->SetTransform(Transform);            
             g_pRenderTarget->DrawBitmap(g_pD2DBitmap);
+
+
+            PrintMatrix(L"Transform", Transform, 0, 100);
+            PrintMatrix(L"g_matRender", g_matRender, 200, 100);
+            PrintMatrix(L"g_matWorld", g_matWorld, 300, 100);
+            PrintMatrix(L"g_matCamera", g_matCamera, 400, 100);
+            PrintMatrix(L"g_matScreen", g_matScreen, 500, 100);
+
             g_pRenderTarget->EndDraw();
         }
     }
@@ -348,7 +419,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		    g_locCameraY -= 10;
 		}	
              
-
+     
         str = L"Camera X : " + to_wstring(g_locCameraX) + L" Camera Y : " + std::to_wstring(g_locCameraY);
         SetWindowText(hWnd, str.c_str());
 		break;
