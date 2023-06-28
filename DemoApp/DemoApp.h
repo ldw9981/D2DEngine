@@ -11,6 +11,7 @@
 
 class AnimationAsset;
 class DemoObject;
+class CameraGameObject;
 class DemoApp: public GameApp
 {
 public:
@@ -22,4 +23,5 @@ public:
 
 	AnimationAsset* m_pAnimationAsset;
 	DemoObject* m_pDemoObject[MAX_DEMO_OBJECT];
+	CameraGameObject* m_pCameraGameObject;
 };

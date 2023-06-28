@@ -87,7 +87,8 @@ HRESULT D2DRenderer::Initialize()
             rc.right - rc.left,
             rc.bottom - rc.top);
 
-		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, ScreenSize.height);
+		// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
+		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
@@ -180,7 +181,9 @@ void D2DRenderer::DrawText(ID2D1RenderTarget* pRenderTarget, const std::wstring&
 void D2DRenderer::EndDraw()
 {
 	HRESULT hr = m_pRenderTarget->EndDraw();
-	// 실패시 렌더타겟 재성성이지만 실패는 그래픽아답터 제거
+	// 그래픽 카드를 사용할수없을때 실패가 리턴되며
+	// 그래픽 카드가 정상화 된 이후에 렌더타겟과 렌더타겟이 생성한 리소스를 재성성해야한다.
+	// 지금은 그런 경우가 잘 일어나지 않으므로 실패 처리의 내용은 아직 작성하지 않았다. 
 }
 
 HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)

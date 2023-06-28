@@ -8,10 +8,13 @@
 
 
 GameObject::GameObject()
-:m_pRootComponent(nullptr)
+	:m_pRootComponent(nullptr), m_bIsCullObject(true), 
+	m_pParentObject(nullptr), m_pOwnerWorld(nullptr), m_bIsCulled(false)
 {
 
 }
+
+
 
 
 void GameObject::SetRootComponent(SceneComponent* pRootComponent)
@@ -45,12 +48,12 @@ void GameObject::Render(ID2D1RenderTarget* pRenderTarget)
 	}
 }
 
-D2D_VECTOR_2F GameObject::GetLocation()
+D2D_VECTOR_2F GameObject::GetWorldLocation()
 {
 	return m_pRootComponent ? m_pRootComponent->GetRelativeLocation() : D2D_VECTOR_2F();
 }
 
-void GameObject::SetLocation(float x, float y)
+void GameObject::SetWorldLocation(float x, float y)
 {
 	if (m_pRootComponent)
 	{

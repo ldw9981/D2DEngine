@@ -2,7 +2,10 @@
 
 #include <vector>
 #include "Object.h"
-#include "../D2DRenderer/Component.h"
+#include "Component.h"
+#include "SceneComponent.h"
+#include "AABB.h"
+
 /*
 	게임 오브젝트	 클래스
 	World의 CreateGameObject<T>를 통해 생성된다.
@@ -28,10 +31,12 @@ public:
 
 
 protected:
+
 	SceneComponent* m_pRootComponent;
 	GameObject* m_pParentObject;
 	World* m_pOwnerWorld;
-
+	bool m_bIsCullObject;
+	bool m_bIsCulled;
 	std::vector<Component*> m_OwnedComponents;
 public:
 	void SetRootComponent(SceneComponent* pRootComponent);
@@ -40,8 +45,13 @@ public:
 	virtual void Update();
 	virtual void Render(ID2D1RenderTarget* pRenderTarget);
 
-	D2D_VECTOR_2F GetLocation();
-	void SetLocation(float x, float y);
+	D2D_VECTOR_2F GetWorldLocation();
+	void SetWorldLocation(float x, float y);
+	bool IsCullObject() const { return m_bIsCullObject; }
+	// 루트에 있는 AABB를 오브젝트 전체를 대표하는 볼륨으로 사용합니다.
+	const AABB& GetBoundingBox() const { return m_pRootComponent->GetBoundingBox(); }
+	void SetBoundingBoxExtend(float x, float y) { m_pRootComponent->SetBoundingBoxExtend(x, y); }
+	void SetIsCull(bool val) { m_bIsCulled = val; }
 
 	template<typename T>
 	T* CreateComponent()

@@ -2,6 +2,7 @@
 #include <vector>
 #include "Object.h"
 #include "Component.h"
+#include "AABB.h"
 
 /*
 	회전, 위치, 크기를 가지는 컴포넌트
@@ -26,6 +27,7 @@ protected:
 
 	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
 
+	AABB				m_BoundingBox;		// AABB
 public:
 	virtual bool Initialize();
 	
@@ -47,14 +49,16 @@ public:
 	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 
 	const D2D_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
-
-
+	const AABB& GetBoundingBox() { return m_BoundingBox; }
+	void SetBoundingBoxExtend(float x, float y) { m_BoundingBox.m_Extend = { x,y }; }
 	void AttachToComponent(SceneComponent* pParent);
 
-	void GetWorldLocation(D2D1_VECTOR_2F* out)
+	D2D1_VECTOR_2F GetWorldLocation()
 	{
-		out->x = m_WorldTransform._31;
-		out->y = m_WorldTransform._32;
+		D2D1_VECTOR_2F out;
+		out.x = m_WorldTransform._31;
+		out.y = m_WorldTransform._32;
+		return out;
 	}
 };
 

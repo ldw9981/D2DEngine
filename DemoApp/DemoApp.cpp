@@ -5,6 +5,7 @@
 #include "DemoApp.h"
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
+#include "../D2DRenderer/CameraGameObject.h"
 #include "DemoObject.h"
 
 
@@ -81,9 +82,12 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
 		m_pDemoObject[i] = m_World.CreateGameObject<DemoObject>();
 		m_pDemoObject[i]->Initialize();
 		// RootSceneComponent의 Location을 중앙위치로 설정
-		m_pDemoObject[i]->SetLocation(rand()%m_ClientSize.width, i);
+		m_pDemoObject[i]->SetWorldLocation((float)(rand()%m_ClientSize.width) ,(float)i);
     }
 
+    m_pCameraGameObject = m_World.CreateGameObject<CameraGameObject>();
+    m_World.SetCamera(m_pCameraGameObject->GetCameraComponent());
+    
     return true;
 }
 

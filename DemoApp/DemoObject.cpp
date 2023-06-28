@@ -81,7 +81,7 @@ void DemoObject::Update()
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	
 	D2D_VECTOR_2F Location,Direction;
-	m_pSceneComponent->GetWorldLocation(&Location);
+	Location = m_pSceneComponent->GetWorldLocation();
 	Direction = m_pMovementComponent->GetDirection();
 
 	if ( Location.x  > 2000.0f)
