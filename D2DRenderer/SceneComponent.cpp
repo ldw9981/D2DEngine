@@ -38,6 +38,8 @@ void SceneComponent::UpdateTrasnform()
 	{
 		m_WorldTransform = m_RelativeTransform;
 	}
+	
+	m_BoundingBox.m_Center = GetWorldLocation();
 }
 
 void SceneComponent::SetRelativeScale(float x, float y)

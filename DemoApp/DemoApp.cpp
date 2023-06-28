@@ -86,6 +86,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     }
 
     m_pCameraGameObject = m_World.CreateGameObject<CameraGameObject>();
+    m_pCameraGameObject->Initialize();
     m_World.SetCamera(m_pCameraGameObject->GetCameraComponent());
     
     return true;

@@ -15,11 +15,24 @@
 #include <tchar.h>
 
 #include <d2d1.h>
+#include <d2d1_1.h>
+#include <wincodec.h>
 #include <comdef.h>
 #include <d2d1_1helper.h>
+#include <dwrite.h>
+#include <sysinfoapi.h>
 #include <string>
+#include <assert.h>
 #include <dcommon.h>
 #include <dxgi1_4.h>
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
 #include <cmath>
+#include <list>
+#include <vector>
+#include <map>
+#include <string>
+#include <queue>
 
-using namespace D2D1;
+using namespace D2D1; 
+using namespace DirectX;

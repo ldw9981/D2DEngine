@@ -1,9 +1,5 @@
 #pragma once
 
-#include <map>
-#include <string>
-#include <list>
-#include <queue>
 
 /*
 	Direct2D의 기본 기능을 래핑한 클래스

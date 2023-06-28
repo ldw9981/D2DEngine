@@ -31,7 +31,13 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <cmath>
+#include <list>
+#include <vector>
+#include <map>
+#include <string>
+#include <queue>
 
 using namespace D2D1;
 using namespace DirectX;
+using namespace std;
 #endif //PCH_H

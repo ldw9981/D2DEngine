@@ -8,7 +8,7 @@
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
-#include <cmath>
+
 DemoObject::DemoObject()
 	:m_pBoxComponent(nullptr), 
 	m_pAnimationComponent(nullptr), 
@@ -84,19 +84,19 @@ void DemoObject::Update()
 	Location = m_pSceneComponent->GetWorldLocation();
 	Direction = m_pMovementComponent->GetDirection();
 
-	if ( Location.x  > 2000.0f)
+	if ( Location.x  > 1500.0f)
 	{
 		m_pMovementComponent->SetDirection(-1.0f, Direction.y);
 	}
-	else if (Location.x < -2000.0f)
+	else if (Location.x < -1500.0f)
 	{
 		m_pMovementComponent->SetDirection(1.0f, Direction.y);
 	}
-	if (Location.y > 2000.0f)
+	if (Location.y > 1500.0f)
 	{
 		m_pMovementComponent->SetDirection(Direction.x, -1.0f);
 	}
-	else if (Location.y < -2000.0f)
+	else if (Location.y < -1500.0f)
 	{
 		m_pMovementComponent->SetDirection(Direction.x, 1.0f);
 	}

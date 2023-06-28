@@ -27,7 +27,7 @@ protected:
 
 	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
 
-	AABB				m_BoundingBox;		// AABB
+	AABB				m_BoundingBox;		// AABB  
 public:
 	virtual bool Initialize();
 	
@@ -53,6 +53,8 @@ public:
 	void SetBoundingBoxExtend(float x, float y) { m_BoundingBox.m_Extend = { x,y }; }
 	void AttachToComponent(SceneComponent* pParent);
 
+
+	// 월드 위치를 WorldTransform에서 가져온다.
 	D2D1_VECTOR_2F GetWorldLocation()
 	{
 		D2D1_VECTOR_2F out;
@@ -60,5 +62,8 @@ public:
 		out.y = m_WorldTransform._32;
 		return out;
 	}
+	// SetWorldLocation은 
+	// 부모가 있을경우 부모 기준으로 RelativeLocation을 변경하고 WorldTransform을 설정해야한다.
+	// 부모가 없을경우 RelativeLocation을 설정하고 WorldTransform을 설정한다.
 };
 
