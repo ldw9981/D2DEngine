@@ -16,9 +16,9 @@
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
-Matrix3x2F D2DRenderer::m_CameraTransform = Matrix3x2F::Identity();
+D2D1_MATRIX_3X2_F D2DRenderer::m_CameraTransform = Matrix3x2F::Identity();
 
-D2D1::Matrix3x2F D2DRenderer::m_ScreenTransform = Matrix3x2F::Identity();
+D2D1_MATRIX_3X2_F D2DRenderer::m_ScreenTransform = Matrix3x2F::Identity();
 
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),
@@ -50,7 +50,7 @@ D2DRenderer::~D2DRenderer()
 	CoUninitialize();
 }
 
-void D2DRenderer::SetCameraTransform(const Matrix3x2F& worldTrasnform)
+void D2DRenderer::SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform)
 {
 	// D2D1InvertMatrix 함수로 카메라의 역행렬을 구한다.
 	// 함수의 인자는 입력이자 출력이 된다.
