@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CameraComponent.h"
-#include "RendererHelper.h"
+#include "Helper.h"
 #include "GameApp.h"
 
 

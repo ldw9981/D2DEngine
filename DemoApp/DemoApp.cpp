@@ -42,12 +42,8 @@ DemoApp::~DemoApp()
 	
 	if (m_pAnimationAsset != nullptr)
 	{
-        m_D2DRenderer.ReleaseAnimationAsset(m_pAnimationAsset);
+        m_D2DRenderer.ReleaseSharedAnimationAsset(m_pAnimationAsset);
 	}
-
-
-
-   
 }
 
 
@@ -59,9 +55,10 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
 
     // 애니메이션 정보는 파일에서 읽어야 하나 여기서는 하드코딩으로 만들어서 사용한다.
     ANIMATION_INFO Animation;
-    m_pAnimationAsset = m_D2DRenderer.CreateAnimationAsset(L"Test");
-    m_pAnimationAsset->SetBitmapFilePath(L"../Resource/run.png");
-    m_pAnimationAsset->Build();
+    m_pAnimationAsset = m_D2DRenderer.CreateSharedAnimationAsset(L"Test");
+    m_pAnimationAsset->SetD2DBitmap(L"../Resource/run.png");
+    
+    Animation.m_Name = L"Run";
     Animation.m_Frames.clear();
     Animation.m_Frames.push_back(FRAME_INFO( 28, 36, 103, 84, 0.1f));
     Animation.m_Frames.push_back(FRAME_INFO(148, 36,  86, 84, 0.1f));

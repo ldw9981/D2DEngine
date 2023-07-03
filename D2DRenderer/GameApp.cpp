@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "GameApp.h"
 #include "D2DRenderer.h"
+#include "Helper.h"
 
 GameApp* GameApp::m_pInstance = nullptr;
 
@@ -75,7 +76,8 @@ bool GameApp::Initialize(UINT Width, UINT Height)
 	HRESULT hr = m_D2DRenderer.Initialize();
 	if (FAILED(hr))
 	{
-		MessageBoxComError(hr);
+		_com_error err(hr);
+		LOG_ERROR(L"%s",err.ErrorMessage());
 	}
 
 	return true;

@@ -33,9 +33,6 @@
     <ClInclude Include="AnimationAsset.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationInstance.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="SceneComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -66,7 +63,7 @@
     <ClInclude Include="SphereComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="RendererHelper.h">
+    <ClInclude Include="Helper.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
@@ -84,6 +81,15 @@
     <ClInclude Include="CameraGameObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="FSMComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMSharedTransition.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -99,9 +105,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AnimationAsset.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationInstance.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SceneComponent.cpp">
@@ -134,7 +137,7 @@
     <ClCompile Include="SphereComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="RendererHelper.cpp">
+    <ClCompile Include="Helper.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
@@ -150,6 +153,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CameraGameObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMSharedTransition.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "TextComponent.h"
 #include "D2DRenderer.h"
-#include "RendererHelper.h"
+#include "Helper.h"
 
 TextComponent::TextComponent()
 	:m_String(L"Text"), m_Color(D2D1::ColorF(D2D1::ColorF::White)),m_Rect(D2D1::RectF(0,0,100,100))

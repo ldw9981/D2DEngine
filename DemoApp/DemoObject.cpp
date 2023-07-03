@@ -67,10 +67,12 @@ bool DemoObject::Initialize()
 
 	
 	m_pAnimationComponent = CreateComponent<AnimationComponent>();
-	m_pAnimationComponent->SetAnimationAssetPath(std::wstring(L"Test"));
+	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Test"));
 	m_pAnimationComponent->SetRelativeLocation(100.0f, 100.0f);
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
+	m_pAnimationComponent->SetAnimation(L"Run",false,true);
+
 
 	return true;
 }

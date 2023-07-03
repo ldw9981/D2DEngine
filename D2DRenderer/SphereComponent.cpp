@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SphereComponent.h"
 #include "D2DRenderer.h"
-#include "RendererHelper.h"
+#include "Helper.h"
 
 SphereComponent::SphereComponent()
 	: m_Radius(5.0f)

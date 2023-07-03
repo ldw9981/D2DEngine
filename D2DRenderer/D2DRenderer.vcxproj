@@ -142,12 +142,14 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="AnimationAsset.h" />
     <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="AnimationInstance.h" />
     <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraGameObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="FSMComponent.h" />
+    <ClInclude Include="FSMSharedTransition.h" />
+    <ClInclude Include="FSMState.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="framework.h" />
@@ -156,7 +158,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ReferenceCounter.h" />
-    <ClInclude Include="RendererHelper.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="SceneComponent.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereComponent.h" />
@@ -167,12 +169,14 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="AnimationAsset.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AnimationInstance.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraGameObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="FSMComponent.cpp" />
+    <ClCompile Include="FSMSharedTransition.cpp" />
+    <ClCompile Include="FSMState.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -185,7 +189,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ReferenceCounter.cpp" />
-    <ClCompile Include="RendererHelper.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="SceneComponent.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereComponent.cpp" />

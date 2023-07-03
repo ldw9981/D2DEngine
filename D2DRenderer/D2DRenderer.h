@@ -45,16 +45,16 @@ public:
 
 
 	// 공유하는 비트맵 생성
-	HRESULT CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
+	HRESULT CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
 	// 파일이름으로 읽어와야하지만 그냥 비어있는 인스턴스 리턴한다.
-	AnimationAsset* CreateAnimationAsset(std::wstring strFilePath);
+	AnimationAsset* CreateSharedAnimationAsset(std::wstring strFilePath);
 
 	// 릴리즈를 대신 호출하면서 카운터가 0이되면 공유중인 목록에서 제거한다.
-	void ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap);
-	void ReleaseAnimationAsset(AnimationAsset* pAnimationAsset);
+	void ReleaseSharedD2DBitmap(ID2D1Bitmap* pBitmap);
+	void ReleaseSharedAnimationAsset(AnimationAsset* pAnimationAsset);
 	ID2D1SolidColorBrush* GetBrush() const { return m_pBrush; }
 
 	size_t GetUsedVRAM();
-	void RenderQueue(ID2D1RenderTarget* pRenderTarget);
+	void RenderQueue(ID2D1RenderTarget* pRenderTarget);	// 미완성
 };
 

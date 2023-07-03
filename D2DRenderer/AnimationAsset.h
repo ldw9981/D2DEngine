@@ -11,6 +11,15 @@ struct FRAME_INFO
 	D2D1_RECT_F Source;			// 이미지에서 하나의 장면이 어느 영역에 있는지
 	float		RenderTime;		// 하나의 장면을 그릴 시간
 
+	FRAME_INFO()
+	{
+		Source.left = 0;
+		Source.top = 0;
+		Source.right = 0;
+		Source.bottom = 0;
+		RenderTime = 0;
+	}
+
 	FRAME_INFO(float x, float y, float with, float height, float time)
 	{
 		Source.left = x;
@@ -31,11 +40,10 @@ struct FRAME_INFO
 */
 struct ANIMATION_INFO
 {
+	std::wstring m_Name; // 애니메이션의 이름	이름으로 검색하여 재생한다.
 	std::vector<FRAME_INFO> m_Frames; // 프레임의 모음
-	bool m_Loop;
-
 	ANIMATION_INFO()
-	:m_Loop(false)
+	:m_Name(L"Default")
 	{
 		
 	}
@@ -58,6 +66,6 @@ public:
 
 	std::vector<ANIMATION_INFO> m_Animations;
 
-	void Build();
-	void SetBitmapFilePath(const WCHAR* szFilePath);
+	void SetD2DBitmap(const WCHAR* szFilePath);
+	ANIMATION_INFO* GetAnimationInfo(const WCHAR* AnimationName);
 };

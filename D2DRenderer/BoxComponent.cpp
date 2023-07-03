@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "BoxComponent.h"
 #include "D2DRenderer.h"
-#include "RendererHelper.h"
+#include "Helper.h"
 
 BoxComponent::BoxComponent()
 :m_Rect({0})

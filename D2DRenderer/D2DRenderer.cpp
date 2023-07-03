@@ -5,8 +5,7 @@
 #include "D2DRenderer.h"
 #include "GameApp.h"
 #include "AnimationAsset.h"
-#include "AnimationInstance.h"
-#include "RendererHelper.h"
+#include "Helper.h"
 #include "RenderComponent.h"
 
 #pragma comment(lib,"d2d1.lib")
@@ -185,7 +184,7 @@ void D2DRenderer::EndDraw()
 	// 지금은 그런 경우가 잘 일어나지 않으므로 실패 처리의 내용은 아직 작성하지 않았다. 
 }
 
-HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
+HRESULT D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {	
 	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
 	auto it = std::find_if(m_SharingBitmaps.begin(), m_SharingBitmaps.end(), 
@@ -250,6 +249,8 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 	}
 
 
+
+
 	// 파일을 사용할때마다 다시 만든다.
 	if (pConverter)
 		pConverter->Release();
@@ -260,13 +261,20 @@ HRESULT D2DRenderer::CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitm
 	if (pFrame)
 		pFrame->Release();
 
+	if (FAILED(hr))
+	{
+		// 로그
+		_com_error err(hr);
+		LOG_ERROR(L"%s %s", err.ErrorMessage(), strFilePath.c_str());
+		return hr;
+	}
 
 	m_SharingBitmaps.push_back(std::pair<std::wstring, ID2D1Bitmap*>(strFilePath,*ppID2D1Bitmap));
 	return hr;
 }
 
 
-AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring strFilePath)
+AnimationAsset* D2DRenderer::CreateSharedAnimationAsset(std::wstring strFilePath)
 {
 	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
 	auto it = std::find_if(m_SharingAnimationAssets.begin(), m_SharingAnimationAssets.end(),
@@ -290,7 +298,7 @@ AnimationAsset* D2DRenderer::CreateAnimationAsset(std::wstring strFilePath)
 	return pAnimationAsset;
 }
 
-void D2DRenderer::ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap)
+void D2DRenderer::ReleaseSharedD2DBitmap(ID2D1Bitmap* pBitmap)
 {
 	int cnt = pBitmap->Release();
 
@@ -310,7 +318,7 @@ void D2DRenderer::ReleaseD2DBitmapFromFile(ID2D1Bitmap* pBitmap)
 	}
 }
 
-void D2DRenderer::ReleaseAnimationAsset(AnimationAsset* pAnimationAsset)
+void D2DRenderer::ReleaseSharedAnimationAsset(AnimationAsset* pAnimationAsset)
 {
 	int cnt = pAnimationAsset->Release();
 	if (cnt > 0)

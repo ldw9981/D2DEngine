@@ -2,7 +2,6 @@
 
 #include "resource.h"
 #include "../D2DRenderer/GameApp.h"
-#include "../D2DRenderer/AnimationInstance.h"
 #include "../D2DRenderer/AnimationAsset.h"
 #include "../D2DRenderer/AnimationComponent.h"
 #include "../D2DRenderer/SceneComponent.h"
