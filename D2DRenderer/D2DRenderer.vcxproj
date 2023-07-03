@@ -148,7 +148,9 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="FSMComponent.h" />
-    <ClInclude Include="FSMSharedTransition.h" />
+    <ClInclude Include="FSMInstance.h" />
+    <ClInclude Include="FSMStateAlias.h" />
+    <ClInclude Include="FSMTransition.h" />
     <ClInclude Include="FSMState.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="RenderComponent.h" />
@@ -175,7 +177,9 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="FSMComponent.cpp" />
-    <ClCompile Include="FSMSharedTransition.cpp" />
+    <ClCompile Include="FSMInstance.cpp" />
+    <ClCompile Include="FSMStateAlias.cpp" />
+    <ClCompile Include="FSMTransition.cpp" />
     <ClCompile Include="FSMState.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />

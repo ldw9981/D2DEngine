@@ -9,11 +9,15 @@
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
 #include "../D2DRenderer/FSMComponent.h"
+#include "../D2DRenderer/FSMTransition.h"
+#include "../D2DRenderer/FSMInstance.h"
+#include "StateIdle.h"
+#include "FSMInstanceTest2.h"
 /*
 	DemoObject Hierachy
 	- MovementComponent
 	- [Root] AnimationComponent
-
+	- FSMComponent
  */
 
 Test2Object::Test2Object()
@@ -28,9 +32,12 @@ Test2Object::Test2Object()
 
 	m_pMovementComponent->SetRootComponent(m_pAnimationComponent);
 	m_pMovementComponent->SetSpeed(300.0f);
-	m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
+	//m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
+	
 
 	m_pFSMComponent = CreateComponent<FSMComponent>();
+	FSMInstance* pFSMInstance = m_pFSMComponent->CreateInstance<FSMInstanceTest2>();
+	m_pAnimationComponent->AddListener(pFSMInstance);
 }
 
 Test2Object::~Test2Object()

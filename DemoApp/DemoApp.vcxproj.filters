@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\FSM">
+      <UniqueIdentifier>{47a83c21-c363-4edf-ad0c-302224abdfc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\FSM">
+      <UniqueIdentifier>{464dbb06-e266-4911-9721-2cb7f3280045}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -39,6 +45,18 @@
     <ClInclude Include="Test2Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="StateIdle.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMInstanceTest2.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionDeath.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="StateAliasDeath.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp">
@@ -55,6 +73,18 @@
     </ClCompile>
     <ClCompile Include="Test2Object.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StateIdle.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMInstanceTest2.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionDeath.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="StateAliasDeath.cpp">
+      <Filter>소스 파일\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

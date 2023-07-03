@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,16 +132,24 @@
     <ClInclude Include="DemoApp.h" />
     <ClInclude Include="DemoObject.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="StateAliasDeath.h" />
+    <ClInclude Include="StateIdle.h" />
+    <ClInclude Include="TransitionDeath.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Test1Object.h" />
+    <ClInclude Include="FSMInstanceTest2.h" />
     <ClInclude Include="Test2Object.h" />
     <ClInclude Include="TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp" />
     <ClCompile Include="DemoObject.cpp" />
+    <ClCompile Include="StateAliasDeath.cpp" />
+    <ClCompile Include="StateIdle.cpp" />
+    <ClCompile Include="TransitionDeath.cpp" />
     <ClCompile Include="Test1Object.cpp" />
+    <ClCompile Include="FSMInstanceTest2.cpp" />
     <ClCompile Include="Test2Object.cpp" />
     <ClCompile Include="TestClass.cpp" />
   </ItemGroup>

@@ -18,6 +18,8 @@ public:
 	FSMComponent* m_pFSMComponent;
 	AnimationComponent* m_pAnimationComponent;
 	MovementComponent* m_pMovementComponent;
+
+	
 public:
 
 	virtual void Update() override;

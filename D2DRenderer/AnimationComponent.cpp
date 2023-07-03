@@ -49,7 +49,7 @@ void AnimationComponent::Update()
 	{	
 		for (auto it : m_Listener)
 		{
-			it->OnAnimationEnd();
+			it->OnAnimationEnd(m_pAnimationInfo->m_Name);
 		}
 				
 		m_ProgressTime -= Frame.RenderTime;

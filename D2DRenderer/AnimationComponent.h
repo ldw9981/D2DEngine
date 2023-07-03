@@ -5,8 +5,8 @@
 class IAnimationNotify
 {
 public:
-	virtual void OnAnimationEnd() = 0;
-	virtual void OnAnimationNotify(const std::wstring& strNotifyName) = 0;
+	virtual void OnAnimationEnd(const std::wstring& AnimationName) = 0;
+	virtual void OnAnimationNotify(const std::wstring& NotifyName) = 0;
 };
 
 

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\FSM">
+      <UniqueIdentifier>{42f32ad0-2528-4009-9649-d5ee14da3b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\FSM">
+      <UniqueIdentifier>{ea0c3138-7e31-4ed7-9626-49f0e2566170}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -82,13 +88,19 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="FSMComponent.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMInstance.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMTransition.h">
+      <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
     <ClInclude Include="FSMState.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="FSMSharedTransition.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="FSMStateAlias.h">
+      <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,13 +168,19 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="FSMComponent.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMInstance.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMTransition.cpp">
+      <Filter>소스 파일\FSM</Filter>
     </ClCompile>
     <ClCompile Include="FSMState.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="FSMSharedTransition.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="FSMStateAlias.cpp">
+      <Filter>소스 파일\FSM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
