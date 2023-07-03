@@ -48,7 +48,7 @@ public:
 
 	void SetParentScene(SceneComponent* pParent) { m_pParentScene = pParent; }
 
-	const D2D_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
+	const D2D1_MATRIX_3X2_F& GetWorldTransform() { return m_WorldTransform; }
 	const AABB& GetBoundingBox() { return m_BoundingBox; }
 	void SetBoundingBoxExtend(float x, float y) { m_BoundingBox.m_Extend = { x,y }; }
 	void AttachToComponent(SceneComponent* pParent);

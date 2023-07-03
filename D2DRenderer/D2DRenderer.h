@@ -17,8 +17,8 @@ public:
 
 	static ID2D1HwndRenderTarget* m_pRenderTarget;
 	static D2DRenderer* m_Instance;
-	static Matrix3x2F m_CameraTransform;		// 카메라의 좌표계로 변환하는 행렬
-	static Matrix3x2F m_ScreenTransform;		// 왼쪽 하단이 0,0인 화면의 좌표계로 변환하는 행렬   
+	static D2D1_MATRIX_3X2_F m_CameraTransform;		// 카메라의 좌표계로 변환하는 행렬
+	static D2D1_MATRIX_3X2_F m_ScreenTransform;		// 왼쪽 하단이 0,0인 화면의 좌표계로 변환하는 행렬   
 private:
 	ID2D1Factory* m_pD2DFactory;		// D2D 개체 인터페이스 포인터 변수	
 	IWICImagingFactory* m_pWICFactory;	// D2D비트맵 생성을 위한 이미지 처리 인터페이스
@@ -33,7 +33,7 @@ private:
 
 	
 	std::vector<RenderComponent*> m_RenderQueue;		// 정렬을 위해 임의 접근이 빠르고 뒤쪽에만 추가하는 컨테이너는 무엇이 좋을까
-	void SetCameraTransform(const Matrix3x2F& worldTrasnform);
+	
 public:
 	HRESULT Initialize();
 
@@ -43,7 +43,8 @@ public:
 	void DrawText(ID2D1RenderTarget* pRenderTarget,const std::wstring& string,D2D1_RECT_F rect, D2D1_COLOR_F color);
 	void EndDraw();
 
-
+	// 카메라의 월드 변환을 넣어 역행렬을 계산하여 저장한다.
+	void SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform);
 	// 공유하는 비트맵 생성
 	HRESULT CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
 	// 파일이름으로 읽어와야하지만 그냥 비어있는 인스턴스 리턴한다.
