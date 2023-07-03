@@ -8,11 +8,6 @@ World::World()
 {
 }
 
-bool World::Initialize()
-{
-	return true;
-}
-
 void World::Update()
 {
 	for (auto& gameObject : m_GameObjects)

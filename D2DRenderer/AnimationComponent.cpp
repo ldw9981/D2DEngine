@@ -28,10 +28,7 @@ AnimationComponent::~AnimationComponent()
 	}
 }
 
-bool AnimationComponent::Initialize()
-{	
-	return true;
-}
+
 
 void AnimationComponent::Update()
 {
@@ -49,7 +46,12 @@ void AnimationComponent::Update()
 
 
 	while (Frame.RenderTime < m_ProgressTime)
-	{
+	{	
+		for (auto it : m_Listener)
+		{
+			it->OnAnimationEnd();
+		}
+				
 		m_ProgressTime -= Frame.RenderTime;
 		m_FrameIndex = (m_FrameIndex + 1) % MaxFrameIndex;
 	}
@@ -113,5 +115,15 @@ void AnimationComponent::SetAnimationAsset(const std::wstring& strAssetKey)
 	assert(strAssetKey.empty()==false);
 	m_strAnimationAsset = strAssetKey;
 	m_pAnimationAsset = D2DRenderer::m_Instance->CreateSharedAnimationAsset(strAssetKey);
+}
+
+void AnimationComponent::AddListener(IAnimationNotify* pNotify)
+{
+	m_Listener.push_back(pNotify);
+}
+
+void AnimationComponent::RemoveListener(IAnimationNotify* pNotify)
+{
+	m_Listener.remove(pNotify);
 }
 

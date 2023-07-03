@@ -9,11 +9,10 @@
 class CameraComponent : public SceneComponent
 {
 public:
-	CameraComponent() {}
-	virtual ~CameraComponent() {}
+	CameraComponent();
+	virtual ~CameraComponent();
 
 public:
 	virtual void Update() override;
-	virtual bool Initialize() override;
 };
 

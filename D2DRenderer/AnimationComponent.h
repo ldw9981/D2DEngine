@@ -30,7 +30,7 @@ public:
 	AnimationAsset* m_pAnimationAsset;		// 애니메이션을 위한 기본 데이터 자산 (내부에 D2D1Bitmap)
 
 
-	std::vector< IAnimationNotify*> m_vecAnimationNotify;	// 애니메이션 노티파이
+	std::list<IAnimationNotify*> m_Listener;	// 애니메이션 노티파이
 
 	// 공격	영역
 	std::vector<D2D1_RECT_F> m_AttackHitBoxes;
@@ -53,11 +53,13 @@ public:
 	void SetProgressTime(float val) { m_ProgressTime = val; }
 	void SetSpeed(float val) { m_Speed = val; }
 
-	virtual bool Initialize() override;
 	virtual void Update() override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 
 	void SetAnimation(const WCHAR* AnimationName, bool Mirror, bool Loop);
 	void SetAnimationAsset(const std::wstring& strAssetKey);
+
+	void AddListener(IAnimationNotify* pNotify);
+	void RemoveListener(IAnimationNotify* pNotify);
 };
 

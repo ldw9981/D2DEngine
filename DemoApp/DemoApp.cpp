@@ -7,14 +7,14 @@
 #include "../D2DRenderer/AnimationAsset.h"
 #include "../D2DRenderer/CameraGameObject.h"
 #include "DemoObject.h"
-
+#include "Test1Object.h"
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
 DemoApp::DemoApp(HINSTANCE hInstance)
     :GameApp::GameApp(hInstance), 
         m_pAnimationAsset(nullptr),
-        m_pDemoObject {0,}
+    m_pTest1Object{0,}
 { 
 
 	std::wstring str(__FUNCTIONW__);
@@ -76,14 +76,12 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     for (int i=0;i< MAX_DEMO_OBJECT;i++)
     {
-		m_pDemoObject[i] = m_World.CreateGameObject<DemoObject>();
-		m_pDemoObject[i]->Initialize();
+        m_pTest1Object[i] = m_World.CreateGameObject<Test1Object>();       
 		// RootSceneComponent의 Location을 중앙위치로 설정
-		m_pDemoObject[i]->SetWorldLocation((float)(rand()%m_ClientSize.width) ,(float)i);
+        m_pTest1Object[i]->SetWorldLocation((float)(rand()%m_ClientSize.width) ,(float)i);
     }
 
     m_pCameraGameObject = m_World.CreateGameObject<CameraGameObject>();
-    m_pCameraGameObject->Initialize();
     m_World.SetCamera(m_pCameraGameObject->GetCameraComponent());
     
     return true;

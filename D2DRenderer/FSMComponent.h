@@ -18,14 +18,14 @@ protected:
 	FSMState* m_pCurrentState;  // 현재 상태
 	FSMState* m_pInitialState;	// 초기 상태
 
-	map<wstring,FSMState*> m_pStates;	// 생성된 FSMState들을 저장하는 컨테이너
+	std::map<std::wstring,FSMState*> m_pStates;	// 생성된 FSMState들을 저장하는 컨테이너
 
 
 	virtual void Update() override;
-	void ChangeState(wstring stateName);
+	void ChangeState(std::wstring stateName);
 public:
 	template<typename T>
-	T* CreateState(wstring stateName)
+	T* CreateState(std::wstring stateName)
 	{
 		// 이미 있는 상태 이름인지 확인
 		auto it = m_pStates.find(stateName);

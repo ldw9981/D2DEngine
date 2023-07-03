@@ -16,7 +16,6 @@ public:
 
 	};
 
-	virtual bool Initialize()=0; //초기화로 오브젝트를 사용가능한지확인한다.
 	virtual void Update()=0;	//오브젝트의 상태를 업데이트한다.
 };
 

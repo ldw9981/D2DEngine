@@ -132,11 +132,15 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Test1Object.h" />
+    <ClInclude Include="Test2Object.h" />
     <ClInclude Include="TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp" />
     <ClCompile Include="DemoObject.cpp" />
+    <ClCompile Include="Test1Object.cpp" />
+    <ClCompile Include="Test2Object.cpp" />
     <ClCompile Include="TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>

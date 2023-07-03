@@ -13,7 +13,6 @@ protected:
 	D2D_VECTOR_2F	m_Direction;	// 방향 유닛벡터
 	SceneComponent* m_pRootComponent; // 위치를 변경할 컴포넌트
 public:
-	virtual bool Initialize() override;
 	virtual void Update() override;
 
 	void SetRootComponent(SceneComponent* val) { m_pRootComponent = val; }

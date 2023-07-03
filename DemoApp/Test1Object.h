@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../D2DRenderer/GameObject.h"
 
 
@@ -9,16 +8,20 @@ class SphereComponent;
 class TextComponent;
 class SceneComponent;
 class MovementComponent;
-class DemoObject :
-    public GameObject
+
+/*
+
+	Hierarchy 테스트용 오브젝트
+*/
+class Test1Object :
+	public GameObject
 {
 public:
-	DemoObject();
-	virtual ~DemoObject();
+	Test1Object();
+	virtual ~Test1Object();
 	BoxComponent* m_pBoxComponent;
 
 	SphereComponent* m_pSphereComponent;
-	AnimationComponent* m_pAnimationComponent;
 	TextComponent* m_pTextComponent;
 	SceneComponent* m_pSceneComponent;
 	MovementComponent* m_pMovementComponent;

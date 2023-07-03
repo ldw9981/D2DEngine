@@ -3,15 +3,9 @@
 #include "SceneComponent.h"
 #include "GameApp.h"
 
-
-bool MovementComponent::Initialize()
-{
-	assert(m_pRootComponent!=nullptr);
-	return true;
-}
-
 void MovementComponent::Update()
 {
+	assert(m_pRootComponent != nullptr);
 	D2D1_VECTOR_2F Location = m_pRootComponent->GetRelativeLocation();	
 	// m_Speed는 1초에 이동할 거리이므로 시간변화량(초)를 곱하면  시간변화만큼 얼마나 이동해야할지 계산한다.
 	float Distance = m_Speed * GameApp::m_deltaTime;

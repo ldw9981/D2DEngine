@@ -14,7 +14,6 @@ public:
 
 	CameraComponent* m_pCameraComponent;
 public :
-	virtual bool Initialize() override;
 
 	CameraComponent* GetCameraComponent() { return m_pCameraComponent; }
 };

@@ -16,7 +16,7 @@
 class SceneComponent;
 class Component;
 class World;
-class GameObject : public Object
+class GameObject
 {
 public:
 	GameObject();

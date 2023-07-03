@@ -6,8 +6,7 @@
 	또한 게임 오브젝트들의 Update, Render를 호출한다.
 */
 class CameraComponent;
-class World :
-    public Object
+class World 
 {
 public:
     World();
@@ -20,8 +19,7 @@ public:
 		m_GameObjects.clear();
 	}
 
-	virtual bool Initialize() override;
-	virtual void Update() override;
+	virtual void Update();
 	void Render(ID2D1RenderTarget* pRernderTarget);
 
 	// 월드에서 컬링에서 필요한 카메라 컴포넌트를 설정한다 SceneComponent에 AABB가 들어있다.
