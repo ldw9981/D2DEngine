@@ -65,14 +65,25 @@ public:
 	
 	// 컴포넌트를 템틀릿 함수로 생성합니다.
 	template<typename T>
-	T* CreateComponent()
+	T* CreateComponent(const std::wstring& Name )
 	{
 		bool bIsBase = std::is_base_of<Component, T>::value;
 		assert(bIsBase == true);
-		T* pComponent = new T;
-		pComponent->SetOwner(this);
+		T* pComponent = new T(this,Name);	
 		m_OwnedComponents.push_back(pComponent);
 		return pComponent;
+	}
+
+	Component* GetComponent(const std::wstring& Name)
+	{
+		for (auto& pComponent : m_OwnedComponents)
+		{
+			if (pComponent->GetName() == Name)
+			{
+				return pComponent;
+			}
+		}
+		return nullptr;
 	}
 
 	// 월드에서 따라갈 오브젝트를 설정합니다.

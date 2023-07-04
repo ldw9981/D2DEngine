@@ -2,9 +2,10 @@
 #include "SphereComponent.h"
 #include "D2DRenderer.h"
 #include "Helper.h"
+#include "GameObject.h"
 
-SphereComponent::SphereComponent()
-	: m_Radius(5.0f)
+SphereComponent::SphereComponent(GameObject* pOwner, const std::wstring& Name)
+	: RenderComponent(m_pOwner,Name), m_Radius(5.0f)
 	, m_Color(D2D1::ColorF(D2D1::ColorF::Red))
 {
 }

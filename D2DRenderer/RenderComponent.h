@@ -9,10 +9,11 @@
 	카메라 컬링후에 실제 그리려는 자식클래스 인스턴스만 
 	자식클래스의 포인터 주소를 ZOrder로 정렬하여 그리도록 한다.	
 */
+class GameObject;
 class RenderComponent: public SceneComponent
 {
 public:
-	RenderComponent();
+	RenderComponent(GameObject* pOwner,const std::wstring&  Name);
 	virtual ~RenderComponent();
 
 protected:

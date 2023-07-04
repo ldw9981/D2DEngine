@@ -8,7 +8,7 @@ class BoxComponent :
     public RenderComponent
 {
 public:
-	BoxComponent();
+	BoxComponent(GameObject* pOwner, const std::wstring& Name);
 	virtual ~BoxComponent();
 
 	

@@ -6,12 +6,13 @@
 	컴포넌트는 생성된 FiniteStateMachine의 Update만 호출해준다.
 */
 class FiniteStateMachine;
+class GameObject;
 class FSMComponent :
     public Component 
 {
 public:
-	FSMComponent()
-		:m_pFiniteStateMachine(nullptr)
+	FSMComponent(GameObject* pOwner, const std::wstring& Name)
+		:Component(pOwner, Name),m_pFiniteStateMachine(nullptr)
 	{
 
 	}

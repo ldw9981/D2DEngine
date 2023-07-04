@@ -8,7 +8,7 @@ class SphereComponent :
     public RenderComponent
 {
 public:
-    SphereComponent();
+	SphereComponent(GameObject* pOwner,const std::wstring& Name);
 	~SphereComponent();
 public:
 	D2D1_COLOR_F m_Color;

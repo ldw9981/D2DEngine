@@ -9,7 +9,16 @@
 #include "TransitionDeath.h"
 
 #include "../D2DRenderer/FSMStateAlias.h"
+#include "../D2DRenderer/FSMComponent.h"
+#include "../D2DRenderer/MovementComponent.h"
+#include "../D2DRenderer/GameObject.h"
 
+class AnimationComponent;
+class MovementComponent;
+/*
+	이 FSM은 PlayerCharacter와 분리된 게임 정보로 작동되므로
+	NPC에게도 사용할수있다.
+*/
 class FSMCharacter :
     public FiniteStateMachine
 {
@@ -35,6 +44,13 @@ public:
 		m_StateAliasDeath.BindState(&m_StateIdle);
 
 		SetInitialState(L"Idle");
+
+		GameObject* pGameObject = pOwner->GetOwner();
+		m_pAnimationComponent =  (AnimationComponent*)pGameObject->GetComponent(L"AnimationComponent");
+		m_pMovementComponent = (MovementComponent*)pGameObject->GetComponent(L"MovementComponent");
+		
+		m_Attack=false;
+		m_AnimationComplete=false;
 	}
 	virtual ~FSMCharacter()
 	{
@@ -51,7 +67,13 @@ public:
 	FSMStateAlias m_StateAliasDeath;	
 
 
-	//AnimationComponent* m_pAnimationComponent;
-	//MovementComponent* m_pMovementComponent;
+	AnimationComponent* m_pAnimationComponent;
+	MovementComponent* m_pMovementComponent;
+
+	D2D1_VECTOR_2F m_MoveDirection;
+	bool			m_Attack;
+	bool			m_AnimationComplete;
+
+	virtual void Update() override;
 };
 

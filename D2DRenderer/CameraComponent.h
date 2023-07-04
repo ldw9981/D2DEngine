@@ -9,7 +9,7 @@
 class CameraComponent : public SceneComponent
 {
 public:
-	CameraComponent();
+	CameraComponent(GameObject* pOwner, const std::wstring& Name);
 	virtual ~CameraComponent();
 
 public:

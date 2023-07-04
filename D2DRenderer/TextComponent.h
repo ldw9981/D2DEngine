@@ -8,7 +8,7 @@ class TextComponent :
     public RenderComponent
 {
 public:
-	TextComponent();
+	TextComponent(GameObject* pOwner, const std::wstring& Name);
 	virtual ~TextComponent() override;
 
 protected:

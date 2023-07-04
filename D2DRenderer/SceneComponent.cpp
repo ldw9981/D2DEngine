@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "SceneComponent.h"
 #include "Helper.h"
-SceneComponent::SceneComponent()
-	:m_RelativeScale({ 1.0f,1.0f }),
+#include "GameObject.h"
+
+SceneComponent::SceneComponent(GameObject* pOwner, std::wstring Name)
+	:Component(pOwner, Name),
+	m_RelativeScale({ 1.0f,1.0f }),
 	m_RelativeRotation(0.0f), 
 	m_RelativeLocation({ 0.0f,0.0f }), 
 	m_RelativeTransform(Matrix3x2F::Identity()), 

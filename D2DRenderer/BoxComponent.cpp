@@ -3,10 +3,10 @@
 #include "D2DRenderer.h"
 #include "Helper.h"
 
-BoxComponent::BoxComponent()
-:m_Rect({0})
+BoxComponent::BoxComponent(GameObject* pOwner, const std::wstring& Name)
+	:RenderComponent(pOwner, Name),m_Rect({0})
 {
-
+	m_Color= D2D1::ColorF(D2D1::ColorF::White);
 }
 
 

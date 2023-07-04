@@ -9,10 +9,11 @@
 	WorldTransform 을 계산하는것이 최종 목적이다. 
 	참조하는 부모 컴포넌트가 있으면 부모 컴포넌트의 WorldTransform을 참조하여 계산한다.
 */
+class GameObject;
 class SceneComponent : public Component
 {
 public:
-	SceneComponent();
+	SceneComponent(GameObject* pOwner, std::wstring Name);
 	virtual ~SceneComponent() {};
 
 

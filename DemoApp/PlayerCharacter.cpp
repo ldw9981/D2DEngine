@@ -8,6 +8,7 @@
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
+#include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/FSMComponent.h"
 #include "../D2DRenderer/FSMTransition.h"
 #include "../D2DRenderer/FiniteStateMachine.h"
@@ -23,12 +24,12 @@
 PlayerCharacter::PlayerCharacter()
 {
 	// 그냥 Component 
-	m_pMovementComponent = CreateComponent<MovementComponent>();
+	m_pMovementComponent = CreateComponent<MovementComponent>(L"MovementComponent");
 
 	// SceneComponent만 RootComponent로 설정 가능
-	m_pAnimationComponent = CreateComponent<AnimationComponent>();
-	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Test"));	
-	m_pAnimationComponent->SetAnimation(L"Run", false, true);
+	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
+	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Ken"));	
+	//m_pAnimationComponent->SetAnimation(L"Attack", false, true);
 	SetRootComponent(m_pAnimationComponent);
 
 	// 위치를 변경할 컴포넌트를 설정한다.
@@ -36,10 +37,16 @@ PlayerCharacter::PlayerCharacter()
 	m_pMovementComponent->SetSpeed(300.0f);
 	m_pMovementComponent->SetDirection(0,0);
 
-	m_pFSMComponent = CreateComponent<FSMComponent>();
-	FiniteStateMachine* pFiniteStateMachine = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
+	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
+	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
 	// 애니메이션 이벤트를 처리할 인스턴스 등록
-	m_pAnimationComponent->AddListener(pFiniteStateMachine);
+	m_pAnimationComponent->AddListener(m_pFSMCharacter);
+
+
+	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
+	m_pTextComponent->SetRelativeLocation(-100,0);
+	m_pTextComponent->SetString(L"이동:화살표 , 공격:스페이스");
+	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -53,7 +60,11 @@ void PlayerCharacter::Update()
 	D2D_VECTOR_2F Location, Direction {0};
 	Location = m_pAnimationComponent->GetWorldLocation();
 	
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) 	{ //왼쪽
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+		m_pFSMCharacter->m_Attack = true;
+	}
+	else if (GetAsyncKeyState(VK_LEFT) & 0x8000) 	{ //왼쪽
 		Direction.x = -1.0f;	
 	}
 	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { //오른쪽

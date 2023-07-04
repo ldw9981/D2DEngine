@@ -8,6 +8,7 @@ public:
 
 	StateIdle(FiniteStateMachine* pOwner);
 	~StateIdle();
+
 	void Enter() override;
 	void Update() override;
 	void Exit() override;

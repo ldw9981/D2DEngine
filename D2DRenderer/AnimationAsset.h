@@ -20,12 +20,12 @@ struct FRAME_INFO
 		RenderTime = 0;
 	}
 
-	FRAME_INFO(float x, float y, float with, float height, float time)
+	FRAME_INFO(float left, float top, float right, float bottom, float time)
 	{
-		Source.left = x;
-		Source.top = y;
-		Source.right = x + with;
-		Source.bottom = y + height;
+		Source.left = left;
+		Source.top = top;
+		Source.right = right;
+		Source.bottom = bottom;
 		RenderTime = time;
 	}
 	FRAME_INFO(D2D1_RECT_F rect, float time)

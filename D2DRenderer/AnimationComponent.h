@@ -16,11 +16,12 @@ public:
 
 class AnimationAsset;
 struct ANIMATION_INFO;
+class GameObject;
 class AnimationComponent :
     public RenderComponent
 {
 public:
-	AnimationComponent();
+	AnimationComponent(GameObject* pOwner, const std::wstring& Name);
 	virtual ~AnimationComponent();
 
 
@@ -40,7 +41,8 @@ public:
 
 	ANIMATION_INFO* m_pAnimationInfo;	// 현재 애니메이션 정보
 
-	size_t m_FrameIndex;			// 현재 프레임 인덱스
+	size_t m_FrameIndexCurr;			// 현재 프레임 인덱스
+	size_t m_FrameIndexPrev;		// 현재 프레임 인덱스
 	float m_ProgressTime;			// 애니메이션 진행시간
 	D2D1_RECT_F m_SrcRect;			// 시간에 따른 D2D1Bitmap의 Source 영역
 	D2D1_RECT_F m_DstRect;			// 시간에 따른 D2D1Bitmap의 Source 영역		

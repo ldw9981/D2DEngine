@@ -2,9 +2,10 @@
 #include "TextComponent.h"
 #include "D2DRenderer.h"
 #include "Helper.h"
+#include "GameObject.h"
 
-TextComponent::TextComponent()
-	:m_String(L"Text"), m_Color(D2D1::ColorF(D2D1::ColorF::White)),m_Rect(D2D1::RectF(0,0,100,100))
+TextComponent::TextComponent(GameObject* pOwner, const std::wstring& Name)
+	:RenderComponent(pOwner,Name),m_String(L"Text"), m_Color(D2D1::ColorF(D2D1::ColorF::White)),m_Rect(D2D1::RectF(0,0,100,100))
 {
 
 }
