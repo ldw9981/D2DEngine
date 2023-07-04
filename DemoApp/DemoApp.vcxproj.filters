@@ -42,19 +42,25 @@
     <ClInclude Include="Test1Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Test2Object.h">
+    <ClInclude Include="PlayerCharacter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="StateIdle.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="FSMInstanceTest2.h">
+    <ClInclude Include="FSMCharacter.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
     <ClInclude Include="TransitionDeath.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="StateAliasDeath.h">
+    <ClInclude Include="StateMove.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="StateDeath.h">
+      <Filter>헤더 파일\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="StateAttack.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,19 +77,25 @@
     <ClCompile Include="Test1Object.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Test2Object.cpp">
+    <ClCompile Include="PlayerCharacter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="StateIdle.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="FSMInstanceTest2.cpp">
+    <ClCompile Include="FSMCharacter.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
     <ClCompile Include="TransitionDeath.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="StateAliasDeath.cpp">
+    <ClCompile Include="StateMove.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="StateDeath.cpp">
+      <Filter>소스 파일\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="StateAttack.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
   </ItemGroup>

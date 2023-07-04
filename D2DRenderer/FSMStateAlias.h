@@ -1,16 +1,21 @@
 #pragma once
 #include "FSMState.h"
+#include "FSMTransition.h"
 
+/*
+	State간에 공유하는 Transition을 작동시킨다.
+*/
 class FSMComponent;
 class GameObject;
 class FSMTransition;
-class FSMInstance;
+class FiniteStateMachine;
 class FSMState;
-class FSMStateAlias :public FSMState
+
+class FSMStateAlias 
 {
 public:
-	FSMStateAlias(FSMInstance* pOwner, std::wstring Name)
-		:FSMState(pOwner,Name)
+	FSMStateAlias(FiniteStateMachine* pOwner)
+		:m_pOwner(pOwner)
 	{
 
 	}
@@ -18,6 +23,9 @@ public:
 	{
 
 	}
+
+	FiniteStateMachine* m_pOwner;
+	std::vector<FSMTransition*> m_Transitions;
 	std::vector<FSMState*> m_States;
 
 public:
@@ -31,12 +39,17 @@ public:
 		return false;
 	}
 	void BindState(FSMState* pState) { m_States.push_back(pState); }
+	bool CheckTransition(std::wstring& OutNextState)
+	{
+		for (auto pTransition : m_Transitions)
+		{
+			if (pTransition->CheckCondition() == true)
+			{
+				OutNextState = pTransition->m_NextState;
+				return true;
+			}
+		}
+		return false;
+	}
 
-
-	virtual void Enter() {};
-	virtual void Update() {};
-	virtual void Exit() {};
-
-	virtual void EventAnimationEnd(const std::wstring& AnimationName){};
-	virtual void EventAnimationNotify(const std::wstring& NotifyName){};
 };

@@ -2,13 +2,13 @@
 #include "FSMState.h"
 #include "FSMTransition.h"
 
-bool FSMState::CheckTransition(std::wstring& NextState)
+bool FSMState::CheckTransition(std::wstring& OutNextState)
 {
 	for (auto pTransition : m_Transitions)
 	{
 		if (pTransition->CheckCondition() == true)
 		{
-			NextState = pTransition->m_NextState;
+			OutNextState = pTransition->m_NextState;
 			return true;
 		}
 	}

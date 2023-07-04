@@ -1,33 +1,45 @@
 #pragma once
 #include "Component.h"
-
-
-class FSMInstance;
+#include "FiniteStateMachine.h"
+/*
+	컴포넌트 사용자가 CreateFiniteStateMachine호출하여 을 상속받은 클래스를 생성해야한다.
+	컴포넌트는 생성된 FiniteStateMachine의 Update만 호출해준다.
+*/
+class FiniteStateMachine;
 class FSMComponent :
     public Component 
 {
 public:
-	FSMComponent()	
-	:m_pFSMInstance(nullptr)
+	FSMComponent()
+		:m_pFiniteStateMachine(nullptr)
 	{
-		
+
 	}
 
-	virtual ~FSMComponent();
+	virtual ~FSMComponent()
+	{
+		if (m_pFiniteStateMachine != nullptr)
+			delete m_pFiniteStateMachine;
+	}
 protected:
-	FSMInstance* m_pFSMInstance;
+	FiniteStateMachine* m_pFiniteStateMachine;
 public:
-	virtual void Update() override;
+	virtual void Update()
+	{
+		if (m_pFiniteStateMachine != nullptr)
+			m_pFiniteStateMachine->Update();
+	}
 
 	template<typename T>
-	T* CreateInstance()
+	T* CreateFiniteStateMachine()
 	{
+		assert(m_pFiniteStateMachine==nullptr);
 		// 부모클래스가 FSMState인지 확인
-		bool bIsBase = std::is_base_of<FSMInstance, T>::value;
+		bool bIsBase = std::is_base_of<FiniteStateMachine, T>::value;
 		assert(bIsBase == true);
 		T* newInstance = new T(this);
 
-		m_pFSMInstance = newInstance;
+		m_pFiniteStateMachine = newInstance;
 		return newInstance;
 	}
 };

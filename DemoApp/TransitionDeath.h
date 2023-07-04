@@ -2,15 +2,15 @@
 #include "../D2DRenderer/FSMTransition.h"
 
 
-class FSMInstanceTest2;
+class FSMCharacter;
 class TransitionDeath :
     public FSMTransition
 {
 public:
-	TransitionDeath(FSMInstance* pOwner) 
+	TransitionDeath(FiniteStateMachine* pOwner)
 	: FSMTransition(pOwner) 
 	{
-		m_pFSMIntance = (FSMInstanceTest2*)pOwner;
+		m_pFSMIntance = (FSMCharacter*)pOwner;
 	}
 
 	~TransitionDeath()
@@ -18,7 +18,7 @@ public:
 
 	}
 
-	FSMInstanceTest2* m_pFSMIntance = nullptr;
+	FSMCharacter* m_pFSMIntance = nullptr;
 
 	virtual bool CheckCondition() override;
 };

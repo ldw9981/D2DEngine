@@ -8,12 +8,12 @@ class AnimationComponent;
 class MovementComponent;
 class FSMComponent;
 
-class Test2Object :
+class PlayerCharacter :
 	public GameObject
 {
 public:
-	Test2Object();
-	virtual ~Test2Object();
+	PlayerCharacter();
+	virtual ~PlayerCharacter();
 
 	FSMComponent* m_pFSMComponent;
 	AnimationComponent* m_pAnimationComponent;

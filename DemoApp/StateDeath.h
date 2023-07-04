@@ -2,12 +2,12 @@
 #include "../D2DRenderer/FSMState.h"
 
 class FiniteStateMachine;
-class StateIdle : public FSMState
+class StateDeath : public FSMState
 {
 public:
 
-	StateIdle(FiniteStateMachine* pOwner);
-	~StateIdle();
+	StateDeath(FiniteStateMachine* pOwner);
+	~StateDeath();
 	void Enter() override;
 	void Update() override;
 	void Exit() override;

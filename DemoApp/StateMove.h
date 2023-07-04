@@ -1,16 +1,15 @@
 #pragma once
 #include "../D2DRenderer/FSMState.h"
-
-class FiniteStateMachine;
-class StateIdle : public FSMState
+class StateMove :
+    public FSMState
 {
 public:
+	StateMove(FiniteStateMachine* pOwner);
+	virtual ~StateMove();
 
-	StateIdle(FiniteStateMachine* pOwner);
-	~StateIdle();
-	void Enter() override;
-	void Update() override;
-	void Exit() override;
+	virtual void Enter() override;
+	virtual void Update() override;
+	virtual void Exit() override;
 
 	virtual bool CheckTransition(std::wstring& NextState) override;
 	virtual void EventAnimationEnd(const std::wstring& AnimationName) override;

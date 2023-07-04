@@ -1,12 +1,18 @@
 #pragma once
+
+/*
+	State Class
+	전이는 Transition Class를 사용해도되고
+	CheckTransition 함수를 재정의(override) 해서 사용해도됨
+*/
 class FSMComponent;
 class GameObject;
 class FSMTransition;
-class FSMInstance;
+class FiniteStateMachine;
 class FSMState
 {
 public:
-	FSMState(FSMInstance* pOwner,std::wstring Name)
+	FSMState(FiniteStateMachine* pOwner,std::wstring Name)
 		:m_pOwner(pOwner)
 		,m_Name(Name)
 	{
@@ -17,16 +23,14 @@ public:
 
 	}
 	std::wstring m_Name;
-	FSMInstance* m_pOwner;
-	GameObject* m_pGameObject;
+	FiniteStateMachine* m_pOwner;
 
 	std::vector<FSMTransition*> m_Transitions;
 public:	
-	void SetOwner(FSMInstance* pOwner) { m_pOwner = pOwner; }
-	void SetGameObject(GameObject* pGameObject) { m_pGameObject = pGameObject; }
+	void SetOwner(FiniteStateMachine* pOwner) { m_pOwner = pOwner; }
 	void AddTransition(FSMTransition* pTransition) { m_Transitions.push_back(pTransition); }
 
-	virtual bool CheckTransition(std::wstring& NextState);
+	virtual bool CheckTransition(std::wstring& OutNextState);
 	const std::wstring& GetName() { return m_Name; }
 
 	virtual void Enter() = 0;

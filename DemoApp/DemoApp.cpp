@@ -8,6 +8,7 @@
 #include "../D2DRenderer/CameraGameObject.h"
 #include "DemoObject.h"
 #include "Test1Object.h"
+#include "PlayerCharacter.h"
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
@@ -83,6 +84,8 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
 
     m_pCameraGameObject = m_World.CreateGameObject<CameraGameObject>();
     m_World.SetCamera(m_pCameraGameObject->GetCameraComponent());
+
+    m_World.CreateGameObject<PlayerCharacter>()->SetWorldLocation(100,100);
     
     return true;
 }

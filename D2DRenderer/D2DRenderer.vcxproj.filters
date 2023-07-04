@@ -90,7 +90,7 @@
     <ClInclude Include="FSMComponent.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="FSMInstance.h">
+    <ClInclude Include="FiniteStateMachine.h">
       <Filter>헤더 파일\FSM</Filter>
     </ClInclude>
     <ClInclude Include="FSMTransition.h">
@@ -170,7 +170,7 @@
     <ClCompile Include="FSMComponent.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="FSMInstance.cpp">
+    <ClCompile Include="FiniteStateMachine.cpp">
       <Filter>소스 파일\FSM</Filter>
     </ClCompile>
     <ClCompile Include="FSMTransition.cpp">

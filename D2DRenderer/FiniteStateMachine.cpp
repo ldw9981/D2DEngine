@@ -1,16 +1,16 @@
 #include "pch.h"
-#include "FSMInstance.h"
+#include "FiniteStateMachine.h"
 #include "FSMState.h"
 #include "FSMTransition.h"
 #include "FSMStateAlias.h"
 #include "Helper.h"
 
-FSMInstance::~FSMInstance()
+FiniteStateMachine::~FiniteStateMachine()
 {
 
 }
 
-void FSMInstance::Update()
+void FiniteStateMachine::Update()
 {
 	if (m_pCurrentState == nullptr)
 	{
@@ -32,12 +32,14 @@ void FSMInstance::Update()
 		return;
 	}
 	
-	// StateAlias Check
+	// 공유 Transition Check
 	for (auto pStateAlias : m_pStateAlias)
 	{
-		if(!pStateAlias->CheckAlias(pStateAlias))
+		// 현재 State가 Alias에 포함되어 있는지 확인한다.
+		if(!pStateAlias->CheckAlias(m_pCurrentState))
 			continue;
 
+		// Alias에 포함되어 있을 경우 Transition을 확인한다.
 		if (pStateAlias->CheckTransition(nextStateName))
 		{
 			ChangeState(nextStateName);
@@ -46,7 +48,7 @@ void FSMInstance::Update()
 	}
 }
 
-void FSMInstance::ChangeState(wstring stateName)
+void FiniteStateMachine::ChangeState(wstring stateName)
 {
 	if (m_pCurrentState)
 	{
@@ -70,18 +72,31 @@ void FSMInstance::ChangeState(wstring stateName)
 	}
 }
 
-void FSMInstance::AddState(FSMState* pState)
+void FiniteStateMachine::SetInitialState(std::wstring stateName)
+{
+	auto it = m_pStates.find(stateName);
+	if (it != m_pStates.end())
+	{
+		m_pInitialState = it->second;
+	}
+	else
+	{
+		LOG_WARNING(L"No state with name: %s ", stateName.c_str());
+	}
+}
+
+void FiniteStateMachine::AddState(FSMState* pState)
 {
 	m_pStates.insert(make_pair(pState->GetName(), pState));
 }
 
 
-void FSMInstance::AddStateAlias(FSMStateAlias* pStateAlias)
+void FiniteStateMachine::AddStateAlias(FSMStateAlias* pStateAlias)
 {
 	m_pStateAlias.push_back(pStateAlias);
 }
 
-void FSMInstance::OnAnimationEnd(const std::wstring& AnimationName)
+void FiniteStateMachine::OnAnimationEnd(const std::wstring& AnimationName)
 {
 	if (m_pCurrentState)
 	{
@@ -89,7 +104,7 @@ void FSMInstance::OnAnimationEnd(const std::wstring& AnimationName)
 	}
 }
 
-void FSMInstance::OnAnimationNotify(const std::wstring& NotifyName)
+void FiniteStateMachine::OnAnimationNotify(const std::wstring& NotifyName)
 {
 	if (m_pCurrentState)
 	{

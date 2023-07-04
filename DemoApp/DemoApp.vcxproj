@@ -132,25 +132,29 @@
     <ClInclude Include="DemoApp.h" />
     <ClInclude Include="DemoObject.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="StateAliasDeath.h" />
+    <ClInclude Include="StateAttack.h" />
+    <ClInclude Include="StateDeath.h" />
     <ClInclude Include="StateIdle.h" />
+    <ClInclude Include="StateMove.h" />
     <ClInclude Include="TransitionDeath.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Test1Object.h" />
-    <ClInclude Include="FSMInstanceTest2.h" />
-    <ClInclude Include="Test2Object.h" />
+    <ClInclude Include="FSMCharacter.h" />
+    <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp" />
     <ClCompile Include="DemoObject.cpp" />
-    <ClCompile Include="StateAliasDeath.cpp" />
+    <ClCompile Include="StateAttack.cpp" />
+    <ClCompile Include="StateDeath.cpp" />
     <ClCompile Include="StateIdle.cpp" />
+    <ClCompile Include="StateMove.cpp" />
     <ClCompile Include="TransitionDeath.cpp" />
     <ClCompile Include="Test1Object.cpp" />
-    <ClCompile Include="FSMInstanceTest2.cpp" />
-    <ClCompile Include="Test2Object.cpp" />
+    <ClCompile Include="FSMCharacter.cpp" />
+    <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>
