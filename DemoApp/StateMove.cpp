@@ -17,17 +17,43 @@ void StateMove::Enter()
 {
 	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
 	AnimationComponent* pAnimationComponent = pFSMCharacter->m_pAnimationComponent;
-	pAnimationComponent->SetAnimation(L"Move", false, true);
+
+	if (pFSMCharacter->m_MoveDirection.x > 0)
+	{
+		pFSMCharacter->m_Mirror = false;
+		
+	}
+	else if (pFSMCharacter->m_MoveDirection.x < 0)
+	{
+		pFSMCharacter->m_Mirror = true;
+		
+	}
+	pAnimationComponent->SetAnimation(L"Move", pFSMCharacter->m_Mirror, true);
+
 }
 
 void StateMove::Update()
 {
+	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
+	if (pFSMCharacter->m_LastDirection.x != pFSMCharacter->m_MoveDirection.x)
+	{
+		AnimationComponent* pAnimationComponent = pFSMCharacter->m_pAnimationComponent;
+		if (pFSMCharacter->m_MoveDirection.x > 0)
+		{
+			pFSMCharacter->m_Mirror = false;
 
+		}
+		else if (pFSMCharacter->m_MoveDirection.x < 0)
+		{
+			pFSMCharacter->m_Mirror = true;
+		}
+		pAnimationComponent->SetMirror(pFSMCharacter->m_Mirror);
+	}
 }
 
 void StateMove::Exit()
 {
-
+	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);	
 }
 
 bool StateMove::CheckTransition(std::wstring& NextState)

@@ -71,8 +71,10 @@ public:
 	MovementComponent* m_pMovementComponent;
 
 	D2D1_VECTOR_2F m_MoveDirection;
+	D2D1_VECTOR_2F m_LastDirection;
 	bool			m_Attack;
 	bool			m_AnimationComplete;
+	bool			m_Mirror;
 
 	virtual void Update() override;
 };
