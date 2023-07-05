@@ -9,6 +9,7 @@ class MovementComponent;
 class FSMComponent;
 class FSMCharacter;
 class TextComponent;
+class CameraComponent;
 class PlayerCharacter :
 	public GameObject
 {
@@ -21,6 +22,7 @@ public:
 	MovementComponent* m_pMovementComponent;
 	FSMCharacter* m_pFSMCharacter;
 	TextComponent* m_pTextComponent;
+	CameraComponent* m_pCameraComponent;
 public:
 
 	virtual void Update() override;

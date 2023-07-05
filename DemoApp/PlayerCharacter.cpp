@@ -12,6 +12,7 @@
 #include "../D2DRenderer/FSMComponent.h"
 #include "../D2DRenderer/FSMTransition.h"
 #include "../D2DRenderer/FiniteStateMachine.h"
+#include "../D2DRenderer/CameraComponent.h"
 #include "StateIdle.h"
 #include "FSMCharacter.h"
 /*
@@ -47,6 +48,16 @@ PlayerCharacter::PlayerCharacter()
 	m_pTextComponent->SetRelativeLocation(-100,0);
 	m_pTextComponent->SetString(L"이동:화살표 , 공격:스페이스");
 	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
+
+	m_pCameraComponent = CreateComponent<CameraComponent>(L"CameraComponent");
+	m_pCameraComponent->AttachToComponent(m_pAnimationComponent);
+	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
+	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
+	D2D_SIZE_U size = GameApp::m_pInstance->GetClientSize();
+	size.height = size.height / 2;
+	size.width = size.width / 2;
+	m_pCameraComponent->SetRelativeLocation((float)size.width * -1.0f,(float)size.height *-1.0f);
+
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -78,6 +89,8 @@ void PlayerCharacter::Update()
 	}
 
 	m_pMovementComponent->SetDirection(Direction.x, Direction.y);
+	
+
 	
 
 	__super::Update();

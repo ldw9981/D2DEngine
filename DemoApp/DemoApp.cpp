@@ -102,10 +102,12 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
         m_pTest1Object[i]->SetWorldLocation((float)(rand()%m_ClientSize.width) ,(float)i);
     }
 
-    m_pCameraGameObject = m_World.CreateGameObject<CameraGameObject>();
-    m_World.SetCamera(m_pCameraGameObject->GetCameraComponent());
+    GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();
+    pGameObject->SetWorldLocation(100, 100);
+    CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent(L"CameraComponent");
+    m_World.SetCamera(pCameraComponent);
 
-    m_World.CreateGameObject<PlayerCharacter>()->SetWorldLocation(100,100);
+    
     
     return true;
 }

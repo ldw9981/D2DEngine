@@ -28,7 +28,7 @@ Test1Object::Test1Object()
 	SetRootComponent(m_pSceneComponent);
 
 	m_pMovementComponent->SetUpdateTarget(m_pSceneComponent);
-	m_pMovementComponent->SetSpeed(300.0f);
+	m_pMovementComponent->SetSpeed(10.0f);
 	m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
 
 

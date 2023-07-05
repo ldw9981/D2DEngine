@@ -23,5 +23,5 @@ public:
 
 	AnimationAsset* m_pAnimationAsset;
 	Test1Object* m_pTest1Object[MAX_DEMO_OBJECT];
-	CameraGameObject* m_pCameraGameObject;
+	//CameraGameObject* m_pCameraGameObject;
 };
