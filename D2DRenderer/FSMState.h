@@ -28,6 +28,8 @@ public:
 	std::vector<FSMTransition*> m_Transitions;
 public:	
 	void SetOwner(FiniteStateMachine* pOwner) { m_pOwner = pOwner; }
+
+	//체크할 Transition 인터스턴스를 등록한다.
 	void AddTransition(FSMTransition* pTransition) { m_Transitions.push_back(pTransition); }
 
 	virtual bool CheckTransition(std::wstring& OutNextState);
