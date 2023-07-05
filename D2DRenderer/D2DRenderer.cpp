@@ -159,9 +159,8 @@ void D2DRenderer::DrawRectangle(ID2D1RenderTarget* pRenderTarget,D2D1_RECT_F rec
 void D2DRenderer::DrawCrossLine(ID2D1RenderTarget* pRenderTarget, D2D1_VECTOR_2F point /*= {0.0f,0.0f}*/, D2D1_COLOR_F color /*= D2D1::ColorF(D2D1::ColorF::LightGreen)*/)
 {
 	m_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
-	pRenderTarget->DrawLine(D2D1::Point2F(point.x - 10.0f, point.y), D2D1::Point2F(point.x + 10.0f, point.y), m_pBrush, 3.0f);
-	m_pBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Green));
-	pRenderTarget->DrawLine(D2D1::Point2F(point.x, point.y - 10.0f), D2D1::Point2F(point.x, point.y + 10.0f), m_pBrush, 3.0f);
+	pRenderTarget->DrawLine(D2D1::Point2F(point.x - 5.0f, point.y), D2D1::Point2F(point.x + 5.0f, point.y), m_pBrush, 1.0f);
+	pRenderTarget->DrawLine(D2D1::Point2F(point.x, point.y - 5.0f), D2D1::Point2F(point.x, point.y + 5.0f), m_pBrush, 1.0f);
 }
 
 void D2DRenderer::DrawEllipse(ID2D1RenderTarget* pRenderTarget, D2D1_ELLIPSE ellipse, D2D1_COLOR_F color)

@@ -2,6 +2,7 @@
 #include "SceneComponent.h"
 #include "Helper.h"
 #include "GameObject.h"
+#include "D2DRenderer.h"
 
 SceneComponent::SceneComponent(GameObject* pOwner, std::wstring Name)
 	:Component(pOwner, Name),
@@ -80,4 +81,12 @@ void SceneComponent::AttachToComponent(SceneComponent* pParent)
 {
 	m_pParentScene = pParent;
 	pParent->m_Children.push_back(this);
+}
+
+// WorldTransform µð¹ö±ë¿ë
+void SceneComponent::DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget)
+{
+	D2D1_MATRIX_3X2_F Transform = m_WorldTransform * D2DRenderer::m_CameraTransform * D2DRenderer::m_ScreenTransform;
+	pRenderTarget->SetTransform(Transform);
+	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }

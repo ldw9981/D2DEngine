@@ -11,8 +11,11 @@ public:
 		:Component(pOwner, Name)
 	{
 		m_Speed=0.0f; 
+		m_Direction.x = 0; m_Direction.y = 0.0f;
 	};
-	~MovementComponent() { m_Direction.x = 0; m_Direction.y=0.0f; }
+	~MovementComponent() 
+	{  
+	}
 protected:
 	float			m_Speed;		// 1초당 이동할 속력
 	D2D_VECTOR_2F	m_Direction;	// 방향 유닛벡터

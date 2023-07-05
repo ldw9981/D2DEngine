@@ -54,6 +54,7 @@ public:
 	void SetBoundingBoxExtend(float x, float y) { m_BoundingBox.m_Extend = { x,y }; }
 	void AttachToComponent(SceneComponent* pParent);
 
+	void DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget);
 
 	// 월드 위치를 WorldTransform에서 가져온다.
 	D2D1_VECTOR_2F GetWorldLocation()

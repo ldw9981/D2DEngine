@@ -94,5 +94,7 @@ public:
 
 	// 이 게임 오브젝트가 속한 월드를 설정 합니다.
 	void SetOwnerWorld(World* val) { m_pOwnerWorld = val; }
+
+	//void TakeDamage(float Damage,GameObject* pAttacker);
 };
 
