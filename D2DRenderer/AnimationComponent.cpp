@@ -64,7 +64,7 @@ void AnimationComponent::Update()
 		}
 	}
 	
-	// 이전 프레임번호와 다르고  마지막 프레임 일때 이벤트 호출
+	// 마지막 프레임으로 번호가 변할때 단한번 이벤트 호출
 	if (m_FrameIndexCurr!= m_FrameIndexPrev && m_FrameIndexCurr == (MaxFrameCount - 1)) 
 	{
 		for (auto& pNotify : m_Listener)
