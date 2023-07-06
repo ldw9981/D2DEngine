@@ -1,62 +1,58 @@
-/*
-
 #include <iostream>
-#include <vector>
 #include <functional>
-
-// Delegate class
-class Delegate {
-public:
-	typedef std::function<int(int, int)> DelegateFunc;  // Define delegate function type
-
-	void AddDelegate(DelegateFunc delegate) {
-		delegates_.push_back(delegate);
-	}
-
-	int InvokeDelegates(int arg1, int arg2) {
-		int result = 0;
-		for (const auto& delegate : delegates_) {
-			result += delegate(arg1, arg2);
-		}
-		return result;
-	}
-
-private:
-	std::vector<DelegateFunc> delegates_;
-};
-
-// Static function to be used as a delegate
-int DelegateFunc1(int arg1, int arg2) {
-	return arg1 + arg2;
-}
+#include <map>
 
 class MyClass {
 public:
-	int DelegateMethod(int arg1, int arg2) {
-		return arg1 * arg2;
-	}
+    std::wstring m_Text = L"MyClass";
+public:
+    void CallbackFunction(int value) {
+        std::cout << "Callback called with value: " << this << " " << value << std::endl;
+    }
+};
+
+class Delegate {
+public:
+    using CallbackFunction = std::function<void(int)>;
+    using CallbackMap = std::map<MyClass*, CallbackFunction>;
+
+    void AddCallback(MyClass* instance, const CallbackFunction& callback) {
+        callbacks_[instance] = callback;
+    }
+
+    void RemoveCallback(MyClass* instance) {
+        callbacks_.erase(instance);
+    }
+
+    void InvokeCallbacks(int value) {
+        for (const auto& pair : callbacks_) {
+            pair.second(value);
+        }
+    }
+
+private:
+    CallbackMap callbacks_;
 };
 
 int main() {
-	Delegate delegateObj;
+    MyClass myObject1;
+    MyClass myObject2;
+    Delegate delegate;
 
-	// Add the static function as a delegate
-	delegateObj.AddDelegate(&DelegateFunc1);
+    auto a = std::bind(&MyClass::CallbackFunction, &myObject1, std::placeholders::_1);
+    std::cout << "te " << std::endl;
 
-	// Create an instance of MyClass
-	MyClass myObj;
+    delegate.AddCallback(&myObject1, std::bind(&MyClass::CallbackFunction, &myObject1, std::placeholders::_1));
+    delegate.AddCallback(&myObject2, std::bind(&MyClass::CallbackFunction, &myObject2, std::placeholders::_1));
 
-	// Add the member function as a delegate using a lambda
-	delegateObj.AddDelegate([&myObj](int arg1, int arg2) {
-		return myObj.DelegateMethod(arg1, arg2);
-		});
+    // Invoke the callbacks
+    delegate.InvokeCallbacks(42);
 
-	// Invoke the delegate functions
-	int result = delegateObj.InvokeDelegates(3, 4);
-	std::cout << result << std::endl;  // Output: 19 (3 + 4) + (3 * 4) = 7 + 12 = 19
+    // Remove the callback for myObject2
+    delegate.RemoveCallback(&myObject2);
 
-	return 0;
+    // Invoke the callbacks again
+    delegate.InvokeCallbacks(42);
+
+    return 0;
 }
-
-
-*/
