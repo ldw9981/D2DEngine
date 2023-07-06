@@ -132,6 +132,7 @@
     <ClCompile Include="ClassChild.cpp" />
     <ClCompile Include="ClassOwner.cpp" />
     <ClCompile Include="ClassParent.cpp" />
+    <ClCompile Include="DeligatePattern.cpp" />
     <ClCompile Include="TestCode.cpp" />
   </ItemGroup>
   <ItemGroup>
