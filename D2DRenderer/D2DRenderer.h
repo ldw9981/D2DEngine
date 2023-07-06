@@ -57,5 +57,7 @@ public:
 
 	size_t GetUsedVRAM();
 	void RenderQueue(ID2D1RenderTarget* pRenderTarget);	// ¹Ì¿Ï¼º
+	void AddRenderQueue(RenderComponent* pRenderComponent);
+	void ClearRenderQueue();
 };
 

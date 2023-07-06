@@ -22,13 +22,8 @@ protected:
 	
 public:
 	void SetZOrder(int zOrder) {  m_iZOrder = zOrder; }
+	int GetZOrder() const { return m_iZOrder; }
 	void SetVisible(bool visible) { m_bVisible = visible; }
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) = 0;
-	
-	bool operator<(const RenderComponent& rhs)
-	{
-		return m_iZOrder < rhs.m_iZOrder;
-	}
-
 };
 
