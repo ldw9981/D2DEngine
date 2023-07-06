@@ -27,7 +27,10 @@
     <ClCompile Include="ClassChild.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="DeligatePattern.cpp">
+    <ClCompile Include="TestDeligate.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDestructor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
