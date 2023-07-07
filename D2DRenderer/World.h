@@ -31,7 +31,7 @@ protected:
 	std::vector<RenderComponent*> m_RenderQueue;		// 정렬을 위해 임의 접근이 빠르고 뒤쪽에만 추가하는 컨테이너는 무엇이 좋을까
     std::list<GameObject*> m_GameObjects;	// 생성된 게임 오브젝트들
 	CameraComponent* m_pCamera;				// 컬링용도로 사용할 카메라
-	int m_nCullCount = 0;					// 컬링된 오브젝트의 수
+	int m_nCulledObjectCount;
 public:
 	
 	// 템플릿 함수로 GameObject를 생성한다.
