@@ -25,5 +25,10 @@ public:
 	int GetZOrder() const { return m_iZOrder; }
 	void SetVisible(bool visible) { m_bVisible = visible; }
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) = 0;
+
+	static bool CompareRenderOrder(RenderComponent* a, RenderComponent* b)
+	{
+		return a->m_iZOrder < b->m_iZOrder;
+	}
 };
 

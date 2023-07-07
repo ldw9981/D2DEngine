@@ -29,11 +29,7 @@ private:
 	IDXGIAdapter3* m_pDXGIAdapter;		// 비디오카드 정보에 접근 가능한 인터페이스
 
 	std::list<std::pair<std::wstring, ID2D1Bitmap*>> m_SharingBitmaps;
-	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;
-
-	
-	std::vector<RenderComponent*> m_RenderQueue;		// 정렬을 위해 임의 접근이 빠르고 뒤쪽에만 추가하는 컨테이너는 무엇이 좋을까
-	
+	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;	
 public:
 	HRESULT Initialize();
 
@@ -56,8 +52,5 @@ public:
 	ID2D1SolidColorBrush* GetBrush() const { return m_pBrush; }
 
 	size_t GetUsedVRAM();
-	void RenderQueue(ID2D1RenderTarget* pRenderTarget);	// 미완성
-	void AddRenderQueue(RenderComponent* pRenderComponent);
-	void ClearRenderQueue();
 };
 

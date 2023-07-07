@@ -159,11 +159,8 @@ void GameApp::CalculateFrameStats()
 void GameApp::Render()
 {
 	D2DRenderer::m_pRenderTarget->BeginDraw();
-	m_D2DRenderer.ClearRenderQueue();
 	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 	m_World.Render(D2DRenderer::m_pRenderTarget);
-
-	m_D2DRenderer.RenderQueue(D2DRenderer::m_pRenderTarget);
 	m_D2DRenderer.EndDraw();
 }
 

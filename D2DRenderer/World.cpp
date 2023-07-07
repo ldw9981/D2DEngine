@@ -17,6 +17,8 @@ void World::Update()
 	}
 }
 
+
+
 void World::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	assert(m_pCamera != nullptr);
@@ -28,7 +30,7 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 	// Render 호출 전에 컬링을 한다.
 	m_nCullCount=0;
 
-
+	m_RenderQueue.clear();
 
 	const AABB bbCamera = m_pCamera->GetBoundingBox();
 	for (auto& gameObject : m_GameObjects)
@@ -45,10 +47,19 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 			if (pRenderComponent == nullptr)
 				continue;
 
-			D2DRenderer::m_Instance->AddRenderQueue(pRenderComponent);
+			m_RenderQueue.push_back(pRenderComponent);			
 		}
 	}
 	
+	// 정렬
+	std::sort(m_RenderQueue.begin(), m_RenderQueue.end(), RenderComponent::CompareRenderOrder);
+
+	// 렌더큐를 순회하면서 렌더링한다.
+	for (auto& pRenderComponent : m_RenderQueue)
+	{
+		pRenderComponent->Render(pRenderTarget);
+	}
+
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	wstring strCullCount = L"Cull Count : " + to_wstring(m_nCullCount);
 	D2DRenderer::m_Instance->DrawText(pRenderTarget,strCullCount, D2D1::RectF(0,0,300,50), D2D1::ColorF(D2D1::ColorF::White));

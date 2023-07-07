@@ -344,25 +344,3 @@ size_t D2DRenderer::GetUsedVRAM()
 	return videoMemoryInfo.CurrentUsage / 1024 / 1024;
 }
 
-void D2DRenderer::RenderQueue(ID2D1RenderTarget* pRenderTarget)
-{
-	std::sort(m_RenderQueue.begin(), m_RenderQueue.end(), [](RenderComponent* a,RenderComponent* b) {
-			return b->GetZOrder() < b->GetZOrder();
-		});
-
-	// 렌더큐를 순회하면서 렌더링한다.
-	for (auto& RenderData : m_RenderQueue)
-	{
-		RenderData->Render(pRenderTarget);
-	}
-}
-
-void D2DRenderer::AddRenderQueue(RenderComponent* pRenderComponent)
-{
-	m_RenderQueue.push_back(pRenderComponent);
-}
-
-void D2DRenderer::ClearRenderQueue()
-{
-	m_RenderQueue.clear();
-}
