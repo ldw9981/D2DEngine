@@ -5,7 +5,7 @@
 #include "Component.h"
 #include "SceneComponent.h"
 #include "AABB.h"
-
+#include "Deligator.h"
 /*
 	게임 오브젝트	 클래스
 	World의 CreateGameObject<T>를 통해 생성된다.
@@ -36,6 +36,8 @@ protected:
 	bool m_bIsCullObject;					// 컬링할수 있는 오브젝트 인지 확인
 	bool m_bIsCulled;						// 컬링된 상태인지 확인
 	std::vector<Component*> m_OwnedComponents;	// 소유한 컴포넌트들
+
+	DeligatorParam2<float, GameObject*> m_OnTakeDamage;
 public:
 	// 루트 컴포넌트로 설정
 	void SetRootComponent(SceneComponent* pRootComponent);

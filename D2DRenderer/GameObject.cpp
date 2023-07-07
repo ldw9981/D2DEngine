@@ -87,6 +87,6 @@ void GameObject::SetParentObject(GameObject* pParentObject)
 
 void GameObject::TakeDamage(float Damage, GameObject* pAttacker)
 {
-
+	m_OnTakeDamage.InvokeCallbacks(Damage, pAttacker);
 }
 

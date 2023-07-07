@@ -28,17 +28,14 @@
 #include <assert.h>
 #include <dcommon.h>
 #include <dxgi1_4.h>
-#include <DirectXMath.h>
-#include <DirectXCollision.h>
 #include <cmath>
 #include <list>
 #include <vector>
 #include <map>
 #include <string>
 #include <queue>
-#include <utility>
+
 
 using namespace D2D1;
-using namespace DirectX;
 using namespace std;
 #endif //PCH_H

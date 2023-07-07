@@ -147,6 +147,7 @@
     <ClInclude Include="CameraGameObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="Deligator.h" />
     <ClInclude Include="FSMComponent.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="FSMStateAlias.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="CameraGameObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="Deligator.cpp" />
     <ClCompile Include="FSMComponent.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="FSMStateAlias.cpp" />
