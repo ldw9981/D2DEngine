@@ -16,5 +16,7 @@
 #include <string>
 #include <assert.h>
 #include <iostream>
-
+#include <iostream>
+#include <functional>
+#include <map>
 #endif //TESTCODE_H

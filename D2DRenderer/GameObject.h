@@ -96,6 +96,7 @@ public:
 	void SetOwnerWorld(World* val) { m_pOwnerWorld = val; }
 
 	const std::vector<Component*>& GetOwnedComponents() const { return m_OwnedComponents; }
-	//void TakeDamage(float Damage,GameObject* pAttacker);
+	
+	void TakeDamage(float Damage,GameObject* pAttacker);
 };
 

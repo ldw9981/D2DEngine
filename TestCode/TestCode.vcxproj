@@ -132,6 +132,9 @@
     <ClCompile Include="ClassChild.cpp" />
     <ClCompile Include="ClassOwner.cpp" />
     <ClCompile Include="ClassParent.cpp" />
+    <ClCompile Include="Deligate.cpp" />
+    <ClCompile Include="MyComponent3.cpp" />
+    <ClCompile Include="MyComponent4.cpp" />
     <ClCompile Include="TestDeligate.cpp" />
     <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="TestDestructor.cpp" />
@@ -140,6 +143,9 @@
     <ClInclude Include="ClassChild.h" />
     <ClInclude Include="ClassOwner.h" />
     <ClInclude Include="ClassParent.h" />
+    <ClInclude Include="Deligate.h" />
+    <ClInclude Include="MyComponent3.h" />
+    <ClInclude Include="MyComponent4.h" />
     <ClInclude Include="TestCode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
