@@ -49,7 +49,7 @@ public:
 	bool m_bMirror;					// 좌우 반전 여부
 	float m_Speed;					// 애니메이션 속도
 	bool m_Loop;
-	D2D1_MATRIX_3X2_F m_RenderTransform;	// 반대 방향으로 뒤집기 위한 행렬 Scale.x = -1.0f , Matrix3x2F::Translation(m_DstRect.right,0.0f)을 적용한다.
+	
 public:
 
 	void SetProgressTime(float val) { m_ProgressTime = val; }

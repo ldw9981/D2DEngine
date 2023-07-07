@@ -19,7 +19,7 @@ public:
 protected:
 	int m_iZOrder;		// 그리는 순서
 	bool m_bVisible;	// 그리려는지
-	
+	D2D1_MATRIX_3X2_F	m_RenderTransform;	// 반대 방향으로 뒤집기 위한 행렬 Scale.x = -1.0f , Matrix3x2F::Translation(m_DstRect.right,0.0f)을 적용한다.
 public:
 	void SetZOrder(int zOrder) {  m_iZOrder = zOrder; }
 	int GetZOrder() const { return m_iZOrder; }

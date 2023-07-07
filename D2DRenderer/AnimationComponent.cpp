@@ -77,7 +77,8 @@ void AnimationComponent::Update()
 	m_SrcRect = Frame.Source;
 	// 그릴 영역을 0,0,with,height으로 설정하고 실제 위치는 Transform으로 설정
 	m_DstRect = { 0,0,m_SrcRect.right - m_SrcRect.left,m_SrcRect.bottom - m_SrcRect.top };
-			
+	
+		
 
 	//x축 스케일은 좌우 반전 , Y축 -1스케일은 유니티 스크린좌표계를 를 위해 미리 상하반전 ,  Translation은 출력할 이미지의 원점 정보
 	if (m_bMirror)
@@ -99,7 +100,9 @@ void AnimationComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	DrawDebugWorldTransform(pRenderTarget);
 
-	// 월드->카메라->스크린 좌표계로 변환한다. Screen 의 y스케일이 -1 이므로 거꾸로 그려진다. 제일처음 변환에 y축 스케일 -1 이어야 제대로 그려진다.
+	// 월드->카메라->스크린 좌표계로 변환한다. 
+	// m_ScreenTransform 의 ScaleY -1 이므로 거꾸로 그려진다. 
+	// m_RenderTransform에서 제일처음 변환에 ScaleY -1을 곱해준다.
 	D2D1_MATRIX_3X2_F Transform = m_RenderTransform * m_WorldTransform * D2DRenderer::m_CameraTransform * D2DRenderer::m_ScreenTransform;
 
 	// 지정한 애니메이션 없으면 안그림
