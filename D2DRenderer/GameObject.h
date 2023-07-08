@@ -34,7 +34,6 @@ protected:
 	GameObject* m_pParentObject;			// 월드에서 따라갈 오브젝트
 	World* m_pOwnerWorld;					// 이 게임 오브젝트가 속한 월드
 	bool m_bIsCullObject;					// 컬링할수 있는 오브젝트 인지 확인
-	bool m_bIsCulled;						// 컬링된 상태인지 확인
 	std::vector<Component*> m_OwnedComponents;	// 소유한 컴포넌트들
 
 	DeligatorParam2<float, GameObject*> m_OnTakeDamage;
@@ -55,12 +54,6 @@ public:
 	// 컬링할수 있는 오브젝트 인지 확인합니다.
 	bool IsCullObject() const { return m_bIsCullObject; }
 	
-	// 컬링된 상태인지 확인합니다.
-	bool IsCulled() const { return m_bIsCulled; }
-	
-	// 컬링된 상태인지 설정합니다.
-	void SetIsCull(bool val) { m_bIsCulled = val; }
-
 	// 루트에 있는 AABB를 오브젝트 전체를 대표하는 볼륨으로 사용합니다.
 	const AABB& GetBoundingBox() const { return m_pRootComponent->GetBoundingBox(); }
 	void SetBoundingBoxExtend(float x, float y) { m_pRootComponent->SetBoundingBoxExtend(x, y); }
