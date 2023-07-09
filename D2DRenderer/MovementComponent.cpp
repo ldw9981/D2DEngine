@@ -2,6 +2,7 @@
 #include "MovementComponent.h"
 #include "SceneComponent.h"
 #include "GameApp.h"
+#include "Helper.h"
 
 void MovementComponent::Update()
 {
@@ -18,18 +19,9 @@ void MovementComponent::Update()
 	m_pUpdateTarget->SetRelativeLocation(Location.x, Location.y);	
 }
 
-void MovementComponent::SetDirection(float x, float y)
+void MovementComponent::SetDirection(const D2D_VECTOR_2F& Direction)
 {
-	// 방향 벡터를 정규화 Normalize 한다.
-	float length = std::sqrt(x * x + y * y);
-
-	if (length != 0.0f) {
-		m_Direction.x = x /length;
-		m_Direction.y = y /length;
-	}
-	else {
-		m_Direction.x = 0.0f;
-		m_Direction.y = 0.0f;
-	}
+	m_Direction = D2DHelper::NormalizeVector(Direction);	
 
 }
+

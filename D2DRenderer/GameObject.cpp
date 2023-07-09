@@ -9,7 +9,7 @@
 
 GameObject::GameObject()
 	:m_pRootComponent(nullptr), m_bIsCullObject(true), 
-	m_pParentObject(nullptr), m_pOwnerWorld(nullptr), m_bIsCulled(false)
+	m_pParentObject(nullptr), m_pOwnerWorld(nullptr)
 {
 
 }

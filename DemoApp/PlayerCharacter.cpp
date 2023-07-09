@@ -35,8 +35,8 @@ PlayerCharacter::PlayerCharacter()
 
 	// 위치를 변경할 컴포넌트를 설정한다.
 	m_pMovementComponent->SetUpdateTarget(m_pAnimationComponent);
-	m_pMovementComponent->SetSpeed(300.0f);
-	m_pMovementComponent->SetDirection(0,0);
+	
+	m_pMovementComponent->SetSpeed(100);
 
 	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
@@ -71,11 +71,11 @@ void PlayerCharacter::Update()
 	D2D_VECTOR_2F Location, Direction {0};
 	Location = m_pAnimationComponent->GetWorldLocation();
 	
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
 	{
 		m_pFSMCharacter->m_Attack = true;
 	}
-	else if (GetAsyncKeyState(VK_LEFT) & 0x8000) 	{ //왼쪽
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) 	{ //왼쪽
 		Direction.x = -1.0f;	
 	}
 	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { //오른쪽
@@ -83,12 +83,17 @@ void PlayerCharacter::Update()
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x8000) { //위
 		Direction.y = 1.0f;
+		OutputDebugString(L"위");
 	} 
 	else if (GetAsyncKeyState(VK_DOWN) & 0x8000) { //아래
 		Direction.y = -1.0f;
 	}
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+		
+	}
 
-	m_pMovementComponent->SetDirection(Direction.x, Direction.y);
+	m_pMovementComponent->SetDirection(Direction);
 	
 
 	

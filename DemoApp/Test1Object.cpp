@@ -28,8 +28,8 @@ Test1Object::Test1Object()
 	SetRootComponent(m_pSceneComponent);
 
 	m_pMovementComponent->SetUpdateTarget(m_pSceneComponent);
-	m_pMovementComponent->SetSpeed(10.0f);
-	m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
+	//m_pMovementComponent->SetSpeed(10.0f);
+	//m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
 
 
 
@@ -59,7 +59,7 @@ Test1Object::~Test1Object()
 
 void Test1Object::Update()
 {
-	m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
-	m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
+	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
+	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	__super::Update();
 }

@@ -19,6 +19,7 @@ public:
 protected:
 	float			m_Speed;		// 1초당 이동할 속력
 	D2D_VECTOR_2F	m_Direction;	// 방향 유닛벡터
+	D2D_VECTOR_2F	m_Velocity;		// 속도 벡터
 	SceneComponent* m_pUpdateTarget; // 위치를 변경할 컴포넌트
 public:
 	virtual void Update() override;	
@@ -26,7 +27,7 @@ public:
 	void SetUpdateTarget(SceneComponent* val) { m_pUpdateTarget = val; }
 	void SetSpeed(float speed) { m_Speed = speed; };
 	float GetSpeed() { return m_Speed; };
-	void SetDirection(float x, float y);
+	void SetDirection(const D2D_VECTOR_2F& Direction );
 	const D2D_VECTOR_2F& GetDirection() { return m_Direction; };
 };
 

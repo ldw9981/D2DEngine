@@ -88,10 +88,6 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     Animation.m_Frames.push_back(FRAME_INFO(1302, 1677, 1373, 1771, 24, 90, 0.05f));
     Animation.m_Frames.push_back(FRAME_INFO(1400, 1680, 1473, 1777, 24, 90, 0.05f));
 	m_pAnimationAsset->m_Animations.push_back(Animation);
-
-
-
-
     	
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.

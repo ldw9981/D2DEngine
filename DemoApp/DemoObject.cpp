@@ -8,7 +8,7 @@
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
-
+#include "../D2DRenderer/Helper.h"
 
 /*
 	DemoObject Hierachy
@@ -29,8 +29,12 @@ DemoObject::DemoObject()
 	SetRootComponent(m_pSceneComponent);
 
 	m_pMovementComponent->SetUpdateTarget(m_pSceneComponent);
-	m_pMovementComponent->SetSpeed(300.0f);
-	m_pMovementComponent->SetDirection(float(rand() % 90) + 1, float(rand() % 90) + 1);
+
+
+	D2D_VECTOR_2F Direction;
+	Direction.x = float(rand() % 90) + 1;
+	Direction.y = float(rand() % 90) + 1;
+	m_pMovementComponent->SetDirection(Direction);
 
 
 

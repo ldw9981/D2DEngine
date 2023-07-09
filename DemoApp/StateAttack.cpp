@@ -25,7 +25,7 @@ void StateAttack::Enter()
 	// 공격할때는 스피드 0 못움직이게 한다.
 	MovementComponent* pMoveComponent = pFSMCharacter->m_pMovementComponent;
 	m_BackupSpeed = pMoveComponent->GetSpeed();
-	pMoveComponent->SetSpeed(0.0f);
+	pMoveComponent->SetSpeed(0);
 	
 }
 
