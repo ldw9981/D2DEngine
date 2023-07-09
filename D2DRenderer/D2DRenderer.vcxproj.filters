@@ -31,6 +31,12 @@
     <Filter Include="헤더 파일\GameObject">
       <UniqueIdentifier>{01662f84-6680-487e-968e-cfa098be5027}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Math">
+      <UniqueIdentifier>{31c0ba7e-549c-4d92-9823-65254f96d0eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Math">
+      <UniqueIdentifier>{7c7d9459-9f64-490e-a616-f7254bf7d34e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -58,9 +64,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
@@ -117,6 +120,12 @@
     <ClInclude Include="Deligator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>헤더 파일\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMathHelper.h">
+      <Filter>헤더 파일\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -141,9 +150,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AABB.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
@@ -199,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="Deligator.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>소스 파일\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMathHelper.cpp">
+      <Filter>소스 파일\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
