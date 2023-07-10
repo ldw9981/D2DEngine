@@ -18,6 +18,7 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 GameApp::GameApp(HINSTANCE hInstance)
 	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768})
 {
+	m_previousTime =0.0f;
 	std::wstring str(__FUNCTIONW__);
 	str += L"\n";
 	OutputDebugString(str.c_str());
@@ -114,8 +115,12 @@ void GameApp::Update()
 	m_previousTime = m_currentTime;
 	m_currentTime = (float)GetTickCount64() / 1000.0f;
 	m_deltaTime = m_currentTime - m_previousTime;
-	CalculateFrameStats();
-	m_World.Update();
+	// 시간변화 0 임시 처리
+	if (m_deltaTime)
+	{
+		CalculateFrameStats();
+		m_World.Update();
+	}	
 }
 
 void GameApp::CalculateFrameStats()

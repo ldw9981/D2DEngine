@@ -35,7 +35,7 @@ PlayerCharacter::PlayerCharacter()
 
 	// 위치를 변경할 컴포넌트를 설정한다.
 	m_pSideMovementComponent->SetUpdateTarget(m_pAnimationComponent);	
-	m_pSideMovementComponent->SetSpeed(300);
+	m_pSideMovementComponent->SetSpeed(200);
 
 	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
@@ -55,7 +55,7 @@ PlayerCharacter::PlayerCharacter()
 	D2D_SIZE_U size = GameApp::m_pInstance->GetClientSize();
 	size.height = size.height / 2;
 	size.width = size.width / 2;
-	m_pCameraComponent->SetRelativeLocation((float)size.width * -1.0f,(float)size.height *-1.0f);
+	m_pCameraComponent->SetRelativeLocation((float)size.width * -1.0f , -200.0f);
 
 }
 
@@ -79,10 +79,10 @@ void PlayerCharacter::Update()
 	}
 	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { //오른쪽
 		Direction.x = 1.0f;
+		OutputDebugString(L"위");
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x8000) { //위
-		Direction.y = 1.0f;
-		OutputDebugString(L"위");
+		Direction.y = 1.0f;		
 	} 
 	else if (GetAsyncKeyState(VK_DOWN) & 0x8000) { //아래
 		Direction.y = -1.0f;
