@@ -16,8 +16,9 @@ public:
 protected:
 	bool  m_IsJumping;				// 점프중인지
 	float m_GravityAcceleration;	// 중력 가속도	
-	float m_JumpAcceleration;		//점프 가속도
+	float m_JumpSpeed;				// 점프의 속력
 	float m_GravityScale;			// 중력 가속도 스케일  오브젝트에 따라서 중력을 다르게 적용할 수 있다.
+	float m_SpeedY;		            // Y축 속력
 public:
 	virtual void Update() override;
 	virtual void SetDirection(const mathHelper::Vector2F& Direction);

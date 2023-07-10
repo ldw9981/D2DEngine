@@ -78,8 +78,7 @@ void PlayerCharacter::Update()
 		Direction.x = -1.0f;	
 	}
 	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { //오른쪽
-		Direction.x = 1.0f;
-		OutputDebugString(L"위");
+		Direction.x = 1.0f;		
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x8000) { //위
 		Direction.y = 1.0f;		
