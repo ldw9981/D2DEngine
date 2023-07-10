@@ -5,7 +5,7 @@
 
 
 class AnimationComponent;
-class MovementComponent;
+class SideMovementComponent;
 class FSMComponent;
 class FSMCharacter;
 class TextComponent;
@@ -19,7 +19,7 @@ public:
 
 	FSMComponent* m_pFSMComponent;
 	AnimationComponent* m_pAnimationComponent;
-	MovementComponent* m_pMovementComponent;
+	SideMovementComponent* m_pSideMovementComponent;
 	FSMCharacter* m_pFSMCharacter;
 	TextComponent* m_pTextComponent;
 	CameraComponent* m_pCameraComponent;

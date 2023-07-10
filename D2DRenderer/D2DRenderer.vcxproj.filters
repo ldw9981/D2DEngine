@@ -126,6 +126,9 @@
     <ClInclude Include="SimpleMathHelper.h">
       <Filter>헤더 파일\Math</Filter>
     </ClInclude>
+    <ClInclude Include="SideMovementComponent.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="SimpleMathHelper.cpp">
       <Filter>소스 파일\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SideMovementComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

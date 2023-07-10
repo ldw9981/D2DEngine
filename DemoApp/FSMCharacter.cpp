@@ -4,9 +4,9 @@
 
 void FSMCharacter::Update()
 {
-	assert(m_pMovementComponent!=nullptr);
+	assert(m_pSideMovementComponent !=nullptr);
 	m_LastDirection = m_MoveDirection;
-	m_MoveDirection = m_pMovementComponent->GetDirection();
+	m_MoveDirection = m_pSideMovementComponent->GetDirection();
 
 	
 

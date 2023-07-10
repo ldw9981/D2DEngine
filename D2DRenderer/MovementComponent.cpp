@@ -4,6 +4,8 @@
 #include "GameApp.h"
 #include "Helper.h"
 
+
+
 void MovementComponent::Update()
 {
 	assert(m_pUpdateTarget != nullptr);

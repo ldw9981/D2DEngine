@@ -7,7 +7,7 @@
 #include "../D2DRenderer/GameApp.h"
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
-#include "../D2DRenderer/MovementComponent.h"
+#include "../D2DRenderer/SideMovementComponent.h"
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/FSMComponent.h"
 #include "../D2DRenderer/FSMTransition.h"
@@ -17,7 +17,7 @@
 #include "FSMCharacter.h"
 /*
 	DemoObject Hierachy
-	- MovementComponent
+	- SideMovementComponent
 	- [Root] AnimationComponent
 	- FSMComponent
  */
@@ -25,7 +25,7 @@
 PlayerCharacter::PlayerCharacter()
 {
 	// 그냥 Component 
-	m_pMovementComponent = CreateComponent<MovementComponent>(L"MovementComponent");
+	m_pSideMovementComponent = CreateComponent<SideMovementComponent>(L"SideMovementComponent");
 
 	// SceneComponent만 RootComponent로 설정 가능
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
@@ -34,9 +34,8 @@ PlayerCharacter::PlayerCharacter()
 	SetRootComponent(m_pAnimationComponent);
 
 	// 위치를 변경할 컴포넌트를 설정한다.
-	m_pMovementComponent->SetUpdateTarget(m_pAnimationComponent);
-	
-	m_pMovementComponent->SetSpeed(100);
+	m_pSideMovementComponent->SetUpdateTarget(m_pAnimationComponent);	
+	m_pSideMovementComponent->SetSpeed(300);
 
 	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
@@ -90,10 +89,10 @@ void PlayerCharacter::Update()
 	}
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		
+		m_pSideMovementComponent->Jump();
 	}
 
-	m_pMovementComponent->SetDirection(Direction);
+	m_pSideMovementComponent->SetDirection(Direction);
 	
 
 	

@@ -28,7 +28,7 @@ public:
 	void SetUpdateTarget(SceneComponent* val) { m_pUpdateTarget = val; }
 	void SetSpeed(float speed) { m_Speed = speed; };
 	float GetSpeed() { return m_Speed; };
-	void SetDirection(const mathHelper::Vector2F& Direction );
+	virtual void SetDirection(const mathHelper::Vector2F& Direction );
 	const mathHelper::Vector2F& GetDirection() { return m_Direction; };
 };
 

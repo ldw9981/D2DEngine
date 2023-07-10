@@ -10,11 +10,11 @@
 
 #include "../D2DRenderer/FSMStateAlias.h"
 #include "../D2DRenderer/FSMComponent.h"
-#include "../D2DRenderer/MovementComponent.h"
+#include "../D2DRenderer/SideMovementComponent.h"
 #include "../D2DRenderer/GameObject.h"
 
 class AnimationComponent;
-class MovementComponent;
+class SideMovementComponent;
 /*
 	이 FSM은 PlayerCharacter와 분리된 게임 정보로 작동되므로
 	NPC에게도 사용할수있다.
@@ -47,7 +47,7 @@ public:
 
 		GameObject* pGameObject = pOwner->GetOwner();
 		m_pAnimationComponent =  (AnimationComponent*)pGameObject->GetComponent(L"AnimationComponent");
-		m_pMovementComponent = (MovementComponent*)pGameObject->GetComponent(L"MovementComponent");
+		m_pSideMovementComponent = (SideMovementComponent*)pGameObject->GetComponent(L"SideMovementComponent");
 		
 		m_Attack=false;
 		m_AnimationComplete=false;
@@ -68,7 +68,7 @@ public:
 
 
 	AnimationComponent* m_pAnimationComponent;
-	MovementComponent* m_pMovementComponent;
+	SideMovementComponent* m_pSideMovementComponent;
 
 	D2D1_VECTOR_2F m_MoveDirection;
 	D2D1_VECTOR_2F m_LastDirection;

@@ -23,9 +23,9 @@ void StateAttack::Enter()
 	pFSMCharacter->m_AnimationComplete = false;
 
 	// 공격할때는 스피드 0 못움직이게 한다.
-	MovementComponent* pMoveComponent = pFSMCharacter->m_pMovementComponent;
-	m_BackupSpeed = pMoveComponent->GetSpeed();
-	pMoveComponent->SetSpeed(0);
+	SideMovementComponent* pSideMovementComponent = pFSMCharacter->m_pSideMovementComponent;
+	m_BackupSpeed = pSideMovementComponent->GetSpeed();
+	pSideMovementComponent->SetSpeed(0);
 	
 }
 
@@ -41,8 +41,8 @@ void StateAttack::Exit()
 	pFSMCharacter->m_Attack = false;
 	pFSMCharacter->m_AnimationComplete = false;
 
-	MovementComponent* pMoveComponent = pFSMCharacter->m_pMovementComponent;
-	pMoveComponent->SetSpeed(m_BackupSpeed);
+	SideMovementComponent* pSideMovementComponent = pFSMCharacter->m_pSideMovementComponent;
+	pSideMovementComponent->SetSpeed(m_BackupSpeed);
 }
 
 bool StateAttack::CheckTransition(std::wstring& NextState)
