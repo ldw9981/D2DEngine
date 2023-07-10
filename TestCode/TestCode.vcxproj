@@ -138,6 +138,7 @@
     <ClCompile Include="TestDeligate.cpp" />
     <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="TestDestructor.cpp" />
+    <ClCompile Include="TestObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassChild.h" />

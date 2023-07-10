@@ -13,6 +13,7 @@
 #include "../D2DRenderer/FSMTransition.h"
 #include "../D2DRenderer/FiniteStateMachine.h"
 #include "../D2DRenderer/CameraComponent.h"
+#include "../D2DRenderer/BoxComponent.h"
 #include "StateIdle.h"
 #include "FSMCharacter.h"
 /*
@@ -26,22 +27,24 @@ PlayerCharacter::PlayerCharacter()
 {
 	// 그냥 Component 
 	m_pSideMovementComponent = CreateComponent<SideMovementComponent>(L"SideMovementComponent");
+	m_pSideMovementComponent->SetSpeed(200);
+
+	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
+	m_pBoxComponent->SetExtend(25.0f,25.0f);
+	SetRootComponent(m_pBoxComponent);
+
+	// 위치를 변경할 컴포넌트를 설정한다.
+	m_pSideMovementComponent->SetUpdateTarget(m_pBoxComponent);
+
 
 	// SceneComponent만 RootComponent로 설정 가능
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
 	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Ken"));	
 	//m_pAnimationComponent->SetAnimation(L"Attack", false, true);
-	SetRootComponent(m_pAnimationComponent);
-
-	// 위치를 변경할 컴포넌트를 설정한다.
-	m_pSideMovementComponent->SetUpdateTarget(m_pAnimationComponent);	
-	m_pSideMovementComponent->SetSpeed(200);
+	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);	
 
 	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
-	// 애니메이션 이벤트를 처리할 인스턴스 등록
-	m_pAnimationComponent->AddListener(m_pFSMCharacter);
-
 
 	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
 	m_pTextComponent->SetRelativeLocation(-100,0);
@@ -88,7 +91,7 @@ void PlayerCharacter::Update()
 	}
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		m_pSideMovementComponent->Jump();
+		m_pSideMovementComponent->StartJump();
 	}
 
 	m_pSideMovementComponent->SetDirection(Direction);
@@ -97,4 +100,14 @@ void PlayerCharacter::Update()
 	
 
 	__super::Update();
+}
+
+void PlayerCharacter::OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+	m_pSideMovementComponent->EndJump();
+}
+
+void PlayerCharacter::OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::wstring& AnimationName)
+{
+	m_pFSMCharacter->m_AnimationComplete = true;
 }

@@ -6,7 +6,7 @@
 #include "../D2DRenderer/AnimationComponent.h"
 #include "../D2DRenderer/SceneComponent.h"
 
-#define MAX_DEMO_OBJECT 5
+#define MAX_DEMO_OBJECT 3
 
 class AnimationAsset;
 class DemoObject;

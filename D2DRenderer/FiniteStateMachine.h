@@ -6,7 +6,7 @@ class FSMComponent;
 class FSMState;
 class FSMTransition;
 class FSMStateAlias;
-class FiniteStateMachine : public IAnimationNotify
+class FiniteStateMachine 
 {
 public:
 	FiniteStateMachine(FSMComponent* pOwnerComponent)
@@ -29,10 +29,6 @@ public:
 	void SetInitialState(std::wstring stateName);
 	void AddState(FSMState* pState);
 	void AddStateAlias(FSMStateAlias* pStateAlias);
-
-	// 애니메이션 이벤트를 받아서 현재 활성화된 State에 전달
-	virtual void OnAnimationEnd(const std::wstring& AnimationName) override;
-	virtual void OnAnimationNotify(const std::wstring& NotifyName) override;
 
 };
 

@@ -95,19 +95,3 @@ void FiniteStateMachine::AddStateAlias(FSMStateAlias* pStateAlias)
 {
 	m_pStateAlias.push_back(pStateAlias);
 }
-
-void FiniteStateMachine::OnAnimationEnd(const std::wstring& AnimationName)
-{
-	if (m_pCurrentState)
-	{
-		m_pCurrentState->EventAnimationEnd(AnimationName);
-	}
-}
-
-void FiniteStateMachine::OnAnimationNotify(const std::wstring& NotifyName)
-{
-	if (m_pCurrentState)
-	{
-		m_pCurrentState->EventAnimationNotify(NotifyName);
-	}
-}

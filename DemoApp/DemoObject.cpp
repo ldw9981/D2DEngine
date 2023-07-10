@@ -40,7 +40,7 @@ DemoObject::DemoObject()
 
 	m_pSphereComponent = CreateComponent<SphereComponent>(L"SphereComponent");
 	m_pSphereComponent->SetRadius(10.0f);
-	m_pSphereComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Yellow);
+	m_pSphereComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
 
 	m_pSphereComponent->AttachToComponent(m_pSceneComponent);
 
@@ -50,8 +50,8 @@ DemoObject::DemoObject()
 	m_pTextComponent->AttachToComponent(m_pSceneComponent);
 
 	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
-	m_pBoxComponent->m_Rect = D2D1_RECT_F{ -25.0f,-25.0f,25.0f,25.0f };
-	m_pBoxComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Red);
+	m_pBoxComponent->SetExtend(25.0f, 25.0f);
+	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
 	m_pBoxComponent->SetRelativeLocation(100.0f, 100.0f);
 	m_pBoxComponent->Initialize();
 	m_pBoxComponent->AttachToComponent(m_pSphereComponent);

@@ -28,5 +28,8 @@ public:
 public:
 
 	virtual void Update() override;
+
+	virtual void OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::wstring& AnimationName) override;
 };
 

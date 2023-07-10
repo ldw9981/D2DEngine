@@ -165,6 +165,7 @@
     <ClInclude Include="ReferenceCounter.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="SceneComponent.h" />
+    <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="SideMovementComponent.h" />
     <ClInclude Include="SimpleMathHelper.h" />
     <ClInclude Include="Sphere.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="ReferenceCounter.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="SceneComponent.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="SideMovementComponent.cpp" />
     <ClCompile Include="SimpleMathHelper.cpp" />
     <ClCompile Include="Sphere.cpp" />

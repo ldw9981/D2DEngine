@@ -26,21 +26,24 @@ public:
 	bool CheckIntersect(const AABB& other) const
 	{
 		// self min,max
-		float S_MinX = m_Center.x - m_Extend.x;
-		float S_MaxX = m_Center.x + m_Extend.x;
-		float S_MinY = m_Center.y - m_Extend.y;
-		float S_MaxY = m_Center.y + m_Extend.y;
+		float minBox1X = m_Center.x - m_Extend.x;
+		float maxBox1X = m_Center.x + m_Extend.x;
+		float minBox1Y = m_Center.y - m_Extend.y;
+		float maxBox1Y = m_Center.y + m_Extend.y;
 
 		// other min,max
-		float O_MinX = other.m_Center.x - other.m_Extend.x;
-		float O_MaxX = other.m_Center.x + other.m_Extend.x;
-		float O_MinY = other.m_Center.y - other.m_Extend.y;
-		float O_MaxY = other.m_Center.y + other.m_Extend.y;
+		float minBox2X = other.m_Center.x - other.m_Extend.x;
+		float maxBox2X = other.m_Center.x + other.m_Extend.x;
+		float minBox2Y = other.m_Center.y - other.m_Extend.y;
+		float maxBox2Y = other.m_Center.y + other.m_Extend.y;
 
-		if(S_MinX <= O_MaxX && S_MaxX >= O_MinX && S_MinY <= O_MaxY && S_MaxY >= O_MinY)
-			return true;
-		
-		return false;
+		// Check for no overlap conditions
+		if (maxBox1X < minBox2X || minBox1X > maxBox2X || maxBox1Y < minBox2Y || minBox1Y > maxBox2Y) {
+			return false;
+		}
+
+		return true;
+
 	}
 };
 

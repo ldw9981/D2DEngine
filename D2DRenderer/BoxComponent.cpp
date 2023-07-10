@@ -4,9 +4,9 @@
 #include "Helper.h"
 
 BoxComponent::BoxComponent(GameObject* pOwner, const std::wstring& Name)
-	:RenderComponent(pOwner, Name),m_Rect({0})
+	:ColliderComponent(pOwner, Name),m_Rect({0})
 {
-	m_Color= D2D1::ColorF(D2D1::ColorF::White);
+
 }
 
 
@@ -16,10 +16,21 @@ BoxComponent::~BoxComponent()
 }
 
 
+void BoxComponent::SetExtend(float x, float y)
+{
+	m_Rect.right = x;
+	m_Rect.bottom = y;
+	m_Rect.left = -x;
+	m_Rect.top = -y;
+
+	m_Collider.m_Extend.x = x;
+	m_Collider.m_Extend.y = y;
+}
+
 void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	ID2D1SolidColorBrush* pBrush = D2DRenderer::m_Instance->GetBrush();
-	pBrush->SetColor(m_Color);	
+	pBrush->SetColor(GetColor());	
 	
 	// 월드->카메라->스크린 좌표계로 변환한다. 
 	// m_ScreenTransform 의 ScaleY -1 이므로 거꾸로 그려진다. 
@@ -30,5 +41,23 @@ void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawRectangle(m_Rect,pBrush);	
 
-	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
+	DrawDebugWorldTransform(pRenderTarget);
+}
+
+void BoxComponent::Update()
+{
+	__super::Update();
+	m_Collider.m_Center = GetWorldLocation();
+}
+
+bool BoxComponent::IsCollide(ColliderComponent* pOtherComponent)
+{
+	BoxComponent* pOtherBoxComponent = dynamic_cast<BoxComponent*>(pOtherComponent);
+	if (!pOtherBoxComponent)
+		return false;
+
+	if(!m_Collider.CheckIntersect(pOtherBoxComponent->m_Collider))
+		return false;
+			
+	return true;
 }

@@ -42,14 +42,12 @@ void SideMovementComponent::Update()
 	// 외부에서 착지 판단을 해야하는데 일단 0.0f보다 작거나 같으면 착지한 것으로 판단한다.	
 	if (Location.y <= 0.0f)
 	{
-		Location.y=0.0f;
-		m_IsJumping = false;
-		m_SpeedY = 0.0f;
-		m_GravityAcceleration =0.0f;
+		EndJump();
 	}	
 
 	//새로 계산된 위치를 적용한다.
 	m_pUpdateTarget->SetRelativeLocation(Location.x, Location.y);
+	m_pUpdateTarget->SetVelocity(m_Velocity);
 }
 
 void SideMovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
@@ -59,7 +57,7 @@ void SideMovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
 
 }
 
-void SideMovementComponent::Jump()
+void SideMovementComponent::StartJump()
 {
 	if (m_IsJumping == false)
 	{
@@ -67,4 +65,11 @@ void SideMovementComponent::Jump()
 		m_IsJumping = true;
 		m_SpeedY = m_JumpSpeed;
 	}
+}
+
+void SideMovementComponent::EndJump()
+{
+	m_IsJumping = false;
+	m_SpeedY = 0.0f;
+	//m_GravityAcceleration = 0.0f;
 }

@@ -16,3 +16,13 @@ CameraGameObject::~CameraGameObject()
 {
 }
 
+void CameraGameObject::OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void CameraGameObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
+{
+
+}
+

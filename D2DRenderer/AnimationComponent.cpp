@@ -67,10 +67,7 @@ void AnimationComponent::Update()
 	// 마지막 프레임으로 번호가 변할때 단한번 이벤트 호출
 	if (m_FrameIndexCurr!= m_FrameIndexPrev && m_FrameIndexCurr == (MaxFrameCount - 1)) 
 	{
-		for (auto& pNotify : m_Listener)
-		{
-			pNotify->OnAnimationEnd(m_pAnimationInfo->m_Name);
-		}
+		GetOwner()->OnAnimationEnd(this, m_Name.c_str());
 	}
 
 	// 이지미에서의 프레임 영역
@@ -137,14 +134,3 @@ void AnimationComponent::SetAnimationAsset(const std::wstring& strAssetKey)
 	m_strAnimationAsset = strAssetKey;
 	m_pAnimationAsset = D2DRenderer::m_Instance->CreateSharedAnimationAsset(strAssetKey);
 }
-
-void AnimationComponent::AddListener(IAnimationNotify* pNotify)
-{
-	m_Listener.push_back(pNotify);
-}
-
-void AnimationComponent::RemoveListener(IAnimationNotify* pNotify)
-{
-	m_Listener.remove(pNotify);
-}
-

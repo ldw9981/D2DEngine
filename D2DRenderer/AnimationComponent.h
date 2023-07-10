@@ -2,11 +2,11 @@
 #include "SceneComponent.h"
 #include "RenderComponent.h"
 
+class AnimationComponent;
 class IAnimationNotify
 {
 public:
-	virtual void OnAnimationEnd(const std::wstring& AnimationName) = 0;
-	virtual void OnAnimationNotify(const std::wstring& NotifyName) = 0;
+	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent,const std::wstring& AnimationName) = 0;
 };
 
 
@@ -29,9 +29,7 @@ public:
 public:	
 	std::wstring m_strAnimationAsset;
 	AnimationAsset* m_pAnimationAsset;		// 애니메이션을 위한 기본 데이터 자산 (내부에 D2D1Bitmap)
-
-
-	std::list<IAnimationNotify*> m_Listener;	// 애니메이션 노티파이
+		
 
 	// 공격	영역
 	std::vector<D2D1_RECT_F> m_AttackHitBoxes;
@@ -61,7 +59,5 @@ public:
 	void SetAnimation(const WCHAR* AnimationName, bool Mirror, bool Loop);
 	void SetAnimationAsset(const std::wstring& strAssetKey);
 
-	void AddListener(IAnimationNotify* pNotify);
-	void RemoveListener(IAnimationNotify* pNotify);
 };
 

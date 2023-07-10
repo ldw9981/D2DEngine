@@ -35,7 +35,7 @@ Test1Object::Test1Object()
 
 	m_pSphereComponent = CreateComponent<SphereComponent>(L"SphereComponent");
 	m_pSphereComponent->SetRadius(10.0f);
-	m_pSphereComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Yellow);
+	m_pSphereComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
 
 	m_pSphereComponent->AttachToComponent(m_pSceneComponent);
 
@@ -45,9 +45,9 @@ Test1Object::Test1Object()
 	m_pTextComponent->AttachToComponent(m_pSceneComponent);
 
 	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
-	m_pBoxComponent->m_Rect = D2D1_RECT_F{ -25.0f,-25.0f,25.0f,25.0f };
-	m_pBoxComponent->m_Color = D2D1::ColorF(D2D1::ColorF::Red);
-	m_pBoxComponent->SetRelativeLocation(100.0f, 100.0f);
+	m_pBoxComponent->SetExtend(50.0f,50.0f);
+	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+//	m_pBoxComponent->SetRelativeLocation(100.0f, 100.0f);
 
 	m_pBoxComponent->AttachToComponent(m_pSphereComponent);
 }
@@ -62,4 +62,14 @@ void Test1Object::Update()
 	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	__super::Update();
+}
+
+void Test1Object::OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void Test1Object::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
+{
+
 }

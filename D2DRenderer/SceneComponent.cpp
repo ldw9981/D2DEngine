@@ -13,7 +13,7 @@ SceneComponent::SceneComponent(GameObject* pOwner, std::wstring Name)
 	m_pParentScene(nullptr),
 	m_WorldTransform(Matrix3x2F::Identity())
 {
-
+	m_Velocity = { 0.0f,0.0f };
 }
 
 
@@ -25,6 +25,7 @@ bool SceneComponent::Initialize()
 void SceneComponent::Update()
 {
 	UpdateTrasnform();	
+	UpdateVelocity();
 }
 
 void SceneComponent::UpdateTrasnform()
@@ -44,6 +45,14 @@ void SceneComponent::UpdateTrasnform()
 	}
 	
 	m_BoundingBox.m_Center = GetWorldLocation();
+}
+
+void SceneComponent::UpdateVelocity()
+{
+	if (m_pParentScene != nullptr)
+	{
+		m_Velocity = m_pParentScene->GetVelocity();
+	}	
 }
 
 void SceneComponent::SetRelativeScale(float x, float y)

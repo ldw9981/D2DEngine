@@ -95,7 +95,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     {
         m_pTest1Object[i] = m_World.CreateGameObject<Test1Object>();       
 		// RootSceneComponent의 Location을 중앙위치로 설정
-        m_pTest1Object[i]->SetWorldLocation((float)(rand()%m_ClientSize.width) ,(float)i);
+        m_pTest1Object[i]->SetWorldLocation((float) i * 100 , (float)100 * i);
     }
 
     GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();

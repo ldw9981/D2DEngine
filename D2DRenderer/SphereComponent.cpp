@@ -4,9 +4,9 @@
 #include "Helper.h"
 #include "GameObject.h"
 
+
 SphereComponent::SphereComponent(GameObject* pOwner, const std::wstring& Name)
-	: RenderComponent(m_pOwner,Name), m_Radius(5.0f)
-	, m_Color(D2D1::ColorF(D2D1::ColorF::Red))
+	: ColliderComponent(m_pOwner,Name), m_Radius(5.0f)
 {
 }
 
@@ -14,15 +14,11 @@ SphereComponent::~SphereComponent()
 {
 }
 
-void SphereComponent::Update()
-{
-	__super::Update();
-}
 
 void SphereComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	ID2D1SolidColorBrush* pBrush = D2DRenderer::m_Instance->GetBrush();
-	pBrush->SetColor(m_Color);
+	pBrush->SetColor(GetColor());
 
 	// 월드->카메라->스크린 좌표계로 변환한다. 
 	// m_ScreenTransform 의 ScaleY -1 이므로 거꾸로 그려진다. 
@@ -33,4 +29,9 @@ void SphereComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->SetTransform(Transform);
 	pRenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(0, 0), m_Radius, m_Radius), pBrush);
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
+}
+
+bool SphereComponent::IsCollide(ColliderComponent* pOtherComponent)
+{
+	return false;
 }

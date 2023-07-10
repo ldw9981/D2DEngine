@@ -29,12 +29,14 @@ protected:
 	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
 
 	AABB				m_BoundingBox;		// AABB  
+	D2D_VECTOR_2F		m_Velocity;			// 속도
 public:
 	virtual bool Initialize();
 	
 	virtual void Update() override;
 	// RelativeTransform과 	m_WorldTransform을 계산한다.
 	void UpdateTrasnform();
+	void UpdateVelocity();
 	void SetRelativeScale(float x, float y);
 	void AddRelativeScale(float x, float y);
 	const D2D1_VECTOR_2F& GetRelativeScale() { return m_RelativeScale; }
@@ -53,6 +55,8 @@ public:
 	const AABB& GetBoundingBox() { return m_BoundingBox; }
 	void SetBoundingBoxExtend(float x, float y) { m_BoundingBox.m_Extend = { x,y }; }
 	void AttachToComponent(SceneComponent* pParent);
+	void SetVelocity(const D2D_VECTOR_2F& Velocity) { m_Velocity = Velocity; }
+	const D2D_VECTOR_2F& GetVelocity() { return m_Velocity; }
 
 	void DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget);
 

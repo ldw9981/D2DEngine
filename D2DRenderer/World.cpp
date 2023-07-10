@@ -4,21 +4,73 @@
 #include "CameraGameObject.h"
 #include "D2DRenderer.h"
 #include "RenderComponent.h"
+#include "ColliderComponent.h"	
+#include "BoxComponent.h"	
 
 World::World()
 {
 }
 
+/*	
+	매프레임 BoxComponent를 모으는건 비효율 적이다.
+	CollisionWorld를 따로 두면 해결되지만 이해하기 쉽게 일단 이렇게 구현
+*/
 void World::Update()
 {
 	for (auto& gameObject : m_GameObjects)
 	{
 		gameObject->Update();
 	}
+
+	// 현재 월드에서 모든 게임오브젝트의 BoxComponent를 모은다.
+	std::vector<BoxComponent*> colliderComponents;
+	for (auto& gameObject : m_GameObjects)
+	{
+		if (gameObject->IsNoCollide())	//충돌없음은 패스
+			continue;	
+		
+		const std::vector<Component*> components = gameObject->GetOwnedComponents();
+		for (auto& component : components)
+		{
+			BoxComponent* pBoxComponent = dynamic_cast<BoxComponent*>(component);
+			if (pBoxComponent == nullptr)
+				continue;
+
+			// 박스 그리는 용도면 패스
+			if( pBoxComponent->GetNoCollision())
+				continue;
+
+			colliderComponents.push_back(pBoxComponent);
+		}
+	}
+
+	// 충돌 테스트
+	for (auto& pSourceBoxComponent : colliderComponents)
+	{
+		for (auto& pTargetBoxComponent : colliderComponents)
+		{
+			// 같으면 패스
+			if (pSourceBoxComponent == pTargetBoxComponent)
+				continue;
+
+			// 같은 오브젝트면 패스
+			if (pSourceBoxComponent->GetOwner() == pTargetBoxComponent->GetOwner())
+				continue;
+
+			// 충돌 안하면 패스
+			if (!pSourceBoxComponent->IsCollide(pTargetBoxComponent))
+				continue;
+
+			// 게임 오브젝트에 알린다.
+			pSourceBoxComponent->GetOwner()->OnCollide(pSourceBoxComponent,pTargetBoxComponent);
+		}
+	}
 }
 
 
-
+/*	
+	Todo : 게임 오브젝트에서  RenderComponent를 모으기위해 매번 dynamic_cast 사용 하지않는 방법을 찾아보자
+*/
 void World::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	assert(m_pCamera != nullptr);

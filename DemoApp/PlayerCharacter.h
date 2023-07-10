@@ -10,6 +10,7 @@ class FSMComponent;
 class FSMCharacter;
 class TextComponent;
 class CameraComponent;
+class BoxComponent;
 class PlayerCharacter :
 	public GameObject
 {
@@ -23,8 +24,12 @@ public:
 	FSMCharacter* m_pFSMCharacter;
 	TextComponent* m_pTextComponent;
 	CameraComponent* m_pCameraComponent;
+	BoxComponent* m_pBoxComponent;
 public:
 
 	virtual void Update() override;
+
+	virtual void OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName) override;
 };
 
