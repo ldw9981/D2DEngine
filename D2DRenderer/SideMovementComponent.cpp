@@ -14,6 +14,7 @@ SideMovementComponent::SideMovementComponent(GameObject* pOwner, std::wstring Na
 	m_JumpSpeed = 600;		
 	m_IsJumping = false;
 	m_SpeedY = 0.0f;
+	m_MinSpeedY = -600.0f;
 }
 
 SideMovementComponent::~SideMovementComponent()
@@ -25,10 +26,14 @@ void SideMovementComponent::Update()
 	assert(m_pUpdateTarget != nullptr);
 	mathHelper::Vector2F Location = m_pUpdateTarget->GetRelativeLocation();
 
-	//                 속도 = 방향 * 속력
+	//                 속도 = 방향 * 힘
 	m_Velocity.x = (mathHelper::Vector2F(m_Direction) * m_Speed).x;
 
 	m_SpeedY -= m_GravityAcceleration * GameApp::m_deltaTime;
+
+	// 중력에 의해 떨어지는 속도를 종단속도로 제한한다.
+	m_SpeedY = max(m_MinSpeedY,m_SpeedY);
+
 	m_Velocity.y = (mathHelper::Vector2F(0.0f, 1.0f) * m_SpeedY).y;  
 
 	D2DHelper::Log(L"%f,%f\n", m_Velocity.x, m_Velocity.y);
