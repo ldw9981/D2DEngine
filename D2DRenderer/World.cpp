@@ -45,24 +45,21 @@ void World::Update()
 	}
 
 	// 충돌 테스트
-	for (auto& pSourceBoxComponent : colliderComponents)
+	for (size_t i = 0; i < colliderComponents.size(); i++)
 	{
-		for (auto& pTargetBoxComponent : colliderComponents)
+		for (size_t j = i+1; j < colliderComponents.size(); j++)
 		{
-			// 같으면 패스
-			if (pSourceBoxComponent == pTargetBoxComponent)
-				continue;
-
-			// 같은 오브젝트면 패스
-			if (pSourceBoxComponent->GetOwner() == pTargetBoxComponent->GetOwner())
+			// 같은 게임 오브젝트면 패스
+			if (colliderComponents[i]->GetOwner() == colliderComponents[j]->GetOwner())
 				continue;
 
 			// 충돌 안하면 패스
-			if (!pSourceBoxComponent->IsCollide(pTargetBoxComponent))
+			if (!colliderComponents[i]->IsCollide(colliderComponents[j]))
 				continue;
 
 			// 게임 오브젝트에 알린다.
-			pSourceBoxComponent->GetOwner()->OnCollide(pSourceBoxComponent,pTargetBoxComponent);
+			colliderComponents[i]->GetOwner()->OnCollide(colliderComponents[i], colliderComponents[j]);
+			colliderComponents[j]->GetOwner()->OnCollide(colliderComponents[j], colliderComponents[i]);
 		}
 	}
 }

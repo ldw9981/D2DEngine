@@ -16,9 +16,10 @@ public:
 	virtual ~ColliderComponent();
 
 protected:
-	bool		m_NoCollision;
+	bool	m_IsCollide;
+	bool	m_IsCollidePrev;
+	bool	m_NoCollision;
 	D2D1_COLOR_F m_Color;
-	std::list<IColliderNotify*> m_Observers;
 public:
 	bool GetNoCollision() const { return m_NoCollision; }
 	void SetNoCollision(bool val) { m_NoCollision = val; }
@@ -27,6 +28,5 @@ public:
 
 	// Sphere,Box, Capsule 에서 각자 구현해야한다.
 	virtual bool IsCollide(ColliderComponent* pOtherComponent)=0;
-
 };
 
