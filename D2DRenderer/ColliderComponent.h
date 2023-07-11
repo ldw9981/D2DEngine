@@ -52,9 +52,8 @@ public:
 	void SetColor(D2D1_COLOR_F val) { m_Color = val; }
 	void SetIsCollide(bool IsCollide) { m_IsCollide = IsCollide; }
 	bool GetIsCollide() { return m_IsCollide; }
-	void ClearCollideStateCurr() { m_CollideStateCurr.clear(); }
-	void ClearCollideStatePrev() { m_CollideStatePrev.clear(); }
-	void BackupCollideState() {	m_CollideStatePrev = m_CollideStateCurr; }
+	void ClearAndBackupCollideState();
+
 	void InsertCollideState(ColliderComponent* pColliderComponent) { m_CollideStateCurr.insert(pColliderComponent); }
 
 	bool IsEmptyCollideStateCurr() { return m_CollideStateCurr.empty(); }

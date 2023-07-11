@@ -15,6 +15,12 @@ ColliderComponent::~ColliderComponent()
 {
 }
 
+void ColliderComponent::ClearAndBackupCollideState()
+{
+	m_CollideStatePrev = m_CollideStateCurr;
+	m_CollideStateCurr.clear();
+}
+
 void ColliderComponent::ProcessOverlap()
 {
 	// 현재는 충돌 이지만 이전 상태에 업으면 Begin

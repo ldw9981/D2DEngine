@@ -28,7 +28,7 @@ DemoObject::DemoObject()
 	m_pSceneComponent->Initialize();
 	SetRootComponent(m_pSceneComponent);
 
-	m_pMovementComponent->SetUpdateTarget(m_pSceneComponent);
+	m_pMovementComponent->SetRootSceneComponent(m_pSceneComponent);
 
 
 	D2D_VECTOR_2F Direction;

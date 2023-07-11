@@ -40,9 +40,7 @@ void World::Update()
 			if(pColliderComponent->GetCollisionType() == CollisionType::NoCollision)
 				continue;
 
-
-			pColliderComponent->BackupCollideState();
-			pColliderComponent->ClearCollideStateCurr();
+			pColliderComponent->ClearAndBackupCollideState();
 			colliderComponents.push_back(pColliderComponent);
 		}
 	}

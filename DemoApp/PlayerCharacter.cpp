@@ -34,7 +34,7 @@ PlayerCharacter::PlayerCharacter()
 	SetRootComponent(m_pBoxComponent);
 
 	// 위치를 변경할 컴포넌트를 설정한다.
-	m_pSideMovementComponent->SetUpdateTarget(m_pBoxComponent);
+	m_pSideMovementComponent->SetRootSceneComponent(m_pBoxComponent);
 
 
 	// SceneComponent만 RootComponent로 설정 가능
