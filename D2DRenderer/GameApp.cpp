@@ -111,16 +111,11 @@ void GameApp::Loop()
 
 void GameApp::Update()
 {
-	// 어떤 게임이라도 시간업데이트는 한다.
-	m_previousTime = m_currentTime;
-	m_currentTime = (float)GetTickCount64() / 1000.0f;
-	m_deltaTime = m_currentTime - m_previousTime;
-	// 시간변화 0 임시 처리
-	if (m_deltaTime)
-	{
-		CalculateFrameStats();
-		m_World.Update();
-	}	
+	// 어떤 게임이라도 시간업데이트는 한다.	
+	m_Timer.Tick();
+	m_deltaTime = m_Timer.DeltaTime();
+	CalculateFrameStats();	
+	m_World.Update();		
 }
 
 void GameApp::CalculateFrameStats()

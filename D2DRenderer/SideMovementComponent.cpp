@@ -35,11 +35,11 @@ void SideMovementComponent::Update()
 	m_SpeedY = max(m_MinSpeedY,m_SpeedY);
 	m_Velocity.y = (mathHelper::Vector2F(0.0f, 1.0f) * m_SpeedY).y;  
 
-	D2DHelper::Log(L"%f,%f\n", m_Velocity.x, m_Velocity.y);
+	//D2DHelper::Log(L"%f,%f\n", m_Velocity.x, m_Velocity.y);
 
 	//1초 기준 속도로 실제 시간을 적용해 위치를 계산한다.
 	Location = Location + m_Velocity * GameApp::m_deltaTime;
-
+	Location.y = max(0.0f, Location.y);
 	// 외부에서 착지 판단을 해야하는데 일단 0.0f보다 작거나 같으면 착지한 것으로 판단한다.	
 	if (Location.y <= 0.0f)
 	{

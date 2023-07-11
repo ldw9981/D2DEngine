@@ -103,8 +103,11 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 	{				
 		// 게임 오브젝트와 카메라 겹침 테스트 
 		const AABB& bbGameObject = gameObject->GetBoundingBox();
-		if (gameObject->IsCullObject() && !bbCamera.CheckIntersect(bbGameObject))
-			continue;
+		//if (!gameObject->IsCullObject())
+		//	continue;
+		
+		//if (!bbCamera.CheckIntersect(bbGameObject))
+		//	continue;
 			
 		// 겹치면 내부 RenderComponent Ptr를 큐에 보관
 		m_nCulledObjectCount++;
