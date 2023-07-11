@@ -15,16 +15,16 @@ public:
 	static float m_Gravity;		// 중력 가속도
 protected:
 	bool  m_IsJumping;				// 점프중인지
-	float m_GravityAcceleration;	// 중력 가속도	
+	float m_GravityScaled;			// 스케일된 중력
 	float m_JumpSpeed;				// 점프의 속력
 	float m_GravityScale;			// 중력 가속도 스케일  오브젝트에 따라서 중력을 다르게 적용할 수 있다.
 	float m_SpeedY;		            // Y축 속력 
-	float m_MinSpeedY;				// 중력의 종단 속도
+	float m_MaxSpeedY;				// 중력의 종단 속도
 public:
 	virtual void Update() override;
 	virtual void SetDirection(const mathHelper::Vector2F& Direction);
 	void SetGravityScale(float val) { m_GravityScale = val; }
-	void ResetGravity() { m_GravityAcceleration = m_Gravity * m_GravityScale; }
+	void ResetGravity() { m_GravityScaled = m_Gravity * m_GravityScale; }
 	void Jump();
 	void EndJump();
 };
