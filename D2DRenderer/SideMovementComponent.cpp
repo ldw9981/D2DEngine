@@ -23,8 +23,8 @@ SideMovementComponent::~SideMovementComponent()
 
 void SideMovementComponent::Update()
 {
-	assert(m_pUpdateTarget != nullptr);
-	mathHelper::Vector2F Location = m_pUpdateTarget->GetRelativeLocation();
+	assert(m_pRootSceneComponent != nullptr);
+	mathHelper::Vector2F Location = m_pRootSceneComponent->GetRelativeLocation();
 
 	// x축 이동 속도
 	m_Velocity.x = (mathHelper::Vector2F(m_Direction) * m_Speed).x;
@@ -44,8 +44,8 @@ void SideMovementComponent::Update()
 	}	
 
 	//새로 계산된 위치를 적용한다.
-	m_pUpdateTarget->SetRelativeLocation(Location);
-	m_pUpdateTarget->SetVelocity(m_Velocity);
+	m_pRootSceneComponent->SetRelativeLocation(Location);
+	m_pRootSceneComponent->SetVelocity(m_Velocity);
 }
 
 void SideMovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
