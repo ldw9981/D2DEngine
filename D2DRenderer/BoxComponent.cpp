@@ -6,7 +6,8 @@
 BoxComponent::BoxComponent(GameObject* pOwner, const std::wstring& Name)
 	:ColliderComponent(pOwner, Name),m_Rect({0})
 {
-
+	m_ColliderType = ColliderType::Box;
+	m_CollisionType = CollisionType::Block;
 }
 
 
@@ -25,6 +26,9 @@ void BoxComponent::SetExtend(float x, float y)
 
 	m_Collider.m_Extend.x = x;
 	m_Collider.m_Extend.y = y;
+
+	m_BoundingBox.m_Extend.x = x;
+	m_BoundingBox.m_Extend.y = y;
 }
 
 void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
@@ -48,16 +52,18 @@ void BoxComponent::Update()
 {
 	__super::Update();
 	m_Collider.m_Center = GetWorldLocation();
+	m_BoundingBox.m_Center = GetWorldLocation();
 }
 
 bool BoxComponent::IsCollide(ColliderComponent* pOtherComponent)
 {
-	BoxComponent* pOtherBoxComponent = dynamic_cast<BoxComponent*>(pOtherComponent);
-	if (!pOtherBoxComponent)
-		return false;
+	if (pOtherComponent->GetColliderType() == ColliderType::Box)
+	{
+		BoxComponent* pOtherBoxComponent = static_cast<BoxComponent*>(pOtherComponent);		
+		if (!m_Collider.CheckIntersect(pOtherBoxComponent->m_Collider))
+			return false;
 
-	if(!m_Collider.CheckIntersect(pOtherBoxComponent->m_Collider))
-		return false;
-			
-	return true;
+		return true;
+	}
+	return false;
 }

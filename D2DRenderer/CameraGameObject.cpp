@@ -16,7 +16,17 @@ CameraGameObject::~CameraGameObject()
 {
 }
 
-void CameraGameObject::OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+void CameraGameObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void CameraGameObject::OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void CameraGameObject::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
 
 }

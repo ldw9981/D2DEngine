@@ -39,7 +39,7 @@
     <ClInclude Include="DemoObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Test1Object.h">
+    <ClInclude Include="FlatformObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCharacter.h">
@@ -74,7 +74,7 @@
     <ClCompile Include="DemoObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Test1Object.cpp">
+    <ClCompile Include="FlatformObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCharacter.cpp">

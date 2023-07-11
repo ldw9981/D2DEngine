@@ -52,7 +52,7 @@ public:
 	D2D_VECTOR_2F GetWorldLocation();
 
 	// 루트 SceneComponent의 위치를 설정합니다.
-	void SetWorldLocation(float x, float y);
+	void SetWorldLocation(const mathHelper::Vector2F& Location);
 
 	// 컬링할수 있는 오브젝트 인지 확인합니다.
 	bool IsCullObject() const { return m_bIsCullObject; }

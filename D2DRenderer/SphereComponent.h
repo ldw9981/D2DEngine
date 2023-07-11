@@ -14,7 +14,7 @@ public:
 	float m_Radius;
 
 public:
-	void SetRadius(float radius) { m_Radius = radius; }
+	void SetRadius(float radius);
 	float GetRadius() { return m_Radius; }
 
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;

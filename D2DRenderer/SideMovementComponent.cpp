@@ -11,7 +11,7 @@ SideMovementComponent::SideMovementComponent(GameObject* pOwner, std::wstring Na
 {
 	m_GravityScale = 100.0f;  // 9.8을 그대로 쓰면  1초에 9.8 픽셀이 적용됨
 	m_GravityAcceleration = m_Gravity * m_GravityScale;	// 중력 가속도  
-	m_JumpSpeed = 600;		
+	m_JumpSpeed = 500;		
 	m_IsJumping = false;
 	m_SpeedY = 0.0f;
 	m_MinSpeedY = -600.0f;
@@ -47,7 +47,7 @@ void SideMovementComponent::Update()
 	}	
 
 	//새로 계산된 위치를 적용한다.
-	m_pUpdateTarget->SetRelativeLocation(Location.x, Location.y);
+	m_pUpdateTarget->SetRelativeLocation(Location);
 	m_pUpdateTarget->SetVelocity(m_Velocity);
 }
 
@@ -58,7 +58,7 @@ void SideMovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
 
 }
 
-void SideMovementComponent::StartJump()
+void SideMovementComponent::Jump()
 {
 	if (m_IsJumping == false)
 	{
@@ -72,5 +72,5 @@ void SideMovementComponent::EndJump()
 {
 	m_IsJumping = false;
 	m_SpeedY = 0.0f;
-	//m_GravityAcceleration = 0.0f;
+	m_GravityAcceleration = 0.0f;
 }

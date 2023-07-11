@@ -52,14 +52,14 @@ DemoObject::DemoObject()
 	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
 	m_pBoxComponent->SetExtend(25.0f, 25.0f);
 	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
-	m_pBoxComponent->SetRelativeLocation(100.0f, 100.0f);
+	m_pBoxComponent->SetRelativeLocation(mathHelper::Vector2F(100.0f, 100.0f));
 	m_pBoxComponent->Initialize();
 	m_pBoxComponent->AttachToComponent(m_pSphereComponent);
 
 
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
 	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Test"));
-	m_pAnimationComponent->SetRelativeLocation(100.0f, 100.0f);
+	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(100.0f, 100.0f));
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
 	m_pAnimationComponent->SetAnimation(L"Run", false, true);

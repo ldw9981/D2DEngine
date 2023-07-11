@@ -7,7 +7,7 @@
 #include "../D2DRenderer/AnimationAsset.h"
 #include "../D2DRenderer/CameraGameObject.h"
 #include "DemoObject.h"
-#include "Test1Object.h"
+#include "FlatformObject.h"
 #include "PlayerCharacter.h"
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
@@ -93,13 +93,13 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     for (int i=0;i< MAX_DEMO_OBJECT;i++)
     {
-        m_pTest1Object[i] = m_World.CreateGameObject<Test1Object>();       
+        m_pTest1Object[i] = m_World.CreateGameObject<FlatformObject>();       
 		// RootSceneComponent의 Location을 중앙위치로 설정
-        m_pTest1Object[i]->SetWorldLocation((float) i * 100 , (float)100 * i);
+        m_pTest1Object[i]->SetWorldLocation(mathHelper::Vector2F(500+ (float) i * 100 ,0));
     }
 
     GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();
-    pGameObject->SetWorldLocation(100, 100);
+    pGameObject->SetWorldLocation(mathHelper::Vector2F(100, 100));
     CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent(L"CameraComponent");
     m_World.SetCamera(pCameraComponent);
 

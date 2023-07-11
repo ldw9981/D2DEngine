@@ -76,9 +76,9 @@ void SceneComponent::AddRelativeRotation(float Rotation)
 	m_RelativeRotation = fmodf(m_RelativeRotation, 360.0f);
 }
 
-void SceneComponent::SetRelativeLocation(float x, float y)
+void SceneComponent::SetRelativeLocation(const mathHelper::Vector2F& Location)
 {
-	m_RelativeLocation = { x,y };
+	m_RelativeLocation = Location;
 }
 
 void SceneComponent::AddRelativeLocation(float x, float y)

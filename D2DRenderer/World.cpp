@@ -23,7 +23,7 @@ void World::Update()
 	}
 
 	// 현재 월드에서 모든 게임오브젝트의 BoxComponent를 모은다.
-	std::vector<BoxComponent*> colliderComponents;
+	std::vector<ColliderComponent*> colliderComponents;
 	for (auto& gameObject : m_GameObjects)
 	{
 		if (gameObject->IsNoCollide())	//충돌없음은 패스
@@ -32,18 +32,18 @@ void World::Update()
 		const std::vector<Component*> components = gameObject->GetOwnedComponents();
 		for (auto& component : components)
 		{
-			BoxComponent* pBoxComponent = dynamic_cast<BoxComponent*>(component);
-			if (pBoxComponent == nullptr)
+			ColliderComponent* pColliderComponent = dynamic_cast<ColliderComponent*>(component);
+			if (pColliderComponent == nullptr)
 				continue;
 
-			// 박스 그리는 용도면 패스
-			if( pBoxComponent->GetNoCollision())
+			//  그리는 용도면 패스
+			if(pColliderComponent->GetCollisionType() == CollisionType::NoCollision)
 				continue;
 
 
-			pBoxComponent->BackupCollideState();
-			pBoxComponent->ClearCollideStateCurr();
-			colliderComponents.push_back(pBoxComponent);
+			pColliderComponent->BackupCollideState();
+			pColliderComponent->ClearCollideStateCurr();
+			colliderComponents.push_back(pColliderComponent);
 		}
 	}
 
@@ -60,20 +60,25 @@ void World::Update()
 			if (!colliderComponents[source]->IsCollide(colliderComponents[target]))
 				continue;
 
-			// 게임 오브젝트에 알린다.	
-			colliderComponents[source]->InsertCollideState(colliderComponents[target]);
-			colliderComponents[source]->GetOwner()->OnCollide(colliderComponents[source], colliderComponents[target]);
-
-
-			colliderComponents[target]->InsertCollideState(colliderComponents[source]);
-			colliderComponents[target]->GetOwner()->OnCollide(colliderComponents[target], colliderComponents[source]);
+			if (colliderComponents[source]->GetCollisionType() == CollisionType::Block &&
+				colliderComponents[target]->GetCollisionType() == CollisionType::Block 	)
+			{
+				// 충돌 처리
+				colliderComponents[source]->ProcessBlock(colliderComponents[target]);
+				colliderComponents[target]->ProcessBlock(colliderComponents[source]);
+			}
+			else
+			{
+				colliderComponents[source]->InsertCollideState(colliderComponents[target]);
+				colliderComponents[target]->InsertCollideState(colliderComponents[source]);
+			}
 		}
 	}
 
 	// Begin/End 처리
 	for (auto& pColliderComponent : colliderComponents)
 	{
-
+		pColliderComponent->ProcessOverlap();
 	}
 	
 }

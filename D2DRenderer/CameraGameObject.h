@@ -16,7 +16,9 @@ public:
 public :
 
 	CameraComponent* GetCameraComponent() { return m_pCameraComponent; }
-	virtual void OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName) override;
 };
 

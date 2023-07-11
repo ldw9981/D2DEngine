@@ -53,11 +53,11 @@ D2D_VECTOR_2F GameObject::GetWorldLocation()
 	return m_pRootComponent ? m_pRootComponent->GetRelativeLocation() : D2D_VECTOR_2F();
 }
 
-void GameObject::SetWorldLocation(float x, float y)
+void GameObject::SetWorldLocation(const mathHelper::Vector2F& Location)
 {
 	if (m_pRootComponent)
 	{
-		m_pRootComponent->SetRelativeLocation(x, y);
+		m_pRootComponent->SetRelativeLocation(Location);
 	}
 }
 

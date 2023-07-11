@@ -24,7 +24,8 @@ public:
 	virtual void Update() override;
 	virtual void SetDirection(const mathHelper::Vector2F& Direction);
 	void SetGravityScale(float val) { m_GravityScale = val; }
-	void StartJump();
+	void ResetGravity() { m_GravityAcceleration = m_Gravity * m_GravityScale; }
+	void Jump();
 	void EndJump();
 };
 

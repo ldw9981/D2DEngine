@@ -17,7 +17,7 @@ void MovementComponent::Update()
 	Location += m_Velocity;
 	
 	//새로 계산된 위치를 적용한다.
-	m_pUpdateTarget->SetRelativeLocation(Location.x, Location.y);	
+	m_pUpdateTarget->SetRelativeLocation(Location);	
 }
 
 void MovementComponent::SetDirection(const mathHelper::Vector2F& Direction)

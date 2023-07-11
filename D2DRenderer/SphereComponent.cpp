@@ -8,12 +8,20 @@
 SphereComponent::SphereComponent(GameObject* pOwner, const std::wstring& Name)
 	: ColliderComponent(m_pOwner,Name), m_Radius(5.0f)
 {
+	m_ColliderType = ColliderType::Sphere;
 }
 
 SphereComponent::~SphereComponent()
 {
 }
 
+
+void SphereComponent::SetRadius(float radius)
+{
+	m_Radius = radius;
+	m_BoundingBox.m_Extend.x = radius;
+	m_BoundingBox.m_Extend.y = radius;
+}
 
 void SphereComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {

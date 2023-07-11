@@ -13,13 +13,15 @@ class MovementComponent;
 
 	Hierarchy 테스트용 오브젝트
 */
-class Test1Object :
+class FlatformObject :
 	public GameObject
 {
 public:
-	Test1Object();
-	virtual ~Test1Object();
+	FlatformObject();
+	virtual ~FlatformObject();
 	BoxComponent* m_pBoxComponent;
+	BoxComponent* m_pLeftBlock;
+	BoxComponent* m_pRightBlock;
 
 	SphereComponent* m_pSphereComponent;
 	TextComponent* m_pTextComponent;
@@ -29,7 +31,9 @@ public:
 
 	virtual void Update() override;
 
-	virtual void OnCollide(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
+	virtual void OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::wstring& AnimationName) override;
 };
 
