@@ -23,7 +23,7 @@ void MovementComponent::Update()
 
 void MovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
 {
-	m_Direction = D2DHelper::NormalizeVector(Direction);	
-
+	m_Direction = Direction;
+	m_Direction.Normalize();
 }
 
