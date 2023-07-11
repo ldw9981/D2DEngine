@@ -40,28 +40,42 @@ void World::Update()
 			if( pBoxComponent->GetNoCollision())
 				continue;
 
+
+			pBoxComponent->BackupCollideState();
+			pBoxComponent->ClearCollideStateCurr();
 			colliderComponents.push_back(pBoxComponent);
 		}
 	}
 
 	// 충돌 테스트
-	for (size_t i = 0; i < colliderComponents.size(); i++)
+	for (size_t source = 0; source < colliderComponents.size(); source++)
 	{
-		for (size_t j = i+1; j < colliderComponents.size(); j++)
+		for (size_t target = source +1; target < colliderComponents.size(); target++)
 		{
 			// 같은 게임 오브젝트면 패스
-			if (colliderComponents[i]->GetOwner() == colliderComponents[j]->GetOwner())
+			if (colliderComponents[source]->GetOwner() == colliderComponents[target]->GetOwner())
 				continue;
 
 			// 충돌 안하면 패스
-			if (!colliderComponents[i]->IsCollide(colliderComponents[j]))
+			if (!colliderComponents[source]->IsCollide(colliderComponents[target]))
 				continue;
 
-			// 게임 오브젝트에 알린다.
-			colliderComponents[i]->GetOwner()->OnCollide(colliderComponents[i], colliderComponents[j]);
-			colliderComponents[j]->GetOwner()->OnCollide(colliderComponents[j], colliderComponents[i]);
+			// 게임 오브젝트에 알린다.	
+			colliderComponents[source]->InsertCollideState(colliderComponents[target]);
+			colliderComponents[source]->GetOwner()->OnCollide(colliderComponents[source], colliderComponents[target]);
+
+
+			colliderComponents[target]->InsertCollideState(colliderComponents[source]);
+			colliderComponents[target]->GetOwner()->OnCollide(colliderComponents[target], colliderComponents[source]);
 		}
 	}
+
+	// Begin/End 처리
+	for (auto& pColliderComponent : colliderComponents)
+	{
+
+	}
+	
 }
 
 

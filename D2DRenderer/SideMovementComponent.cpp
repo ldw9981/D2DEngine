@@ -30,6 +30,7 @@ void SideMovementComponent::Update()
 	m_Velocity.x = (mathHelper::Vector2F(m_Direction) * m_Speed).x;
 
 	// 중력 가속도를 적용하며 속도를 종단속도로 제한한다.
+	
 	m_SpeedY -= m_GravityAcceleration * GameApp::m_deltaTime;	
 	m_SpeedY = max(m_MinSpeedY,m_SpeedY);
 	m_Velocity.y = (mathHelper::Vector2F(0.0f, 1.0f) * m_SpeedY).y;  

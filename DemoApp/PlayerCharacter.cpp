@@ -96,7 +96,7 @@ void PlayerCharacter::Update()
 
 	m_pSideMovementComponent->SetDirection(Direction);
 	
-
+	
 	
 
 	__super::Update();
