@@ -57,7 +57,7 @@ void BoxComponent::Update()
 
 bool BoxComponent::IsCollide(ColliderComponent* pOtherComponent)
 {
-	if (pOtherComponent->GetColliderType() == ColliderType::Box)
+	if (pOtherComponent->GetColliderShape() == ColliderType::Box)
 	{
 		BoxComponent* pOtherBoxComponent = static_cast<BoxComponent*>(pOtherComponent);		
 		if (!m_Collider.CheckIntersect(pOtherBoxComponent->m_Collider))
