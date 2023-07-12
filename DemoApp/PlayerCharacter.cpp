@@ -29,26 +29,30 @@ PlayerCharacter::PlayerCharacter()
 	m_pSideMovementComponent = CreateComponent<SideMovementComponent>(L"SideMovementComponent");
 	m_pSideMovementComponent->SetSpeed(200);
 
-	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
-	m_pBoxComponent->SetExtend(30.0f,50.0f);
-	SetRootComponent(m_pBoxComponent);
+	m_pFootBox = CreateComponent<BoxComponent>(L"FootBox");
+	m_pFootBox->SetExtend(20.0f,4.0f);
+	SetRootComponent(m_pFootBox);
 
 	// 위치를 변경할 컴포넌트를 설정한다.
-	m_pSideMovementComponent->SetRootSceneComponent(m_pBoxComponent);
+	m_pSideMovementComponent->SetRootSceneComponent(m_pFootBox);
 
+	m_pBodyBox = CreateComponent<BoxComponent>(L"BodyBox");
+	m_pBodyBox->SetRelativeLocation(mathHelper::Vector2F(0, 50));
+	m_pBodyBox->SetExtend(25.0f, 50.0f);
+	m_pBodyBox->AttachToComponent(m_pFootBox);
 
 	// SceneComponent만 RootComponent로 설정 가능
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
 	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Ken"));	
-	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(0,-50));
-	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);	
+	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(0,-4));
+	m_pAnimationComponent->AttachToComponent(m_pFootBox);	
 
 	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
 
 	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
 	m_pTextComponent->SetRelativeLocation(mathHelper::Vector2F (- 100, 0));
-	m_pTextComponent->SetString(L"이동:화살표 , 공격:스페이스");
+	m_pTextComponent->SetString(L"이동:화살표 , 공격:컨트롤 , 점프: 스페이스");
 	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
 
 	m_pCameraComponent = CreateComponent<CameraComponent>(L"CameraComponent");
@@ -104,28 +108,34 @@ void PlayerCharacter::Update()
 
 void PlayerCharacter::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
-	if (pOwnedComponent == m_pBoxComponent)
+	if (pOwnedComponent == m_pFootBox)
+	{
+		mathHelper::Vector2F Location = m_pRootComponent->GetWorldLocation();
+		Location = Location - m_pRootComponent->GetVelocity() * GameApp::m_deltaTime;
+		Location.x = m_pRootComponent->GetRelativeLocation().x;
+		m_pRootComponent->SetRelativeLocation(Location);
+
+		m_pSideMovementComponent->EndJump();
+		
+	}
+	else if (pOwnedComponent == m_pBodyBox)
 	{
 		mathHelper::Vector2F Location = m_pRootComponent->GetWorldLocation();
 		Location = Location - m_pRootComponent->GetVelocity() * GameApp::m_deltaTime;
 		Location.y = m_pRootComponent->GetRelativeLocation().y;
 		m_pRootComponent->SetRelativeLocation(Location);
-		
 	}
 
 }
 
 void PlayerCharacter::OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
-	m_pSideMovementComponent->EndJump();
+
 }
 
 void PlayerCharacter::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
-	if (pOwnedComponent->IsEmptyCollideStateCurr())
-	{
-		m_pSideMovementComponent->ResetGravity();
-	}
+
 
 }
 

@@ -69,5 +69,5 @@ void SideMovementComponent::EndJump()
 {
 	m_IsJumping = false;
 	m_SpeedY = 0.0f;
-	m_GravityScaled = 0.0f;	// 중력을 끄는게 맞을까?
+	//m_GravityScaled = 0.0f;	// 중력을 끄는게 맞을까?
 }

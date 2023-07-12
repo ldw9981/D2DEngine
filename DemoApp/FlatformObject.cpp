@@ -23,24 +23,11 @@ FlatformObject::FlatformObject()
 {
 	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
 	m_pBoxComponent->SetExtend(400.0f, 50.0f);
-	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
-	m_pBoxComponent->SetCollisionType(CollisionType::Overlap);	
+	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
+	m_pBoxComponent->SetCollisionType(CollisionType::Block);
 	SetRootComponent(m_pBoxComponent);
 
-	m_pLeftBlock = CreateComponent<BoxComponent>(L"LeftBlock");
-	m_pLeftBlock->AttachToComponent(m_pBoxComponent);
-	m_pLeftBlock->SetExtend(2.5f, 48.0f);
-	m_pLeftBlock->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
-	m_pLeftBlock->SetCollisionType(CollisionType::Block);
-	m_pLeftBlock->SetRelativeLocation(mathHelper::Vector2F(-400.0f,0.0f));
-
-	m_pRightBlock = CreateComponent<BoxComponent>(L"RightBlock");
-	m_pRightBlock->AttachToComponent(m_pBoxComponent);
-	m_pRightBlock->SetExtend(2.5f, 48.0f);
-	m_pRightBlock->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
-	m_pRightBlock->SetCollisionType(CollisionType::Block);
-	m_pRightBlock->SetRelativeLocation(mathHelper::Vector2F(400.0f, 0.0f));
-
+	
 	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
 	m_pTextComponent->SetString(std::wstring(L"Root"));
 	m_pTextComponent->AttachToComponent(m_pBoxComponent);

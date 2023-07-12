@@ -20,7 +20,7 @@ void World::Update()
 	for (auto& gameObject : m_GameObjects)
 	{
 		gameObject->Update();
-	}
+	}  
 
 	// 현재 월드에서 모든 게임오브젝트의 BoxComponent를 모은다.
 	std::vector<ColliderComponent*> colliderComponents;

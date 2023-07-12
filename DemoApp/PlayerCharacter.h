@@ -24,7 +24,8 @@ public:
 	FSMCharacter* m_pFSMCharacter;
 	TextComponent* m_pTextComponent;
 	CameraComponent* m_pCameraComponent;
-	BoxComponent* m_pBoxComponent;
+	BoxComponent* m_pFootBox;
+	BoxComponent* m_pBodyBox;
 public:
 
 	virtual void Update() override;
