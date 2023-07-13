@@ -5,9 +5,14 @@
 #include "Deligate.h"
 #include "MyComponent3.h"
 #include "MyComponent4.h"
+#include "GameObject.h"
 
 int main() 
 {
+	GameObject go;
+
+	go.Update();
+
 	MyComponent3 com3;
 	MyComponent4 com4;
 

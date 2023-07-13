@@ -129,25 +129,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoxRenderer.cpp" />
     <ClCompile Include="ClassChild.cpp" />
     <ClCompile Include="ClassOwner.cpp" />
     <ClCompile Include="ClassParent.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Deligate.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="MyComponent3.cpp" />
     <ClCompile Include="MyComponent4.cpp" />
+    <ClCompile Include="AnimRenderer.cpp" />
     <ClCompile Include="TestDeligate.cpp" />
     <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="TestDestructor.cpp" />
     <ClCompile Include="TestObserver.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxRenderer.h" />
     <ClInclude Include="ClassChild.h" />
     <ClInclude Include="ClassOwner.h" />
     <ClInclude Include="ClassParent.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Deligate.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="MyComponent3.h" />
     <ClInclude Include="MyComponent4.h" />
+    <ClInclude Include="AnimRenderer.h" />
     <ClInclude Include="TestCode.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
