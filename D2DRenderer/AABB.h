@@ -32,6 +32,11 @@ public:
 
 	~AABB() = default;
 
+	float GetMinX() { return m_Center.x - m_Extend.x; }
+	float GetMaxX() { return m_Center.x + m_Extend.x; }
+	float GetMinY() { return m_Center.y - m_Extend.y; }
+	float GetMaxY() { return m_Center.y + m_Extend.y; }
+
 	bool CheckIntersect(const AABB& other) const
 	{
 		// self min,max
