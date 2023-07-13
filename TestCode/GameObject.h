@@ -1,26 +1,17 @@
 #pragma once
 #include "Transform.h"
-#include "AnimRenderer.h"
+#include "AnimationRender.h"
 #include "Transform.h"
-#include "BoxRenderer.h"
+#include "BoxRender.h"
 #include "Movement.h"
 
-class GameObject: public AnimRenderer, public Movement
+class GameObject
 {
 public:
 	GameObject() {}
 	~GameObject() {}
 
-	virtual void Print()
-	{
-		int a;
-	}
-
-
-	virtual void Update() override
-	{
-		AnimRenderer::Update();
-		Movement::Update();
-	}
+	virtual void Render()=0;;
+	virtual void Update()=0;
 };
 

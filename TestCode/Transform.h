@@ -2,7 +2,7 @@
 
 #include "Component.h"
 
-class Transform : Component
+class Transform : public Component
 {
 public:
 	Transform()
@@ -11,16 +11,20 @@ public:
 	}
 	virtual ~Transform() {}
 
-public:
+protected:
+	Transform* m_pParent;
 	int m_RelativePositionX;
 	int m_RelativeTransform;
 	int m_WorldTransform;
-	Transform* m_pParent;
+
 public:
+	Transform* GetParent() const { return m_pParent; }
+	void SetParent(Transform* val) { m_pParent = val; }
 	const int& GetWorldTransform()
 	{
 		return m_WorldTransform;
 	}
 	virtual void Update();
+
 };
 

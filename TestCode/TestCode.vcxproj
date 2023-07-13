@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoxRenderer.cpp" />
+    <ClCompile Include="BoxRender.cpp" />
     <ClCompile Include="ClassChild.cpp" />
     <ClCompile Include="ClassOwner.cpp" />
     <ClCompile Include="ClassParent.cpp" />
@@ -139,7 +139,9 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="MyComponent3.cpp" />
     <ClCompile Include="MyComponent4.cpp" />
-    <ClCompile Include="AnimRenderer.cpp" />
+    <ClCompile Include="AnimationRender.cpp" />
+    <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="TestDeligate.cpp" />
     <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="TestDestructor.cpp" />
@@ -147,7 +149,7 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxRenderer.h" />
+    <ClInclude Include="BoxRender.h" />
     <ClInclude Include="ClassChild.h" />
     <ClInclude Include="ClassOwner.h" />
     <ClInclude Include="ClassParent.h" />
@@ -157,7 +159,9 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="MyComponent3.h" />
     <ClInclude Include="MyComponent4.h" />
-    <ClInclude Include="AnimRenderer.h" />
+    <ClInclude Include="AnimationRender.h" />
+    <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="TestCode.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>

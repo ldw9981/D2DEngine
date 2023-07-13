@@ -8,7 +8,7 @@ void Transform::Update()
 
 	if(m_pParent)
 	{ 
-		m_WorldTransform = m_RelativeTransform * m_pParent->m_WorldTransform;
+		m_WorldTransform = m_RelativeTransform + m_pParent->m_WorldTransform;
 	}
 	else
 	{
