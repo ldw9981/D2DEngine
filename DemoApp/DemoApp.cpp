@@ -5,7 +5,7 @@
 #include "DemoApp.h"
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
-#include "../D2DRenderer/CameraGameObject.h"
+#include "../D2DRenderer/Camera.h"
 #include "DemoObject.h"
 #include "FlatformObject.h"
 #include "PlayerCharacter.h"

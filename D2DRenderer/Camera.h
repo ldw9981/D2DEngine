@@ -6,11 +6,11 @@
 	내부에 카메라 컴포넌트를 생성한다.
 */
 class CameraComponent;
-class CameraGameObject : public GameObject
+class Camera : public GameObject
 {
 public:
-	CameraGameObject();
-	virtual ~CameraGameObject();
+	Camera();
+	virtual ~Camera();
 
 	CameraComponent* m_pCameraComponent;
 public :

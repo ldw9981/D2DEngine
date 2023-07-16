@@ -108,7 +108,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>헤더 파일\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="CameraGameObject.h">
+    <ClInclude Include="Camera.h">
       <Filter>헤더 파일\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -134,6 +134,15 @@
     </ClInclude>
     <ClInclude Include="TimeSystem.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>헤더 파일\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>헤더 파일\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapComponent.h">
+      <Filter>헤더 파일\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +197,7 @@
     <ClCompile Include="BoxComponent.cpp">
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
-    <ClCompile Include="CameraGameObject.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
@@ -229,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="TimeSystem.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>소스 파일\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

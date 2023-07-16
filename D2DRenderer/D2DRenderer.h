@@ -1,6 +1,6 @@
 #pragma once
 
-
+#define NOIMAGE L"NoImage.png"
 /*
 	Direct2D의 기본 기능을 래핑한 클래스
 	기본 렌더 타겟을 생성한다.

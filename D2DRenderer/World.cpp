@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "World.h"
 #include "CameraComponent.h"
-#include "CameraGameObject.h"
+#include "Camera.h"
 #include "D2DRenderer.h"
 #include "RenderComponent.h"
 #include "ColliderComponent.h"	
