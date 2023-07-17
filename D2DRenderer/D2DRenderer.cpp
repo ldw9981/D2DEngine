@@ -7,6 +7,7 @@
 #include "AnimationAsset.h"
 #include "Helper.h"
 #include "RenderComponent.h"
+#include <fstream>
 
 #pragma comment(lib,"d2d1.lib")
 #pragma comment(lib,"dwrite.lib")
@@ -247,9 +248,6 @@ bool D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1B
 		hr = m_pRenderTarget->CreateBitmapFromWicBitmap(pConverter, NULL, ppID2D1Bitmap);
 	}
 
-
-
-
 	// 파일을 사용할때마다 다시 만든다.
 	if (pConverter)
 		pConverter->Release();
@@ -291,7 +289,20 @@ AnimationAsset* D2DRenderer::CreateSharedAnimationAsset(std::wstring strFilePath
 		pAnimationAsset->AddRef();
 		return pAnimationAsset;
 	}
+
+	std::ifstream stream(strFilePath,std::ios::in);
+	if (stream.is_open()) {
+		stream.close();
+	}
+	else {
+		// 로그
+		LOG_ERROR(L"File not found %s", strFilePath.c_str());
+		return nullptr;
+	}
+
+	// 컨테이너에 없는경우
 	pAnimationAsset = new AnimationAsset;
+	pAnimationAsset->Load(strFilePath.c_str());
 	m_SharingAnimationAssets.push_back(std::pair<std::wstring, AnimationAsset*>(strFilePath, pAnimationAsset));
 	pAnimationAsset->AddRef();
 	return pAnimationAsset;

@@ -35,6 +35,7 @@
 #include <string>
 #include <queue>
 #include <set>
+#include <nlohmann/json.hpp>
 
 using namespace D2D1;
 using namespace std;

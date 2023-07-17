@@ -28,7 +28,7 @@ void StateMove::Enter()
 		pFSMCharacter->m_Mirror = true;
 		
 	}
-	pAnimationComponent->SetAnimation(L"Move", pFSMCharacter->m_Mirror, true);
+	pAnimationComponent->SetAnimation("Move", pFSMCharacter->m_Mirror, true);
 
 }
 

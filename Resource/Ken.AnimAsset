@@ -1,0 +1,199 @@
+{
+  "m_BitmapFilePath": "../Resource/ken.png",
+  "m_Animations": [
+    {
+      "Name": "Idle",
+      "m_Frames": [
+        {
+          "Index": 0,
+          "Source.left": 3.0,
+          "Source.top": 698.0,
+          "Source.right": 61.0,
+          "Source.bottom": 787.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 1,
+          "Source.left": 73.0,
+          "Source.top": 696.0,
+          "Source.right": 130.0,
+          "Source.bottom": 787.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Source.left": 143.0,
+          "Source.top": 695.0,
+          "Source.right": 197.0,
+          "Source.bottom": 787.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 3,
+          "Source.left": 279.0,
+          "Source.top": 698.0,
+          "Source.right": 337.0,
+          "Source.bottom": 787.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 4,
+          "Source.left": 347.0,
+          "Source.top": 699.0,
+          "Source.right": 406.0,
+          "Source.bottom": 787.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        }
+      ]
+    },
+    {
+      "Name": "Move",
+      "m_Frames": [
+        {
+          "Index": 0,
+          "Source.left": 9.0,
+          "Source.top": 883.0,
+          "Source.right": 61.0,
+          "Source.bottom": 965.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 1,
+          "Source.left": 71.0,
+          "Source.top": 878.0,
+          "Source.right": 130.0,
+          "Source.bottom": 965.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 2,
+          "Source.left": 141.0,
+          "Source.top": 877.0,
+          "Source.right": 204.0,
+          "Source.bottom": 966.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 3,
+          "Source.left": 216.0,
+          "Source.top": 876.0,
+          "Source.right": 278.0,
+          "Source.bottom": 964.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        },
+        {
+          "Index": 4,
+          "Source.left": 358.0,
+          "Source.top": 878.0,
+          "Source.right": 407.0,
+          "Source.bottom": 966.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.10000000149011612
+        }
+      ]
+    },
+    {
+      "Name": "Attack",
+      "m_Frames": [
+        {
+          "Index": 0,
+          "Source.left": 731.0,
+          "Source.top": 1685.0,
+          "Source.right": 805.0,
+          "Source.bottom": 1775.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 1,
+          "Source.left": 809.0,
+          "Source.top": 1685.0,
+          "Source.right": 890.0,
+          "Source.bottom": 1772.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 2,
+          "Source.left": 896.0,
+          "Source.top": 1679.0,
+          "Source.right": 955.0,
+          "Source.bottom": 1773.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 3,
+          "Source.left": 966.0,
+          "Source.top": 1674.0,
+          "Source.right": 1079.0,
+          "Source.bottom": 1772.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 4,
+          "Source.left": 1101.0,
+          "Source.top": 1679.0,
+          "Source.right": 1201.0,
+          "Source.bottom": 1772.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 5,
+          "Source.left": 1223.0,
+          "Source.top": 1677.0,
+          "Source.right": 1295.0,
+          "Source.bottom": 1771.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 6,
+          "Source.left": 1302.0,
+          "Source.top": 1677.0,
+          "Source.right": 1373.0,
+          "Source.bottom": 1771.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        },
+        {
+          "Index": 7,
+          "Source.left": 1400.0,
+          "Source.top": 1680.0,
+          "Source.right": 1473.0,
+          "Source.bottom": 1777.0,
+          "Center.x": 24.0,
+          "Center.y": 90.0,
+          "RenderTime": 0.05000000074505806
+        }
+      ]
+    }
+  ]
+}

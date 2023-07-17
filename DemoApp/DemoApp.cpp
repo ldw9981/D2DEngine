@@ -53,41 +53,6 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     bool bRet = GameApp::Initialize(Width,Height);
 	if (!bRet)
 	    return false;
-
-    // 애니메이션 정보는 파일에서 읽어야 하나 여기서는 하드코딩으로 만들어서 사용한다.
-    ANIMATION_INFO Animation;
-    m_pAnimationAsset = m_D2DRenderer.CreateSharedAnimationAsset(L"Ken");
-    m_pAnimationAsset->SetD2DBitmap(L"../Resource/ken.png");
-    
-    Animation.m_Name = L"Idle";
-    Animation.m_Frames.clear();
-    Animation.m_Frames.push_back(FRAME_INFO(3, 698, 61, 787, 24, 90, 0.1f));
-    Animation.m_Frames.push_back(FRAME_INFO(73, 696, 130, 787, 24, 90, 0.1f));
-    Animation.m_Frames.push_back(FRAME_INFO(143, 695, 197, 787, 24, 90, 0.1f));
-    Animation.m_Frames.push_back(FRAME_INFO(279, 698, 337, 787, 24, 90, 0.1f));
-    Animation.m_Frames.push_back(FRAME_INFO(347, 699, 406, 787, 24, 90, 0.1f));
-    m_pAnimationAsset->m_Animations.push_back(Animation);
-
-	Animation.m_Name = L"Move";
-	Animation.m_Frames.clear();
-	Animation.m_Frames.push_back(FRAME_INFO(9, 883, 61, 965, 24, 90, 0.1f));
-	Animation.m_Frames.push_back(FRAME_INFO(71, 878, 130, 965, 24, 90, 0.1f));
-	Animation.m_Frames.push_back(FRAME_INFO(141, 877, 204, 966, 24, 90, 0.1f));
-	Animation.m_Frames.push_back(FRAME_INFO(216, 876, 278, 964, 24, 90, 0.1f));
-	Animation.m_Frames.push_back(FRAME_INFO(358, 878, 407, 966, 24, 90, 0.1f));
-	m_pAnimationAsset->m_Animations.push_back(Animation);
-
-	Animation.m_Name = L"Attack";
-	Animation.m_Frames.clear();
-	Animation.m_Frames.push_back(FRAME_INFO(731, 1685, 805, 1775, 24, 90, 0.05f));
-	Animation.m_Frames.push_back(FRAME_INFO(809, 1685, 890, 1772, 24, 90, 0.05f));
-	Animation.m_Frames.push_back(FRAME_INFO(896, 1679, 955, 1773, 24, 90, 0.05f));
-	Animation.m_Frames.push_back(FRAME_INFO(966, 1674, 1079, 1772, 24, 90, 0.05f));
-	Animation.m_Frames.push_back(FRAME_INFO(1101, 1679, 1201, 1772, 24, 90, 0.05f));
-    Animation.m_Frames.push_back(FRAME_INFO(1223, 1677, 1295, 1771, 24, 90, 0.05f));
-    Animation.m_Frames.push_back(FRAME_INFO(1302, 1677, 1373, 1771, 24, 90, 0.05f));
-    Animation.m_Frames.push_back(FRAME_INFO(1400, 1680, 1473, 1777, 24, 90, 0.05f));
-	m_pAnimationAsset->m_Animations.push_back(Animation);
     	
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
@@ -101,9 +66,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();
     pGameObject->SetWorldLocation(mathHelper::Vector2F(0, 0));
     CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent(L"CameraComponent");
-    m_World.SetCamera(pCameraComponent);
-
-    
+    m_World.SetCamera(pCameraComponent);    
     
     return true;
 }

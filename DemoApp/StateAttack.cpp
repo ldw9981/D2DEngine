@@ -19,7 +19,7 @@ void StateAttack::Enter()
 	// 공격 애니메이션을 시작하고 애니메이션 종료를 기다린다.
 	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
 	AnimationComponent* pAnimationComponent = pFSMCharacter->m_pAnimationComponent;
-	pAnimationComponent->SetAnimation(L"Attack", pFSMCharacter->m_Mirror, false);
+	pAnimationComponent->SetAnimation("Attack", pFSMCharacter->m_Mirror, false);
 	pFSMCharacter->m_AnimationComplete = false;
 
 	// 공격할때는 스피드 0 못움직이게 한다.

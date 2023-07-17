@@ -8,7 +8,7 @@
 	지금당장은 Object의 역할이 없으므로 Object를 상속받지 않는다.
 */
 class GameObject;
-class Component 
+class Component //: public Object
 {
 public:
 	Component(GameObject* pOwner,const std::wstring& Name) : m_pOwner(pOwner),m_Name(Name)

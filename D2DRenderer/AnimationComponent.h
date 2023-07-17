@@ -56,7 +56,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 
-	void SetAnimation(const WCHAR* AnimationName, bool Mirror, bool Loop);
+	void SetAnimation(const char* AnimationName, bool Mirror, bool Loop);
 	void SetAnimationAsset(const std::wstring& strAssetKey);
 
 };

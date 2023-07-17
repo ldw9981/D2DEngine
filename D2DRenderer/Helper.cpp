@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Helper.h"
+#include <string>
+#include <locale>
+#include <codecvt>
 
 namespace D2DHelper
 {
@@ -147,5 +150,18 @@ namespace D2DHelper
 
 		OutputDebugStringW(buffer);
 	}
+
+	std::string WStringToString(const std::wstring& wstr)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.to_bytes(wstr);
+	}
+
+	std::wstring StringToWString(const std::string& str)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.from_bytes(str);
+	}
+
 }
 

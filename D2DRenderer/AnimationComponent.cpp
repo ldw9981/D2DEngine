@@ -112,7 +112,7 @@ void AnimationComponent::Render(ID2D1RenderTarget* pRenderTarget)
 }
 
 
-void AnimationComponent::SetAnimation(const WCHAR* AnimationName, bool Mirror, bool Loop)
+void AnimationComponent::SetAnimation(const char* AnimationName, bool Mirror, bool Loop)
 {
 	assert(m_pAnimationAsset != nullptr);
 

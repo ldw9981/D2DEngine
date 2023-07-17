@@ -16,7 +16,7 @@ void StateIdle::Enter()
 {
   	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
 	AnimationComponent* pAnimationComponent = pFSMCharacter->m_pAnimationComponent;
-	pAnimationComponent->SetAnimation(L"Idle", pFSMCharacter->m_Mirror,true);
+	pAnimationComponent->SetAnimation("Idle", pFSMCharacter->m_Mirror,true);
 }
 
 void StateIdle::Update() 

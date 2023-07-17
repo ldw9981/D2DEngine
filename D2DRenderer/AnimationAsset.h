@@ -5,12 +5,13 @@
 
 
 
+
 // 애니메이션 기본 프레임의 기본 정보
 struct FRAME_INFO
 {
 	D2D1_RECT_F Source;			// 이미지에서 하나의 장면이 어느 영역에 있는지
 	D2D1_VECTOR_2F Center;		// 하나의 FRAME에서 좌측상단 0,0 기준  중점의 좌표
-	float		RenderTime;		// 하나의 장면을 그릴 시간
+	FLOAT		RenderTime;		// 하나의 장면을 그릴 시간
 
 	FRAME_INFO()
 	{
@@ -39,7 +40,7 @@ struct FRAME_INFO
 		Center.x = centerX;
 		Center.y = centerY;
 		RenderTime = time;
-	}
+	}	
 };
 
 /*
@@ -47,10 +48,10 @@ struct FRAME_INFO
 */
 struct ANIMATION_INFO
 {
-	std::wstring m_Name; // 애니메이션의 이름	이름으로 검색하여 재생한다.
+	std::string m_Name; // 애니메이션의 이름	이름으로 검색하여 재생한다.
 	std::vector<FRAME_INFO> m_Frames; // 프레임의 모음
 	ANIMATION_INFO()
-	:m_Name(L"Default")
+	:m_Name("Default")
 	{
 		
 	}
@@ -74,5 +75,8 @@ public:
 	std::vector<ANIMATION_INFO> m_Animations;
 
 	void SetD2DBitmap(const WCHAR* szFilePath);
-	ANIMATION_INFO* GetAnimationInfo(const WCHAR* AnimationName);
+	ANIMATION_INFO* GetAnimationInfo(const char* AnimationName);
+
+	void Save(const WCHAR* szFilePath);
+	bool Load(const WCHAR* szFilePath);
 };

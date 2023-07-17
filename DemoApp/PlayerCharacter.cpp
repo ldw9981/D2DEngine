@@ -43,7 +43,7 @@ PlayerCharacter::PlayerCharacter()
 
 	// SceneComponent만 RootComponent로 설정 가능
 	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
-	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Ken"));	
+	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"../Resource/Ken.AnimAsset"));	
 	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(0,-4));
 	m_pAnimationComponent->AttachToComponent(m_pFootBox);	
 

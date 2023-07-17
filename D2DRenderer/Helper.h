@@ -1,4 +1,5 @@
 #pragma once
+
 /*
 	Render에서 유용한 매크로나 함수를 정의한다.
 */
@@ -6,7 +7,7 @@
 #define LOG_ERROR(...) \
 { \
     wchar_t buffer[256]; \
-    swprintf_s(buffer,256, L"%s:%d - ", __FUNCTIONW__, __LINE__); \
+    swprintf_s(buffer,256, L"[ERROR] %s:%d - ", __FUNCTIONW__, __LINE__); \
     wchar_t message[256]; \
     swprintf_s(message,256, __VA_ARGS__); \
     wcscat_s(buffer, message); \
@@ -17,13 +18,25 @@
 #define LOG_WARNING(...) \
 { \
     wchar_t buffer[256]; \
-    swprintf_s(buffer,256, L"%s:%d - ", __FUNCTIONW__, __LINE__); \
+    swprintf_s(buffer,256, L"[WARNING] %s:%d - ", __FUNCTIONW__, __LINE__); \
     wchar_t message[256]; \
     swprintf_s(message,256, __VA_ARGS__); \
     wcscat_s(buffer, message); \
     wcscat_s(buffer, L"\n"); \
     OutputDebugString(buffer); \
 }
+
+#define LOG_MESSAGE(...) \
+{ \
+    wchar_t buffer[256]; \
+    swprintf_s(buffer,256, L"[MESSAGE] %s:%d - ", __FUNCTIONW__, __LINE__); \
+    wchar_t message[256]; \
+    swprintf_s(message,256, __VA_ARGS__); \
+    wcscat_s(buffer, message); \
+    wcscat_s(buffer, L"\n"); \
+    OutputDebugString(buffer); \
+}
+
 
 template <typename T>
 void SAFE_RELEASE(T* p)
@@ -72,6 +85,7 @@ namespace D2DHelper
 
 	void Log(const wchar_t* format, ...);
 
-
-
+	std::string WStringToString(const std::wstring& wstr);
+	
+	std::wstring StringToWString(const std::string& str);
 } // namespace D2DUtils

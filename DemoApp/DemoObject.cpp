@@ -62,7 +62,7 @@ DemoObject::DemoObject()
 	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(100.0f, 100.0f));
 	m_pAnimationComponent->Initialize();
 	m_pAnimationComponent->AttachToComponent(m_pBoxComponent);
-	m_pAnimationComponent->SetAnimation(L"Run", false, true);
+	m_pAnimationComponent->SetAnimation("Run", false, true);
 }
 
 DemoObject::~DemoObject()
