@@ -99,3 +99,17 @@ void SceneComponent::DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->SetTransform(Transform);
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
+
+void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	Component::SerializeOut(object);
+	if (m_pParentScene)
+	{
+		object["ParentScene"] =  m_pParentScene->GetName(); 
+	}	
+	object["m_RelativeScale"] = { m_RelativeScale.x,m_RelativeScale.y };
+	object["m_RelativeRotation"] = m_RelativeRotation;
+	object["m_RelativeLocation"] = { m_RelativeLocation.x,m_RelativeLocation.y };
+	object["m_BoundingBox.m_Center"] = { m_BoundingBox.m_Center.x,m_BoundingBox.m_Center.y };
+	object["m_BoundingBox.m_Extend"] = { m_BoundingBox.m_Extend.x,m_BoundingBox.m_Extend.y };
+}

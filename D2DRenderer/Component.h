@@ -1,5 +1,7 @@
 #pragma once
 #include "Object.h"
+#include <typeinfo>
+
 /*
 	게임 오브젝트의 기능을 컴포넌트 단위로 분리하기 위한 추상 클래스
 	게임오브젝트는 컴포넌트의 조합으로 이루어진다.
@@ -11,19 +13,25 @@ class GameObject;
 class Component : public Object
 {
 public:
-	Component(GameObject* pOwner,const std::string& Name) : m_pOwner(pOwner),m_Name(Name)
+	Component(GameObject* pOwner,const std::string& Name) : m_pOwner(pOwner),m_ComponentName(Name)
 	{
 	}
 	virtual ~Component() {};
 
 protected:
 	GameObject* m_pOwner;
-	std::string m_Name;
+	std::string m_ComponentName;
 public:
-	const std::string& GetName() const { return m_Name; }
+	const std::string& GetName() const { return m_ComponentName; }
 	virtual void Update() = 0;
 	void SetOwner(GameObject* pOwner) { m_pOwner = pOwner; }
 	GameObject* GetOwner() { return m_pOwner; }
+	std::string GetClassName() 
+	{
+		const std::type_info& self = typeid(*this);
+		return	self.name();
+	}
+	
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
 	virtual void SerializeIn(nlohmann::ordered_json& object) { };

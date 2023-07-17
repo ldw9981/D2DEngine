@@ -4,5 +4,6 @@
 
 void Component::SerializeOut(nlohmann::ordered_json& object)
 {
-	object["m_Name"] = m_Name;
+	object["ClassName"] = GetClassName();
+	object["m_ComponentName"] = m_ComponentName;
 }

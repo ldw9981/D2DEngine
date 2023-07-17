@@ -8,7 +8,7 @@
 #include "GameObject.h"
 #include "PlayerCharacter.h"
 
-int main() 
+int __main() 
 {
 	PlayerCharacter go;
 

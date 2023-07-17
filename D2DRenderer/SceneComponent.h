@@ -22,14 +22,14 @@ protected:
 	SceneComponent*		m_pParentScene;		// 부모 Scene 컴포넌트
 	std::vector<SceneComponent*> m_Children; // 단지 참조만 한다. update,render호출안함
 
-	mathHelper::Vector2F		m_RelativeScale;	// 상대 크기
-	float				m_RelativeRotation; // 상대 회전
-	mathHelper::Vector2F		m_RelativeLocation; // 상대 위치
-	D2D1_MATRIX_3X2_F	m_RelativeTransform; // 상대 복합 변환
+	mathHelper::Vector2F	m_RelativeScale;	// 상대 크기
+	float					m_RelativeRotation; // 상대 회전
+	mathHelper::Vector2F	m_RelativeLocation; // 상대 위치
+	D2D1_MATRIX_3X2_F		m_RelativeTransform; // 상대 복합 변환
 
-	D2D1_MATRIX_3X2_F	m_WorldTransform;    // 부모까지 반영된 최종 변환
+	D2D1_MATRIX_3X2_F		m_WorldTransform;    // 부모까지 반영된 최종 변환
 
-	AABB				m_BoundingBox;		// AABB  
+	AABB					m_BoundingBox;		// AABB  
 	mathHelper::Vector2F m_Velocity;			// 속도
 public:
 	virtual bool Initialize();
@@ -73,7 +73,7 @@ public:
 	// 부모가 있을경우 부모 기준으로 RelativeLocation을 변경하고 WorldTransform을 설정해야한다.
 	// 부모가 없을경우 RelativeLocation을 설정하고 WorldTransform을 설정한다.
 
-	virtual void SerializeOut(nlohmann::ordered_json& object){};
+	virtual void SerializeOut(nlohmann::ordered_json& object);
 	virtual void SerializeIn(nlohmann::ordered_json& object){};
 };
 

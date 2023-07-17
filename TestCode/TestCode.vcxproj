@@ -153,6 +153,7 @@
     <ClCompile Include="TestDestructor.cpp" />
     <ClCompile Include="TestJson.cpp" />
     <ClCompile Include="TestObserver.cpp" />
+    <ClCompile Include="TestTypeId.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
