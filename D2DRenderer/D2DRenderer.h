@@ -1,6 +1,6 @@
 #pragma once
 
-#define NOIMAGE L"NoImage.png"
+#define NOIMAGE L"../Resource/NoImage.png"
 /*
 	Direct2D의 기본 기능을 래핑한 클래스
 	기본 렌더 타겟을 생성한다.
@@ -42,7 +42,7 @@ public:
 	// 카메라의 월드 변환을 넣어 역행렬을 계산하여 저장한다.
 	void SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform);
 	// 공유하는 비트맵 생성
-	HRESULT CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
+	bool CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap);
 	// 파일이름으로 읽어와야하지만 그냥 비어있는 인스턴스 리턴한다.
 	AnimationAsset* CreateSharedAnimationAsset(std::wstring strFilePath);
 

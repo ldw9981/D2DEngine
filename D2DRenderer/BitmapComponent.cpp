@@ -3,6 +3,20 @@
 #include "D2DRenderer.h"
 
 
+void BitmapComponent::SetBitmap(std::wstring val)
+{
+	ID2D1Bitmap* result = nullptr;
+	if (!D2DRenderer::m_Instance->CreateSharedD2DBitmapFromFile(val,&result))
+		return;	
+	
+	if (m_pBitmap!=nullptr)
+	{
+		D2DRenderer::m_Instance->ReleaseSharedD2DBitmap(m_pBitmap);
+	}
+	m_FilePath = val;
+	m_pBitmap = result;	
+}
+
 void BitmapComponent::Render(ID2D1RenderTarget* pRenderTarget)
 {
 	DrawDebugWorldTransform(pRenderTarget);
@@ -13,3 +27,4 @@ void BitmapComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->DrawBitmap(m_pBitmap);
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
+ 

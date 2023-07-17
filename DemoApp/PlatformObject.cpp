@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "FlatformObject.h"
+#include "PlatformObject.h"
 #include "../D2DRenderer/SceneComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
 #include "../D2DRenderer/Component.h"
@@ -8,6 +8,7 @@
 #include "../D2DRenderer/SphereComponent.h"
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
+#include "../D2DRenderer/BitmapComponent.h"
 
 /*
 	Test1Object Hierachy
@@ -19,50 +20,50 @@
 		+ [Child] TextComponent
  */
 
-FlatformObject::FlatformObject()
+PlatformObject::PlatformObject()
 {
 	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
-	m_pBoxComponent->SetExtend(400.0f, 50.0f);
+	m_pBoxComponent->SetExtend(35.0f, 35.0f);
 	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
 	m_pBoxComponent->SetCollisionType(CollisionType::Block);
 	SetRootComponent(m_pBoxComponent);
 
-	
-	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
-	m_pTextComponent->SetString(std::wstring(L"Root"));
-	m_pTextComponent->AttachToComponent(m_pBoxComponent);
 
+	m_pBitmapComponent = CreateComponent<BitmapComponent>(L"BitmapComponent");
+	m_pBitmapComponent->SetBitmap(L"../Resource/Tiles/grassmid.png");
+	m_pBitmapComponent->SetRelativeLocation(mathHelper::Vector2F(-35,35));
+	m_pBitmapComponent->AttachToComponent(m_pBoxComponent);
 
 }
 
-FlatformObject::~FlatformObject()
+PlatformObject::~PlatformObject()
 {
 
 }
 
-void FlatformObject::Update()
+void PlatformObject::Update()
 {
 	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
 	__super::Update();
 }
 
-void FlatformObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+void PlatformObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
 
 }
 
-void FlatformObject::OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+void PlatformObject::OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
 
 }
 
-void FlatformObject::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+void PlatformObject::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
 {
 
 }
 
-void FlatformObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
+void PlatformObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
 {
 
 }

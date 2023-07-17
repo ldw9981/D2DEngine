@@ -183,7 +183,7 @@ void D2DRenderer::EndDraw()
 	// 지금은 그런 경우가 잘 일어나지 않으므로 실패 처리의 내용은 아직 작성하지 않았다. 
 }
 
-HRESULT D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
+bool D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
 {	
 	// 문자열과 포인터 쌍에서 문자열만 같으면 해당 원소를 찾는다.
 	auto it = std::find_if(m_SharingBitmaps.begin(), m_SharingBitmaps.end(), 
@@ -202,7 +202,7 @@ HRESULT D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2
 		*ppID2D1Bitmap = pBitmap;
 		pBitmap->AddRef();
 		hr=S_OK;
-		return hr;
+		return true;
 	}
 
 	// Create a decoder
@@ -265,11 +265,11 @@ HRESULT D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2
 		// 로그
 		_com_error err(hr);
 		LOG_ERROR(L"%s %s", err.ErrorMessage(), strFilePath.c_str());
-		return hr;
+		return false;
 	}
 
 	m_SharingBitmaps.push_back(std::pair<std::wstring, ID2D1Bitmap*>(strFilePath,*ppID2D1Bitmap));
-	return hr;
+	return true;
 }
 
 

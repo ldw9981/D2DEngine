@@ -16,6 +16,7 @@ public:
 
 	};
 
-	virtual void Update()=0;	//오브젝트의 상태를 업데이트한다.
+	virtual void Serialize(std::ofstream& ofstream)=0;	
+	virtual void Serialize(std::ifstream& ofstream)=0;
 };
 

@@ -8,25 +8,22 @@ class SphereComponent;
 class TextComponent;
 class SceneComponent;
 class MovementComponent;
-
+class BitmapComponent;
 /*
 
 	Hierarchy 테스트용 오브젝트
 */
-class FlatformObject :
+class PlatformObject :
 	public GameObject
 {
 public:
-	FlatformObject();
-	virtual ~FlatformObject();
+	PlatformObject();
+	virtual ~PlatformObject();
 	BoxComponent* m_pBoxComponent;
-	BoxComponent* m_pLeftBlock;
-	BoxComponent* m_pRightBlock;
-
-	SphereComponent* m_pSphereComponent;
-	TextComponent* m_pTextComponent;
+	
 	SceneComponent* m_pSceneComponent;
 	MovementComponent* m_pMovementComponent;
+	BitmapComponent* m_pBitmapComponent;
 public:
 
 	virtual void Update() override;

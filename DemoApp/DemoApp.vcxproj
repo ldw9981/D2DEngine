@@ -141,7 +141,7 @@
     <ClInclude Include="TransitionDeath.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="FlatformObject.h" />
+    <ClInclude Include="PlatformObject.h" />
     <ClInclude Include="FSMCharacter.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="TestClass.h" />
@@ -154,7 +154,7 @@
     <ClCompile Include="StateIdle.cpp" />
     <ClCompile Include="StateMove.cpp" />
     <ClCompile Include="TransitionDeath.cpp" />
-    <ClCompile Include="FlatformObject.cpp" />
+    <ClCompile Include="PlatformObject.cpp" />
     <ClCompile Include="FSMCharacter.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="TestClass.cpp" />

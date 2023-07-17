@@ -11,7 +11,7 @@
 class AnimationAsset;
 class DemoObject;
 class CameraGameObject;
-class FlatformObject;
+class PlatformObject;
 class DemoApp: public GameApp
 {
 public:
@@ -22,6 +22,6 @@ public:
 	virtual bool Initialize(UINT Width,UINT Height) override;
 
 	AnimationAsset* m_pAnimationAsset;
-	FlatformObject* m_pTest1Object[MAX_DEMO_OBJECT];
+	PlatformObject* m_pTest1Object[MAX_DEMO_OBJECT];
 	//CameraGameObject* m_pCameraGameObject;
 };

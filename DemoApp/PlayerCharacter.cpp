@@ -51,7 +51,7 @@ PlayerCharacter::PlayerCharacter()
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
 
 	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
-	m_pTextComponent->SetRelativeLocation(mathHelper::Vector2F (- 100, 0));
+	m_pTextComponent->SetRelativeLocation(mathHelper::Vector2F (-100,100));
 	m_pTextComponent->SetString(L"이동:화살표 , 공격:컨트롤 , 점프: 스페이스");
 	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
 
@@ -62,7 +62,7 @@ PlayerCharacter::PlayerCharacter()
 	D2D_SIZE_U size = GameApp::m_pInstance->GetClientSize();
 	size.height = size.height / 2;
 	size.width = size.width / 2;
-	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -200.0f));
+	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -100.0f));
 
 }
 
