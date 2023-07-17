@@ -14,7 +14,7 @@ class GameObject;
 class SceneComponent : public Component
 {
 public:
-	SceneComponent(GameObject* pOwner, std::wstring Name);
+	SceneComponent(GameObject* pOwner, std::string Name);
 	virtual ~SceneComponent() {};
 
 
@@ -72,5 +72,8 @@ public:
 	// SetWorldLocation은 
 	// 부모가 있을경우 부모 기준으로 RelativeLocation을 변경하고 WorldTransform을 설정해야한다.
 	// 부모가 없을경우 RelativeLocation을 설정하고 WorldTransform을 설정한다.
+
+	virtual void SerializeOut(nlohmann::ordered_json& object){};
+	virtual void SerializeIn(nlohmann::ordered_json& object){};
 };
 

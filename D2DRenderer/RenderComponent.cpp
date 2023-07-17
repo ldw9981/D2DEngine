@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "RenderComponent.h"
 
-RenderComponent::RenderComponent(GameObject* pOwner, const std::wstring& Name)
+RenderComponent::RenderComponent(GameObject* pOwner, const std::string& Name)
 	:SceneComponent(pOwner, Name),m_bVisible(true),m_iZOrder(0)
 {
 	// Screen 변환에서 왼쪽,하단이 0,0에서 위로 출력하므로 상하 반대로 출력한다.

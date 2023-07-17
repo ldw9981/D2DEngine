@@ -3,7 +3,7 @@
 #include "D2DRenderer.h"
 #include "Helper.h"
 
-BoxComponent::BoxComponent(GameObject* pOwner, const std::wstring& Name)
+BoxComponent::BoxComponent(GameObject* pOwner, const std::string& Name)
 	:ColliderComponent(pOwner, Name),m_Rect({0})
 {
 	m_ColliderType = ColliderType::Box;

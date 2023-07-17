@@ -11,7 +11,7 @@ class FSMComponent :
     public Component 
 {
 public:
-	FSMComponent(GameObject* pOwner, const std::wstring& Name)
+	FSMComponent(GameObject* pOwner, const std::string& Name)
 		:Component(pOwner, Name),m_pFiniteStateMachine(nullptr)
 	{
 

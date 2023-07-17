@@ -4,14 +4,14 @@
 #include "GameObject.h"
 #include "D2DRenderer.h"
 
-SceneComponent::SceneComponent(GameObject* pOwner, std::wstring Name)
+SceneComponent::SceneComponent(GameObject* pOwner, std::string Name)
 	:Component(pOwner, Name),
 	m_RelativeScale({ 1.0f,1.0f }),
 	m_RelativeRotation(0.0f), 
 	m_RelativeLocation({ 0.0f,0.0f }), 
-	m_RelativeTransform(Matrix3x2F::Identity()), 
+	m_RelativeTransform(D2D1::Matrix3x2F::Identity()), 
 	m_pParentScene(nullptr),
-	m_WorldTransform(Matrix3x2F::Identity())
+	m_WorldTransform(D2D1::Matrix3x2F::Identity())
 {
 	m_Velocity = { 0.0f,0.0f };
 }
@@ -30,9 +30,9 @@ void SceneComponent::Update()
 
 void SceneComponent::UpdateTrasnform()
 {
-	m_RelativeTransform = Matrix3x2F::Scale(D2D1::SizeF(m_RelativeScale.x, m_RelativeScale.y)) *
-		Matrix3x2F::Rotation(m_RelativeRotation) *
-		Matrix3x2F::Translation(m_RelativeLocation.x, m_RelativeLocation.y);
+	m_RelativeTransform = D2D1::Matrix3x2F::Scale(D2D1::SizeF(m_RelativeScale.x, m_RelativeScale.y)) *
+		D2D1::Matrix3x2F::Rotation(m_RelativeRotation) *
+		D2D1::Matrix3x2F::Translation(m_RelativeLocation.x, m_RelativeLocation.y);
 
 	if (m_pParentScene != nullptr)
 	{	

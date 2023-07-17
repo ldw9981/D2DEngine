@@ -12,7 +12,7 @@ class FiniteStateMachine;
 class FSMState
 {
 public:
-	FSMState(FiniteStateMachine* pOwner,std::wstring Name)
+	FSMState(FiniteStateMachine* pOwner,std::string Name)
 		:m_pOwner(pOwner)
 		,m_Name(Name)
 	{
@@ -22,7 +22,7 @@ public:
 	{
 
 	}
-	std::wstring m_Name;
+	std::string m_Name;
 	FiniteStateMachine* m_pOwner;
 
 	std::vector<FSMTransition*> m_Transitions;
@@ -32,14 +32,11 @@ public:
 	//체크할 Transition 인터스턴스를 등록한다.
 	void AddTransition(FSMTransition* pTransition) { m_Transitions.push_back(pTransition); }
 
-	virtual bool CheckTransition(std::wstring& OutNextState);
-	const std::wstring& GetName() { return m_Name; }
+	virtual bool CheckTransition(std::string& OutNextState);
+	const std::string& GetName() { return m_Name; }
 
 	virtual void Enter() = 0;
 	virtual void Update() = 0;
 	virtual void Exit() = 0;
-
-	virtual void EventAnimationEnd(const std::wstring& AnimationName) = 0;
-	virtual void EventAnimationNotify(const std::wstring& NotifyName) = 0;
 };
 

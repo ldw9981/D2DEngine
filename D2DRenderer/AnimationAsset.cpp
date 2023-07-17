@@ -3,7 +3,7 @@
 #include "D2DRenderer.h"
 #include <fstream>
 #include "Helper.h"
-
+#include <nlohmann/json.hpp>
 
 using nlohmann::ordered_json;
 
@@ -93,7 +93,7 @@ bool AnimationAsset::Load(const WCHAR* szFilePath)
 	for (auto& animationObj : obj["m_Animations"])
 	{
 		ANIMATION_INFO animation;
-		animation.m_Name = animationObj["Name"].get<std::string>();
+		animation.m_Name = animationObj["m_Name"].get<std::string>();
 		for (auto& frameObj : animationObj["m_Frames"])
 		{
 			FRAME_INFO frame;

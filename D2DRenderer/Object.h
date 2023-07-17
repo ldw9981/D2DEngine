@@ -4,6 +4,8 @@
 	추후 Save/Load를 하는 Serialize을 선언할 예정
 	자식 클래스는 Serialize를 구현해야 한다.
 */
+#include <nlohmann/json.hpp>
+
 class Object
 {
 public:
@@ -16,7 +18,7 @@ public:
 
 	};
 
-	virtual void Serialize(std::ofstream& ofstream)=0;	
-	virtual void Serialize(std::ifstream& ofstream)=0;
+	virtual void SerializeOut(nlohmann::ordered_json& object) {} ;
+	virtual void SerializeIn(nlohmann::ordered_json& object) {};
 };
 

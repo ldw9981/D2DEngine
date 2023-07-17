@@ -64,7 +64,7 @@ public:
 	
 	// 컴포넌트를 템틀릿 함수로 생성합니다.
 	template<typename T>
-	T* CreateComponent(const std::wstring& Name )
+	T* CreateComponent(const std::string& Name )
 	{
 		bool bIsBase = std::is_base_of<Component, T>::value;
 		assert(bIsBase == true);
@@ -73,7 +73,7 @@ public:
 		return pComponent;
 	}
 
-	Component* GetComponent(const std::wstring& Name)
+	Component* GetComponent(const std::string& Name)
 	{
 		for (auto& pComponent : m_OwnedComponents)
 		{

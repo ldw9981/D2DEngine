@@ -39,7 +39,7 @@ public:
 		return false;
 	}
 	void BindState(FSMState* pState) { m_States.push_back(pState); }
-	bool CheckTransition(std::wstring& OutNextState)
+	bool CheckTransition(std::string& OutNextState)
 	{
 		for (auto pTransition : m_Transitions)
 		{

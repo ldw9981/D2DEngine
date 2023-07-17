@@ -2,7 +2,7 @@
 #include "FSMState.h"
 #include "FSMTransition.h"
 
-bool FSMState::CheckTransition(std::wstring& OutNextState)
+bool FSMState::CheckTransition(std::string& OutNextState)
 {
 	for (auto pTransition : m_Transitions)
 	{

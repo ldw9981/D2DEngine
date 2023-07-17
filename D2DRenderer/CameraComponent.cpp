@@ -4,7 +4,7 @@
 #include "GameApp.h"
 
 
-CameraComponent::CameraComponent(GameObject* pOwner, const std::wstring& Name)
+CameraComponent::CameraComponent(GameObject* pOwner, const std::string& Name)
 	: SceneComponent(pOwner, Name)
 {
 	m_BoundingBox.m_Extend.x = GameApp::m_pInstance->GetClientSize().width / 2.f;

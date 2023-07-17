@@ -65,7 +65,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
 
     GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();
     pGameObject->SetWorldLocation(mathHelper::Vector2F(0, 0));
-    CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent(L"CameraComponent");
+    CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent("CameraComponent");
     m_World.SetCamera(pCameraComponent);    
     
     return true;

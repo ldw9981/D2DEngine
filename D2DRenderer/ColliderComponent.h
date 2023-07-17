@@ -33,7 +33,7 @@ class ColliderComponent :
     public RenderComponent
 {
 public:
-	ColliderComponent(GameObject* pOwner, const std::wstring& Name);
+	ColliderComponent(GameObject* pOwner, const std::string& Name);
 	virtual ~ColliderComponent();
 
 protected:

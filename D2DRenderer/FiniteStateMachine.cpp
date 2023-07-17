@@ -25,7 +25,7 @@ void FiniteStateMachine::Update()
 	m_pCurrentState->Update();
 
 	// Transition Check수행하여 조건에 만족할경우 넘겨받은 nextState로 변경한다.
-	wstring nextStateName;
+	std::string nextStateName;
 	if (m_pCurrentState->CheckTransition(nextStateName))
 	{
 		ChangeState(nextStateName);
@@ -48,7 +48,7 @@ void FiniteStateMachine::Update()
 	}
 }
 
-void FiniteStateMachine::ChangeState(wstring stateName)
+void FiniteStateMachine::ChangeState(std::string stateName)
 {
 	if (m_pCurrentState)
 	{
@@ -68,11 +68,12 @@ void FiniteStateMachine::ChangeState(wstring stateName)
 	}
 	else
 	{
-		LOG_WARNING(L"No state with name: %s ", stateName.c_str());
+		std::wstring wstrStateName = D2DHelper::StringToWString(stateName);
+		LOG_WARNING(L"No state with name: %s ", wstrStateName.c_str());
 	}
 }
 
-void FiniteStateMachine::SetInitialState(std::wstring stateName)
+void FiniteStateMachine::SetInitialState(std::string stateName)
 {
 	auto it = m_pStates.find(stateName);
 	if (it != m_pStates.end())
@@ -81,7 +82,8 @@ void FiniteStateMachine::SetInitialState(std::wstring stateName)
 	}
 	else
 	{
-		LOG_WARNING(L"No state with name: %s ", stateName.c_str());
+		std::wstring wstrStateName = D2DHelper::StringToWString(stateName);
+		LOG_WARNING(L"No state with name: %s ", wstrStateName.c_str());
 	}
 }
 

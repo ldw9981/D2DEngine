@@ -8,7 +8,7 @@ class MovementComponent :
     public Component
 {
 public:
-	MovementComponent(GameObject* pOwner, std::wstring Name)
+	MovementComponent(GameObject* pOwner, std::string Name)
 		:Component(pOwner, Name)
 	{
 		m_Speed=0.0f; 

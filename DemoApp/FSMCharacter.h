@@ -43,11 +43,11 @@ public:
 		m_StateAliasDeath.BindState(&m_StateAttack);
 		m_StateAliasDeath.BindState(&m_StateIdle);
 
-		SetInitialState(L"Idle");
+		SetInitialState("Idle");
 
 		GameObject* pGameObject = pOwner->GetOwner();
-		m_pAnimationComponent =  (AnimationComponent*)pGameObject->GetComponent(L"AnimationComponent");
-		m_pSideMovementComponent = (SideMovementComponent*)pGameObject->GetComponent(L"SideMovementComponent");
+		m_pAnimationComponent =  (AnimationComponent*)pGameObject->GetComponent("AnimationComponent");
+		m_pSideMovementComponent = (SideMovementComponent*)pGameObject->GetComponent("SideMovementComponent");
 		
 		m_Attack=false;
 		m_AnimationComplete=false;

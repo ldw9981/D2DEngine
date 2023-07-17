@@ -13,7 +13,7 @@ class GameObject;
 class RenderComponent: public SceneComponent
 {
 public:
-	RenderComponent(GameObject* pOwner,const std::wstring&  Name);
+	RenderComponent(GameObject* pOwner,const std::string&  Name);
 	virtual ~RenderComponent();
 
 protected:

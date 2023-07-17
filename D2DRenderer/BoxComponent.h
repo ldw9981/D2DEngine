@@ -8,7 +8,7 @@ class BoxComponent :
 	public ColliderComponent
 {
 public:
-	BoxComponent(GameObject* pOwner, const std::wstring& Name);
+	BoxComponent(GameObject* pOwner, const std::string& Name);
 	virtual ~BoxComponent();
 
 protected:

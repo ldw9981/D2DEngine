@@ -3,7 +3,7 @@
 #include "../D2DRenderer/FSMState.h"
 
 StateDeath::StateDeath(FiniteStateMachine* pOwner)
-	:FSMState(pOwner, L"Death")
+	:FSMState(pOwner, "Death")
 {
 
 }
@@ -27,17 +27,8 @@ void StateDeath::Exit()
 
 }
 
-bool StateDeath::CheckTransition(std::wstring& NextState)
+bool StateDeath::CheckTransition(std::string& NextState)
 {
 	return false;
 }
 
-void StateDeath::EventAnimationEnd(const std::wstring& AnimationName)
-{
-
-}
-
-void StateDeath::EventAnimationNotify(const std::wstring& NotifyName)
-{
-
-}

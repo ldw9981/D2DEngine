@@ -4,7 +4,7 @@
 
 
 StateMove::StateMove(FiniteStateMachine* pOwner)
-	:FSMState(pOwner,L"Move")
+	:FSMState(pOwner,"Move")
 {
 
 }
@@ -56,28 +56,18 @@ void StateMove::Exit()
 	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);	
 }
 
-bool StateMove::CheckTransition(std::wstring& NextState)
+bool StateMove::CheckTransition(std::string& NextState)
 {
 	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
 	if (pFSMCharacter->m_Attack)
 	{
-		NextState = L"Attack";
+		NextState = "Attack";
 		return true;
 	}
 	else if (pFSMCharacter->m_MoveDirection.x == 0.0f && pFSMCharacter->m_MoveDirection.y == 0.0f)
 	{
-		NextState = L"Idle";
+		NextState = "Idle";
 		return true;
 	}
 	return false;
-}
-
-void StateMove::EventAnimationEnd(const std::wstring& AnimationName)
-{
-
-}
-
-void StateMove::EventAnimationNotify(const std::wstring& NotifyName)
-{
-
 }

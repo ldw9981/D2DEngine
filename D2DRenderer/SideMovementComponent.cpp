@@ -6,7 +6,7 @@
 
 float SideMovementComponent::m_Gravity = 9.80f;
 
-SideMovementComponent::SideMovementComponent(GameObject* pOwner, std::wstring Name)
+SideMovementComponent::SideMovementComponent(GameObject* pOwner, std::string Name)
 :MovementComponent(pOwner,Name)
 {
 	m_GravityScale = 100.0f;  // 9.8을 그대로 쓰면  1초에 9.8 픽셀이 적용됨

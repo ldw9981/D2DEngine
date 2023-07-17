@@ -22,14 +22,14 @@
 
 PlatformObject::PlatformObject()
 {
-	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
+	m_pBoxComponent = CreateComponent<BoxComponent>("BoxComponent");
 	m_pBoxComponent->SetExtend(35.0f, 35.0f);
 	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
 	m_pBoxComponent->SetCollisionType(CollisionType::Block);
 	SetRootComponent(m_pBoxComponent);
 
 
-	m_pBitmapComponent = CreateComponent<BitmapComponent>(L"BitmapComponent");
+	m_pBitmapComponent = CreateComponent<BitmapComponent>("BitmapComponent");
 	m_pBitmapComponent->SetBitmap(L"../Resource/Tiles/grassmid.png");
 	m_pBitmapComponent->SetRelativeLocation(mathHelper::Vector2F(-35,35));
 	m_pBitmapComponent->AttachToComponent(m_pBoxComponent);
@@ -63,7 +63,7 @@ void PlatformObject::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderCo
 
 }
 
-void PlatformObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
+void PlatformObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName)
 {
 
 }

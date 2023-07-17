@@ -26,36 +26,36 @@
 PlayerCharacter::PlayerCharacter()
 {
 	// 그냥 Component 
-	m_pSideMovementComponent = CreateComponent<SideMovementComponent>(L"SideMovementComponent");
+	m_pSideMovementComponent = CreateComponent<SideMovementComponent>("SideMovementComponent");
 	m_pSideMovementComponent->SetSpeed(200);
 
-	m_pFootBox = CreateComponent<BoxComponent>(L"FootBox");
+	m_pFootBox = CreateComponent<BoxComponent>("FootBox");
 	m_pFootBox->SetExtend(20.0f,4.0f);
 	SetRootComponent(m_pFootBox);
 
 	// 위치를 변경할 컴포넌트를 설정한다.
 	m_pSideMovementComponent->SetRootSceneComponent(m_pFootBox);
 
-	m_pBodyBox = CreateComponent<BoxComponent>(L"BodyBox");
+	m_pBodyBox = CreateComponent<BoxComponent>("BodyBox");
 	m_pBodyBox->SetRelativeLocation(mathHelper::Vector2F(0, 50));
 	m_pBodyBox->SetExtend(25.0f, 50.0f);
 	m_pBodyBox->AttachToComponent(m_pFootBox);
 
 	// SceneComponent만 RootComponent로 설정 가능
-	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
+	m_pAnimationComponent = CreateComponent<AnimationComponent>("AnimationComponent");
 	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"../Resource/Ken.AnimAsset"));	
 	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(0,-4));
 	m_pAnimationComponent->AttachToComponent(m_pFootBox);	
 
-	m_pFSMComponent = CreateComponent<FSMComponent>(L"FSMComponent");
+	m_pFSMComponent = CreateComponent<FSMComponent>("FSMComponent");
 	m_pFSMCharacter = m_pFSMComponent->CreateFiniteStateMachine<FSMCharacter>();
 
-	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
+	m_pTextComponent = CreateComponent<TextComponent>("TextComponent");
 	m_pTextComponent->SetRelativeLocation(mathHelper::Vector2F (-100,100));
 	m_pTextComponent->SetString(L"이동:화살표 , 공격:컨트롤 , 점프: 스페이스");
 	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
 
-	m_pCameraComponent = CreateComponent<CameraComponent>(L"CameraComponent");
+	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");
 	m_pCameraComponent->AttachToComponent(m_pAnimationComponent);
 	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
 	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
@@ -139,7 +139,7 @@ void PlayerCharacter::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderC
 
 }
 
-void PlayerCharacter::OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::wstring& AnimationName)
+void PlayerCharacter::OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::string& AnimationName)
 {
 	m_pFSMCharacter->m_AnimationComplete = true;
 }

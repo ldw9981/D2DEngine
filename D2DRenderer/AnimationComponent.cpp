@@ -7,7 +7,7 @@
 #include "GameObject.h"
 #include "RenderComponent.h"
 
-AnimationComponent::AnimationComponent(GameObject* pOwner, const std::wstring& Name)
+AnimationComponent::AnimationComponent(GameObject* pOwner, const std::string& Name)
 	:RenderComponent(pOwner, Name)
 {
 	m_pAnimationAsset = nullptr;

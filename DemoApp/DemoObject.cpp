@@ -22,9 +22,9 @@
 
 DemoObject::DemoObject()
 {
-	m_pMovementComponent = CreateComponent<MovementComponent>(L"MovementComponent");
+	m_pMovementComponent = CreateComponent<MovementComponent>("MovementComponent");
 
-	m_pSceneComponent = CreateComponent<SceneComponent>(L"SceneComponent");
+	m_pSceneComponent = CreateComponent<SceneComponent>("SceneComponent");
 	m_pSceneComponent->Initialize();
 	SetRootComponent(m_pSceneComponent);
 
@@ -38,18 +38,18 @@ DemoObject::DemoObject()
 
 
 
-	m_pSphereComponent = CreateComponent<SphereComponent>(L"SphereComponent");
+	m_pSphereComponent = CreateComponent<SphereComponent>("SphereComponent");
 	m_pSphereComponent->SetRadius(10.0f);
 	m_pSphereComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
 
 	m_pSphereComponent->AttachToComponent(m_pSceneComponent);
 
-	m_pTextComponent = CreateComponent<TextComponent>(L"TextComponent");
+	m_pTextComponent = CreateComponent<TextComponent>("TextComponent");
 	m_pTextComponent->SetString(std::wstring(L"Root"));
 	m_pTextComponent->Initialize();
 	m_pTextComponent->AttachToComponent(m_pSceneComponent);
 
-	m_pBoxComponent = CreateComponent<BoxComponent>(L"BoxComponent");
+	m_pBoxComponent = CreateComponent<BoxComponent>("BoxComponent");
 	m_pBoxComponent->SetExtend(25.0f, 25.0f);
 	m_pBoxComponent->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
 	m_pBoxComponent->SetRelativeLocation(mathHelper::Vector2F(100.0f, 100.0f));
@@ -57,7 +57,7 @@ DemoObject::DemoObject()
 	m_pBoxComponent->AttachToComponent(m_pSphereComponent);
 
 
-	m_pAnimationComponent = CreateComponent<AnimationComponent>(L"AnimationComponent");
+	m_pAnimationComponent = CreateComponent<AnimationComponent>("AnimationComponent");
 	m_pAnimationComponent->SetAnimationAsset(std::wstring(L"Test"));
 	m_pAnimationComponent->SetRelativeLocation(mathHelper::Vector2F(100.0f, 100.0f));
 	m_pAnimationComponent->Initialize();

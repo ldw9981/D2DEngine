@@ -22,7 +22,7 @@ public:
 	}
 	
 public:	
-	std::wstring m_NextState;			// 변화할 상태이름
+	std::string m_NextState;			// 변화할 상태이름
 	virtual bool CheckCondition() = 0;	// 조건 내용
 	FiniteStateMachine* m_pOwner;
 public:

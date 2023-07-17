@@ -5,7 +5,7 @@
 
 Camera::Camera()
 {
-	m_pCameraComponent = CreateComponent<CameraComponent>(L"CameraComponent");
+	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");
 	SetRootComponent(m_pCameraComponent);
 	// 사용하려는 게임에서 직접 호출해야 한다
 	//GetOwnerWorld()->SetCamera(m_pCameraComponent);
@@ -31,7 +31,7 @@ void Camera::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent*
 
 }
 
-void Camera::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::wstring& AnimationName)
+void Camera::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName)
 {
 
 }

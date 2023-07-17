@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "GameApp.h"
 
-ColliderComponent::ColliderComponent(GameObject* pOwner, const std::wstring& Name)
+ColliderComponent::ColliderComponent(GameObject* pOwner, const std::string& Name)
 	: RenderComponent(pOwner,Name),m_Color(D2D1::ColorF(D2D1::ColorF::White))
 {
 	m_ColliderType = ColliderType::None;

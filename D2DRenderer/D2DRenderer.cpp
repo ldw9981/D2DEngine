@@ -16,9 +16,9 @@
 ID2D1HwndRenderTarget* D2DRenderer::m_pRenderTarget= nullptr;
 D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
-D2D1_MATRIX_3X2_F D2DRenderer::m_CameraTransform = Matrix3x2F::Identity();
+D2D1_MATRIX_3X2_F D2DRenderer::m_CameraTransform = D2D1::Matrix3x2F::Identity();
 
-D2D1_MATRIX_3X2_F D2DRenderer::m_ScreenTransform = Matrix3x2F::Identity();
+D2D1_MATRIX_3X2_F D2DRenderer::m_ScreenTransform = D2D1::Matrix3x2F::Identity();
 
 D2DRenderer::D2DRenderer()
     :m_pD2DFactory(nullptr),
@@ -87,7 +87,7 @@ HRESULT D2DRenderer::Initialize()
             rc.bottom - rc.top);
 
 		// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
-		m_ScreenTransform = Matrix3x2F::Scale(1.0f, -1.0f) * Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
+		m_ScreenTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) * D2D1::Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(

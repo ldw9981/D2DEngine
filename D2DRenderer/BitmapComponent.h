@@ -5,7 +5,7 @@ class BitmapComponent :
     public RenderComponent
 {
 public:
-    BitmapComponent(GameObject* pOwner, const std::wstring& Name)
+    BitmapComponent(GameObject* pOwner, const std::string& Name)
         :RenderComponent(pOwner, Name)
     {
         D2DRenderer::m_Instance->CreateSharedD2DBitmapFromFile(NOIMAGE,&m_pBitmap);

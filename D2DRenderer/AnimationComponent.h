@@ -6,7 +6,7 @@ class AnimationComponent;
 class IAnimationNotify
 {
 public:
-	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent,const std::wstring& AnimationName) = 0;
+	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent,const std::string& AnimationName) = 0;
 };
 
 
@@ -21,7 +21,7 @@ class AnimationComponent :
     public RenderComponent
 {
 public:
-	AnimationComponent(GameObject* pOwner, const std::wstring& Name);
+	AnimationComponent(GameObject* pOwner, const std::string& Name);
 	virtual ~AnimationComponent();
 
 

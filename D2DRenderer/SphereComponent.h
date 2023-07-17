@@ -8,7 +8,7 @@ class SphereComponent :
     public ColliderComponent
 {
 public:
-	SphereComponent(GameObject* pOwner,const std::wstring& Name);
+	SphereComponent(GameObject* pOwner,const std::string& Name);
 	~SphereComponent();
 public:
 	float m_Radius;

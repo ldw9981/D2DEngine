@@ -4,7 +4,7 @@
 #include "Helper.h"
 #include "GameObject.h"
 
-TextComponent::TextComponent(GameObject* pOwner, const std::wstring& Name)
+TextComponent::TextComponent(GameObject* pOwner, const std::string& Name)
 	:RenderComponent(pOwner,Name),m_String(L"Text"), m_Color(D2D1::ColorF(D2D1::ColorF::White)),m_Rect(D2D1::RectF(0,0,100,100))
 {
 

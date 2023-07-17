@@ -10,7 +10,7 @@ class SideMovementComponent :
     public MovementComponent
 {
 public:
-	SideMovementComponent(GameObject* pOwner,std::wstring Name);
+	SideMovementComponent(GameObject* pOwner,std::string Name);
 	~SideMovementComponent();
 	static float m_Gravity;		// 중력 가속도
 protected:

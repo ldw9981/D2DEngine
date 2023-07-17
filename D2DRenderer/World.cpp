@@ -131,6 +131,6 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 
 	// 텍스트 정보 출력
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-	wstring strCullCount = L"Culled Object Count : " + to_wstring(m_nCulledObjectCount);
+	std::wstring strCullCount = L"Culled Object Count : " + std::to_wstring(m_nCulledObjectCount);
 	D2DRenderer::m_Instance->DrawText(pRenderTarget,strCullCount, D2D1::RectF(0,0,300,50), D2D1::ColorF(D2D1::ColorF::White));
 }
