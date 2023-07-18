@@ -6,8 +6,6 @@
 	게임 오브젝트의 기능을 컴포넌트 단위로 분리하기 위한 추상 클래스
 	게임오브젝트는 컴포넌트의 조합으로 이루어진다.
 	컴포넌트의 생성은 GameObject의 CreateComponent<T> 를 통해 이루어진다.
-
-	지금당장은 Object의 역할이 없으므로 Object를 상속받지 않는다.
 */
 class GameObject;
 class Component : public Object
@@ -20,7 +18,7 @@ public:
 
 protected:
 	GameObject* m_pOwner;
-	std::string m_Name;
+	std::string m_Name;			// 게임 오브젝트 안에서 같은 종류의 컴포넌트라도 다른 이름을 갖게하여 구분할수 있게 한다.	
 public:
 	const std::string& GetName() const { return m_Name; }
 	virtual void Update() = 0;
