@@ -24,7 +24,7 @@ public:
 		return	self.name();
 	}
 
-	virtual void SerializeOut(nlohmann::ordered_json& object) {} ;
-	virtual void SerializeIn(nlohmann::ordered_json& object) {};
+	virtual void SerializeOut(nlohmann::ordered_json& object)=0;
+	virtual void SerializeIn(nlohmann::ordered_json& object)=0;
 };
 

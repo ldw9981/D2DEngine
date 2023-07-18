@@ -7,10 +7,12 @@
 #include "MyComponent4.h"
 #include "GameObject.h"
 #include "PlayerCharacter.h"
+#include "TestFileIO.h"
 
-int __main() 
+int main()
 {
 	PlayerCharacter go;
+	//Test_C_FileIO_Text();
 
 	go.Update();
 	go.Render();

@@ -22,7 +22,8 @@ public:
 	
 };
 
-int main() {
+int TestTypeId()
+{
 	Shape shape;
 	Rectangle rectangle;
 

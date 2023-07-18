@@ -151,6 +151,7 @@
     <ClCompile Include="TestDeligate.cpp" />
     <ClCompile Include="TestCode.cpp" />
     <ClCompile Include="TestDestructor.cpp" />
+    <ClCompile Include="TestFileIO.cpp" />
     <ClCompile Include="TestJson.cpp" />
     <ClCompile Include="TestObserver.cpp" />
     <ClCompile Include="TestTypeId.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="TestCode.h" />
+    <ClInclude Include="TestFileIO.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
