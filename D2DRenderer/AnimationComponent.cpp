@@ -67,7 +67,7 @@ void AnimationComponent::Update()
 	// 마지막 프레임으로 번호가 변할때 단한번 이벤트 호출
 	if (m_FrameIndexCurr!= m_FrameIndexPrev && m_FrameIndexCurr == (MaxFrameCount - 1)) 
 	{
-		GetOwner()->OnAnimationEnd(this, m_Name.c_str());
+		GetOwner()->OnAnimationEnd(this, m_Name);
 	}
 
 	// 이지미에서의 프레임 영역

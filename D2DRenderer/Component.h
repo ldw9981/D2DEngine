@@ -13,16 +13,16 @@ class GameObject;
 class Component : public Object
 {
 public:
-	Component(GameObject* pOwner,const std::string& Name) : m_pOwner(pOwner),m_ComponentName(Name)
+	Component(GameObject* pOwner,const std::string& Name) : m_pOwner(pOwner),m_Name(Name)
 	{
 	}
 	virtual ~Component() {};
 
 protected:
 	GameObject* m_pOwner;
-	std::string m_ComponentName;
+	std::string m_Name;
 public:
-	const std::string& GetName() const { return m_ComponentName; }
+	const std::string& GetName() const { return m_Name; }
 	virtual void Update() = 0;
 	void SetOwner(GameObject* pOwner) { m_pOwner = pOwner; }
 	GameObject* GetOwner() { return m_pOwner; }

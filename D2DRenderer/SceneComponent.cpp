@@ -105,8 +105,10 @@ void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
 	Component::SerializeOut(object);
 	if (m_pParentScene)
 	{
-		object["ParentScene"] =  m_pParentScene->GetName(); 
-	}	
+		object["ParentScene"] = m_pParentScene->GetName();
+	}
+	else object["ParentScene"] = "";
+
 	object["m_RelativeScale"] = { m_RelativeScale.x,m_RelativeScale.y };
 	object["m_RelativeRotation"] = m_RelativeRotation;
 	object["m_RelativeLocation"] = { m_RelativeLocation.x,m_RelativeLocation.y };
