@@ -27,3 +27,10 @@ void MovementComponent::SetDirection(const mathHelper::Vector2F& Direction)
 	m_Direction.Normalize();
 }
 
+void MovementComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	Component::SerializeOut(object);
+	object["m_Direction"] = { m_Direction.x , m_Direction.y };
+	object["m_Speed"] = m_Speed;
+}
+

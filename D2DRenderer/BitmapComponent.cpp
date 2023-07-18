@@ -27,4 +27,10 @@ void BitmapComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->DrawBitmap(m_pBitmap);
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
+
+void BitmapComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeOut(object);
+	object["m_FilePath"] = m_FilePath;
+}
  
