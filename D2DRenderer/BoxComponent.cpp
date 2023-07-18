@@ -67,3 +67,12 @@ bool BoxComponent::IsCollide(ColliderComponent* pOtherComponent)
 	}
 	return false;
 }
+
+void BoxComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	ColliderComponent::SerializeOut(object);
+	object["m_ColliderType"] = m_ColliderType;
+	object["m_CollisionType"] = m_CollisionType;
+	object["m_Collider.Extend"] = { m_Collider.m_Extend.x, m_Collider.m_Extend.y };
+	object["m_BoundingBox.Extend"] = { m_BoundingBox.m_Extend.x, m_BoundingBox.m_Extend.y };
+}

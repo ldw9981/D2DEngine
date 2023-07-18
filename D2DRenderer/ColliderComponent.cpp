@@ -45,3 +45,11 @@ void ColliderComponent::ProcessBlock(ColliderComponent* pOtherComponent)
 	GetOwner()->OnBlock(this, pOtherComponent);
 }
 
+void ColliderComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeOut(object);
+	object["m_Color"] = { m_Color.r , m_Color.g , m_Color.b, m_Color.a };
+	object["m_ColliderType"] = m_ColliderType;
+	object["m_CollisionType"] = m_CollisionType; 
+}
+

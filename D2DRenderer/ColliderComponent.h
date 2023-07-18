@@ -62,5 +62,8 @@ public:
 
 	// Sphere,Box, Capsule 에서 각자 구현해야한다.
 	virtual bool IsCollide(ColliderComponent* pOtherComponent)=0;
+
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object) {};
 };
 

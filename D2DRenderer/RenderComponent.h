@@ -17,18 +17,21 @@ public:
 	virtual ~RenderComponent();
 
 protected:
-	int m_iZOrder;		// 그리는 순서
-	bool m_bVisible;	// 그리려는지
+	int m_ZOrder;		// 그리는 순서
+	bool m_Visible;	// 그리려는지
 	D2D1_MATRIX_3X2_F	m_RenderTransform;	// 반대 방향으로 뒤집기 위한 행렬 Scale.x = -1.0f 
 public:
-	void SetZOrder(int zOrder) {  m_iZOrder = zOrder; }
-	int GetZOrder() const { return m_iZOrder; }
-	void SetVisible(bool visible) { m_bVisible = visible; }
+	void SetZOrder(int zOrder) {  m_ZOrder = zOrder; }
+	int GetZOrder() const { return m_ZOrder; }
+	void SetVisible(bool visible) { m_Visible = visible; }
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) = 0;
 
 	static bool CompareRenderOrder(RenderComponent* a, RenderComponent* b)
 	{
-		return a->m_iZOrder < b->m_iZOrder;
+		return a->m_ZOrder < b->m_ZOrder;
 	}
+
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object) {};
 };
 

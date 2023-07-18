@@ -59,5 +59,7 @@ public:
 	void SetAnimation(const char* AnimationName, bool Mirror, bool Loop);
 	void SetAnimationAsset(const std::wstring& strAssetKey);
 
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object) {};
 };
 

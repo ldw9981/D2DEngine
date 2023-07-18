@@ -134,3 +134,9 @@ void AnimationComponent::SetAnimationAsset(const std::wstring& strAssetKey)
 	m_strAnimationAsset = strAssetKey;
 	m_pAnimationAsset = D2DRenderer::m_Instance->CreateSharedAnimationAsset(strAssetKey);
 }
+
+void AnimationComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeOut(object);
+	object["m_strAnimationAsset"] = m_strAnimationAsset;
+}
