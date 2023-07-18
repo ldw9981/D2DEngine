@@ -26,11 +26,7 @@ public:
 	virtual void Update() = 0;
 	void SetOwner(GameObject* pOwner) { m_pOwner = pOwner; }
 	GameObject* GetOwner() { return m_pOwner; }
-	std::string GetClassName() 
-	{
-		const std::type_info& self = typeid(*this);
-		return	self.name();
-	}
+
 	
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);

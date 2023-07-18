@@ -7,9 +7,7 @@
 #include "ColliderComponent.h"	
 #include "BoxComponent.h"	
 
-World::World()
-{
-}
+
 
 /*	
 	매프레임 BoxComponent를 모으는건 비효율 적이다.
@@ -133,4 +131,24 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	std::wstring strCullCount = L"Culled Object Count : " + std::to_wstring(m_nCulledObjectCount);
 	D2DRenderer::m_Instance->DrawText(pRenderTarget,strCullCount, D2D1::RectF(0,0,300,50), D2D1::ColorF(D2D1::ColorF::White));
+}
+
+void World::SerializeOut(nlohmann::ordered_json& object)
+{
+	object["m_Name"] = m_Name;
+	for (auto& gameObject : m_GameObjects)
+	{
+		nlohmann::ordered_json JsonGameObject;
+		gameObject->SerializeOut(JsonGameObject);
+		object["m_GameObjects"].push_back(JsonGameObject);
+	}
+}
+
+void World::Save(const wchar_t* FilePath)
+{
+	nlohmann::ordered_json obj;
+	SerializeOut(obj);
+	std::ofstream ofs(FilePath);
+	ofs << obj.dump(2);
+	ofs.close();
 }

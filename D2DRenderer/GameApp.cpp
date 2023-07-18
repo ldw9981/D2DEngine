@@ -16,7 +16,7 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 }
 
 GameApp::GameApp(HINSTANCE hInstance)
-	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768})
+	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768}),m_World("TestWorld")
 {
 	m_previousTime =0.0f;
 	std::wstring str(__FUNCTIONW__);

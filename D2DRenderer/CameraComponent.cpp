@@ -24,3 +24,8 @@ void CameraComponent::Update()
 	m_BoundingBox.m_Center.y = GetWorldLocation().y + m_BoundingBox.m_Extend.y;
 }
 
+void CameraComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	__super::SerializeOut(object);
+}
+

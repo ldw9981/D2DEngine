@@ -7,10 +7,15 @@
 */
 class RenderComponent;
 class CameraComponent;
-class World 
+class World :
+	public Object
 {
 public:
-    World();
+	World(std::string Name)
+	:m_Name(Name)
+	{
+
+	}
     virtual ~World()
 	{
 		for (auto& gameObject : m_GameObjects)
@@ -32,7 +37,7 @@ protected:
     std::list<GameObject*> m_GameObjects;	// 생성된 게임 오브젝트들
 	CameraComponent* m_pCamera;				// 컬링용도로 사용할 카메라
 	int m_nCulledObjectCount;
-	std::wstring m_Name;
+	std::string m_Name;
 public:
 	
 	// 템플릿 함수로 GameObject를 생성한다.
@@ -47,6 +52,9 @@ public:
 		return newObject;
 	}
 
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object) { };
 
+	virtual void Save(const wchar_t* FilePath);
 };
 

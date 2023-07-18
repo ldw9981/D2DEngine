@@ -138,5 +138,5 @@ void AnimationComponent::SetAnimationAsset(const std::wstring& strAssetKey)
 void AnimationComponent::SerializeOut(nlohmann::ordered_json& object)
 {
 	RenderComponent::SerializeOut(object);
-	object["m_strAnimationAsset"] = m_strAnimationAsset;
+	object["m_strAnimationAsset"] = D2DHelper::WStringToString(m_strAnimationAsset);
 }

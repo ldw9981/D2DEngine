@@ -18,6 +18,12 @@ public:
 
 	};
 
+	std::string GetClassName()
+	{
+		const std::type_info& self = typeid(*this);
+		return	self.name();
+	}
+
 	virtual void SerializeOut(nlohmann::ordered_json& object) {} ;
 	virtual void SerializeIn(nlohmann::ordered_json& object) {};
 };

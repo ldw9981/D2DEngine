@@ -8,6 +8,7 @@
 #include "Deligator.h"
 #include "AnimationComponent.h"
 #include "ColliderComponent.h"
+#include "Object.h"
 /*
 	게임 오브젝트	 클래스
 	World의 CreateGameObject<T>를 통해 생성된다.
@@ -18,7 +19,7 @@
 class SceneComponent;
 class Component;
 class World;
-class GameObject : public IAnimationNotify, public IColliderNotify
+class GameObject : public IAnimationNotify, public IColliderNotify , public Object
 {
 public:
 	GameObject();
@@ -35,8 +36,8 @@ protected:
 	SceneComponent* m_pRootComponent;		// 컴포넌트 중에 어느게 루트인지 설정
 	GameObject* m_pParentObject;			// 월드에서 따라갈 오브젝트
 	World* m_pOwnerWorld;					// 이 게임 오브젝트가 속한 월드
-	bool m_bIsCullObject;					// 컬링할수 있는 오브젝트 인지 확인
-	bool m_IsNoCollide;						// 충돌을 하지 않는 오브젝트 인지 확인
+	bool m_IsCullObject;					// 컬링할수 있는 오브젝트 인지 확인
+	bool m_IsNoCollider;						// 충돌을 하지 않는 오브젝트 인지 확인
 	std::vector<Component*> m_OwnedComponents;	// 소유한 컴포넌트들
 
 	DeligatorParam2<float, GameObject*> m_OnTakeDamage;
@@ -55,8 +56,8 @@ public:
 	void SetWorldLocation(const mathHelper::Vector2F& Location);
 
 	// 컬링할수 있는 오브젝트 인지 확인합니다.
-	bool IsCullObject() const { return m_bIsCullObject; }
-	bool IsNoCollide() const { return m_IsNoCollide; }
+	bool IsCullObject() const { return m_IsCullObject; }
+	bool IsNoCollide() const { return m_IsNoCollider; }
 
 	// 루트에 있는 AABB를 오브젝트 전체를 대표하는 볼륨으로 사용합니다.
 	const AABB& GetBoundingBox() const { return m_pRootComponent->GetBoundingBox(); }
@@ -97,5 +98,10 @@ public:
 	const std::vector<Component*>& GetOwnedComponents() const { return m_OwnedComponents; }
 	
 	void TakeDamage(float Damage,GameObject* pAttacker);
+
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object) { };
+
+	virtual void Save(const wchar_t* FileName);	
 };
 

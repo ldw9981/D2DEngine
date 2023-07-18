@@ -5,10 +5,10 @@
 #include "SceneComponent.h"
 #include "RenderComponent.h"
 #include "Component.h"
-
+#include <fstream>
 
 GameObject::GameObject()
-	:m_pRootComponent(nullptr), m_bIsCullObject(true), 
+	:m_pRootComponent(nullptr), m_IsCullObject(true), 
 	m_pParentObject(nullptr), m_pOwnerWorld(nullptr)
 {
 
@@ -88,5 +88,47 @@ void GameObject::SetParentObject(GameObject* pParentObject)
 void GameObject::TakeDamage(float Damage, GameObject* pAttacker)
 {
 	m_OnTakeDamage.InvokeCallbacks(Damage, pAttacker);
+}
+
+void GameObject::SerializeOut(nlohmann::ordered_json& object)
+{
+	object["ClassName"] = GetClassName();
+	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
+	if (m_pParentObject)
+	{
+		
+		object["ParentObject"] = " ";
+	}
+	else
+	{
+		object["ParentObject"] = " ";
+	}
+
+	if (m_pRootComponent)
+	{
+		object["RootComponent"] = m_pRootComponent->GetName();
+	}
+	else
+	{
+		object["RootComponent"] = " ";
+	}
+	object["m_IsCullObject"] = m_IsCullObject;
+	object["m_IsNoCollider"] = m_IsNoCollider;
+
+	for (auto& pComponent : m_OwnedComponents)
+	{
+		nlohmann::ordered_json objComponent;
+		pComponent->SerializeOut(objComponent);
+		object["m_OwnedComponents"].push_back(objComponent);
+	}
+}
+
+void GameObject::Save(const wchar_t* FilePath)
+{
+	nlohmann::ordered_json obj;
+	SerializeOut(obj);
+	std::ofstream ofs(FilePath);
+	ofs << obj.dump(2);
+	ofs.close();
 }
 

@@ -67,7 +67,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     pGameObject->SetWorldLocation(mathHelper::Vector2F(0, 0));
     CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent("CameraComponent");
     m_World.SetCamera(pCameraComponent);    
-    
+    m_World.Save(L"../Resource/TestWorld.WorldAsset");
     return true;
 }
 

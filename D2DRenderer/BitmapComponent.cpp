@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "BitmapComponent.h"
 #include "D2DRenderer.h"
-
+#include "Helper.h"
 
 void BitmapComponent::SetBitmap(std::wstring val)
 {
@@ -31,6 +31,6 @@ void BitmapComponent::Render(ID2D1RenderTarget* pRenderTarget)
 void BitmapComponent::SerializeOut(nlohmann::ordered_json& object)
 {
 	RenderComponent::SerializeOut(object);
-	object["m_FilePath"] = m_FilePath;
+	object["m_FilePath"] = D2DHelper::WStringToString(m_FilePath);
 }
  

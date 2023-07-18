@@ -1,0 +1,252 @@
+{
+  "m_Name": "TestWorld",
+  "m_GameObjects": [
+    {
+      "ClassName": "class PlatformObject",
+      "ParentObject": " ",
+      "RootComponent": "BoxComponent",
+      "m_IsCullObject": true,
+      "m_IsNoCollider": false,
+      "m_OwnedComponents": [
+        {
+          "ClassName": "class BoxComponent",
+          "m_Name": "BoxComponent",
+          "ParentScene": "",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            500.0,
+            40.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            35.0,
+            35.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_Color": [
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "m_ColliderType": 2,
+          "m_CollisionType": 1,
+          "m_Collider.Extend": [
+            35.0,
+            35.0
+          ],
+          "m_BoundingBox.Extend": [
+            35.0,
+            35.0
+          ]
+        },
+        {
+          "ClassName": "class BitmapComponent",
+          "m_Name": "BitmapComponent",
+          "ParentScene": "BoxComponent",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            -35.0,
+            35.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            0.0,
+            0.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_FilePath": "../Resource/Tiles/grassmid.png"
+        }
+      ]
+    },
+    {
+      "ClassName": "class PlayerCharacter",
+      "ParentObject": " ",
+      "RootComponent": "FootBox",
+      "m_IsCullObject": true,
+      "m_IsNoCollider": false,
+      "m_OwnedComponents": [
+        {
+          "ClassName": "class SideMovementComponent",
+          "m_Name": "SideMovementComponent",
+          "m_Direction": [
+            0.0,
+            0.0
+          ],
+          "m_Speed": 200.0
+        },
+        {
+          "ClassName": "class BoxComponent",
+          "m_Name": "FootBox",
+          "ParentScene": "",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            20.0,
+            4.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_Color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_ColliderType": 2,
+          "m_CollisionType": 1,
+          "m_Collider.Extend": [
+            20.0,
+            4.0
+          ],
+          "m_BoundingBox.Extend": [
+            20.0,
+            4.0
+          ]
+        },
+        {
+          "ClassName": "class BoxComponent",
+          "m_Name": "BodyBox",
+          "ParentScene": "FootBox",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            0.0,
+            50.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            25.0,
+            50.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_Color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_ColliderType": 2,
+          "m_CollisionType": 1,
+          "m_Collider.Extend": [
+            25.0,
+            50.0
+          ],
+          "m_BoundingBox.Extend": [
+            25.0,
+            50.0
+          ]
+        },
+        {
+          "ClassName": "class AnimationComponent",
+          "m_Name": "AnimationComponent",
+          "ParentScene": "FootBox",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            0.0,
+            -4.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            0.0,
+            0.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_strAnimationAsset": "../Resource/Ken.AnimAsset"
+        },
+        {
+          "ClassName": "class FSMComponent",
+          "m_Name": "FSMComponent"
+        },
+        {
+          "ClassName": "class TextComponent",
+          "m_Name": "TextComponent",
+          "ParentScene": "AnimationComponent",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            -100.0,
+            100.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            0.0,
+            0.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true
+        },
+        {
+          "ClassName": "class CameraComponent",
+          "m_Name": "CameraComponent",
+          "ParentScene": "AnimationComponent",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            -512.0,
+            -100.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            512.0,
+            384.0
+          ]
+        }
+      ]
+    }
+  ]
+}
