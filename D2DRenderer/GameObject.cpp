@@ -99,11 +99,11 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 	if (m_pParentObject)
 	{
 		
-		object["ParentObject"] = " ";
+		object["ParentObject"] = "";
 	}
 	else
 	{
-		object["ParentObject"] = " ";
+		object["ParentObject"] = "";
 	}
 
 	if (m_pRootComponent)
@@ -112,7 +112,7 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 	}
 	else
 	{
-		object["RootComponent"] = " ";
+		object["RootComponent"] = "";
 	}
 	object["m_IsCullObject"] = m_IsCullObject;
 	object["m_IsNoCollider"] = m_IsNoCollider;
@@ -122,6 +122,34 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 		nlohmann::ordered_json objComponent;
 		pComponent->SerializeOut(objComponent);
 		object["m_OwnedComponents"].push_back(objComponent);
+	}
+}
+
+void GameObject::SerializeIn(nlohmann::ordered_json& object)
+{
+	std::string type = object["ClassName"];
+	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
+		
+	std::string ComponentName = object["m_pRootComponent"].get<std::string>();
+	if (!ComponentName.empty())
+	{
+		SceneComponent* pComponent = static_cast<SceneComponent*>(GetComponent(ComponentName));
+		if (pComponent)
+		{
+			SetRootComponent(pComponent);
+		}
+	}	
+	m_IsCullObject = object["m_IsCullObject"].get<bool>();
+	m_IsNoCollider = object["m_IsNoCollider"].get<bool>();
+
+	for (auto& JsonObjComponent : object["m_OwnedComponents"])
+	{
+		ComponentName = JsonObjComponent["m_Name"].get<std::string>();
+		Component* pComponent = GetComponent(ComponentName);
+		if (pComponent)
+		{
+			pComponent->SerializeIn(JsonObjComponent);
+		}
 	}
 }
 

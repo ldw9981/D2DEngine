@@ -33,4 +33,9 @@ void BitmapComponent::SerializeOut(nlohmann::ordered_json& object)
 	RenderComponent::SerializeOut(object);
 	object["m_FilePath"] = D2DHelper::WStringToString(m_FilePath);
 }
- 
+
+
+void BitmapComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+
+}

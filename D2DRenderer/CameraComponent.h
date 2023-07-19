@@ -15,6 +15,6 @@ public:
 public:
 	virtual void Update() override;
 	virtual void SerializeOut(nlohmann::ordered_json& object);;
-	virtual void SerializeIn(nlohmann::ordered_json& object) {};
+	virtual void SerializeIn(nlohmann::ordered_json& object);;
 };
 

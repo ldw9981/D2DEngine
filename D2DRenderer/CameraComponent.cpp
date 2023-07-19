@@ -29,3 +29,8 @@ void CameraComponent::SerializeOut(nlohmann::ordered_json& object)
 	__super::SerializeOut(object);
 }
 
+void CameraComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	__super::SerializeIn(object);
+}
+

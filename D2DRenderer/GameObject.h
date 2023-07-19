@@ -100,7 +100,7 @@ public:
 	void TakeDamage(float Damage,GameObject* pAttacker);
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
-	virtual void SerializeIn(nlohmann::ordered_json& object) { };
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 
 	virtual void Save(const wchar_t* FileName);
 };

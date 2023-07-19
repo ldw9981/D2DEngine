@@ -161,7 +161,7 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 		std::string ClassName = JsonGameObj["ClassName"].get<std::string>();
 		// Todo: ClassName으로 게임오브젝트를 생성하고 SerializeIn호출한다.
 		// 다른 프로젝트에 있는 게임오브젝트도 생성하려면 어떻게 해야할까..
-		GameObject* pGameObject = nullptr;
+		GameObject* pGameObject = World::CreateGameObject(ClassName);
 		pGameObject->SerializeIn(JsonGameObj);
 	}
 }

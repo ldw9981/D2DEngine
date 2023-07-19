@@ -76,3 +76,8 @@ void BoxComponent::SerializeOut(nlohmann::ordered_json& object)
 	object["m_Collider.Extend"] = { m_Collider.m_Extend.x, m_Collider.m_Extend.y };
 	object["m_BoundingBox.Extend"] = { m_BoundingBox.m_Extend.x, m_BoundingBox.m_Extend.y };
 }
+
+void BoxComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+
+}
