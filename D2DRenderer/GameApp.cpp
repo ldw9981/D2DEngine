@@ -114,6 +114,7 @@ void GameApp::Update()
 	m_Timer.Tick();
 	m_deltaTime = m_Timer.DeltaTime();
 	CalculateFrameStats();	
+	m_World.Update();
 }
 
 void GameApp::CalculateFrameStats()
