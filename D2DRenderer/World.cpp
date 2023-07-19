@@ -7,13 +7,14 @@
 #include "ColliderComponent.h"	
 #include "BoxComponent.h"	
 #include "Helper.h"
-
-
+#include "Bitmap.h"
 
 World::World(std::string Name)
 	:m_Name(Name)
 {
-//	RegisterCreator()
+	World::RegistGameObjectClass<Camera>();
+	World::RegistGameObjectClass<Effect>();
+	World::RegistGameObjectClass<Bitmap>();
 }
 
 /*
@@ -190,3 +191,16 @@ bool World::Load(const wchar_t* FilePath)
 
 	return true;
 }
+
+GameObject* World::CreateGameObject(const std::string& ClassName)
+{
+	auto iter = m_ClassCreatorFunction.find(ClassName);
+	if (iter != m_ClassCreatorFunction.end())
+	{
+		auto func = iter->second;
+		return func();
+	}
+	return nullptr;
+}
+
+std::map<std::string, std::function<GameObject* ()>> World::m_ClassCreatorFunction;

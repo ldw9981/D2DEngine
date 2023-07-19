@@ -88,4 +88,6 @@ namespace D2DHelper
 	std::string WStringToString(const std::wstring& wstr);
 	
 	std::wstring StringToWString(const std::string& str);
+
+	std::string GetNameFromTypeName(const std::string& typeidName);
 } // namespace D2DUtils

@@ -163,5 +163,39 @@ namespace D2DHelper
 		return converter.from_bytes(str);
 	}
 
+
+	std::string GetNameFromTypeName(const std::string& typeidName)
+	{
+		std::string className = typeidName;
+
+		// The typeid name may contain other information, like namespaces and other decorations.
+		// We'll attempt to find the class name by removing any leading unwanted characters.
+
+		// Remove leading "class " if present
+		size_t classPos = className.find("class ");
+		if (classPos != std::string::npos) {
+			className.erase(classPos, 6); // 6 is the length of "class "
+		}
+
+		// Remove leading "struct " if present
+		size_t structPos = className.find("struct ");
+		if (structPos != std::string::npos) {
+			className.erase(structPos, 7); // 7 is the length of "struct "
+		}
+
+		// If the name starts with 'const' or 'volatile', remove them too
+		if (className.substr(0, 6) == "const ") {
+			className.erase(0, 6);
+		}
+		else if (className.substr(0, 9) == "volatile ") {
+			className.erase(0, 9);
+		}
+
+		return className;
+
+
+
+	}
+
 }
 

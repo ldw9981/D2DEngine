@@ -1,14 +1,13 @@
 #pragma once
 #include "Object.h"
 #include "GameObject.h"
+#include "Helper.h"
+
 /*
 	월드는 GameObject를 생성하고 파괴하는 역할을 한다.
 	또한 게임 오브젝트들의 Update, Render를 호출한다.
 */
-
 class GameObject;
-using ClassCreator = GameObject* (*)();
-
 class RenderComponent;
 class CameraComponent;
 class World :
@@ -58,10 +57,18 @@ public:
 	virtual void Save(const wchar_t* FilePath);
 	virtual bool Load(const wchar_t* FilePath);
 
-	static std::map<std::string, ClassCreator> m_ClassCreator;
-	static void RegisterCreator(const std::string& ClassName,ClassCreator func)
+	// 이름으로 클래스 생성하기 , 미리 등록된 클래스만 생성가능하다.
+	GameObject* CreateGameObject(const std::string& ClassName);
+
+	// 람다로 생성한 클래스 생성함수를 등록할 컨테이너 
+	static std::map<std::string, std::function<GameObject*()>> m_ClassCreatorFunction;
+
+	// 클래스를 등록하는 함수 , CreateGameObject를 사용하기전에 미리 등록을 해야한다.
+	template<typename T>
+	static void RegistGameObjectClass()
 	{
-		m_ClassCreator[ClassName] = func;
+		std::string ClassName = D2DHelper::GetNameFromTypeName(typeid(T).name());
+		m_ClassCreatorFunction[ClassName] = []()->GameObject* {return new T(); };
 	}
 };
 

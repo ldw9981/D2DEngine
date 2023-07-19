@@ -40,7 +40,6 @@ GameApp::~GameApp()
 	std::wstring str(__FUNCTIONW__);
 	str += L"\n";
 	OutputDebugString(str.c_str());
-	
 }
 
 // 윈도우 정보는 게임 마다 다를수 있으므로 등록,생성,보이기만 한다.
@@ -115,7 +114,6 @@ void GameApp::Update()
 	m_Timer.Tick();
 	m_deltaTime = m_Timer.DeltaTime();
 	CalculateFrameStats();	
-	m_World.Update();		
 }
 
 void GameApp::CalculateFrameStats()

@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Component.h"
-
+#include "Helper.h"
 
 void Component::SerializeOut(nlohmann::ordered_json& object)
 {
-	object["ClassName"] = GetClassName();
+	std::string type = typeid(*this).name();
+	object["ClassName"] = D2DHelper::GetNameFromTypeName(type);
 	object["m_Name"] = m_Name;
 }

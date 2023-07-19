@@ -6,6 +6,7 @@
 #include "RenderComponent.h"
 #include "Component.h"
 #include <fstream>
+#include "Helper.h"
 
 GameObject::GameObject()
 	:m_pRootComponent(nullptr), m_IsCullObject(true), 
@@ -92,7 +93,8 @@ void GameObject::TakeDamage(float Damage, GameObject* pAttacker)
 
 void GameObject::SerializeOut(nlohmann::ordered_json& object)
 {
-	object["ClassName"] = GetClassName();
+	std::string type = typeid(*this).name();
+	object["ClassName"] = D2DHelper::GetNameFromTypeName(type);
 	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
 	if (m_pParentObject)
 	{

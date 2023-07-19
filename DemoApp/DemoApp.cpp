@@ -32,6 +32,9 @@ DemoApp::DemoApp(HINSTANCE hInstance)
 	//m_wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_DEMOAPP);                  //게임이므로 메뉴는 없앤다
 	m_wcex.hIconSm = LoadIcon(m_hInstance, MAKEINTRESOURCE(IDI_SMALL));
     m_hAccelTable = LoadAccelerators(m_hInstance, MAKEINTRESOURCE(IDC_DEMOAPP));
+
+    World::RegistGameObjectClass<PlayerCharacter>();
+    World::RegistGameObjectClass<PlatformObject>();
 }
 
 // DemoApp의 파괴자 -> 멤버변수로 사용한 클래스의 파괴자 -> GameApp의 파괴자  순으로 호출된다.
@@ -53,7 +56,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     bool bRet = GameApp::Initialize(Width,Height);
 	if (!bRet)
 	    return false;
-    	
+    	      
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     for (int i=0;i< MAX_DEMO_OBJECT;i++)
@@ -67,7 +70,7 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     pGameObject->SetWorldLocation(mathHelper::Vector2F(0, 0));
     CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent("CameraComponent");
     m_World.SetCamera(pCameraComponent);    
-    m_World.Save(L"../Resource/TestWorld.WorldAsset");
+    //m_World.Save(L"../Resource/TestWorld.WorldAsset");
     return true;
 }
 
