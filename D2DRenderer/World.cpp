@@ -8,6 +8,7 @@
 #include "BoxComponent.h"	
 #include "Helper.h"
 #include "Bitmap.h"
+#include "Effect.h"
 
 World::World(std::string Name)
 	:m_Name(Name)
