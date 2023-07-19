@@ -56,5 +56,6 @@ public:
 	virtual void SerializeIn(nlohmann::ordered_json& object) { };
 
 	virtual void Save(const wchar_t* FilePath);
+	virtual bool Load(const wchar_t* FilePath);
 };
 

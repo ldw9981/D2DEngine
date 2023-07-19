@@ -26,3 +26,20 @@ public:
 	virtual void Update() override;
 };
 
+
+
+class Galaxy :
+	public GameObject, public Bitmapcomponent , 
+{
+	Galaxy()
+	{
+		SetOwner(this);
+		m_Earth.SetParent(this);
+		m_Moon.SetParent(&m_Earth);
+	}
+	Bitmapcomponent m_Earth;
+	Bitmapcomponent m_Moon;
+
+	virtual void Render() override;
+	virtual void Update() override;
+};

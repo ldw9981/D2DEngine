@@ -17,6 +17,7 @@ protected:
 	int m_RelativeTransform;
 	int m_WorldTransform;
 
+	ID2D_Bitmap* m_pBitmap;
 public:
 	Transform* GetParent() const { return m_pParent; }
 	void SetParent(Transform* val) { m_pParent = val; }

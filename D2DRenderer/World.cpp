@@ -6,6 +6,7 @@
 #include "RenderComponent.h"
 #include "ColliderComponent.h"	
 #include "BoxComponent.h"	
+#include "Helper.h"
 
 
 
@@ -144,6 +145,19 @@ void World::SerializeOut(nlohmann::ordered_json& object)
 	}
 }
 
+void World::SerializeIn(nlohmann::ordered_json& object)
+{
+	m_Name = object["m_Name"].get<std::string>();
+	for (auto& JsonGameObj : object["m_GameObjects"])
+	{
+		std::string ClassName = JsonGameObj["ClassName"].get<std::string>();
+		// Todo: ClassName으로 게임오브젝트를 생성하고 SerializeIn호출한다.
+		// 다른 프로젝트에 있는 게임오브젝트도 생성하려면 어떻게 해야할까..
+		GameObject* pGameObject = nullptr;
+		pGameObject->SerializeIn(JsonGameObj);
+	}
+}
+
 void World::Save(const wchar_t* FilePath)
 {
 	nlohmann::ordered_json obj;
@@ -151,4 +165,22 @@ void World::Save(const wchar_t* FilePath)
 	std::ofstream ofs(FilePath);
 	ofs << obj.dump(2);
 	ofs.close();
+}
+
+bool World::Load(const wchar_t* FilePath)
+{
+	std::ifstream ifs(FilePath, std::ios::in);
+	if (!ifs.is_open())
+	{
+		LOG_ERROR(L"File not found %s", FilePath);
+		return false;
+	}
+	std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+	ifs.close();
+
+	nlohmann::ordered_json obj = nlohmann::ordered_json::parse(str);
+
+	SerializeIn(obj);
+
+	return true;
 }

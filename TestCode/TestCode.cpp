@@ -11,11 +11,11 @@
 
 int main()
 {
-	PlayerCharacter go;
-	//Test_C_FileIO_Text();
+	//PlayerCharacter go;
+	Test_CPP_writeBinaryFile();
 
-	go.Update();
-	go.Render();
+	//go.Update();
+	//go.Render();
 		
 
 	return 0;
