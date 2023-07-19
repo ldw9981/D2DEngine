@@ -16,8 +16,6 @@ protected:
 	int m_RelativePositionX;
 	int m_RelativeTransform;
 	int m_WorldTransform;
-
-	ID2D_Bitmap* m_pBitmap;
 public:
 	Transform* GetParent() const { return m_pParent; }
 	void SetParent(Transform* val) { m_pParent = val; }
@@ -29,3 +27,18 @@ public:
 
 };
 
+/*
+class BitmapComponent : public Transform
+	'
+{'
+
+wstring m_FilePath;
+ID2D_Bitmap* m_pBitmap;
+
+Render(IRenderTarget* pRendertaret)
+{
+	SetTransform
+		pRendertaret->DrawBitmap()
+}
+}
+*/

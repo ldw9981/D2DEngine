@@ -5,17 +5,17 @@
 	월드는 GameObject를 생성하고 파괴하는 역할을 한다.
 	또한 게임 오브젝트들의 Update, Render를 호출한다.
 */
+
+class GameObject;
+using ClassCreator = GameObject* (*)();
+
 class RenderComponent;
 class CameraComponent;
 class World :
 	public Object
 {
 public:
-	World(std::string Name)
-	:m_Name(Name)
-	{
-
-	}
+	World(std::string Name);
     virtual ~World()
 	{
 		for (auto& gameObject : m_GameObjects)
@@ -53,9 +53,15 @@ public:
 	}
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
-	virtual void SerializeIn(nlohmann::ordered_json& object) { };
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 
 	virtual void Save(const wchar_t* FilePath);
 	virtual bool Load(const wchar_t* FilePath);
+
+	static std::map<std::string, ClassCreator> m_ClassCreator;
+	static void RegisterCreator(const std::string& ClassName,ClassCreator func)
+	{
+		m_ClassCreator[ClassName] = func;
+	}
 };
 

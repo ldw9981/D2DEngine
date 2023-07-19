@@ -26,7 +26,7 @@ public:
 	virtual void Update() override;
 };
 
-
+/*
 
 class Galaxy :
 	public GameObject, public Bitmapcomponent , 
@@ -43,3 +43,5 @@ class Galaxy :
 	virtual void Render() override;
 	virtual void Update() override;
 };
+
+*/
