@@ -1,5 +1,6 @@
 {
   "m_Name": "TestWorld",
+  "m_CameraID": 1,
   "m_GameObjects": [
     {
       "ClassName": "PlatformObject",

@@ -148,6 +148,7 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 void World::SerializeOut(nlohmann::ordered_json& object)
 {
 	object["m_Name"] = m_Name;
+	object["m_CameraID"] = m_CameraID;
 	for (auto& gameObject : m_GameObjects)
 	{
 		nlohmann::ordered_json JsonGameObject;
@@ -159,6 +160,7 @@ void World::SerializeOut(nlohmann::ordered_json& object)
 void World::SerializeIn(nlohmann::ordered_json& object)
 {
 	m_Name = object["m_Name"].get<std::string>();
+	int CameraID = object["m_CameraID"].get<int>();
 	for (auto& JsonGameObj : object["m_GameObjects"])
 	{
 		std::string ClassName = JsonGameObj["ClassName"].get<std::string>();
@@ -170,6 +172,7 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 			pGameObject->SerializeIn(JsonGameObj);
 		}		
 	}
+	SetCamera(CameraID);
 }
 
 void World::Save(const wchar_t* FilePath)
@@ -195,6 +198,8 @@ bool World::Load(const wchar_t* FilePath)
 	nlohmann::ordered_json obj = nlohmann::ordered_json::parse(str);
 
 	SerializeIn(obj);
+
+
 
 	return true;
 }

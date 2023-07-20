@@ -75,8 +75,6 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     */
     
     m_World.Load(L"../Resource/TestWorld.WorldAsset");
-
-    m_World.SetCamera(1);
     return true;
 }
 

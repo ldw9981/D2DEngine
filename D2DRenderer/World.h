@@ -30,7 +30,11 @@ public:
 	// 월드에서 컬링에서 필요한 카메라 컴포넌트를 설정한다 SceneComponent에 AABB가 들어있다.
 
 
-	void SetCamera(int id) { m_pCamera = m_Cameras[id]; }
+	void SetCamera(int id) 
+	{ 
+		m_CameraID = id; 
+		m_pCamera = m_Cameras[id]; 
+	}
 
 protected:
 	std::vector<RenderComponent*> m_RenderQueue;		// 정렬을 위해 임의 접근이 빠르고 뒤쪽에만 추가하는 컨테이너는 무엇이 좋을까
@@ -38,6 +42,7 @@ protected:
 	CameraComponent* m_pCamera;				// 컬링용도로 사용할 카메라
 	int m_nCulledObjectCount;
 	std::string m_Name;
+	int m_CameraID;
 	std::map<int, CameraComponent*> m_Cameras;	
 public:
 	
