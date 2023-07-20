@@ -162,7 +162,10 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 		// Todo: ClassName으로 게임오브젝트를 생성하고 SerializeIn호출한다.
 		// 다른 프로젝트에 있는 게임오브젝트도 생성하려면 어떻게 해야할까..
 		GameObject* pGameObject = World::CreateGameObject(ClassName);
-		pGameObject->SerializeIn(JsonGameObj);
+		if (pGameObject)
+		{
+			pGameObject->SerializeIn(JsonGameObj);
+		}		
 	}
 }
 
@@ -195,11 +198,15 @@ bool World::Load(const wchar_t* FilePath)
 
 GameObject* World::CreateGameObject(const std::string& ClassName)
 {
+	GameObject* newObject = nullptr;
 	auto iter = m_ClassCreatorFunction.find(ClassName);
 	if (iter != m_ClassCreatorFunction.end())
 	{
 		auto func = iter->second;
-		return func();
+
+		newObject = func();
+		newObject->SetOwnerWorld(this);
+		m_GameObjects.push_back(newObject);
 	}
 	return nullptr;
 }
