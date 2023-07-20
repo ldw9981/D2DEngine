@@ -112,7 +112,6 @@ void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
 	object["m_RelativeScale"] = { m_RelativeScale.x,m_RelativeScale.y };
 	object["m_RelativeRotation"] = m_RelativeRotation;
 	object["m_RelativeLocation"] = { m_RelativeLocation.x,m_RelativeLocation.y };
-	object["m_BoundingBox.m_Center"] = { m_BoundingBox.m_Center.x,m_BoundingBox.m_Center.y };
 	object["m_BoundingBox.m_Extend"] = { m_BoundingBox.m_Extend.x,m_BoundingBox.m_Extend.y };
 }
 
@@ -136,8 +135,6 @@ void SceneComponent::SerializeIn(nlohmann::ordered_json& object)
 	m_RelativeRotation = object["m_RelativeRotation"];
 	m_RelativeLocation.x = object["m_RelativeLocation"][0];
 	m_RelativeLocation.y = object["m_RelativeLocation"][1];
-	m_BoundingBox.m_Center.x = object["m_BoundingBox.m_Center"][0];
-	m_BoundingBox.m_Center.y = object["m_BoundingBox.m_Center"][1];
 	m_BoundingBox.m_Extend.x = object["m_BoundingBox.m_Extend"][0];
 	m_BoundingBox.m_Extend.y = object["m_BoundingBox.m_Extend"][1];
 }

@@ -20,11 +20,7 @@
           "m_RelativeLocation": [
             500.0,
             40.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],        
           "m_BoundingBox.m_Extend": [
             35.0,
             35.0
@@ -60,11 +56,7 @@
           "m_RelativeLocation": [
             -35.0,
             35.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             0.0,
             0.0
@@ -94,11 +86,7 @@
           "m_RelativeLocation": [
             600.0,
             60.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],        
           "m_BoundingBox.m_Extend": [
             35.0,
             35.0
@@ -134,11 +122,7 @@
           "m_RelativeLocation": [
             -35.0,
             35.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             0.0,
             0.0
@@ -168,11 +152,7 @@
           "m_RelativeLocation": [
             700.0,
             80.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             35.0,
             35.0
@@ -208,11 +188,7 @@
           "m_RelativeLocation": [
             -35.0,
             35.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],        
           "m_BoundingBox.m_Extend": [
             0.0,
             0.0
@@ -249,11 +225,7 @@
           "m_RelativeLocation": [
             0.0,
             0.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             20.0,
             4.0
@@ -289,11 +261,7 @@
           "m_RelativeLocation": [
             0.0,
             50.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             25.0,
             50.0
@@ -329,11 +297,7 @@
           "m_RelativeLocation": [
             0.0,
             -4.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             0.0,
             0.0
@@ -358,11 +322,7 @@
           "m_RelativeLocation": [
             -100.0,
             100.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],         
           "m_BoundingBox.m_Extend": [
             0.0,
             0.0
@@ -395,11 +355,7 @@
           "m_RelativeLocation": [
             -512.0,
             -100.0
-          ],
-          "m_BoundingBox.m_Center": [
-            0.0,
-            0.0
-          ],
+          ],        
           "m_BoundingBox.m_Extend": [
             512.0,
             384.0
