@@ -127,10 +127,10 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 
 void GameObject::SerializeIn(nlohmann::ordered_json& object)
 {
-	std::string type = object["ClassName"];
+	std::string type = object["ClassName"].get<std::string>();
 	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
 		
-	std::string ComponentName = object["m_pRootComponent"].get<std::string>();
+	std::string ComponentName = object["RootComponent"].get<std::string>();
 	if (!ComponentName.empty())
 	{
 		SceneComponent* pComponent = static_cast<SceneComponent*>(GetComponent(ComponentName));

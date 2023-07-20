@@ -31,3 +31,19 @@ void TextComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	D2DRenderer::m_Instance->DrawText(pRenderTarget, m_String, m_Rect, m_Color);  //시간이 엄청 오래 걸립니다.
 	D2DRenderer::m_Instance->DrawCrossLine(pRenderTarget);
 }
+
+void TextComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeOut(object);
+	object["m_String"] = D2DHelper::WStringToString(m_String);
+	object["m_Color"] = { m_Color.r,m_Color.g,m_Color.b,m_Color.a };
+	object["m_Rect"] = { m_Rect.left,m_Rect.top,m_Rect.right,m_Rect.bottom};
+}
+
+void TextComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeIn(object);
+	m_String = D2DHelper::StringToWString(object["m_String"]);
+	m_Color = D2D1::ColorF(object["m_Color"][0], object["m_Color"][1], object["m_Color"][2], object["m_Color"][3]);
+	m_Rect = D2D1::RectF(object["m_Rect"][0], object["m_Rect"][1], object["m_Rect"][2], object["m_Rect"][3]);
+}

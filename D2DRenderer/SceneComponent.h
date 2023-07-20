@@ -74,6 +74,6 @@ public:
 	// 부모가 없을경우 RelativeLocation을 설정하고 WorldTransform을 설정한다.
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
-	virtual void SerializeIn(nlohmann::ordered_json& object){};
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

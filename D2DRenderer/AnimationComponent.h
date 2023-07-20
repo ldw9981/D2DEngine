@@ -60,6 +60,6 @@ public:
 	void SetAnimationAsset(const std::wstring& strAssetKey);
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
-	virtual void SerializeIn(nlohmann::ordered_json& object) {};
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

@@ -32,6 +32,6 @@ public:
 	const mathHelper::Vector2F& GetDirection() { return m_Direction; };
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
-	virtual void SerializeIn(nlohmann::ordered_json& object) {};
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

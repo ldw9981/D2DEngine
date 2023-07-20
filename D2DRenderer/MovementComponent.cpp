@@ -34,3 +34,11 @@ void MovementComponent::SerializeOut(nlohmann::ordered_json& object)
 	object["m_Speed"] = m_Speed;
 }
 
+void MovementComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	Component::SerializeIn(object);
+	m_Direction.x = object["m_Direction"][0];
+	m_Direction.y = object["m_Direction"][1];
+	m_Speed = object["m_Speed"];
+}
+

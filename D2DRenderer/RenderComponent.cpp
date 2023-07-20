@@ -21,4 +21,10 @@ void RenderComponent::SerializeOut(nlohmann::ordered_json& object)
 	object["m_Visible"] = m_Visible;
 }
 
+void RenderComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	SceneComponent::SerializeIn(object);
+	m_ZOrder = object["m_ZOrder"];
+	m_Visible = object["m_Visible"];
+}
 

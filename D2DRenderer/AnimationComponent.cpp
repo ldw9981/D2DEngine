@@ -140,3 +140,10 @@ void AnimationComponent::SerializeOut(nlohmann::ordered_json& object)
 	RenderComponent::SerializeOut(object);
 	object["m_strAnimationAsset"] = D2DHelper::WStringToString(m_strAnimationAsset);
 }
+
+void AnimationComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	RenderComponent::SerializeIn(object);
+	m_strAnimationAsset = D2DHelper::StringToWString(object["m_strAnimationAsset"]);
+	m_pAnimationAsset = D2DRenderer::m_Instance->CreateSharedAnimationAsset(m_strAnimationAsset);
+}

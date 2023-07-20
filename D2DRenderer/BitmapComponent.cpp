@@ -37,5 +37,7 @@ void BitmapComponent::SerializeOut(nlohmann::ordered_json& object)
 
 void BitmapComponent::SerializeIn(nlohmann::ordered_json& object)
 {
-
+	RenderComponent::SerializeIn(object);
+	m_FilePath = D2DHelper::StringToWString(object["m_FilePath"]);
+	SetBitmap(m_FilePath);
 }

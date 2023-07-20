@@ -27,5 +27,8 @@ public:
 	void ResetGravity() { m_GravityScaled = m_Gravity * m_GravityScale; }
 	void Jump();
 	void EndJump();
+
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

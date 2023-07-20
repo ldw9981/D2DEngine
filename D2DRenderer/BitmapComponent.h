@@ -25,6 +25,6 @@ public:
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 
     virtual void SerializeOut(nlohmann::ordered_json& object);
-    virtual void SerializeIn(nlohmann::ordered_json& object);;
+    virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

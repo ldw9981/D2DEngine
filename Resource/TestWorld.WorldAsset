@@ -3,7 +3,7 @@
   "m_GameObjects": [
     {
       "ClassName": "PlatformObject",
-      "ParentObject": " ",
+      "ParentObject": "",
       "RootComponent": "BoxComponent",
       "m_IsCullObject": true,
       "m_IsNoCollider": false,
@@ -77,7 +77,7 @@
     },
     {
       "ClassName": "PlayerCharacter",
-      "ParentObject": " ",
+      "ParentObject": "",
       "RootComponent": "FootBox",
       "m_IsCullObject": true,
       "m_IsNoCollider": false,
@@ -85,11 +85,9 @@
         {
           "ClassName": "SideMovementComponent",
           "m_Name": "SideMovementComponent",
-          "m_Direction": [
-            0.0,
-            0.0
-          ],
-          "m_Speed": 200.0
+          "m_JumpSpeed": 500.0,
+          "m_MaxSpeedY": 600.0,
+          "m_GravityScale": 100.0
         },
         {
           "ClassName": "BoxComponent",
@@ -222,7 +220,20 @@
             0.0
           ],
           "m_ZOrder": 0,
-          "m_Visible": true
+          "m_Visible": true,
+          "m_String": "이동:화살표 , 공격:컨트롤 , 점프: 스페이스",
+          "m_Color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_Rect": [
+            0.0,
+            0.0,
+            100.0,
+            100.0
+          ]
         },
         {
           "ClassName": "CameraComponent",

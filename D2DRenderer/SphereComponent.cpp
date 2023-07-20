@@ -43,3 +43,17 @@ bool SphereComponent::IsCollide(ColliderComponent* pOtherComponent)
 {
 	return false;
 }
+
+void SphereComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	ColliderComponent::SerializeOut(object);
+	object["m_Radius"] = m_Radius;
+}
+
+void SphereComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	ColliderComponent::SerializeIn(object);
+	m_Radius = object["m_Radius"];
+	m_BoundingBox.m_Extend.x = m_Radius;
+	m_BoundingBox.m_Extend.y = m_Radius;
+}

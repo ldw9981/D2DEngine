@@ -23,5 +23,7 @@ public:
 	const std::wstring& GetString() const { return m_String; }
 	void SetString(const std::wstring& val) { m_String = val; }
 
+	virtual void SerializeOut(nlohmann::ordered_json& object);
+	virtual void SerializeIn(nlohmann::ordered_json& object);
 };
 

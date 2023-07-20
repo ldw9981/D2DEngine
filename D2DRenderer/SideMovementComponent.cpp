@@ -71,3 +71,21 @@ void SideMovementComponent::EndJump()
 	m_SpeedY = 0.0f;
 	//m_GravityScaled = 0.0f;	// 중력을 끄는게 맞을까?
 }
+
+void SideMovementComponent::SerializeOut(nlohmann::ordered_json& object)
+{
+	Component::SerializeOut(object);
+
+	object["m_JumpSpeed"] = m_JumpSpeed;
+	object["m_MaxSpeedY"] = m_MaxSpeedY;
+	object["m_GravityScale"] = m_GravityScale;
+}
+
+void SideMovementComponent::SerializeIn(nlohmann::ordered_json& object)
+{
+	Component::SerializeIn(object);
+	
+	m_JumpSpeed = object["m_JumpSpeed"];
+	m_MaxSpeedY = object["m_MaxSpeedY"];
+	m_GravityScale = object["m_GravityScale"];
+}
