@@ -9,11 +9,12 @@ class SphereComponent;
 class TextComponent;
 class SceneComponent;
 class MovementComponent;
+class World;
 class DemoObject :
     public GameObject
 {
 public:
-	DemoObject();
+	DemoObject(World* pOwner);
 	virtual ~DemoObject();
 	BoxComponent* m_pBoxComponent;
 

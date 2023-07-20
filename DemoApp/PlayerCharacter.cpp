@@ -23,7 +23,8 @@
 	- FSMComponent
  */
 
-PlayerCharacter::PlayerCharacter()
+PlayerCharacter::PlayerCharacter(World* pOwnerWorld)
+	:GameObject(pOwnerWorld)
 {
 	// 그냥 Component 
 	m_pSideMovementComponent = CreateComponent<SideMovementComponent>("SideMovementComponent");
@@ -55,7 +56,7 @@ PlayerCharacter::PlayerCharacter()
 	m_pTextComponent->SetString(L"이동:화살표 , 공격:컨트롤 , 점프: 스페이스");
 	m_pTextComponent->AttachToComponent(m_pAnimationComponent);
 
-	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");
+	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");	
 	m_pCameraComponent->AttachToComponent(m_pAnimationComponent);
 	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
 	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
@@ -63,12 +64,14 @@ PlayerCharacter::PlayerCharacter()
 	size.height = size.height / 2;
 	size.width = size.width / 2;
 	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -100.0f));
-
+	m_pCameraComponent->SetCameraID(1);
+	
+	GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 PlayerCharacter::~PlayerCharacter()
 {
-
+	GetOwnerWorld()->DelCamera(m_pCameraComponent);
 }
 
 void PlayerCharacter::Update()

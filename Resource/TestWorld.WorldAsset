@@ -76,6 +76,154 @@
       ]
     },
     {
+      "ClassName": "PlatformObject",
+      "ParentObject": "",
+      "RootComponent": "BoxComponent",
+      "m_IsCullObject": true,
+      "m_IsNoCollider": false,
+      "m_OwnedComponents": [
+        {
+          "ClassName": "BoxComponent",
+          "m_Name": "BoxComponent",
+          "ParentScene": "",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            600.0,
+            60.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            35.0,
+            35.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_Color": [
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "m_ColliderType": 2,
+          "m_CollisionType": 1,
+          "m_Collider.Extend": [
+            35.0,
+            35.0
+          ],
+          "m_BoundingBox.Extend": [
+            35.0,
+            35.0
+          ]
+        },
+        {
+          "ClassName": "BitmapComponent",
+          "m_Name": "BitmapComponent",
+          "ParentScene": "BoxComponent",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            -35.0,
+            35.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            0.0,
+            0.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_FilePath": "../Resource/Tiles/grassmid.png"
+        }
+      ]
+    },	
+    {
+      "ClassName": "PlatformObject",
+      "ParentObject": "",
+      "RootComponent": "BoxComponent",
+      "m_IsCullObject": true,
+      "m_IsNoCollider": false,
+      "m_OwnedComponents": [
+        {
+          "ClassName": "BoxComponent",
+          "m_Name": "BoxComponent",
+          "ParentScene": "",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            700.0,
+            80.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            35.0,
+            35.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_Color": [
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "m_ColliderType": 2,
+          "m_CollisionType": 1,
+          "m_Collider.Extend": [
+            35.0,
+            35.0
+          ],
+          "m_BoundingBox.Extend": [
+            35.0,
+            35.0
+          ]
+        },
+        {
+          "ClassName": "BitmapComponent",
+          "m_Name": "BitmapComponent",
+          "ParentScene": "BoxComponent",
+          "m_RelativeScale": [
+            1.0,
+            1.0
+          ],
+          "m_RelativeRotation": 0.0,
+          "m_RelativeLocation": [
+            -35.0,
+            35.0
+          ],
+          "m_BoundingBox.m_Center": [
+            0.0,
+            0.0
+          ],
+          "m_BoundingBox.m_Extend": [
+            0.0,
+            0.0
+          ],
+          "m_ZOrder": 0,
+          "m_Visible": true,
+          "m_FilePath": "../Resource/Tiles/grassmid.png"
+        }
+      ]
+    },		
+    {
       "ClassName": "PlayerCharacter",
       "ParentObject": "",
       "RootComponent": "FootBox",
@@ -255,7 +403,8 @@
           "m_BoundingBox.m_Extend": [
             512.0,
             384.0
-          ]
+          ],
+          "m_CameraID": 1
         }
       ]
     }

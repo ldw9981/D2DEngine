@@ -16,14 +16,14 @@ RenderComponent::~RenderComponent()
 
 void RenderComponent::SerializeOut(nlohmann::ordered_json& object)
 {
-	SceneComponent::SerializeOut(object);
+	__super::SerializeOut(object);
 	object["m_ZOrder"] =  m_ZOrder;
 	object["m_Visible"] = m_Visible;
 }
 
 void RenderComponent::SerializeIn(nlohmann::ordered_json& object)
 {
-	SceneComponent::SerializeIn(object);
+	__super::SerializeIn(object);
 	m_ZOrder = object["m_ZOrder"];
 	m_Visible = object["m_Visible"];
 }

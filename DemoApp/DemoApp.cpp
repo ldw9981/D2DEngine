@@ -56,7 +56,8 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     bool bRet = GameApp::Initialize(Width,Height);
 	if (!bRet)
 	    return false;
-    	      
+    	  
+    /*
 	// DemoObject를 생성하고 초기화한다.
     // 월드의 CreateGameObject()함수를 호출하면 GameObject를 생성하고 월드에 등록한다.
     for (int i=0;i< MAX_DEMO_OBJECT;i++)
@@ -68,12 +69,14 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
 
     GameObject* pGameObject = m_World.CreateGameObject<PlayerCharacter>();
     pGameObject->SetWorldLocation(mathHelper::Vector2F(0, 0));
-    CameraComponent* pCameraComponent = (CameraComponent*)pGameObject->GetComponent("CameraComponent");
-    m_World.SetCamera(pCameraComponent);    
+   
+   
     m_World.Save(L"../Resource/TestWorld.WorldAsset");
+    */
     
-    
-    //m_World.Load(L"../Resource/TestWorld.WorldAsset");
+    m_World.Load(L"../Resource/TestWorld.WorldAsset");
+
+    m_World.SetCamera(1);
     return true;
 }
 

@@ -20,7 +20,8 @@
 		+ [Child] TextComponent
  */
 
-DemoObject::DemoObject()
+DemoObject::DemoObject(World* pOwner)
+	:GameObject(pOwner)
 {
 	m_pMovementComponent = CreateComponent<MovementComponent>("MovementComponent");
 

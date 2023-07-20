@@ -9,7 +9,7 @@ class CameraComponent;
 class Camera : public GameObject
 {
 public:
-	Camera();
+	Camera(World* pOwnerWorld);
 	virtual ~Camera();
 
 	CameraComponent* m_pCameraComponent;

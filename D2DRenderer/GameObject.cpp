@@ -8,9 +8,9 @@
 #include <fstream>
 #include "Helper.h"
 
-GameObject::GameObject()
+GameObject::GameObject(World* pOwnerWorld)
 	:m_pRootComponent(nullptr), m_IsCullObject(true), 
-	m_pParentObject(nullptr), m_pOwnerWorld(nullptr)
+	m_pParentObject(nullptr), m_pOwnerWorld(pOwnerWorld)
 {
 
 }

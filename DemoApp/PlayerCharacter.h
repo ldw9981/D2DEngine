@@ -15,7 +15,7 @@ class PlayerCharacter :
 	public GameObject
 {
 public:
-	PlayerCharacter();
+	PlayerCharacter(World* pOwnerWorld);
 	virtual ~PlayerCharacter();
 
 	FSMComponent* m_pFSMComponent;

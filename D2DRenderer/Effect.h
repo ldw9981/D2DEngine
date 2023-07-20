@@ -5,7 +5,7 @@ class Effect :
 {
 public:
 
-	Effect();
+	Effect(World* pOwnerWorld);
 	virtual ~Effect();
 
 	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;

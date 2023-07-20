@@ -9,6 +9,9 @@
 #include "Helper.h"
 #include "Bitmap.h"
 #include "Effect.h"
+#include "CameraComponent.h"
+
+std::map<std::string, std::function<GameObject* (World* pOwner)>> World::m_ClassCreatorFunction;
 
 World::World(std::string Name)
 	:m_Name(Name)
@@ -203,12 +206,33 @@ GameObject* World::CreateGameObject(const std::string& ClassName)
 	if (iter != m_ClassCreatorFunction.end())
 	{
 		auto func = iter->second;
-
-		newObject = func();
-		newObject->SetOwnerWorld(this);
+		newObject = func(this);
 		m_GameObjects.push_back(newObject);
 	}
-	return nullptr;
+	return newObject;
 }
 
-std::map<std::string, std::function<GameObject* ()>> World::m_ClassCreatorFunction;
+
+void World::AddCamera(CameraComponent* pCameraComponent)
+{
+	int  id = pCameraComponent->GetCameraID();
+	auto ret = m_Cameras.find(id);
+	if (ret != m_Cameras.end())
+	{
+		LOG_ERROR(L"CameraID %d is already added. \n", id);
+		return;
+	}
+	m_Cameras[id] = pCameraComponent;
+}
+
+void World::DelCamera(CameraComponent* pCameraComponent)
+{
+	int  id = pCameraComponent->GetCameraID();
+	auto ret = m_Cameras.find(id);
+	if (ret == m_Cameras.end())
+	{
+		LOG_ERROR(L"CameraID %d is not found. \n", id);
+		return;
+	}
+	m_Cameras.erase(id);
+}

@@ -102,7 +102,7 @@ void SceneComponent::DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget)
 
 void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
 {
-	Component::SerializeOut(object);
+	__super::SerializeOut(object);
 	if (m_pParentScene)
 	{
 		object["ParentScene"] = m_pParentScene->GetName();
@@ -118,7 +118,7 @@ void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
 
 void SceneComponent::SerializeIn(nlohmann::ordered_json& object)
 {
-	Component::SerializeIn(object);
+	__super::SerializeIn(object);
 
 	// 부모를 찾아서 연결한다.
 	std::string ParentScene = object["ParentScene"].get<std::string>();	

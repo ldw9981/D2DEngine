@@ -20,7 +20,8 @@
 		+ [Child] TextComponent
  */
 
-PlatformObject::PlatformObject()
+PlatformObject::PlatformObject(World* pOwner)
+	:GameObject(pOwner)
 {
 	m_pBoxComponent = CreateComponent<BoxComponent>("BoxComponent");
 	m_pBoxComponent->SetExtend(35.0f, 35.0f);

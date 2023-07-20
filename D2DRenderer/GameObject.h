@@ -22,7 +22,7 @@ class World;
 class GameObject : public IAnimationNotify, public IColliderNotify , public Object
 {
 public:
-	GameObject();
+	GameObject(World* pOwnerWorld);
 	virtual ~GameObject()
 	{
 		for (auto& pComponent : m_OwnedComponents)

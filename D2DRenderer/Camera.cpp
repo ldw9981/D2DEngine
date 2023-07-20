@@ -3,17 +3,22 @@
 #include "CameraComponent.h"
 #include "World.h"
 
-Camera::Camera()
+Camera::Camera(World* pOwnerWorld)
+	:GameObject(pOwnerWorld)
 {
 	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");
 	SetRootComponent(m_pCameraComponent);
-	// 사용하려는 게임에서 직접 호출해야 한다
-	//GetOwnerWorld()->SetCamera(m_pCameraComponent);
+
 	m_IsCullObject = false;
+
+	// CameraID를 등록한다.
+	GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 Camera::~Camera()
 {
+	// CameraID를 삭제한다.
+	GetOwnerWorld()->DelCamera(m_pCameraComponent);
 }
 
 void Camera::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)

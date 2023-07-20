@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Effect.h"
 
-Effect::Effect()
+Effect::Effect(World* pOwnerWorld)
+	:GameObject(pOwnerWorld)
 {
 }
 

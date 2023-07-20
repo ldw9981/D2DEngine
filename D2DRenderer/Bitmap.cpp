@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Bitmap.h"
 
-Bitmap::Bitmap()
+Bitmap::Bitmap(World* pOwnerWorld)
+	:GameObject(pOwnerWorld)
 {
 }
 

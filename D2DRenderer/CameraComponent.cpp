@@ -9,6 +9,7 @@ CameraComponent::CameraComponent(GameObject* pOwner, const std::string& Name)
 {
 	m_BoundingBox.m_Extend.x = GameApp::m_pInstance->GetClientSize().width / 2.f;
 	m_BoundingBox.m_Extend.y = GameApp::m_pInstance->GetClientSize().height / 2.f;
+	m_CameraID = -1;
 }
 
 CameraComponent::~CameraComponent()
@@ -27,10 +28,12 @@ void CameraComponent::Update()
 void CameraComponent::SerializeOut(nlohmann::ordered_json& object)
 {
 	__super::SerializeOut(object);
+	object["m_CameraID"] = m_CameraID;
 }
 
 void CameraComponent::SerializeIn(nlohmann::ordered_json& object)
 {
 	__super::SerializeIn(object);
+	m_CameraID = object["m_CameraID"].get<int>();
 }
 
