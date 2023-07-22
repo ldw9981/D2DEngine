@@ -103,38 +103,33 @@ void SceneComponent::DrawDebugWorldTransform(ID2D1RenderTarget* pRenderTarget)
 void SceneComponent::SerializeOut(nlohmann::ordered_json& object)
 {
 	__super::SerializeOut(object);
-	if (m_pParentScene)
-	{
-		object["ParentScene"] = m_pParentScene->GetName();
-	}
-	else object["ParentScene"] = "";
-
-	object["m_RelativeScale"] = { m_RelativeScale.x,m_RelativeScale.y };
-	object["m_RelativeRotation"] = m_RelativeRotation;
-	object["m_RelativeLocation"] = { m_RelativeLocation.x,m_RelativeLocation.y };
-	object["m_BoundingBox.m_Extend"] = { m_BoundingBox.m_Extend.x,m_BoundingBox.m_Extend.y };
+	
+	object["m_RelativeLocation"] = { m_RelativeLocation.x,m_RelativeLocation.y };	
 }
 
 void SceneComponent::SerializeIn(nlohmann::ordered_json& object)
 {
 	__super::SerializeIn(object);
+	
 
-	// 부모를 찾아서 연결한다.
-	std::string ParentScene = object["ParentScene"].get<std::string>();	
-	if (!ParentScene.empty())
-	{	
-		SceneComponent* pComponent = static_cast<SceneComponent*>(GetOwner()->GetComponent(ParentScene));
-		if (pComponent)
-		{
-			SetParentScene(pComponent);
-		}
+	if (object.find("m_RelativeScale") != object.end())
+	{
+		m_RelativeScale.x = object["m_RelativeScale"][0];
+		m_RelativeScale.y = object["m_RelativeScale"][1];	
+	}
+	if (object.find("m_RelativeRotation") != object.end())
+	{
+		m_RelativeRotation = object["m_RelativeRotation"];
 	}
 
-	m_RelativeScale.x = object["m_RelativeScale"][0];
-	m_RelativeScale.y = object["m_RelativeScale"][1];
-	m_RelativeRotation = object["m_RelativeRotation"];
-	m_RelativeLocation.x = object["m_RelativeLocation"][0];
-	m_RelativeLocation.y = object["m_RelativeLocation"][1];
-	m_BoundingBox.m_Extend.x = object["m_BoundingBox.m_Extend"][0];
-	m_BoundingBox.m_Extend.y = object["m_BoundingBox.m_Extend"][1];
+	if (object.find("m_RelativeLocation") != object.end())
+	{
+		m_RelativeLocation.x = object["m_RelativeLocation"][0];
+		m_RelativeLocation.y = object["m_RelativeLocation"][1];
+	}
+	if (object.find("m_BoundingBox.m_Extend") != object.end())
+	{
+		m_BoundingBox.m_Extend.x = object["m_BoundingBox.m_Extend"][0];
+		m_BoundingBox.m_Extend.y = object["m_BoundingBox.m_Extend"][1];
+	}
 }

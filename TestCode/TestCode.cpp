@@ -9,6 +9,7 @@
 #include "PlayerCharacter.h"
 #include "TestFileIO.h"
 #include "TestFactory.h"
+#include "TestEnumToString.h"
 
 int main()
 {
@@ -18,7 +19,7 @@ int main()
 	//go.Update();
 	//go.Render();
 		
-	TestFactory();
+	TestEnumToString();
 
 	return 0;
 }

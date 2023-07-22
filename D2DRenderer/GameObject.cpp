@@ -95,17 +95,7 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 {
 	std::string type = typeid(*this).name();
 	object["ClassName"] = D2DHelper::GetNameFromTypeName(type);
-	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
-	if (m_pParentObject)
-	{
-		
-		object["ParentObject"] = "";
-	}
-	else
-	{
-		object["ParentObject"] = "";
-	}
-
+	
 	if (m_pRootComponent)
 	{
 		object["RootComponent"] = m_pRootComponent->GetName();
@@ -114,8 +104,6 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 	{
 		object["RootComponent"] = "";
 	}
-	object["m_IsCullObject"] = m_IsCullObject;
-	object["m_IsNoCollider"] = m_IsNoCollider;
 
 	for (auto& pComponent : m_OwnedComponents)
 	{
@@ -127,21 +115,7 @@ void GameObject::SerializeOut(nlohmann::ordered_json& object)
 
 void GameObject::SerializeIn(nlohmann::ordered_json& object)
 {
-	std::string type = object["ClassName"].get<std::string>();
-	// TODO  게임 오브 젝트 부모-자식 연결 정리가 필요 
-		
-	std::string ComponentName = object["RootComponent"].get<std::string>();
-	if (!ComponentName.empty())
-	{
-		SceneComponent* pComponent = static_cast<SceneComponent*>(GetComponent(ComponentName));
-		if (pComponent)
-		{
-			SetRootComponent(pComponent);
-		}
-	}	
-	m_IsCullObject = object["m_IsCullObject"].get<bool>();
-	m_IsNoCollider = object["m_IsNoCollider"].get<bool>();
-
+	std::string ComponentName;
 	for (auto& JsonObjComponent : object["m_OwnedComponents"])
 	{
 		ComponentName = JsonObjComponent["m_Name"].get<std::string>();

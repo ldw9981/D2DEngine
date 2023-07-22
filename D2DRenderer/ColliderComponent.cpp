@@ -48,19 +48,29 @@ void ColliderComponent::ProcessBlock(ColliderComponent* pOtherComponent)
 void ColliderComponent::SerializeOut(nlohmann::ordered_json& object)
 {
 	__super::SerializeOut(object);
-	object["m_Color"] = { m_Color.r , m_Color.g , m_Color.b, m_Color.a };
-	object["m_ColliderType"] = m_ColliderType;
-	object["m_CollisionType"] = m_CollisionType; 
 }
 
 void ColliderComponent::SerializeIn(nlohmann::ordered_json& object)
 {
 	__super::SerializeIn(object);
-	m_Color.r = object["m_Color"][0];
-	m_Color.g = object["m_Color"][1];
-	m_Color.b = object["m_Color"][2];
-	m_Color.a = object["m_Color"][3];
-	m_ColliderType = object["m_ColliderType"];
-	m_CollisionType = object["m_CollisionType"];
+
+
+	if (object.find("m_Color") != object.end())
+	{
+		m_Color.r = object["m_Color"][0];
+		m_Color.g = object["m_Color"][1];
+		m_Color.b = object["m_Color"][2];
+		m_Color.a = object["m_Color"][3];
+	}
+
+	if (object.find("m_ColliderType") != object.end())
+	{
+		m_ColliderType = object["m_ColliderType"];
+	}
+
+	if (object.find("m_CollisionType") != object.end())
+	{
+		m_CollisionType = object["m_CollisionType"];
+	}
 }
 
