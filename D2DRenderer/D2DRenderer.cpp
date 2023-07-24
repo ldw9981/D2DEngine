@@ -58,8 +58,9 @@ void D2DRenderer::SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform)
 	D2D1InvertMatrix(&m_CameraTransform); 
 }
 
-HRESULT D2DRenderer::Initialize()
+HRESULT D2DRenderer::Initialize(HWND hWnd)
 {
+	m_hWnd = hWnd;
     HRESULT hr = S_OK;
     // COM 사용 시작
     hr = CoInitialize(NULL);
@@ -80,7 +81,7 @@ HRESULT D2DRenderer::Initialize()
         */
       
         RECT rc;
-        ::GetClientRect(GameApp::m_hWnd, &rc);
+        ::GetClientRect(m_hWnd, &rc);
 
         D2D1_SIZE_U ScreenSize = D2D1::SizeU(
             rc.right - rc.left,
@@ -92,7 +93,7 @@ HRESULT D2DRenderer::Initialize()
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(GameApp::m_hWnd, ScreenSize),
+            D2D1::HwndRenderTargetProperties(m_hWnd, ScreenSize),
             &m_pRenderTarget);
     }
 
@@ -174,14 +175,6 @@ void D2DRenderer::DrawText(ID2D1RenderTarget* pRenderTarget, const std::wstring&
 {
 	m_pBrush->SetColor(color);
 	pRenderTarget->DrawTextW(string.c_str(),(UINT32) string.length(), m_pDWriteTextFormat, rect, m_pBrush);
-}
-
-void D2DRenderer::EndDraw()
-{
-	HRESULT hr = m_pRenderTarget->EndDraw();
-	// 그래픽 카드를 사용할수없을때 실패가 리턴되며
-	// 그래픽 카드가 정상화 된 이후에 렌더타겟과 렌더타겟이 생성한 리소스를 재성성해야한다.
-	// 지금은 그런 경우가 잘 일어나지 않으므로 실패 처리의 내용은 아직 작성하지 않았다. 
 }
 
 bool D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)

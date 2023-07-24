@@ -73,7 +73,7 @@ bool GameApp::Initialize(UINT Width, UINT Height)
 	m_currentTime = m_previousTime = (float)GetTickCount64() / 1000.0f;
 
 
-	HRESULT hr = m_D2DRenderer.Initialize();
+	HRESULT hr = m_D2DRenderer.Initialize(m_hWnd);
 	if (FAILED(hr))
 	{
 		_com_error err(hr);
@@ -160,7 +160,10 @@ void GameApp::Render()
 	D2DRenderer::m_pRenderTarget->BeginDraw();
 	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 	m_World.Render(D2DRenderer::m_pRenderTarget);
-	m_D2DRenderer.EndDraw();
+	HRESULT hr = D2DRenderer::m_pRenderTarget->EndDraw();
+	// 그래픽 카드를 사용할수없을때 실패가 리턴되며
+	// 그래픽 카드가 정상화 된 이후에 렌더타겟과 렌더타겟이 생성한 리소스를 재성성해야한다.
+	// 지금은 그런 경우가 잘 일어나지 않으므로 실패 처리의 내용은 아직 작성하지 않았다. 
 }
 
 

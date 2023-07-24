@@ -27,17 +27,19 @@ private:
 	ID2D1SolidColorBrush* m_pBrush;	// 렌더타겟이 생성하는 리소스 역시 장치의존
 	IDXGIFactory4* m_pDXGIFactory;		// DXGI팩토리
 	IDXGIAdapter3* m_pDXGIAdapter;		// 비디오카드 정보에 접근 가능한 인터페이스
+	HWND m_hWnd;
 
 	std::list<std::pair<std::wstring, ID2D1Bitmap*>> m_SharingBitmaps;
 	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;	
 public:
-	HRESULT Initialize();
+	HRESULT Initialize(HWND hWnd);
 
 	void DrawRectangle(ID2D1RenderTarget* pRenderTarget,D2D1_RECT_F rect, D2D1_COLOR_F color);
 	void DrawCrossLine(ID2D1RenderTarget* pRenderTarget,D2D1_VECTOR_2F point = {0.0f,0.0f}, D2D1_COLOR_F color = D2D1::ColorF(D2D1::ColorF::LightGreen));
 	void DrawEllipse(ID2D1RenderTarget* pRenderTarget,D2D1_ELLIPSE ellipse, D2D1_COLOR_F color);
 	void DrawText(ID2D1RenderTarget* pRenderTarget,const std::wstring& string,D2D1_RECT_F rect, D2D1_COLOR_F color);
-	void EndDraw();
+
+
 
 	// 카메라의 월드 변환을 넣어 역행렬을 계산하여 저장한다.
 	void SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform);
