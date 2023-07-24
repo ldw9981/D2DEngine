@@ -182,7 +182,7 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnSize(UINT nType, int cx, int cy);
+//	afx_msg void OnSize(UINT nType, int cx, int cy);
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
@@ -195,7 +195,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-	ON_WM_SIZE()
+//	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 // 대화 상자를 실행하기 위한 응용 프로그램 명령입니다.
@@ -252,9 +252,9 @@ BOOL CWorldEditorApp::OnIdle(LONG lCount)
 }
 
 
-void CAboutDlg::OnSize(UINT nType, int cx, int cy)
-{
-	CDialogEx::OnSize(nType, cx, cy);
-
+//void CAboutDlg::OnSize(UINT nType, int cx, int cy)
+//{
+//	CDialogEx::OnSize(nType, cx, cy);
+//
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-}
+//}

@@ -30,7 +30,7 @@ BEGIN_MESSAGE_MAP(CWorldEditorView, CView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
 	ON_WM_SIZE()
-	ON_WM_SIZING()
+//	ON_WM_SIZING()
 END_MESSAGE_MAP()
 
 // CWorldEditorView 생성/소멸
@@ -144,9 +144,9 @@ void CWorldEditorView::OnSize(UINT nType, int cx, int cy)
 }
 
 
-void CWorldEditorView::OnSizing(UINT fwSide, LPRECT pRect)
-{
-	CView::OnSizing(fwSide, pRect);
-	
-	
-}
+//void CWorldEditorView::OnSizing(UINT fwSide, LPRECT pRect)
+//{
+//	CView::OnSizing(fwSide, pRect);
+//	
+//	
+//}
