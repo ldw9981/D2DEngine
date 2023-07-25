@@ -1,4 +1,7 @@
 #include "PlayerCharacter.h"
+#include "TestFactory.h"
+
+REGISTER_PRODUCT(PlayerCharacter)
 
 void PlayerCharacter::Render()
 {
@@ -13,3 +16,4 @@ void PlayerCharacter::Update()
 	m_BoxRenderer.Update();
 
 }
+

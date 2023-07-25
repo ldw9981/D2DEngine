@@ -19,7 +19,7 @@ int main()
 	//go.Update();
 	//go.Render();
 		
-	TestEnumToString();
+	TestFactory();
 
 	return 0;
 }

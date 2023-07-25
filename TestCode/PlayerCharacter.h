@@ -5,6 +5,7 @@
 #include "BoxRender.h"
 #include "Component.h"
 
+
 class PlayerCharacter :
     public GameObject,public AnimationRender,public Movement
 {
@@ -25,6 +26,8 @@ public:
 	virtual void Render() override;
 	virtual void Update() override;
 };
+
+
 
 /*
 
