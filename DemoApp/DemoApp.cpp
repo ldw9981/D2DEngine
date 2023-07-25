@@ -6,9 +6,9 @@
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/AnimationAsset.h"
 #include "../D2DRenderer/Camera.h"
-#include "DemoObject.h"
-#include "PlatformObject.h"
-#include "PlayerCharacter.h"
+#include "../DemoAppLib/DemoObject.h"
+#include "../DemoAppLib/PlatformObject.h"
+#include "../DemoAppLib/PlayerCharacter.h"
 
 // D2DEngine프로젝트에서 기본 윈도우 생성,루프 기능 클래스로 래핑한 를 구현
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
@@ -32,9 +32,6 @@ DemoApp::DemoApp(HINSTANCE hInstance)
 	//m_wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_DEMOAPP);                  //게임이므로 메뉴는 없앤다
 	m_wcex.hIconSm = LoadIcon(m_hInstance, MAKEINTRESOURCE(IDI_SMALL));
     m_hAccelTable = LoadAccelerators(m_hInstance, MAKEINTRESOURCE(IDC_DEMOAPP));
-
-    World::RegistGameObjectClass<PlayerCharacter>();
-    World::RegistGameObjectClass<PlatformObject>();
 }
 
 // DemoApp의 파괴자 -> 멤버변수로 사용한 클래스의 파괴자 -> GameApp의 파괴자  순으로 호출된다.

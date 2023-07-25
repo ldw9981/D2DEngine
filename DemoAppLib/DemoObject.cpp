@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "pch.h"
 #include "DemoObject.h"
 #include "../D2DRenderer/SceneComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
@@ -9,6 +9,8 @@
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
 #include "../D2DRenderer/Helper.h"
+#include "../D2DRenderer/Factory.h"
+
 
 /*
 	DemoObject Hierachy
@@ -20,8 +22,9 @@
 		+ [Child] TextComponent
  */
 
-DemoObject::DemoObject(World* pOwner)
-	:GameObject(pOwner)
+ REGISTER_GAMEOBJECT(DemoObject)
+
+DemoObject::DemoObject()
 {
 	m_pMovementComponent = CreateComponent<MovementComponent>("MovementComponent");
 
@@ -100,4 +103,24 @@ void DemoObject::Update()
 	*/
 
 	__super::Update();
+}
+
+void DemoObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void DemoObject::OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void DemoObject::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
+{
+
+}
+
+void DemoObject::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName)
+{
+
 }

@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "Effect.h"
+#include "Factory.h"
+#include "World.h"
 
-Effect::Effect(World* pOwnerWorld)
-	:GameObject(pOwnerWorld)
+REGISTER_GAMEOBJECT(Effect)
+
+Effect::Effect()
 {
 }
 

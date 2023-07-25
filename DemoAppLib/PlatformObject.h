@@ -1,31 +1,27 @@
 #pragma once
-
 #include "../D2DRenderer/GameObject.h"
 
 
-
-class AnimationComponent;
-class SideMovementComponent;
-class FSMComponent;
-class FSMCharacter;
-class TextComponent;
-class CameraComponent;
 class BoxComponent;
-class PlayerCharacter :
+class AnimationComponent;
+class SphereComponent;
+class TextComponent;
+class SceneComponent;
+class MovementComponent;
+class BitmapComponent;
+class World;
+/*
+
+	Hierarchy 테스트용 오브젝트
+*/
+class PlatformObject :
 	public GameObject
 {
 public:
-	PlayerCharacter(World* pOwnerWorld);
-	virtual ~PlayerCharacter();
-
-	FSMComponent* m_pFSMComponent;
-	AnimationComponent* m_pAnimationComponent;
-	SideMovementComponent* m_pSideMovementComponent;
-	FSMCharacter* m_pFSMCharacter;
-	TextComponent* m_pTextComponent;
-	CameraComponent* m_pCameraComponent;
-	BoxComponent* m_pFootBox;
-	BoxComponent* m_pBodyBox;
+	PlatformObject();
+	virtual ~PlatformObject();
+	BoxComponent* m_pBoxComponent;	
+	BitmapComponent* m_pBitmapComponent;
 public:
 
 	virtual void Update() override;

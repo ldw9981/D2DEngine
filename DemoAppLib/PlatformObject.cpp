@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "pch.h"
 #include "PlatformObject.h"
 #include "../D2DRenderer/SceneComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
@@ -9,7 +9,7 @@
 #include "../D2DRenderer/TextComponent.h"
 #include "../D2DRenderer/MovementComponent.h"
 #include "../D2DRenderer/BitmapComponent.h"
-
+#include "../D2DRenderer/Factory.h"
 /*
 	Test1Object Hierachy
 	- MovementComponent
@@ -20,8 +20,9 @@
 		+ [Child] TextComponent
  */
 
-PlatformObject::PlatformObject(World* pOwner)
-	:GameObject(pOwner)
+REGISTER_GAMEOBJECT(PlatformObject)
+
+PlatformObject::PlatformObject()
 {
 	m_pBoxComponent = CreateComponent<BoxComponent>("BoxComponent");
 	m_pBoxComponent->SetExtend(35.0f, 35.0f);

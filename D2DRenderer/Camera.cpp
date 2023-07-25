@@ -2,23 +2,25 @@
 #include "Camera.h"
 #include "CameraComponent.h"
 #include "World.h"
+#include "Factory.h"
 
-Camera::Camera(World* pOwnerWorld)
-	:GameObject(pOwnerWorld)
+REGISTER_GAMEOBJECT(Camera)
+
+Camera::Camera()
 {
 	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");
 	SetRootComponent(m_pCameraComponent);
-
 	m_IsCullObject = false;
-
-	// CameraID를 등록한다.
-	GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 Camera::~Camera()
 {
-	// CameraID를 삭제한다.
-	GetOwnerWorld()->DelCamera(m_pCameraComponent);
+	m_pOwnerWorld->DelCamera(m_pCameraComponent);
+}
+
+void Camera::SetCameraID(int id)
+{
+	m_pCameraComponent->SetCameraID(id);
 }
 
 void Camera::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
@@ -39,5 +41,12 @@ void Camera::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent*
 void Camera::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName)
 {
 
+}
+
+void Camera::SerializeIn(nlohmann::ordered_json& object)
+{
+	GameObject::SerializeIn(object);
+
+	m_pOwnerWorld->AddCamera(m_pCameraComponent);
 }
 

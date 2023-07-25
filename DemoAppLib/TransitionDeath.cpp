@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "pch.h"
 #include "TransitionDeath.h"
 
 bool TransitionDeath::CheckCondition()

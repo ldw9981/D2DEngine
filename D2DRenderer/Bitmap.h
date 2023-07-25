@@ -4,7 +4,7 @@ class Bitmap :
     public GameObject
 {
 public:
-	Bitmap(World* pOwnerWorld);
+	Bitmap();
 	~Bitmap();
 
 	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;

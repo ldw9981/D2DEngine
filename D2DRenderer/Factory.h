@@ -6,16 +6,16 @@
 #include <functional> // For std::function
 
 
-int TestFactory();
-
-// Registration macros to simplify registration of concrete products
-#define REGISTER_GAMEOBJECT(GameObjectType) \
-    GameObject* Create##GameObjectType() { return new GameObjectType(); } \
-    bool Registered##GameObjectType = GameObjectFactory::RegisterGameObject(#GameObjectType, Create##GameObjectType);
-
 class GameObject;
-// Factory class using registration mechanism
-class GameObjectFactory {
+
+// CPP에서 사용합니다.
+#define REGISTER_GAMEOBJECT(GameObjectType) \
+    GameObject* CreateGameObject##GameObjectType() { return new GameObjectType(); } \
+    bool Registered##GameObjectType = Factory::RegisterGameObject(#GameObjectType, CreateGameObject##GameObjectType);
+
+
+class Factory
+{
 public:
 	using GameObjectCreator = std::function<GameObject* ()>;
 
@@ -32,7 +32,7 @@ public:
 		return true;
 	}
 
-private:
+
 	static std::map<std::string, GameObjectCreator>& GetRegistry() {
 		static std::map<std::string, GameObjectCreator> registry;
 		return registry;

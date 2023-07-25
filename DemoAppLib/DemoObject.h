@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../D2DRenderer/GameObject.h"
 
 
@@ -8,20 +9,20 @@ class SphereComponent;
 class TextComponent;
 class SceneComponent;
 class MovementComponent;
-class BitmapComponent;
 class World;
-/*
-
-	Hierarchy 테스트용 오브젝트
-*/
-class PlatformObject :
-	public GameObject
+class DemoObject :
+    public GameObject
 {
 public:
-	PlatformObject(World* pOwner);
-	virtual ~PlatformObject();
-	BoxComponent* m_pBoxComponent;	
-	BitmapComponent* m_pBitmapComponent;
+	DemoObject();
+	virtual ~DemoObject();
+	BoxComponent* m_pBoxComponent;
+
+	SphereComponent* m_pSphereComponent;
+	AnimationComponent* m_pAnimationComponent;
+	TextComponent* m_pTextComponent;
+	SceneComponent* m_pSceneComponent;
+	MovementComponent* m_pMovementComponent;
 public:
 
 	virtual void Update() override;
@@ -29,6 +30,6 @@ public:
 	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
-	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::string& AnimationName) override;
+	virtual void OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName) override;
 };
 

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1e2acc6c-71d8-4c0d-b2d3-06c2bc7b3e2d}</ProjectGuid>
-    <RootNamespace>D2DRenderer</RootNamespace>
+    <ProjectGuid>{f204a1c2-1c1b-4861-90bf-deeaa3db0abf}</ProjectGuid>
+    <RootNamespace>DemoAppLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,7 +118,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -136,7 +135,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -147,87 +145,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AABB.h" />
-    <ClInclude Include="AnimationAsset.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="BoxComponent.h" />
-    <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="D2DRenderer.h" />
-    <ClInclude Include="Deligator.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="Factory.h" />
-    <ClInclude Include="FSMComponent.h" />
-    <ClInclude Include="FiniteStateMachine.h" />
-    <ClInclude Include="FSMStateAlias.h" />
-    <ClInclude Include="FSMTransition.h" />
-    <ClInclude Include="FSMState.h" />
-    <ClInclude Include="Bitmap.h" />
-    <ClInclude Include="BitmapComponent.h" />
-    <ClInclude Include="MovementComponent.h" />
-    <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameApp.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="FSMCharacter.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ReferenceCounter.h" />
-    <ClInclude Include="Helper.h" />
-    <ClInclude Include="SceneComponent.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="SideMovementComponent.h" />
-    <ClInclude Include="SimpleMathHelper.h" />
-    <ClInclude Include="Sphere.h" />
-    <ClInclude Include="SphereComponent.h" />
-    <ClInclude Include="TextComponent.h" />
-    <ClInclude Include="TimeSystem.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="PlatformObject.h" />
+    <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="StateAttack.h" />
+    <ClInclude Include="StateDeath.h" />
+    <ClInclude Include="StateIdle.h" />
+    <ClInclude Include="StateMove.h" />
+    <ClInclude Include="TransitionDeath.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AABB.cpp" />
-    <ClCompile Include="AnimationAsset.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="BoxComponent.cpp" />
-    <ClCompile Include="CameraComponent.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="D2DRenderer.cpp" />
-    <ClCompile Include="Deligator.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="Factory.cpp" />
-    <ClCompile Include="FSMComponent.cpp" />
-    <ClCompile Include="FiniteStateMachine.cpp" />
-    <ClCompile Include="FSMStateAlias.cpp" />
-    <ClCompile Include="FSMTransition.cpp" />
-    <ClCompile Include="FSMState.cpp" />
-    <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="BitmapComponent.cpp" />
-    <ClCompile Include="MovementComponent.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="GameApp.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="DemoAppLib.cpp" />
+    <ClCompile Include="DemoObject.cpp" />
+    <ClCompile Include="FSMCharacter.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ReferenceCounter.cpp" />
-    <ClCompile Include="Helper.cpp" />
-    <ClCompile Include="SceneComponent.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
-    <ClCompile Include="SideMovementComponent.cpp" />
-    <ClCompile Include="SimpleMathHelper.cpp" />
-    <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="SphereComponent.cpp" />
-    <ClCompile Include="TextComponent.cpp" />
-    <ClCompile Include="TimeSystem.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="PlatformObject.cpp" />
+    <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="StateAttack.cpp" />
+    <ClCompile Include="StateDeath.cpp" />
+    <ClCompile Include="StateIdle.cpp" />
+    <ClCompile Include="StateMove.cpp" />
+    <ClCompile Include="TransitionDeath.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

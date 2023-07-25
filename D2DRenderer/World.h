@@ -32,8 +32,16 @@ public:
 
 	void SetCamera(int id) 
 	{ 
+		auto it = m_Cameras.find(id);
+		if (it == m_Cameras.end())
+		{			
+			m_pCamera = nullptr;
+			LOG_ERROR(L"Camera ID  %d is not exist",id);
+			// 찾는 카메라가 없으면 어떻게 처리해야할까.
+			return;
+		}	
 		m_CameraID = id; 
-		m_pCamera = m_Cameras[id]; 
+		m_pCamera = it->second;
 	}
 
 protected:
@@ -52,7 +60,8 @@ public:
 	{
 		bool bIsBase = std::is_base_of<GameObject, T>::value;
 		assert(bIsBase == true);
-		T* newObject = new T(this);
+		T* newObject = new T();
+		newObject->SetOwner(this);
 		m_GameObjects.push_back(newObject);
 		return newObject;
 	}
@@ -62,21 +71,7 @@ public:
 
 	virtual void Save(const wchar_t* FilePath);
 	virtual bool Load(const wchar_t* FilePath);
-
-	// 이름으로 클래스 생성하기 , 미리 등록된 클래스만 생성가능하다.
-	GameObject* CreateGameObject(const std::string& ClassName);
-
-	// 람다로 생성한 클래스 생성함수를 등록할 컨테이너 
-	static std::map<std::string, std::function<GameObject*(World* pOwner)>> m_ClassCreatorFunction;
-
-	// 클래스를 등록하는 함수 , CreateGameObject를 사용하기전에 미리 등록을 해야한다.
-	template<typename T>
-	static void RegistGameObjectClass()
-	{
-		std::string ClassName = D2DHelper::GetNameFromTypeName(typeid(T).name());
-		m_ClassCreatorFunction[ClassName] = [](World* pOwner)->GameObject* {return new T(pOwner); };
-	}
-
+	
 	void AddCamera(CameraComponent* pCameraComponent);
 	void DelCamera(CameraComponent* pCameraComponent);
 

@@ -4,7 +4,7 @@
 
 int TestFactory() 
 {
-	GameObject* pObject = ProductFactory::createProduct("PlayerCharacter");
+	GameObject* pObject = GameObjectFactory::CreateGameObject("PlayerCharacter");
 
 	return 0;
 }

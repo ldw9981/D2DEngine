@@ -253,6 +253,11 @@
   <ItemGroup>
     <ProjectReference Include="..\D2DRenderer\D2DRenderer.vcxproj">
       <Project>{1e2acc6c-71d8-4c0d-b2d3-06c2bc7b3e2d}</Project>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\DemoAppLib\DemoAppLib.vcxproj">
+      <Project>{f204a1c2-1c1b-4861-90bf-deeaa3db0abf}</Project>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

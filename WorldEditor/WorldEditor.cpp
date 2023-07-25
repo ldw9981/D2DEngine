@@ -11,6 +11,8 @@
 
 #include "WorldEditorDoc.h"
 #include "WorldEditorView.h"
+#include "../D2DRenderer/Factory.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,6 +34,7 @@ END_MESSAGE_MAP()
 // CWorldEditorApp 생성
 
 CWorldEditorApp::CWorldEditorApp() noexcept
+:m_EditorWorld("TestWorld")
 {
 	m_bHiColorIcons = TRUE;
 
@@ -149,6 +152,10 @@ BOOL CWorldEditorApp::InitInstance()
 
 	CMainFrame* pMainFrame = (CMainFrame*)::AfxGetMainWnd();
 	m_Renderer.Initialize(pMainFrame->GetActiveView()->GetSafeHwnd());
+
+	// 팩토리 테스트
+	auto& result  = Factory::GetRegistry();
+	auto it = result.find("Effect");
 	return TRUE;
 }
 

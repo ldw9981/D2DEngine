@@ -2,6 +2,7 @@
 #include "CameraComponent.h"
 #include "Helper.h"
 #include "GameApp.h"
+#include "World.h"
 
 
 CameraComponent::CameraComponent(GameObject* pOwner, const std::string& Name)
@@ -10,11 +11,15 @@ CameraComponent::CameraComponent(GameObject* pOwner, const std::string& Name)
 	m_BoundingBox.m_Extend.x = GameApp::m_pInstance->GetClientSize().width / 2.f;
 	m_BoundingBox.m_Extend.y = GameApp::m_pInstance->GetClientSize().height / 2.f;
 	m_CameraID = -1;
+
+	// CameraID를 등록한다.
+	//GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 CameraComponent::~CameraComponent()
 {
-
+	// CameraID를 삭제한다.
+	//GetOwnerWorld()->DelCamera(m_pCameraComponent);
 }
 
 void CameraComponent::Update()

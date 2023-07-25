@@ -1,7 +1,7 @@
 #include "PlayerCharacter.h"
 #include "TestFactory.h"
 
-REGISTER_PRODUCT(PlayerCharacter)
+REGISTER_GAMEOBJECT(PlayerCharacter)
 
 void PlayerCharacter::Render()
 {

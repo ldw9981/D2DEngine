@@ -3,6 +3,7 @@
 //
 #pragma once
 #include "../D2DRenderer/D2DRenderer.h"
+#include "../D2DRenderer/World.h"
 
 #ifndef __AFXWIN_H__
 	#error "PCH에 대해 이 파일을 포함하기 전에 'pch.h'를 포함합니다."
@@ -30,7 +31,7 @@ public:
 	UINT  m_nAppLook;
 	BOOL  m_bHiColorIcons;
 	D2DRenderer m_Renderer;
-
+	World m_EditorWorld;
 	virtual void PreLoadState();
 	virtual void LoadCustomState();
 	virtual void SaveCustomState();

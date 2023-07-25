@@ -1,12 +1,15 @@
 #pragma once
 #include "GameObject.h"
+
+
 class Effect :
     public GameObject
 {
 public:
 
-	Effect(World* pOwnerWorld);
+	Effect();
 	virtual ~Effect();
+
 
 	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;

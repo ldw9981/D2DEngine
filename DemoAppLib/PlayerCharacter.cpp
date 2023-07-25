@@ -1,4 +1,4 @@
-#include "framework.h"
+#include "pch.h"
 #include "PlayerCharacter.h"
 #include "../D2DRenderer/SceneComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
@@ -14,8 +14,20 @@
 #include "../D2DRenderer/FiniteStateMachine.h"
 #include "../D2DRenderer/CameraComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
+#include "../D2DRenderer/Factory.h"
 #include "StateIdle.h"
 #include "FSMCharacter.h"
+
+int SetValue()
+{
+	return rand();
+}
+
+int Test = SetValue();
+
+
+REGISTER_GAMEOBJECT(PlayerCharacter)
+
 /*
 	DemoObject Hierachy
 	- SideMovementComponent
@@ -23,8 +35,7 @@
 	- FSMComponent
  */
 
-PlayerCharacter::PlayerCharacter(World* pOwnerWorld)
-	:GameObject(pOwnerWorld)
+PlayerCharacter::PlayerCharacter()
 {
 	// ±×³É Component 
 	m_pSideMovementComponent = CreateComponent<SideMovementComponent>("SideMovementComponent");
@@ -65,8 +76,6 @@ PlayerCharacter::PlayerCharacter(World* pOwnerWorld)
 	size.width = size.width / 2;
 	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -100.0f));
 	m_pCameraComponent->SetCameraID(1);
-	
-	GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 PlayerCharacter::~PlayerCharacter()
@@ -145,4 +154,10 @@ void PlayerCharacter::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderC
 void PlayerCharacter::OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::string& AnimationName)
 {
 	m_pFSMCharacter->m_AnimationComplete = true;
+}
+
+void PlayerCharacter::SerializeIn(nlohmann::ordered_json& object)
+{
+	__super::SerializeIn(object);
+	GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }

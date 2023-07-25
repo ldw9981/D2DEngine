@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "Bitmap.h"
+#include "Factory.h"
 
-Bitmap::Bitmap(World* pOwnerWorld)
-	:GameObject(pOwnerWorld)
+
+REGISTER_GAMEOBJECT(Bitmap)
+
+Bitmap::Bitmap()
 {
 }
 

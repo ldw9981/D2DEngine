@@ -138,31 +138,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DemoApp.h" />
-    <ClInclude Include="DemoObject.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="StateAttack.h" />
-    <ClInclude Include="StateDeath.h" />
-    <ClInclude Include="StateIdle.h" />
-    <ClInclude Include="StateMove.h" />
-    <ClInclude Include="TransitionDeath.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="PlatformObject.h" />
-    <ClInclude Include="FSMCharacter.h" />
-    <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoApp.cpp" />
-    <ClCompile Include="DemoObject.cpp" />
-    <ClCompile Include="StateAttack.cpp" />
-    <ClCompile Include="StateDeath.cpp" />
-    <ClCompile Include="StateIdle.cpp" />
-    <ClCompile Include="StateMove.cpp" />
-    <ClCompile Include="TransitionDeath.cpp" />
-    <ClCompile Include="PlatformObject.cpp" />
-    <ClCompile Include="FSMCharacter.cpp" />
-    <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +157,11 @@
   <ItemGroup>
     <ProjectReference Include="..\D2DRenderer\D2DRenderer.vcxproj">
       <Project>{1e2acc6c-71d8-4c0d-b2d3-06c2bc7b3e2d}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\DemoAppLib\DemoAppLib.vcxproj">
+      <Project>{f204a1c2-1c1b-4861-90bf-deeaa3db0abf}</Project>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

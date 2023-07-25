@@ -10,15 +10,13 @@
 #include "Bitmap.h"
 #include "Effect.h"
 #include "CameraComponent.h"
+#include "Factory.h"
 
-std::map<std::string, std::function<GameObject* (World* pOwner)>> World::m_ClassCreatorFunction;
 
 World::World(std::string Name)
 	:m_Name(Name)
 {
-	World::RegistGameObjectClass<Camera>();
-	World::RegistGameObjectClass<Effect>();
-	World::RegistGameObjectClass<Bitmap>();
+
 }
 
 /*
@@ -166,11 +164,17 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 		std::string ClassName = JsonGameObj["ClassName"].get<std::string>();
 		// Todo: ClassName으로 게임오브젝트를 생성하고 SerializeIn호출한다.
 		// 다른 프로젝트에 있는 게임오브젝트도 생성하려면 어떻게 해야할까..
-		GameObject* pGameObject = World::CreateGameObject(ClassName);
+		GameObject* pGameObject = Factory::CreateGameObject(ClassName);
 		if (pGameObject)
 		{
+			pGameObject->SetOwnerWorld(this);
 			pGameObject->SerializeIn(JsonGameObj);
-		}		
+			m_GameObjects.push_back(pGameObject);
+		}	
+		else
+		{
+			LOG_ERROR(L"Failed to create GameObject %s", D2DHelper::StringToWString(ClassName).c_str());
+		}
 	}
 	SetCamera(CameraID);
 }
@@ -203,20 +207,6 @@ bool World::Load(const wchar_t* FilePath)
 
 	return true;
 }
-
-GameObject* World::CreateGameObject(const std::string& ClassName)
-{
-	GameObject* newObject = nullptr;
-	auto iter = m_ClassCreatorFunction.find(ClassName);
-	if (iter != m_ClassCreatorFunction.end())
-	{
-		auto func = iter->second;
-		newObject = func(this);
-		m_GameObjects.push_back(newObject);
-	}
-	return newObject;
-}
-
 
 void World::AddCamera(CameraComponent* pCameraComponent)
 {

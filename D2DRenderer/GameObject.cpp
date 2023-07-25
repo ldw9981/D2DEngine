@@ -8,15 +8,13 @@
 #include <fstream>
 #include "Helper.h"
 
-GameObject::GameObject(World* pOwnerWorld)
-	:m_pRootComponent(nullptr), m_IsCullObject(true), 
-	m_pParentObject(nullptr), m_pOwnerWorld(pOwnerWorld)
+
+GameObject::GameObject()
+	:m_pRootComponent(nullptr), m_IsCullObject(true),
+	m_pParentObject(nullptr)
 {
 
 }
-
-
-
 
 void GameObject::SetRootComponent(SceneComponent* pRootComponent)
 {
