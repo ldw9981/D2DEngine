@@ -27,6 +27,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
 	ON_WM_SETTINGCHANGE()
+	ON_COMMAND(ID_BUTTON_GAMEPLAY, &CMainFrame::OnButtonGameplay)
+	ON_COMMAND(ID_BUTTON_GAMESTOP, &CMainFrame::OnButtonGamestop)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -67,13 +69,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// 메뉴 모음을 활성화해도 포커스가 이동하지 않게 합니다.
 	CMFCPopupMenu::SetForceMenuFocus(FALSE);
 
+	// 툴바1
 	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
 		!m_wndToolBar.LoadToolBar(theApp.m_bHiColorIcons ? IDR_MAINFRAME_256 : IDR_MAINFRAME))
 	{
 		TRACE0("도구 모음을 만들지 못했습니다.\n");
 		return -1;      // 만들지 못했습니다.
 	}
-
+	
 	CString strToolBarName;
 	bNameValid = strToolBarName.LoadString(IDS_TOOLBAR_STANDARD);
 	ASSERT(bNameValid);
@@ -83,6 +86,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	bNameValid = strCustomize.LoadString(IDS_TOOLBAR_CUSTOMIZE);
 	ASSERT(bNameValid);
 	m_wndToolBar.EnableCustomizeButton(TRUE, ID_VIEW_CUSTOMIZE, strCustomize);
+	
+	// 툴바Game
+	if (!m_wndToolBarGame.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+		!m_wndToolBarGame.LoadToolBar(IDR_TOOLBAR_GAME))
+	{
+		TRACE0("도구 모음을 만들지 못했습니다.\n");
+		return -1;      // 만들지 못했습니다.
+	}
 
 	// 사용자 정의 도구 모음 작업을 허용합니다.
 	InitUserToolbars(nullptr, uiFirstUserToolBarId, uiLastUserToolBarId);
@@ -99,11 +110,15 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 
 	// TODO: 도구 모음 및 메뉴 모음을 도킹할 수 없게 하려면 이 다섯 줄을 삭제하십시오.
+	
 	m_wndMenuBar.EnableDocking(CBRS_ALIGN_ANY);
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+	m_wndToolBarGame.EnableDocking(CBRS_ALIGN_ANY);
+
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockPane(&m_wndMenuBar);
 	DockPane(&m_wndToolBar);
+	DockPane(&m_wndToolBarGame);
 
 
 	// Visual Studio 2005 스타일 도킹 창 동작을 활성화합니다.
@@ -428,3 +443,25 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 }
 
 
+
+
+void CMainFrame::OnButtonGameplay()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_wndToolBarGame.GetButton(0)->Show(FALSE);
+	m_wndToolBarGame.InvalidateButton(0);
+	
+	m_wndToolBarGame.GetButton(1)->Show(TRUE);
+	m_wndToolBarGame.InvalidateButton(1);
+}
+
+
+void CMainFrame::OnButtonGamestop()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_wndToolBarGame.GetButton(0)->Show(TRUE);
+	m_wndToolBarGame.InvalidateButton(0);
+
+	m_wndToolBarGame.GetButton(1)->Show(FALSE);
+	m_wndToolBarGame.InvalidateButton(1);
+}

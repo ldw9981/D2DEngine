@@ -37,13 +37,14 @@ public:
 protected:  // 컨트롤 모음이 포함된 멤버입니다.
 	CMFCMenuBar       m_wndMenuBar;
 	CMFCToolBar       m_wndToolBar;
+	CMFCToolBar       m_wndToolBarGame;
 	CMFCStatusBar     m_wndStatusBar;
-	CMFCStatusBar     m_wndStatusBar2;
 	CMFCToolBarImages m_UserImages;
 	CGameObjectView         m_wndFileView;
 	CWorldView        m_wndClassView;
 	COutputWnd        m_wndOutput;
 	CPropertiesWnd    m_wndProperties;
+
 
 // 생성된 메시지 맵 함수
 protected:
@@ -59,6 +60,8 @@ protected:
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
 public:
 	void UpdateStatusBar(float FPS, float SPF, size_t VRAM);
+	afx_msg void OnButtonGameplay();
+	afx_msg void OnButtonGamestop();
 };
 
 

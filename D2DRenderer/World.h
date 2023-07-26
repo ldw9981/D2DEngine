@@ -17,11 +17,7 @@ public:
 	World(std::string Name);
     virtual ~World()
 	{
-		for (auto& gameObject : m_GameObjects)
-		{
-			delete gameObject;
-		}
-		m_GameObjects.clear();
+		ClearGameObject();
 	}
 
 	virtual void Update(float DeltaTime);
@@ -87,6 +83,15 @@ public:
 
 			out.push_back(gameObject);
 		}
+	}
+
+	void ClearGameObject()
+	{
+		for (auto& gameObject : m_GameObjects)
+		{
+			delete gameObject;
+		}
+		m_GameObjects.clear();
 	}
 };
 
