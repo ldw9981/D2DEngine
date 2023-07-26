@@ -59,7 +59,7 @@ protected:
 	BOOL CreateDockingWindows();
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
 public:
-	void UpdateStatusBar(float FPS, float SPF, size_t VRAM);
+	void UpdateStatusBar(float FPS, float SPF, size_t VRAM);	
 	afx_msg void OnButtonGameplay();
 	afx_msg void OnButtonGamestop();
 };

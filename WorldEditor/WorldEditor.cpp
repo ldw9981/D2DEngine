@@ -38,8 +38,8 @@ CWorldEditorApp::CWorldEditorApp() noexcept
 :m_PlayWorld("PlayWorld")
 {
 	m_bHiColorIcons = TRUE;
-	m_pCurrentWorld = nullptr;
-
+	m_pTargetWorld = nullptr;
+	m_bPlayMode = false;
 	m_nAppLook = 0;
 	// 다시 시작 관리자 지원
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
@@ -207,6 +207,25 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // 대화 상자를 실행하기 위한 응용 프로그램 명령입니다.
+
+
+void CWorldEditorApp::ChangeMode(bool PlayMode)
+{
+	CMainFrame* pMainFrame = (CMainFrame*)::AfxGetMainWnd();
+	CWorldEditorDoc* pDoc = (CWorldEditorDoc*)pMainFrame->GetActiveDocument();
+	if (!PlayMode)
+	{
+		m_bPlayMode = false;
+		m_pTargetWorld = &pDoc->m_EditWorld;
+	}
+	else
+	{		
+		m_bPlayMode = true;
+		// Todo: 플레이모드일때는  pDoc->m_EditWorld의 내용을 복사해서 m_PlayWorld에 넣어줘야함
+		//m_pTargetWorld = &m_PlayWorld;
+	}
+}
+
 void CWorldEditorApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
@@ -239,11 +258,11 @@ void CWorldEditorApp::Update()
 {
 	m_Timer.Tick();
 	CalculateFrameStats();
-
-	if (m_pCurrentWorld != nullptr)
+	if (m_pTargetWorld != nullptr)
 	{
-		m_pCurrentWorld->Update(m_Timer.DeltaTime());
+		m_pTargetWorld->Update(m_Timer.DeltaTime());		
 	}
+
 }
 
 void CWorldEditorApp::Render()
@@ -257,9 +276,9 @@ void CWorldEditorApp::Render()
 	m_Renderer.DrawEllipse(m_Renderer.m_pRenderTarget, ellipse, color);
 	*/
 
-	if (m_pCurrentWorld != nullptr)
+	if (m_pTargetWorld != nullptr)
 	{		
-		m_pCurrentWorld->Render(m_Renderer.m_pRenderTarget);
+		m_pTargetWorld->Render(m_Renderer.m_pRenderTarget);
 	}
 	m_Renderer.m_pRenderTarget->EndDraw();
 }
@@ -305,6 +324,7 @@ void CWorldEditorApp::CalculateFrameStats()
 		timeElapsed -= 1.0f;
 	}
 }
+
 
 // CWorldEditorApp 메시지 처리기
 

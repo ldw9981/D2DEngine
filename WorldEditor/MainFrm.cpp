@@ -37,6 +37,7 @@ static UINT indicators[] =
 	ID_SEPARATOR,
 	ID_SEPARATOR,
 	ID_SEPARATOR,
+	ID_SEPARATOR,
 };
 
 // CMainFrame 생성/소멸
@@ -105,8 +106,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
 	m_wndStatusBar.SetPaneWidth(1,100);
+	m_wndStatusBar.SetPaneText(1, _T("Edit"));
 	m_wndStatusBar.SetPaneWidth(2,100);
 	m_wndStatusBar.SetPaneWidth(3,100);
+	m_wndStatusBar.SetPaneWidth(4,100);
 
 
 	// TODO: 도구 모음 및 메뉴 모음을 도킹할 수 없게 하려면 이 다섯 줄을 삭제하십시오.
@@ -192,8 +195,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	lstBasicCommands.AddTail(ID_SORTING_GROUPBYTYPE);
 
 	CMFCToolBar::SetBasicCommands(lstBasicCommands);
-
-
 	return 0;
 }
 
@@ -279,12 +280,13 @@ void CMainFrame::UpdateStatusBar(float FPS, float SPF, size_t VRAM)
 	CString strSPF;
 	strSPF.Format(_T("SPF : %f"), SPF);
 	CString strVRAM;
-	strVRAM.Format(_T("VRAM : %d MB"), VRAM);
+	strVRAM.Format(_T("VRAM : %d MB"), (int)VRAM);
 
-	m_wndStatusBar.SetPaneText(1, strFPS.GetString());
-	m_wndStatusBar.SetPaneText(2, strSPF.GetString());
-	m_wndStatusBar.SetPaneText(3, strVRAM.GetString());
+	m_wndStatusBar.SetPaneText(2, strFPS.GetString());
+	m_wndStatusBar.SetPaneText(3, strSPF.GetString());
+	m_wndStatusBar.SetPaneText(4, strVRAM.GetString());
 }
+
 
 // CMainFrame 진단
 
@@ -447,21 +449,23 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 
 void CMainFrame::OnButtonGameplay()
 {
+	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
+	if(pApp->m_bPlayMode)
+		return;
+
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	m_wndToolBarGame.GetButton(0)->Show(FALSE);
-	m_wndToolBarGame.InvalidateButton(0);
-	
-	m_wndToolBarGame.GetButton(1)->Show(TRUE);
-	m_wndToolBarGame.InvalidateButton(1);
+	pApp->ChangeMode(true);
+	m_wndStatusBar.SetPaneText(1, _T("Play"));
 }
 
 
 void CMainFrame::OnButtonGamestop()
 {
-	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	m_wndToolBarGame.GetButton(0)->Show(TRUE);
-	m_wndToolBarGame.InvalidateButton(0);
+	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
+	if (!pApp->m_bPlayMode)
+		return;
 
-	m_wndToolBarGame.GetButton(1)->Show(FALSE);
-	m_wndToolBarGame.InvalidateButton(1);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	pApp->ChangeMode(false);
+	m_wndStatusBar.SetPaneText(1, _T("Edit"));
 }

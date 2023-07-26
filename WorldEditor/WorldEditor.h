@@ -32,8 +32,11 @@ public:
 	UINT  m_nAppLook;
 	BOOL  m_bHiColorIcons;
 	D2DRenderer m_Renderer;
-
-	World* m_pCurrentWorld;
+		
+	// 플레이모드에서는 편집한 월드를 복사해서 원본은 유지하면서 게임플레이를 해본다.
+	// 편집모드로 돌아가면 플레이월드는 초기화한다.
+	bool m_bPlayMode;	// PlayMode or EditMode  
+	World* m_pTargetWorld;
 	World m_PlayWorld;
 	static float m_deltaTime;
 	GameTimer m_Timer;
@@ -44,7 +47,9 @@ public:
 	void Update();
 	void Render();
 	void CalculateFrameStats();
-	void SetCurrentWorld(World* pWorld) { m_pCurrentWorld = pWorld;  }
+	void SetTargetWorld(World* pWorld) { m_pTargetWorld = pWorld;  }
+
+	void ChangeMode(bool PlayMode);
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()

@@ -34,7 +34,7 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
-	World m_EditorWorld;
+	World m_EditWorld;
 
 protected:
 
