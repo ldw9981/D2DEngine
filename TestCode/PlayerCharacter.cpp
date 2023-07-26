@@ -9,11 +9,11 @@ void PlayerCharacter::Render()
 	m_BoxRenderer.Render();
 }
 
-void PlayerCharacter::Update()
+void PlayerCharacter::Update(float DeltaTime)
 {
-	Movement::Update();
-	AnimationRender::Update();
-	m_BoxRenderer.Update();
+	Movement::Update(DeltaTime);
+	AnimationRender::Update(DeltaTime);
+	m_BoxRenderer.Update(DeltaTime);
 
 }
 

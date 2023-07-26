@@ -24,7 +24,7 @@ protected:
 
 	std::vector<FSMStateAlias*> m_pStateAlias;	// StateAlias 들을 저장하는 컨테이너
 public:
-	virtual void Update();
+	virtual void Update(float DeltaTime);
 	void ChangeState(std::string stateName);
 	void SetInitialState(std::string stateName);
 	void AddState(FSMState* pState);

@@ -10,7 +10,7 @@ public:
 	~StateIdle();
 
 	void Enter() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 	void Exit() override;
 
 	virtual bool CheckTransition(std::string& NextState) override;

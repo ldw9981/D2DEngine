@@ -34,7 +34,7 @@ protected:
 public:
 	virtual bool Initialize();
 	
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 	// RelativeTransform과 	m_WorldTransform을 계산한다.
 	void UpdateTrasnform();
 	void UpdateVelocity();

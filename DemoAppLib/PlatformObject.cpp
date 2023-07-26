@@ -43,11 +43,11 @@ PlatformObject::~PlatformObject()
 
 }
 
-void PlatformObject::Update()
+void PlatformObject::Update(float DeltaTime)
 {
 	//m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
 	//m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
-	__super::Update();
+	__super::Update(DeltaTime);
 }
 
 void PlatformObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)

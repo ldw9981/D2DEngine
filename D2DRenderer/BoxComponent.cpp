@@ -48,9 +48,9 @@ void BoxComponent::Render(ID2D1RenderTarget* pRenderTarget)
 	DrawDebugWorldTransform(pRenderTarget);
 }
 
-void BoxComponent::Update()
+void BoxComponent::Update(float DeltaTime)
 {
-	__super::Update();
+	__super::Update(DeltaTime);
 	m_Collider.m_Center = GetWorldLocation();
 	m_BoundingBox.m_Center = GetWorldLocation();
 }

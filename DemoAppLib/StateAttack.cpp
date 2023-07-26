@@ -29,7 +29,7 @@ void StateAttack::Enter()
 	
 }
 
-void StateAttack::Update()
+void StateAttack::Update(float DeltaTime)
 {
 	// 공격 중에 뭐 업데이트 할것이 있나?
 }

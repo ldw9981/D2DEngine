@@ -54,5 +54,6 @@ public:
 	ID2D1SolidColorBrush* GetBrush() const { return m_pBrush; }
 
 	size_t GetUsedVRAM();
+	D2D_SIZE_U GetClientSize();
 };
 

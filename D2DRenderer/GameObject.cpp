@@ -26,11 +26,11 @@ SceneComponent* GameObject::GetRootComponent() const
 	return m_pRootComponent;
 }
 
-void GameObject::Update()
+void GameObject::Update(float DeltaTime)
 {
 	for (auto& pComponent : m_OwnedComponents)
 	{
-		pComponent->Update();
+		pComponent->Update(DeltaTime);
 	}
 }
 

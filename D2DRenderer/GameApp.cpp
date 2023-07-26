@@ -5,7 +5,6 @@
 
 GameApp* GameApp::m_pInstance = nullptr;
 
-float GameApp::m_deltaTime = 0.0f;
 
 HWND GameApp::m_hWnd;
 
@@ -112,9 +111,8 @@ void GameApp::Update()
 {
 	// 어떤 게임이라도 시간업데이트는 한다.	
 	m_Timer.Tick();
-	m_deltaTime = m_Timer.DeltaTime();
 	CalculateFrameStats();	
-	m_World.Update();
+	m_World.Update(m_Timer.DeltaTime());
 }
 
 void GameApp::CalculateFrameStats()
@@ -129,7 +127,7 @@ void GameApp::CalculateFrameStats()
 	if(frameCnt==0)
 		return;
 
-	timeElapsed+= m_deltaTime;
+	timeElapsed+= m_Timer.DeltaTime();
 
 	//1초동안의 프레임 시간의 평균을 계산합니다.
 	if ( timeElapsed >= 1.0f)

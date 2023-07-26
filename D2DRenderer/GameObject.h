@@ -46,7 +46,7 @@ public:
 	void SetRootComponent(SceneComponent* pRootComponent);
 	SceneComponent* GetRootComponent() const;
 
-	virtual void Update();
+	virtual void Update(float DeltaTime);
 	virtual void Render(ID2D1RenderTarget* pRenderTarget);
 
 	// 루트 SceneComponent의 위치를 반환합니다.

@@ -17,7 +17,7 @@ void StateDeath::Enter()
 
 }
 
-void StateDeath::Update()
+void StateDeath::Update(float DeltaTime)
 {
 
 }

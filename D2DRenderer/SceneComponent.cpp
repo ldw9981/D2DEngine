@@ -22,7 +22,7 @@ bool SceneComponent::Initialize()
 	return true;
 }
 
-void SceneComponent::Update()
+void SceneComponent::Update(float DeltaTime)
 {
 	UpdateTrasnform();	
 	UpdateVelocity();

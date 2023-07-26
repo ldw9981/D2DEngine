@@ -24,7 +24,7 @@ public:
 		m_GameObjects.clear();
 	}
 
-	virtual void Update();
+	virtual void Update(float DeltaTime);
 	void Render(ID2D1RenderTarget* pRernderTarget);
 
 	// 월드에서 컬링에서 필요한 카메라 컴포넌트를 설정한다 SceneComponent에 AABB가 들어있다.
@@ -53,7 +53,7 @@ protected:
 	int m_CameraID;
 	std::map<int, CameraComponent*> m_Cameras;	
 public:
-	
+	void SetName(const std::string& Name) { m_Name = Name; }
 	// 템플릿 함수로 GameObject를 생성한다.
     template<typename T>
 	T* CreateGameObject()

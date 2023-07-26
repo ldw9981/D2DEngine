@@ -19,7 +19,7 @@ void StateIdle::Enter()
 	pAnimationComponent->SetAnimation("Idle", pFSMCharacter->m_Mirror,true);
 }
 
-void StateIdle::Update() 
+void StateIdle::Update(float DeltaTime)
 {
 	//대기 상태에서는 아무것도 안한다.
 }

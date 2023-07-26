@@ -4,6 +4,7 @@
 #pragma once
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/World.h"
+#include "../D2DRenderer/TimeSystem.h"
 
 #ifndef __AFXWIN_H__
 	#error "PCH에 대해 이 파일을 포함하기 전에 'pch.h'를 포함합니다."
@@ -31,10 +32,19 @@ public:
 	UINT  m_nAppLook;
 	BOOL  m_bHiColorIcons;
 	D2DRenderer m_Renderer;
-	World m_EditorWorld;
+
+	World* m_pCurrentWorld;
+	World m_PlayWorld;
+	static float m_deltaTime;
+	GameTimer m_Timer;
+
 	virtual void PreLoadState();
 	virtual void LoadCustomState();
 	virtual void SaveCustomState();
+	void Update();
+	void Render();
+	void CalculateFrameStats();
+	void SetCurrentWorld(World* pWorld) { m_pCurrentWorld = pWorld;  }
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()

@@ -14,6 +14,7 @@
 #include "../D2DRenderer/Factory.h"
 
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -34,10 +35,10 @@ END_MESSAGE_MAP()
 // CWorldEditorApp 생성
 
 CWorldEditorApp::CWorldEditorApp() noexcept
-:m_EditorWorld("TestWorld")
+:m_PlayWorld("PlayWorld")
 {
 	m_bHiColorIcons = TRUE;
-
+	m_pCurrentWorld = nullptr;
 
 	m_nAppLook = 0;
 	// 다시 시작 관리자 지원
@@ -234,6 +235,73 @@ void CWorldEditorApp::SaveCustomState()
 {
 }
 
+void CWorldEditorApp::Update()
+{
+	m_Timer.Tick();
+	CalculateFrameStats();
+
+	if (m_pCurrentWorld != nullptr)
+	{
+		m_pCurrentWorld->Update(m_Timer.DeltaTime());
+	}
+}
+
+void CWorldEditorApp::Render()
+{
+	m_Renderer.m_pRenderTarget->BeginDraw();
+	m_Renderer.m_pRenderTarget->Clear(D2D1::ColorF(0.0f, 0.0f, 0.0f, 1.0f));
+
+	/*
+	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(100, 100), 500, 500);
+	D2D1_COLOR_F color = D2D1::ColorF(1.0f, 1.0f, 0.0f, 1.0f);
+	m_Renderer.DrawEllipse(m_Renderer.m_pRenderTarget, ellipse, color);
+	*/
+
+	if (m_pCurrentWorld != nullptr)
+	{		
+		m_pCurrentWorld->Render(m_Renderer.m_pRenderTarget);
+	}
+	m_Renderer.m_pRenderTarget->EndDraw();
+}
+
+void CWorldEditorApp::CalculateFrameStats()
+{
+	//해당 코드는 초당 프레임을 계산하고, 1프레임 렌더시 걸리는 시간의 평균을 계산한다.
+	//해당 수치들은 창의 제목표시줄에 추가된다.
+
+	static int frameCnt = -1;
+	static float timeElapsed = 0.0f;
+
+	frameCnt++;
+	if (frameCnt == 0)
+		return;
+
+	timeElapsed += m_Timer.DeltaTime();
+
+	//1초동안의 프레임 시간의 평균을 계산합니다.
+	if (timeElapsed >= 1.0f)
+	{
+		float fps = (float)frameCnt;  //Frame Per Second
+		float spf = 1000.0f / fps;   // MilliSecond Per Frame
+
+		std::wstring windowText;
+	//	windowText.append(m_szTitle);
+		windowText.append(L"  FPS: ");
+		windowText.append(std::to_wstring(fps));
+		windowText.append(L"  SPF: ");
+		windowText.append(std::to_wstring(spf));
+		windowText.append(L" Used VRAM: ");
+		windowText.append(std::to_wstring(D2DRenderer::m_Instance->GetUsedVRAM()));
+		windowText.append(L"MB");
+
+//		SetWindowText(m_hWnd, windowText.c_str());
+
+		//다음 계산을위해 리셋
+		frameCnt = 0;
+		timeElapsed -= 1.0f;
+	}
+}
+
 // CWorldEditorApp 메시지 처리기
 
 
@@ -245,15 +313,8 @@ BOOL CWorldEditorApp::OnIdle(LONG lCount)
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
 		// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-	m_Renderer.m_pRenderTarget->BeginDraw();
-	m_Renderer.m_pRenderTarget->Clear(D2D1::ColorF(1.0f, 0.0f, 0.0f, 1.0f));
-
-
-	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(100, 100), 500, 500);
-	D2D1_COLOR_F color = D2D1::ColorF(1.0f, 1.0f, 0.0f, 1.0f);
-	m_Renderer.DrawEllipse(m_Renderer.m_pRenderTarget, ellipse, color);
-
-	m_Renderer.m_pRenderTarget->EndDraw();
+	Update();
+	Render();
 
 	return CWinAppEx::OnIdle(lCount);
 }

@@ -34,9 +34,9 @@ AnimationComponent::~AnimationComponent()
 
 
 
-void AnimationComponent::Update()
+void AnimationComponent::Update(float DeltaTime)
 {
-	__super::Update();	
+	__super::Update(DeltaTime);	
 	// asset이 없으면 경고
 	assert(m_pAnimationAsset != nullptr);
 
@@ -47,7 +47,7 @@ void AnimationComponent::Update()
 	const FRAME_INFO& Frame = m_pAnimationInfo->m_Frames[m_FrameIndexCurr];
 	size_t MaxFrameCount = m_pAnimationInfo->m_Frames.size();
 
-	m_ProgressTime += GameApp::m_deltaTime * m_Speed;
+	m_ProgressTime += DeltaTime * m_Speed;
 
 	m_FrameIndexPrev = m_FrameIndexCurr;
 	while (Frame.RenderTime < m_ProgressTime)

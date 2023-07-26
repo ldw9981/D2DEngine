@@ -74,10 +74,10 @@ DemoObject::~DemoObject()
 
 }
 
-void DemoObject::Update()
+void DemoObject::Update(float DeltaTime)
 {
-	m_pSphereComponent->AddRelativeRotation(30.0f * GameApp::m_deltaTime);
-	m_pBoxComponent->AddRelativeRotation(90.0f * GameApp::m_deltaTime);
+	m_pSphereComponent->AddRelativeRotation(30.0f * GameTimer::m_Instance->DeltaTime());
+	m_pBoxComponent->AddRelativeRotation(90.0f * GameTimer::m_Instance->DeltaTime());
 	
 	D2D_VECTOR_2F Location,Direction;
 	Location = m_pSceneComponent->GetWorldLocation();
@@ -102,7 +102,7 @@ void DemoObject::Update()
 	}
 	*/
 
-	__super::Update();
+	__super::Update(DeltaTime);
 }
 
 void DemoObject::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)

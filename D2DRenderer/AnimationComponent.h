@@ -53,7 +53,7 @@ public:
 	void SetProgressTime(float val) { m_ProgressTime = val; }
 	void SetSpeed(float val) { m_Speed = val; }
 	void SetMirror(bool Mirror) { m_bMirror = Mirror;  }
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
 
 	void SetAnimation(const char* AnimationName, bool Mirror, bool Loop);

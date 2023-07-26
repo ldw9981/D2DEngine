@@ -4,7 +4,7 @@
 
 
 #pragma once
-
+#include "../D2DRenderer/World.h"
 
 class CWorldEditorDoc : public CDocument
 {
@@ -34,6 +34,7 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
+	World m_EditorWorld;
 
 protected:
 
@@ -45,4 +46,7 @@ protected:
 	// 검색 처리기에 대한 검색 콘텐츠를 설정하는 도우미 함수
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+public:
+	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 };

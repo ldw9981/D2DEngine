@@ -2,7 +2,7 @@
 #include "FSMCharacter.h"
 #include "../D2DRenderer/Helper.h"
 
-void FSMCharacter::Update()
+void FSMCharacter::Update(float DeltaTime)
 {
 	assert(m_pSideMovementComponent !=nullptr);
 	m_LastDirection = m_MoveDirection;
@@ -10,5 +10,5 @@ void FSMCharacter::Update()
 
 	
 
-	FiniteStateMachine::Update();
+	FiniteStateMachine::Update(DeltaTime);
 }

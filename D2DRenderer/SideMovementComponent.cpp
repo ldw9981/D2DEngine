@@ -21,7 +21,7 @@ SideMovementComponent::~SideMovementComponent()
 {
 }
 
-void SideMovementComponent::Update()
+void SideMovementComponent::Update(float DeltaTime)
 {
 	assert(m_pRootSceneComponent != nullptr);
 	mathHelper::Vector2F Location = m_pRootSceneComponent->GetRelativeLocation();
@@ -30,12 +30,12 @@ void SideMovementComponent::Update()
 	m_Velocity.x = (mathHelper::Vector2F(m_Direction) * m_Speed).x;
 	
 	// y축 이동 속도
-	m_SpeedY += m_GravityScaled * GameApp::m_deltaTime;	// y축 이동속도는 중력에 의해 점점 빨라진다.
+	m_SpeedY += m_GravityScaled * DeltaTime;	// y축 이동속도는 중력에 의해 점점 빨라진다.
 	m_SpeedY = min(m_MaxSpeedY,m_SpeedY);				// 종단속도로 제한한다.
 	m_Velocity.y = (mathHelper::Vector2F(0.0f, -1.0f) * m_SpeedY).y;  
 
 	//D2DHelper::Log(L"%f,%f\n", m_Velocity.x, m_Velocity.y);
-	Location = Location + m_Velocity * GameApp::m_deltaTime;	// 시간변화 만큼 이동
+	Location = Location + m_Velocity * DeltaTime;	// 시간변화 만큼 이동
 	Location.y = max(0.0f, Location.y);						// 바닥이 없을때 무한낙하 방지 
 	// 외부에서 착지 판단을 해야하는데 일단 0.0f보다 작거나 같으면 착지한 것으로 판단한다.	
 	if (Location.y <= 0.0f)

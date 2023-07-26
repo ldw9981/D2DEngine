@@ -8,7 +8,7 @@ public:
 	virtual ~StateMove();
 
 	virtual void Enter() override;
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 	virtual void Exit() override;
 
 	virtual bool CheckTransition(std::string& NextState) override;

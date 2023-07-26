@@ -23,11 +23,11 @@ World::World(std::string Name)
 	매프레임 BoxComponent를 모으는건 비효율 적이다.
 	CollisionWorld를 따로 두면 해결되지만 이해하기 쉽게 일단 이렇게 구현
 */
-void World::Update()
+void World::Update(float DeltaTime)
 {
 	for (auto& gameObject : m_GameObjects)
 	{
-		gameObject->Update();
+		gameObject->Update(DeltaTime);
 	}  
 
 	// 현재 월드에서 모든 게임오브젝트의 BoxComponent를 모은다.

@@ -25,10 +25,10 @@ public:
 protected:
 	FiniteStateMachine* m_pFiniteStateMachine;
 public:
-	virtual void Update()
+	virtual void Update(float DeltaTime)
 	{
 		if (m_pFiniteStateMachine != nullptr)
-			m_pFiniteStateMachine->Update();
+			m_pFiniteStateMachine->Update(DeltaTime);
 	}
 
 	template<typename T>

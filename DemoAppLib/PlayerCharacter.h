@@ -29,7 +29,7 @@ public:
 	BoxComponent* m_pBodyBox;
 public:
 
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 
 	virtual void OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;

@@ -79,13 +79,9 @@ HRESULT D2DRenderer::Initialize(HWND hWnd)
         Direct3D 장치가 손실된 경우(예: 디스플레이 변경, 원격, 비디오 카드 제거 등)
         리소스를 다시 생성해야 하는 경우를 대비하여 모두 여기에 중앙 집중화되어 있습니다.
         */
-      
-        RECT rc;
-        ::GetClientRect(m_hWnd, &rc);
-
-        D2D1_SIZE_U ScreenSize = D2D1::SizeU(
-            rc.right - rc.left,
-            rc.bottom - rc.top);
+     
+  
+		D2D1_SIZE_U ScreenSize = GetClientSize();
 
 		// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
 		m_ScreenTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) * D2D1::Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
@@ -346,5 +342,16 @@ size_t D2DRenderer::GetUsedVRAM()
 	DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
 	m_pDXGIAdapter->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo);
 	return videoMemoryInfo.CurrentUsage / 1024 / 1024;
+}
+
+D2D_SIZE_U D2DRenderer::GetClientSize()
+{	
+	RECT rc;
+	::GetClientRect(m_hWnd, &rc);
+
+	D2D1_SIZE_U ScreenSize = D2D1::SizeU(
+		rc.right - rc.left + 1,
+		rc.bottom - rc.top + 1);
+	return ScreenSize;
 }
 

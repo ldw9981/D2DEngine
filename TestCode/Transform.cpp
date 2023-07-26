@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include <iostream>
 
-void Transform::Update()
+void Transform::Update(float DeltaTime)
 {
 	std::cout << L"Transform Update" << std::endl ;
 	m_RelativeTransform = m_RelativePositionX;

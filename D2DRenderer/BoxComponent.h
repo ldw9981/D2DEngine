@@ -18,7 +18,7 @@ public:
 	const AABB& GetCollider() { return m_Collider;  }
 	void SetExtend(float x, float y);
 	virtual void Render(ID2D1RenderTarget* pRenderTarget) override;
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 	virtual bool IsCollide(ColliderComponent* pOtherComponent) override;
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);

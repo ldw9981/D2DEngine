@@ -6,7 +6,7 @@
 
 
 // 가속도 개념없이 일정한 속도로 이동한다.
-void MovementComponent::Update()
+void MovementComponent::Update(float DeltaTime)
 {
 	assert(m_pRootSceneComponent != nullptr);
 	// 현재 위치를 가져온다.
@@ -14,7 +14,7 @@ void MovementComponent::Update()
 	m_Velocity = m_Direction * m_Speed;		
 
 	// 새로운 위치를 계산한다.
-	Location += m_Velocity * GameApp::m_deltaTime;	
+	Location += m_Velocity * DeltaTime;	
 
 	//새로 계산된 위치를 적용한다.
 	m_pRootSceneComponent->SetRelativeLocation(Location);	

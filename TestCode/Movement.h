@@ -8,7 +8,7 @@ public:
 	Movement()= default;
 	~Movement() = default;
 
-	virtual void Update() override
+	virtual void Update(float DeltaTime) override
 	{
 		std::cout << "Movement Update" << std::endl;
 	}

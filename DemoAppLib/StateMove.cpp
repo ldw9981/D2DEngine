@@ -32,7 +32,7 @@ void StateMove::Enter()
 
 }
 
-void StateMove::Update()
+void StateMove::Update(float DeltaTime)
 {
 	FSMCharacter* pFSMCharacter = static_cast<FSMCharacter*>(m_pOwner);
 	if (pFSMCharacter->m_LastDirection.x != pFSMCharacter->m_MoveDirection.x)

@@ -21,7 +21,7 @@ protected:
 	float m_SpeedY;		            // Y축 속력 
 	float m_MaxSpeedY;				// 중력의 종단 속도
 public:
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 	virtual void SetDirection(const mathHelper::Vector2F& Direction);
 	void SetGravityScale(float val) { m_GravityScale = val; }
 	void ResetGravity() { m_GravityScaled = m_Gravity * m_GravityScale; }

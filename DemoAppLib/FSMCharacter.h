@@ -76,6 +76,6 @@ public:
 	bool			m_AnimationComplete;
 	bool			m_Mirror;
 
-	virtual void Update() override;
+	virtual void Update(float DeltaTime) override;
 };
 

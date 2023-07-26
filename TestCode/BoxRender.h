@@ -21,7 +21,7 @@ public:
 		std::cout << "BoxRenderer Render" << std::endl;
 	}
 
-	virtual void Update() override
+	virtual void Update(float DeltaTime) override
 	{
 		std::cout << "BoxRenderer Update WorldTrasnform" << m_WorldTransform <<  std::endl;
 	}

@@ -11,7 +11,8 @@
 #endif
 
 #include "WorldEditorDoc.h"
-
+#include "../D2DRenderer/Helper.h"
+#include <string>
 #include <propkey.h>
 
 #ifdef _DEBUG
@@ -29,6 +30,7 @@ END_MESSAGE_MAP()
 // CWorldEditorDoc 생성/소멸
 
 CWorldEditorDoc::CWorldEditorDoc() noexcept
+	:m_EditorWorld("EditorWorld")
 {
 	// TODO: 여기에 일회성 생성 코드를 추가합니다.
 
@@ -45,7 +47,9 @@ BOOL CWorldEditorDoc::OnNewDocument()
 
 	// TODO: 여기에 재초기화 코드를 추가합니다.
 	// SDI 문서는 이 문서를 다시 사용합니다.
-
+	CT2CA convertedString(m_strTitle);
+	m_EditorWorld.SetName(convertedString.m_psz);
+	
 	return TRUE;
 }
 
@@ -55,14 +59,17 @@ BOOL CWorldEditorDoc::OnNewDocument()
 // CWorldEditorDoc serialization
 
 void CWorldEditorDoc::Serialize(CArchive& ar)
-{
+{	
+	//MFC의 Serialize 사용하지 않는다.
 	if (ar.IsStoring())
 	{
 		// TODO: 여기에 저장 코드를 추가합니다.
+		OutputDebugString(L"Save\n");
 	}
 	else
 	{
 		// TODO: 여기에 로딩 코드를 추가합니다.
+		OutputDebugString(L"Load\n");
 	}
 }
 
@@ -136,3 +143,32 @@ void CWorldEditorDoc::Dump(CDumpContext& dc) const
 
 
 // CWorldEditorDoc 명령
+
+
+BOOL CWorldEditorDoc::OnSaveDocument(LPCTSTR lpszPathName)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	CT2CA convertedString(m_strTitle);
+	m_EditorWorld.SetName(convertedString.m_psz);
+
+	//MFC의 파일저장 사용안함.
+	//return CDocument::OnSaveDocument(lpszPathName);
+	return false;
+}
+
+
+BOOL CWorldEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	//if (!CDocument::OnOpenDocument(lpszPathName))
+	//	return FALSE;
+
+	// TODO:  여기에 특수화된 작성 코드를 추가합니다.	
+	if (!m_EditorWorld.Load(lpszPathName))
+	{
+		return FALSE;
+	}
+	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
+	pApp->SetCurrentWorld(&m_EditorWorld);
+
+	return TRUE;
+}

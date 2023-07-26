@@ -20,7 +20,7 @@ public:
 	void Start(); // Call when unpaused.
 	void Stop();  // Call when paused.
 	void Tick();  // Call every frame.
-
+	static GameTimer* m_Instance;
 private:
 	double mSecondsPerCount;
 	double mDeltaTime;

@@ -15,6 +15,8 @@
 #include "../D2DRenderer/CameraComponent.h"
 #include "../D2DRenderer/BoxComponent.h"
 #include "../D2DRenderer/Factory.h"
+#include "../D2DRenderer/D2DRenderer.h"
+#include "../D2DRenderer/TimeSystem.h"
 #include "StateIdle.h"
 #include "FSMCharacter.h"
 
@@ -71,7 +73,7 @@ PlayerCharacter::PlayerCharacter()
 	m_pCameraComponent->AttachToComponent(m_pAnimationComponent);
 	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
 	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
-	D2D_SIZE_U size = GameApp::m_pInstance->GetClientSize();
+	D2D_SIZE_U size = D2DRenderer::m_Instance->GetClientSize();
 	size.height = size.height / 2;
 	size.width = size.width / 2;
 	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -100.0f));
@@ -83,7 +85,7 @@ PlayerCharacter::~PlayerCharacter()
 	GetOwnerWorld()->DelCamera(m_pCameraComponent);
 }
 
-void PlayerCharacter::Update()
+void PlayerCharacter::Update(float DeltaTime)
 {
 
 	D2D_VECTOR_2F Location, Direction {0};
@@ -115,7 +117,7 @@ void PlayerCharacter::Update()
 	
 	
 
-	__super::Update();
+	__super::Update(DeltaTime);
 }
 
 void PlayerCharacter::OnBlock(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent)
@@ -123,7 +125,7 @@ void PlayerCharacter::OnBlock(ColliderComponent* pOwnedComponent, ColliderCompon
 	if (pOwnedComponent == m_pFootBox)
 	{
 		mathHelper::Vector2F Location = m_pRootComponent->GetWorldLocation();
-		Location = Location - m_pRootComponent->GetVelocity() * GameApp::m_deltaTime;
+		Location = Location - m_pRootComponent->GetVelocity() * GameTimer::m_Instance->DeltaTime();
 		Location.x = m_pRootComponent->GetRelativeLocation().x;
 		m_pRootComponent->SetRelativeLocation(Location);
 
@@ -133,7 +135,7 @@ void PlayerCharacter::OnBlock(ColliderComponent* pOwnedComponent, ColliderCompon
 	else if (pOwnedComponent == m_pBodyBox)
 	{
 		mathHelper::Vector2F Location = m_pRootComponent->GetWorldLocation();
-		Location = Location - m_pRootComponent->GetVelocity() * GameApp::m_deltaTime;
+		Location = Location - m_pRootComponent->GetVelocity() * GameTimer::m_Instance->DeltaTime();
 		Location.y = m_pRootComponent->GetRelativeLocation().y;
 		m_pRootComponent->SetRelativeLocation(Location);
 	}

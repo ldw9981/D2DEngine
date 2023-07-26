@@ -23,7 +23,7 @@ public:
 	{
 		return m_WorldTransform;
 	}
-	virtual void Update();
+	virtual void Update(float DeltaTime);
 
 };
 

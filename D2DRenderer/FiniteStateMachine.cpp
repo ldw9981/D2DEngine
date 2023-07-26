@@ -10,7 +10,7 @@ FiniteStateMachine::~FiniteStateMachine()
 
 }
 
-void FiniteStateMachine::Update()
+void FiniteStateMachine::Update(float DeltaTime)
 {
 	if (m_pCurrentState == nullptr)
 	{
@@ -22,7 +22,7 @@ void FiniteStateMachine::Update()
 
 	// Update Action
 	// 현재 실행중인 State의 Update를 실행시켜 매프레임 실행할 내용을 처리하게 한다.
-	m_pCurrentState->Update();
+	m_pCurrentState->Update(DeltaTime);
 
 	// Transition Check수행하여 조건에 만족할경우 넘겨받은 nextState로 변경한다.
 	std::string nextStateName;

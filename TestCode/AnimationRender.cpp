@@ -7,7 +7,7 @@ void AnimationRender::Render()
 	std::cout << "AnimRenderer Render\n";
 }
 
-void AnimationRender::Update()
+void AnimationRender::Update(float DeltaTime)
 {
 	std::cout << "AnimRenderer Update\n";
 }
