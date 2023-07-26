@@ -32,9 +32,9 @@ END_MESSAGE_MAP()
 static UINT indicators[] =
 {
 	ID_SEPARATOR,           // 상태 줄 표시기
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+	ID_SEPARATOR,
+	ID_SEPARATOR,
+	ID_SEPARATOR,
 };
 
 // CMainFrame 생성/소멸
@@ -93,6 +93,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // 만들지 못했습니다.
 	}
 	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
+	m_wndStatusBar.SetPaneWidth(1,100);
+	m_wndStatusBar.SetPaneWidth(2,100);
+	m_wndStatusBar.SetPaneWidth(3,100);
+
 
 	// TODO: 도구 모음 및 메뉴 모음을 도킹할 수 없게 하려면 이 다섯 줄을 삭제하십시오.
 	m_wndMenuBar.EnableDocking(CBRS_ALIGN_ANY);
@@ -174,6 +178,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CMFCToolBar::SetBasicCommands(lstBasicCommands);
 
+
 	return 0;
 }
 
@@ -249,6 +254,21 @@ void CMainFrame::SetDockingWindowIcons(BOOL bHiColorIcons)
 	HICON hPropertiesBarIcon = (HICON) ::LoadImage(::AfxGetResourceHandle(), MAKEINTRESOURCE(bHiColorIcons ? IDI_PROPERTIES_WND_HC : IDI_PROPERTIES_WND), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), 0);
 	m_wndProperties.SetIcon(hPropertiesBarIcon, FALSE);
 
+}
+
+
+void CMainFrame::UpdateStatusBar(float FPS, float SPF, size_t VRAM)
+{
+	CString strFPS;
+	strFPS.Format(_T("FPS : %f"), FPS);
+	CString strSPF;
+	strSPF.Format(_T("SPF : %f"), SPF);
+	CString strVRAM;
+	strVRAM.Format(_T("VRAM : %d MB"), VRAM);
+
+	m_wndStatusBar.SetPaneText(1, strFPS.GetString());
+	m_wndStatusBar.SetPaneText(2, strSPF.GetString());
+	m_wndStatusBar.SetPaneText(3, strVRAM.GetString());
 }
 
 // CMainFrame 진단

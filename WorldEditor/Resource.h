@@ -16,7 +16,7 @@
 #define IDR_MAINFRAME_256               129
 #define IDR_WorldEditorTYPE             130
 #define ID_WINDOW_MANAGER               131
-#define ID_VIEW_GAMEOBJECTVIEW                133
+#define ID_VIEW_GAMEOBJECTVIEW          133
 #define ID_VIEW_WORLDVIEW               134
 #define ID_PROPERTIES                   135
 #define ID_OPEN                         136
@@ -84,6 +84,9 @@
 #define IDS_FIND_TAB                    302
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
+#define ID_INDICATOR_FPS                59142
+#define ID_INDICATOR_SPF                59143
+#define ID_INDICATOR_VRAM               59144
 
 // Next default values for new objects
 // 

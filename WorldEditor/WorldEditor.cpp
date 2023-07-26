@@ -283,7 +283,7 @@ void CWorldEditorApp::CalculateFrameStats()
 	{
 		float fps = (float)frameCnt;  //Frame Per Second
 		float spf = 1000.0f / fps;   // MilliSecond Per Frame
-
+		/*
 		std::wstring windowText;
 	//	windowText.append(m_szTitle);
 		windowText.append(L"  FPS: ");
@@ -295,6 +295,10 @@ void CWorldEditorApp::CalculateFrameStats()
 		windowText.append(L"MB");
 
 		::SetWindowText(m_pMainWnd->GetSafeHwnd(), windowText.c_str());
+		*/
+
+		CMainFrame* pMainFrame = (CMainFrame*)::AfxGetMainWnd();
+		pMainFrame->UpdateStatusBar(fps,spf, D2DRenderer::m_Instance->GetUsedVRAM());
 
 		//다음 계산을위해 리셋
 		frameCnt = 0;

@@ -38,6 +38,7 @@ protected:  // 컨트롤 모음이 포함된 멤버입니다.
 	CMFCMenuBar       m_wndMenuBar;
 	CMFCToolBar       m_wndToolBar;
 	CMFCStatusBar     m_wndStatusBar;
+	CMFCStatusBar     m_wndStatusBar2;
 	CMFCToolBarImages m_UserImages;
 	CGameObjectView         m_wndFileView;
 	CWorldView        m_wndClassView;
@@ -57,6 +58,7 @@ protected:
 	BOOL CreateDockingWindows();
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
 public:
+	void UpdateStatusBar(float FPS, float SPF, size_t VRAM);
 };
 
 
