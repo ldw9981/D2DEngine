@@ -294,7 +294,7 @@ void CWorldEditorApp::CalculateFrameStats()
 		windowText.append(std::to_wstring(D2DRenderer::m_Instance->GetUsedVRAM()));
 		windowText.append(L"MB");
 
-//		SetWindowText(m_hWnd, windowText.c_str());
+		::SetWindowText(m_pMainWnd->GetSafeHwnd(), windowText.c_str());
 
 		//다음 계산을위해 리셋
 		frameCnt = 0;
@@ -311,18 +311,7 @@ void CWorldEditorApp::CalculateFrameStats()
 BOOL CWorldEditorApp::OnIdle(LONG lCount)
 {
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-
-		// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	Update();
 	Render();
-
-	return CWinAppEx::OnIdle(lCount);
+	return TRUE;//CWinAppEx::OnIdle(lCount);
 }
-
-
-//void CAboutDlg::OnSize(UINT nType, int cx, int cy)
-//{
-//	CDialogEx::OnSize(nType, cx, cy);
-//
-	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-//}

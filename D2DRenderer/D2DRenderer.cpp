@@ -82,6 +82,8 @@ HRESULT D2DRenderer::Initialize(HWND hWnd)
      
   
 		D2D1_SIZE_U ScreenSize = GetClientSize();
+		
+		
 
 		// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
 		m_ScreenTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) * D2D1::Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
@@ -352,6 +354,7 @@ D2D_SIZE_U D2DRenderer::GetClientSize()
 	D2D1_SIZE_U ScreenSize = D2D1::SizeU(
 		rc.right - rc.left + 1,
 		rc.bottom - rc.top + 1);
+	LOG_MESSAGE(L"ScreenSize %d , %d", ScreenSize.width, ScreenSize.height);
 	return ScreenSize;
 }
 
