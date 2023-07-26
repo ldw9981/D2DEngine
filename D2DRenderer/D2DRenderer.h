@@ -55,5 +55,7 @@ public:
 
 	size_t GetUsedVRAM();
 	D2D_SIZE_U GetClientSize();
+
+	static void UpdateScreenTransform(D2D_SIZE_U ScreenSize);
 };
 

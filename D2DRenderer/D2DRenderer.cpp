@@ -78,15 +78,10 @@ HRESULT D2DRenderer::Initialize(HWND hWnd)
         Direct3D 장치에 바인딩된 리소스를 만듭니다.
         Direct3D 장치가 손실된 경우(예: 디스플레이 변경, 원격, 비디오 카드 제거 등)
         리소스를 다시 생성해야 하는 경우를 대비하여 모두 여기에 중앙 집중화되어 있습니다.
-        */
-     
+        */    
   
 		D2D1_SIZE_U ScreenSize = GetClientSize();
-		
-		
-
-		// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
-		m_ScreenTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) * D2D1::Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
+		UpdateScreenTransform(ScreenSize);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
@@ -356,5 +351,11 @@ D2D_SIZE_U D2DRenderer::GetClientSize()
 		rc.bottom - rc.top + 1);
 	LOG_MESSAGE(L"ScreenSize %d , %d", ScreenSize.width, ScreenSize.height);
 	return ScreenSize;
+}
+
+void D2DRenderer::UpdateScreenTransform(D2D_SIZE_U ScreenSize)
+{
+	// 화면 왼쪽,하단이 0,0으로 시작하는 화면좌표계로 이동하기위한 변환 
+	m_ScreenTransform = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) * D2D1::Matrix3x2F::Translation(0.0f, (float)ScreenSize.height);
 }
 
