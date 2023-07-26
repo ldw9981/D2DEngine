@@ -2,13 +2,13 @@
 #include "pch.h"
 #include "framework.h"
 #include "MainFrm.h"
-#include "ClassView.h"
+#include "WorldView.h"
 #include "Resource.h"
 #include "WorldEditor.h"
 
 class CClassViewMenuButton : public CMFCToolBarMenuButton
 {
-	friend class CClassView;
+	friend class CWorldView;
 
 	DECLARE_SERIAL(CClassViewMenuButton)
 
@@ -37,16 +37,16 @@ IMPLEMENT_SERIAL(CClassViewMenuButton, CMFCToolBarMenuButton, 1)
 // 생성/소멸
 //////////////////////////////////////////////////////////////////////
 
-CClassView::CClassView() noexcept
+CWorldView::CWorldView() noexcept
 {
 	m_nCurrSort = ID_SORTING_GROUPBYTYPE;
 }
 
-CClassView::~CClassView()
+CWorldView::~CWorldView()
 {
 }
 
-BEGIN_MESSAGE_MAP(CClassView, CDockablePane)
+BEGIN_MESSAGE_MAP(CWorldView, CDockablePane)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
 	ON_WM_CONTEXTMENU()
@@ -64,7 +64,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CClassView 메시지 처리기
 
-int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CWorldView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CDockablePane::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -77,7 +77,7 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	if (!m_wndClassView.Create(dwViewStyle, rectDummy, this, 2))
 	{
-		TRACE0("클래스 뷰를 만들지 못했습니다.\n");
+		TRACE0("월드 뷰를 만들지 못했습니다.\n");
 		return -1;      // 만들지 못했습니다.
 	}
 
@@ -116,13 +116,13 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-void CClassView::OnSize(UINT nType, int cx, int cy)
+void CWorldView::OnSize(UINT nType, int cx, int cy)
 {
 	CDockablePane::OnSize(nType, cx, cy);
 	AdjustLayout();
 }
 
-void CClassView::FillClassView()
+void CWorldView::FillClassView()
 {
 	HTREEITEM hRoot = m_wndClassView.InsertItem(_T("FakeApp 클래스"), 0, 0);
 	m_wndClassView.SetItemState(hRoot, TVIS_BOLD, TVIS_BOLD);
@@ -160,7 +160,7 @@ void CClassView::FillClassView()
 	m_wndClassView.Expand(hClass, TVE_EXPAND);
 }
 
-void CClassView::OnContextMenu(CWnd* pWnd, CPoint point)
+void CWorldView::OnContextMenu(CWnd* pWnd, CPoint point)
 {
 	CTreeCtrl* pWndTree = (CTreeCtrl*)&m_wndClassView;
 	ASSERT_VALID(pWndTree);
@@ -203,7 +203,7 @@ void CClassView::OnContextMenu(CWnd* pWnd, CPoint point)
 	}
 }
 
-void CClassView::AdjustLayout()
+void CWorldView::AdjustLayout()
 {
 	if (GetSafeHwnd() == nullptr)
 	{
@@ -219,12 +219,12 @@ void CClassView::AdjustLayout()
 	m_wndClassView.SetWindowPos(nullptr, rectClient.left + 1, rectClient.top + cyTlb + 1, rectClient.Width() - 2, rectClient.Height() - cyTlb - 2, SWP_NOACTIVATE | SWP_NOZORDER);
 }
 
-BOOL CClassView::PreTranslateMessage(MSG* pMsg)
+BOOL CWorldView::PreTranslateMessage(MSG* pMsg)
 {
 	return CDockablePane::PreTranslateMessage(pMsg);
 }
 
-void CClassView::OnSort(UINT id)
+void CWorldView::OnSort(UINT id)
 {
 	if (m_nCurrSort == id)
 	{
@@ -243,37 +243,37 @@ void CClassView::OnSort(UINT id)
 	}
 }
 
-void CClassView::OnUpdateSort(CCmdUI* pCmdUI)
+void CWorldView::OnUpdateSort(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetCheck(pCmdUI->m_nID == m_nCurrSort);
 }
 
-void CClassView::OnClassAddMemberFunction()
+void CWorldView::OnClassAddMemberFunction()
 {
 	AfxMessageBox(_T("멤버 함수 추가..."));
 }
 
-void CClassView::OnClassAddMemberVariable()
+void CWorldView::OnClassAddMemberVariable()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CClassView::OnClassDefinition()
+void CWorldView::OnClassDefinition()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CClassView::OnClassProperties()
+void CWorldView::OnClassProperties()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CClassView::OnNewFolder()
+void CWorldView::OnNewFolder()
 {
 	AfxMessageBox(_T("새 폴더..."));
 }
 
-void CClassView::OnPaint()
+void CWorldView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
@@ -285,14 +285,14 @@ void CClassView::OnPaint()
 	dc.Draw3dRect(rectTree, ::GetSysColor(COLOR_3DSHADOW), ::GetSysColor(COLOR_3DSHADOW));
 }
 
-void CClassView::OnSetFocus(CWnd* pOldWnd)
+void CWorldView::OnSetFocus(CWnd* pOldWnd)
 {
 	CDockablePane::OnSetFocus(pOldWnd);
 
 	m_wndClassView.SetFocus();
 }
 
-void CClassView::OnChangeVisualStyle()
+void CWorldView::OnChangeVisualStyle()
 {
 	m_ClassViewImages.DeleteImageList();
 

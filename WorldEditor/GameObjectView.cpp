@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "mainfrm.h"
-#include "FileView.h"
+#include "GameObjectView.h"
 #include "Resource.h"
 #include "WorldEditor.h"
 #include "../D2DRenderer/Factory.h"
@@ -16,15 +16,15 @@ static char THIS_FILE[]=__FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CFileView
 
-CFileView::CFileView() noexcept
+CGameObjectView::CGameObjectView() noexcept
 {
 }
 
-CFileView::~CFileView()
+CGameObjectView::~CGameObjectView()
 {
 }
 
-BEGIN_MESSAGE_MAP(CFileView, CDockablePane)
+BEGIN_MESSAGE_MAP(CGameObjectView, CDockablePane)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
 	ON_WM_CONTEXTMENU()
@@ -42,7 +42,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CWorkspaceBar 메시지 처리기
 
-int CFileView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CGameObjectView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CDockablePane::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -55,7 +55,7 @@ int CFileView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	if (!m_wndFileView.Create(dwViewStyle, rectDummy, this, 4))
 	{
-		TRACE0("파일 뷰를 만들지 못했습니다.\n");
+		TRACE0("게임 오브젝트 뷰를 만들지 못했습니다.\n");
 		return -1;      // 만들지 못했습니다.
 	}
 
@@ -84,13 +84,13 @@ int CFileView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-void CFileView::OnSize(UINT nType, int cx, int cy)
+void CGameObjectView::OnSize(UINT nType, int cx, int cy)
 {
 	CDockablePane::OnSize(nType, cx, cy);
 	AdjustLayout();
 }
 
-void CFileView::FillFileView()
+void CGameObjectView::FillFileView()
 {
 	HTREEITEM hRoot = m_wndFileView.InsertItem(_T("게임오브젝트"), 0, 0);
 	m_wndFileView.SetItemState(hRoot, TVIS_BOLD, TVIS_BOLD);
@@ -105,7 +105,7 @@ void CFileView::FillFileView()
 
 }
 
-void CFileView::OnContextMenu(CWnd* pWnd, CPoint point)
+void CGameObjectView::OnContextMenu(CWnd* pWnd, CPoint point)
 {
 	CTreeCtrl* pWndTree = (CTreeCtrl*) &m_wndFileView;
 	ASSERT_VALID(pWndTree);
@@ -134,7 +134,7 @@ void CFileView::OnContextMenu(CWnd* pWnd, CPoint point)
 	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EXPLORER, point.x, point.y, this, TRUE);
 }
 
-void CFileView::AdjustLayout()
+void CGameObjectView::AdjustLayout()
 {
 	if (GetSafeHwnd() == nullptr)
 	{
@@ -150,43 +150,43 @@ void CFileView::AdjustLayout()
 	m_wndFileView.SetWindowPos(nullptr, rectClient.left + 1, rectClient.top + cyTlb + 1, rectClient.Width() - 2, rectClient.Height() - cyTlb - 2, SWP_NOACTIVATE | SWP_NOZORDER);
 }
 
-void CFileView::OnProperties()
+void CGameObjectView::OnProperties()
 {
 	AfxMessageBox(_T("속성...."));
 
 }
 
-void CFileView::OnFileOpen()
+void CGameObjectView::OnFileOpen()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnFileOpenWith()
+void CGameObjectView::OnFileOpenWith()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnDummyCompile()
+void CGameObjectView::OnDummyCompile()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnEditCut()
+void CGameObjectView::OnEditCut()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnEditCopy()
+void CGameObjectView::OnEditCopy()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnEditClear()
+void CGameObjectView::OnEditClear()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
-void CFileView::OnPaint()
+void CGameObjectView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
@@ -198,14 +198,14 @@ void CFileView::OnPaint()
 	dc.Draw3dRect(rectTree, ::GetSysColor(COLOR_3DSHADOW), ::GetSysColor(COLOR_3DSHADOW));
 }
 
-void CFileView::OnSetFocus(CWnd* pOldWnd)
+void CGameObjectView::OnSetFocus(CWnd* pOldWnd)
 {
 	CDockablePane::OnSetFocus(pOldWnd);
 
 	m_wndFileView.SetFocus();
 }
 
-void CFileView::OnChangeVisualStyle()
+void CGameObjectView::OnChangeVisualStyle()
 {
 	m_wndToolBar.CleanUpLockedImages();
 	m_wndToolBar.LoadBitmap(theApp.m_bHiColorIcons ? IDB_EXPLORER_24 : IDR_EXPLORER, 0, 0, TRUE /* 잠금 */);

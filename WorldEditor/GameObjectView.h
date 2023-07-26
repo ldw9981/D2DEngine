@@ -3,7 +3,7 @@
 
 #include "ViewTree.h"
 
-class CFileViewToolBar : public CMFCToolBar
+class CGameObjectViewToolBar : public CMFCToolBar
 {
 	virtual void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler)
 	{
@@ -13,11 +13,11 @@ class CFileViewToolBar : public CMFCToolBar
 	virtual BOOL AllowShowOnList() const { return FALSE; }
 };
 
-class CFileView : public CDockablePane
+class CGameObjectView : public CDockablePane
 {
 // 생성입니다.
 public:
-	CFileView() noexcept;
+	CGameObjectView() noexcept;
 
 	void AdjustLayout();
 	void OnChangeVisualStyle();
@@ -27,14 +27,14 @@ protected:
 
 	CViewTree m_wndFileView;
 	CImageList m_FileViewImages;
-	CFileViewToolBar m_wndToolBar;
+	CGameObjectViewToolBar m_wndToolBar;
 
 protected:
 	void FillFileView();
 
 // 구현입니다.
 public:
-	virtual ~CFileView();
+	virtual ~CGameObjectView();
 
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);

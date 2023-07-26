@@ -185,8 +185,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClassView.h" />
-    <ClInclude Include="FileView.h" />
+    <ClInclude Include="WorldView.h" />
+    <ClInclude Include="GameObjectView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputWnd.h" />
@@ -200,8 +200,8 @@
     <ClInclude Include="WorldEditorView.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClassView.cpp" />
-    <ClCompile Include="FileView.cpp" />
+    <ClCompile Include="WorldView.cpp" />
+    <ClCompile Include="GameObjectView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="pch.cpp">

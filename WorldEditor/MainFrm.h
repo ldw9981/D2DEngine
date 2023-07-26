@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "FileView.h"
-#include "ClassView.h"
+#include "GameObjectView.h"
+#include "WorldView.h"
 #include "OutputWnd.h"
 #include "PropertiesWnd.h"
 
@@ -39,8 +39,8 @@ protected:  // 컨트롤 모음이 포함된 멤버입니다.
 	CMFCToolBar       m_wndToolBar;
 	CMFCStatusBar     m_wndStatusBar;
 	CMFCToolBarImages m_UserImages;
-	CFileView         m_wndFileView;
-	CClassView        m_wndClassView;
+	CGameObjectView         m_wndFileView;
+	CWorldView        m_wndClassView;
 	COutputWnd        m_wndOutput;
 	CPropertiesWnd    m_wndProperties;
 
