@@ -8,24 +8,21 @@
 CameraComponent::CameraComponent(GameObject* pOwner, const std::string& Name)
 	: SceneComponent(pOwner, Name)
 {
-	
-	m_BoundingBox.m_Extend.x = D2DRenderer::m_Instance->GetClientSize().width / 2.f;
-	m_BoundingBox.m_Extend.y = D2DRenderer::m_Instance->GetClientSize().height / 2.f;
 	m_CameraID = -1;
-
-	// CameraID를 등록한다.
-	//GetOwnerWorld()->AddCamera(m_pCameraComponent);
 }
 
 CameraComponent::~CameraComponent()
 {
-	// CameraID를 삭제한다.
-	//GetOwnerWorld()->DelCamera(m_pCameraComponent);
+
 }
 
 void CameraComponent::Update(float DeltaTime)
 {
 	__super::Update(DeltaTime);	
+
+	m_BoundingBox.m_Extend.x = D2DRenderer::m_Instance->GetClientSize().width / 2.f;
+	m_BoundingBox.m_Extend.y = D2DRenderer::m_Instance->GetClientSize().height / 2.f;
+
 	// 카메라의 위치가 0,0 이면 바운딩 박스의 센터위치는 화면 크기의 절반씩 더한 위치이다
 	m_BoundingBox.m_Center.x = GetWorldLocation().x + m_BoundingBox.m_Extend.x;
 	m_BoundingBox.m_Center.y = GetWorldLocation().y + m_BoundingBox.m_Extend.y;

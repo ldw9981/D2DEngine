@@ -71,12 +71,7 @@ PlayerCharacter::PlayerCharacter()
 
 	m_pCameraComponent = CreateComponent<CameraComponent>("CameraComponent");	
 	m_pCameraComponent->AttachToComponent(m_pAnimationComponent);
-	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
-	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
-	D2D_SIZE_U size = D2DRenderer::m_Instance->GetClientSize();
-	size.height = size.height / 2;
-	size.width = size.width / 2;
-	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width * -1.0f , -100.0f));
+
 	m_pCameraComponent->SetCameraID(1);
 }
 
@@ -114,8 +109,10 @@ void PlayerCharacter::Update(float DeltaTime)
 
 	m_pSideMovementComponent->SetDirection(Direction);
 	
-	
-	
+	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
+	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
+	D2D_SIZE_U size = D2DRenderer::m_Instance->GetClientSize();
+	m_pCameraComponent->SetRelativeLocation(mathHelper::Vector2F((float)size.width /2 * -1.0f, -100.0f));	
 
 	__super::Update(DeltaTime);
 }

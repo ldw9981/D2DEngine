@@ -134,11 +134,7 @@ void CWorldEditorView::OnSize(UINT nType, int cx, int cy)
 	CView::OnSize(nType, cx, cy);
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
-	if (pApp->m_Renderer.m_pRenderTarget!=nullptr)
-	{
-		pApp->m_Renderer.m_pRenderTarget->Resize(D2D1::SizeU(cx, cy));
-		D2DRenderer::UpdateScreenTransform(D2D1::SizeU(cx, cy));
-	}
+	D2DRenderer::m_Instance->ChangeHwndRendTargetSize(cx,cy);
 }
 
 

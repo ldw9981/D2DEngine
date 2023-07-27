@@ -27,8 +27,11 @@ D2DRenderer::D2DRenderer()
 	m_pDWriteTextFormat(nullptr),
 	m_pBrush(nullptr),
 	m_pDXGIFactory(nullptr),
-	m_pDXGIAdapter(nullptr)
+	m_pDXGIAdapter(nullptr)	
 {
+	m_ClientSize.height = 0; 
+	m_ClientSize.width = 0;
+
 	OutputDebugString(L"D2DRenderer::D2DRenderer()\n");
 	m_Instance = this;
 }
@@ -80,13 +83,13 @@ HRESULT D2DRenderer::Initialize(HWND hWnd)
         리소스를 다시 생성해야 하는 경우를 대비하여 모두 여기에 중앙 집중화되어 있습니다.
         */    
   
-		D2D1_SIZE_U ScreenSize = GetClientSize();
-		UpdateScreenTransform(ScreenSize);
+		m_ClientSize = CalculateSizeByHwndRect();
+		UpdateScreenTransform(m_ClientSize);
 
         // Create a Direct2D render target.
         hr = m_pD2DFactory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
-            D2D1::HwndRenderTargetProperties(m_hWnd, ScreenSize),
+            D2D1::HwndRenderTargetProperties(m_hWnd, m_ClientSize),
             &m_pRenderTarget);
     }
 
@@ -168,6 +171,18 @@ void D2DRenderer::DrawText(ID2D1RenderTarget* pRenderTarget, const std::wstring&
 {
 	m_pBrush->SetColor(color);
 	pRenderTarget->DrawTextW(string.c_str(),(UINT32) string.length(), m_pDWriteTextFormat, rect, m_pBrush);
+}
+
+void D2DRenderer::ChangeHwndRendTargetSize(UINT width, UINT height)
+{	
+	if (m_pRenderTarget==nullptr)
+	{
+		return;
+	}
+	m_ClientSize.width = width;
+	m_ClientSize.height = height;
+	m_pRenderTarget->Resize(m_ClientSize);
+	UpdateScreenTransform(m_ClientSize);
 }
 
 bool D2DRenderer::CreateSharedD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** ppID2D1Bitmap)
@@ -341,16 +356,16 @@ size_t D2DRenderer::GetUsedVRAM()
 	return videoMemoryInfo.CurrentUsage / 1024 / 1024;
 }
 
-D2D_SIZE_U D2DRenderer::GetClientSize()
+D2D_SIZE_U D2DRenderer::CalculateSizeByHwndRect()
 {	
 	RECT rc;
 	::GetClientRect(m_hWnd, &rc);
 
-	D2D1_SIZE_U ScreenSize = D2D1::SizeU(
+	D2D1_SIZE_U size = D2D1::SizeU(
 		rc.right - rc.left + 1,
 		rc.bottom - rc.top + 1);
-	LOG_MESSAGE(L"ScreenSize %d , %d", ScreenSize.width, ScreenSize.height);
-	return ScreenSize;
+	LOG_MESSAGE(L"CalculateSizeByHwndRect %d , %d", size.width, size.height);
+	return size;
 }
 
 void D2DRenderer::UpdateScreenTransform(D2D_SIZE_U ScreenSize)

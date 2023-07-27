@@ -7,6 +7,7 @@
 	간단한 리소스관리자 로서 공유하는 비트맵과 
 	공유하는 애니메이션 어셋을 생성하는 기능을 제공한다.
 */
+
 class AnimationAsset;
 class RenderComponent;
 class D2DRenderer
@@ -27,7 +28,8 @@ private:
 	ID2D1SolidColorBrush* m_pBrush;	// 렌더타겟이 생성하는 리소스 역시 장치의존
 	IDXGIFactory4* m_pDXGIFactory;		// DXGI팩토리
 	IDXGIAdapter3* m_pDXGIAdapter;		// 비디오카드 정보에 접근 가능한 인터페이스
-	HWND m_hWnd;
+	HWND m_hWnd;						// 렌더타겟을 생성할 윈도우 핸들
+	D2D_SIZE_U	m_ClientSize;			// 렌더타겟의 크기
 
 	std::list<std::pair<std::wstring, ID2D1Bitmap*>> m_SharingBitmaps;
 	std::list<std::pair<std::wstring, AnimationAsset*>> m_SharingAnimationAssets;	
@@ -40,6 +42,7 @@ public:
 	void DrawText(ID2D1RenderTarget* pRenderTarget,const std::wstring& string,D2D1_RECT_F rect, D2D1_COLOR_F color);
 
 
+	void ChangeHwndRendTargetSize(UINT width,UINT height);
 
 	// 카메라의 월드 변환을 넣어 역행렬을 계산하여 저장한다.
 	void SetCameraTransform(const D2D1_MATRIX_3X2_F& worldTrasnform);
@@ -54,8 +57,8 @@ public:
 	ID2D1SolidColorBrush* GetBrush() const { return m_pBrush; }
 
 	size_t GetUsedVRAM();
-	D2D_SIZE_U GetClientSize();
-
+	D2D_SIZE_U CalculateSizeByHwndRect();
+	const D2D_SIZE_U& GetClientSize() const { return m_ClientSize; }
 	static void UpdateScreenTransform(D2D_SIZE_U ScreenSize);
 };
 
