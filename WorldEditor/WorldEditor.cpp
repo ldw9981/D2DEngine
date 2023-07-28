@@ -222,7 +222,10 @@ void CWorldEditorApp::ChangeMode(bool PlayMode)
 	{		
 		m_bPlayMode = true;
 		// Todo: 플레이모드일때는  pDoc->m_EditWorld의 내용을 복사해서 m_PlayWorld에 넣어줘야함
-		//m_pTargetWorld = &m_PlayWorld;
+		pDoc->m_EditWorld.Save(L"../Resource/Temp.WorldAsset");
+		m_PlayWorld.Clear();
+		m_PlayWorld.Load(L"../Resource/Temp.WorldAsset");
+		m_pTargetWorld = &m_PlayWorld;
 	}
 }
 

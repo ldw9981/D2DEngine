@@ -21,7 +21,12 @@ public:
 	std::string GetClassName()
 	{
 		const std::type_info& self = typeid(*this);
-		return	self.name();
+		std::string className = self.name();
+		size_t classPos = className.find("class ");
+		if (classPos != std::string::npos) {
+			className.erase(classPos, 6); // 6 is the length of "class "
+		}
+		return className;
 	}
 
 	virtual void SerializeOut(nlohmann::ordered_json& object)=0;

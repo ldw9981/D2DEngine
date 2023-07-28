@@ -13,13 +13,14 @@
 
 int main()
 {
-	//PlayerCharacter go;
+	PlayerCharacter go;
 	//Test_CPP_writeBinaryFile();
 
 	//go.Update();
 	//go.Render();
 		
-	TestFactory();
+	const std::type_info& self = typeid(go);
+	std::string str = self.name();
 
 	return 0;
 }
