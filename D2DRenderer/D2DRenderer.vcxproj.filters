@@ -147,6 +147,9 @@
     <ClInclude Include="Factory.h">
       <Filter>헤더 파일\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>소스 파일\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -101,8 +101,8 @@
           "ClassName": "BoxComponent",
           "m_Name": "FootBox",
           "m_RelativeLocation": [
-            0.0,
-            0.0
+            696.9388427734375,
+            119.010009765625
           ],
           "m_CollisionType": 1,
           "m_Collider.Extend": [
@@ -161,7 +161,7 @@
           "ClassName": "CameraComponent",
           "m_Name": "CameraComponent",
           "m_RelativeLocation": [
-            -1074.5,
+            -966.5,
             -100.0
           ],
           "m_CameraID": 1

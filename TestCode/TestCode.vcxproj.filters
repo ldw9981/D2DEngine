@@ -84,6 +84,9 @@
     <ClCompile Include="TestEnumToString.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="TestAsyncKeyState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassOwner.h">
@@ -138,6 +141,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TestEnumToString.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestAsyncKeyState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

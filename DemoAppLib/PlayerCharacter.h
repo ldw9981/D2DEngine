@@ -1,9 +1,7 @@
 #pragma once
 
 #include "../D2DRenderer/GameObject.h"
-
-
-extern int Test;
+#include "../D2DRenderer/InputComponent.h"
 
 class AnimationComponent;
 class SideMovementComponent;
@@ -12,13 +10,15 @@ class FSMCharacter;
 class TextComponent;
 class CameraComponent;
 class BoxComponent;
+class InputComponent;
 class PlayerCharacter :
-	public GameObject
+	public GameObject,public IInputNotify 
 {
 public:
 	PlayerCharacter();
 	virtual ~PlayerCharacter();
 
+	InputComponent* m_pInputComponent;
 	FSMComponent* m_pFSMComponent;
 	AnimationComponent* m_pAnimationComponent;
 	SideMovementComponent* m_pSideMovementComponent;
@@ -27,6 +27,7 @@ public:
 	CameraComponent* m_pCameraComponent;
 	BoxComponent* m_pFootBox;
 	BoxComponent* m_pBodyBox;
+	D2D_VECTOR_2F m_KeyDirection;
 public:
 
 	virtual void Update(float DeltaTime) override;
@@ -38,5 +39,9 @@ public:
 
 
 	virtual void SerializeIn(nlohmann::ordered_json& object);
+
+	virtual void OnKeyDown(SHORT Key) override;
+	virtual void OnKeyUp(SHORT Key) override;
+	virtual void OnKeyPressed(SHORT Key) override;
 };
 

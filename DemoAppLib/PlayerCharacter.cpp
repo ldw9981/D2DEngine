@@ -17,29 +17,26 @@
 #include "../D2DRenderer/Factory.h"
 #include "../D2DRenderer/D2DRenderer.h"
 #include "../D2DRenderer/TimeSystem.h"
+#include "../D2DRenderer/InputComponent.h"
 #include "StateIdle.h"
 #include "FSMCharacter.h"
-
-int SetValue()
-{
-	return rand();
-}
-
-int Test = SetValue();
 
 
 REGISTER_GAMEOBJECT(PlayerCharacter)
 
-/*
-	DemoObject Hierachy
-	- SideMovementComponent
-	- [Root] AnimationComponent
-	- FSMComponent
- */
-
 PlayerCharacter::PlayerCharacter()
 {
+	m_KeyDirection = {0,0};	
+
 	// 그냥 Component 
+	m_pInputComponent = CreateComponent<InputComponent>("InputComponent");
+	m_pInputComponent->SetEnabled(true);
+	m_pInputComponent->SetInputListener(this);
+	m_pInputComponent->RegisterKey(VK_CONTROL);
+	m_pInputComponent->RegisterKey(VK_SPACE);
+	m_pInputComponent->RegisterKey(VK_LEFT);
+	m_pInputComponent->RegisterKey(VK_RIGHT);
+
 	m_pSideMovementComponent = CreateComponent<SideMovementComponent>("SideMovementComponent");
 	m_pSideMovementComponent->SetSpeed(200);
 
@@ -82,33 +79,13 @@ PlayerCharacter::~PlayerCharacter()
 
 void PlayerCharacter::Update(float DeltaTime)
 {
+	// 방향은 매프레임 초기화 하고 키 입력이 있는 상태에서만 방향을 설정한다.
+	m_KeyDirection = { 0,0 };
+	m_pSideMovementComponent->SetDirection(m_KeyDirection);
 
-	D2D_VECTOR_2F Location, Direction {0};
-	Location = m_pAnimationComponent->GetWorldLocation();
-	
-	if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-	{
-		m_pFSMCharacter->m_Attack = true;
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) 	{ //왼쪽
-		Direction.x = -1.0f;	
-	}
-	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { //오른쪽
-		Direction.x = 1.0f;		
-	}
-	if (GetAsyncKeyState(VK_UP) & 0x8000) { //위
-		Direction.y = 1.0f;		
-	} 
-	else if (GetAsyncKeyState(VK_DOWN) & 0x8000) { //아래
-		Direction.y = -1.0f;
-	}
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	{
-		m_pSideMovementComponent->Jump();
-	}
-
-	m_pSideMovementComponent->SetDirection(Direction);
-	
+	// 카메라의 상대 위치는 한번만 설정해도 되지만 MFC에디터에서는 화면 크기가 바뀔수 있어 일단 매번 설정한다.
+	// Todo: 이벤트 기반으로 바꾸자
+	D2D_VECTOR_2F Location = m_pAnimationComponent->GetWorldLocation();
 	// 상대위치가 0이면 왼쪽 하단 기준으로 나온다.
 	// 플레이어 이므로 캐릭터가 가운데 나오게한다.
 	D2D_SIZE_U size = D2DRenderer::m_Instance->GetClientSize();
@@ -159,4 +136,32 @@ void PlayerCharacter::SerializeIn(nlohmann::ordered_json& object)
 {
 	__super::SerializeIn(object);
 	GetOwnerWorld()->AddCamera(m_pCameraComponent);
+}
+
+void PlayerCharacter::OnKeyDown(SHORT Key)
+{
+	if (Key == VK_CONTROL)
+	{
+		m_pFSMCharacter->m_Attack = true;
+	}
+	if (Key == VK_SPACE)
+	{
+		m_pSideMovementComponent->Jump();
+	}
+}
+
+void PlayerCharacter::OnKeyUp(SHORT Key)
+{
+
+}
+
+void PlayerCharacter::OnKeyPressed(SHORT Key)
+{
+	if (Key == VK_LEFT)
+		m_KeyDirection.x = -1.0f;		
+	else if ( Key == VK_RIGHT)
+		m_KeyDirection.x = 1.0f;
+
+	if (Key == VK_LEFT || Key == VK_RIGHT )
+		m_pSideMovementComponent->SetDirection(m_KeyDirection);
 }
