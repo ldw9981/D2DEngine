@@ -42,3 +42,13 @@ void MovementComponent::SerializeIn(nlohmann::ordered_json& object)
 	m_Speed = object["m_Speed"];
 }
 
+void MovementComponent::OnBeginPlay()
+{
+
+}
+
+void MovementComponent::OnEndPlay()
+{
+
+}
+

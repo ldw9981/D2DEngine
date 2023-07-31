@@ -1,14 +1,16 @@
 #include "pch.h"
 #include "InputComponent.h"
+#include "InputManager.h"
 
 InputComponent::InputComponent(GameObject* pOwner, const std::string& Name)
 :Component(pOwner,Name),m_pInputNotify(nullptr), m_bIsEnabled(false)
 {
-
+	
 }
 
 InputComponent::~InputComponent()
 {
+	
 }
 
 void InputComponent::RegisterKey(SHORT Key)
@@ -51,11 +53,21 @@ void InputComponent::Update(float DeltaTime)
 
 void InputComponent::SerializeOut(nlohmann::ordered_json& object)
 {
-	//__super::SerializeOut(object);
+	__super::SerializeOut(object);
 
 }
 
 void InputComponent::SerializeIn(nlohmann::ordered_json& object)
 {
-	//__super::SerializeIn(object);
+	__super::SerializeIn(object);
+}
+
+void InputComponent::OnBeginPlay()
+{
+	InputManager::GetInstance()->RegisterInputComponent(this);
+}
+
+void InputComponent::OnEndPlay()
+{
+	InputManager::GetInstance()->UnregisterInputComponent(this);
 }

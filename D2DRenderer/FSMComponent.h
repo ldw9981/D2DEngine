@@ -43,5 +43,8 @@ public:
 		m_pFiniteStateMachine = newInstance;
 		return newInstance;
 	}
+
+	virtual void OnBeginPlay();
+	virtual void OnEndPlay();
 };
 

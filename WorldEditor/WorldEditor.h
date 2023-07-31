@@ -36,8 +36,9 @@ public:
 	// 플레이모드에서는 편집한 월드를 복사해서 원본은 유지하면서 게임플레이를 해본다.
 	// 편집모드로 돌아가면 플레이월드는 초기화한다.
 	bool m_bPlayMode;	// PlayMode or EditMode  
-	World* m_pTargetWorld;
+	World* m_pCurrWorld;
 	World m_PlayWorld;
+
 	static float m_deltaTime;
 	GameTimer m_Timer;
 
@@ -47,13 +48,14 @@ public:
 	void Update();
 	void Render();
 	void CalculateFrameStats();
-	void SetTargetWorld(World* pWorld) { m_pTargetWorld = pWorld;  }
+	void SetWorld(World* pWorld) { m_pCurrWorld = pWorld;  }
 
-	void ChangeMode(bool PlayMode);
+	void SetMode(bool PlayMode);
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 	virtual BOOL OnIdle(LONG lCount);
+	virtual CDocument* OpenDocumentFile(LPCTSTR lpszFileName);
 };
 
 extern CWorldEditorApp theApp;

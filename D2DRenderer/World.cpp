@@ -11,12 +11,32 @@
 #include "Effect.h"
 #include "CameraComponent.h"
 #include "Factory.h"
-
+#include "Helper.h"
 
 World::World(std::string Name)
-	:m_Name(Name)
+	:m_Name(Name), m_pCamera(nullptr), m_Playing(false)
 {
 
+}
+
+void World::OnBeginPlay()
+{
+	for (auto& gameObject : m_GameObjects)
+	{
+		gameObject->OnBeginPlay();
+	}
+	m_Playing = true;
+		
+	UpdateReferenceCameraComponent(m_CameraID);
+}
+
+void World::OnEndPlay()
+{
+	m_Playing = false;
+	for (auto& gameObject : m_GameObjects)
+	{
+		gameObject->OnEndPlay();
+	}
 }
 
 /*
@@ -143,6 +163,35 @@ void World::Render(ID2D1RenderTarget* pRenderTarget)
 	D2DRenderer::m_Instance->DrawText(pRenderTarget,strCullCount, D2D1::RectF(0,0,300,50), D2D1::ColorF(D2D1::ColorF::White));
 }
 
+void World::SetCameraID(int id)
+{	
+	if (m_Playing)
+	{
+		if (UpdateReferenceCameraComponent(id))
+		{
+			m_CameraID = id;
+		}
+	}
+	else
+	{
+		m_CameraID = id;
+	}
+}
+
+bool World::UpdateReferenceCameraComponent(int id)
+{
+	for (auto& it : m_Cameras)
+	{
+		if (it->GetCameraID() == id)
+		{
+			m_pCamera = it;
+			return true;
+		}
+	}
+	LOG_ERROR(L"Camera ID  %d is not exist", m_CameraID);	
+	return false;
+}
+
 void World::SerializeOut(nlohmann::ordered_json& object)
 {
 	object["m_Name"] = m_Name;
@@ -158,7 +207,7 @@ void World::SerializeOut(nlohmann::ordered_json& object)
 void World::SerializeIn(nlohmann::ordered_json& object)
 {
 	m_Name = object["m_Name"].get<std::string>();
-	int CameraID = object["m_CameraID"].get<int>();
+	m_CameraID = object["m_CameraID"].get<int>();
 	for (auto& JsonGameObj : object["m_GameObjects"])
 	{
 		std::string ClassName = JsonGameObj["ClassName"].get<std::string>();
@@ -167,7 +216,7 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 		GameObject* pGameObject = Factory::CreateGameObject(ClassName);
 		if (pGameObject)
 		{
-			pGameObject->SetOwnerWorld(this);
+			pGameObject->SetOwner(this);
 			pGameObject->SerializeIn(JsonGameObj);
 			m_GameObjects.push_back(pGameObject);
 		}	
@@ -176,7 +225,6 @@ void World::SerializeIn(nlohmann::ordered_json& object)
 			LOG_ERROR(L"Failed to create GameObject %s", D2DHelper::StringToWString(ClassName).c_str());
 		}
 	}
-	SetCamera(CameraID);
 }
 
 void World::Save(const wchar_t* FilePath)
@@ -210,24 +258,22 @@ bool World::Load(const wchar_t* FilePath)
 
 void World::AddCamera(CameraComponent* pCameraComponent)
 {
-	int  id = pCameraComponent->GetCameraID();
-	auto ret = m_Cameras.find(id);
-	if (ret != m_Cameras.end())
+	auto it = std::find(m_Cameras .begin(), m_Cameras.end(), pCameraComponent);
+	if (it != m_Cameras.end())
 	{
-		LOG_ERROR(L"CameraID %d is already added. \n", id);
+		LOG_ERROR(L"CameraComponent is already added. \n");
 		return;
 	}
-	m_Cameras[id] = pCameraComponent;
+	m_Cameras.push_back(pCameraComponent);
 }
 
 void World::DelCamera(CameraComponent* pCameraComponent)
 {
-	int  id = pCameraComponent->GetCameraID();
-	auto ret = m_Cameras.find(id);
-	if (ret == m_Cameras.end())
+	auto it = std::find(m_Cameras.begin(), m_Cameras.end(), pCameraComponent);
+	if (it == m_Cameras.end())
 	{
-		LOG_ERROR(L"CameraID %d is not found. \n", id);
+		LOG_ERROR(L"CameraComponent is none. \n");
 		return;
 	}
-	m_Cameras.erase(id);
+	m_Cameras.remove(pCameraComponent);
 }

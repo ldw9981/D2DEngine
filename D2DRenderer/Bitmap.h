@@ -11,5 +11,7 @@ public:
 	virtual void OnBeginOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent* pOtherComponent) override;
 	virtual void OnAnimationEnd(AnimationComponent* pOwnedComponent, const std::string& AnimationName) override;
+	virtual void OnBeginPlay() override;
+	virtual void OnEndPlay() override;
 };
 

@@ -14,8 +14,7 @@
 // GameApp클래스는 기본생성자가 없기때문에 자식클래스 DemoApp이 GameApp을 어떻게 생성자 호출할지 알려줘야한다.
 DemoApp::DemoApp(HINSTANCE hInstance)
     :GameApp::GameApp(hInstance), 
-        m_pAnimationAsset(nullptr),
-    m_pTest1Object{0,}
+        m_pAnimationAsset(nullptr), m_World("TestWorld"),   m_pTest1Object{0,}
 { 
 
 	std::wstring str(__FUNCTIONW__);
@@ -72,6 +71,8 @@ bool DemoApp::Initialize(UINT Width, UINT Height)
     */
     
     m_World.Load(L"../Resource/TestWorld.WorldAsset");
+    ChangeWorld(&m_World);
+    
     return true;
 }
 

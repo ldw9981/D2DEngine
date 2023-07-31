@@ -28,3 +28,13 @@ void Effect::OnEndOverlap(ColliderComponent* pOwnedComponent, ColliderComponent*
 void Effect::OnAnimationEnd(AnimationComponent* pAnimationComponent, const std::string& AnimationName)
 {
 }
+
+void Effect::OnBeginPlay()
+{
+
+}
+
+void Effect::OnEndPlay()
+{
+
+}

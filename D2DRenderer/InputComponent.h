@@ -31,5 +31,7 @@ public:
 
 	virtual void SerializeOut(nlohmann::ordered_json& object);
 	virtual void SerializeIn(nlohmann::ordered_json& object);
+	virtual void OnBeginPlay();
+	virtual void OnEndPlay();
 };
 

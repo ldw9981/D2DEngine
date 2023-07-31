@@ -90,10 +90,10 @@ public:
 	void SetParentObject(GameObject* pParentObject);
 
 	// 이 게임 오브젝트를 생성한 월드를 반환합니다.
-	World* GetOwnerWorld() const { return m_pOwnerWorld; }
+	World* GetOwner() const { return m_pOwnerWorld; }
 
 	// 이 게임 오브젝트가 속한 월드를 설정 합니다.
-	void SetOwnerWorld(World* val) { m_pOwnerWorld = val; }
+	void SetOwner(World* val) { m_pOwnerWorld = val; }
 
 	const std::vector<Component*>& GetOwnedComponents() const { return m_OwnedComponents; }
 	
@@ -103,5 +103,8 @@ public:
 	virtual void SerializeIn(nlohmann::ordered_json& object);
 
 	virtual void Save(const wchar_t* FileName);
+
+	virtual void OnBeginPlay();
+	virtual void OnEndPlay();
 };
 

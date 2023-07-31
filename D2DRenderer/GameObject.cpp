@@ -134,3 +134,19 @@ void GameObject::Save(const wchar_t* FilePath)
 	ofs.close();
 }
 
+void GameObject::OnBeginPlay()
+{
+	for (auto& pComponent : m_OwnedComponents)
+	{
+		pComponent->OnBeginPlay();
+	}
+}
+
+void GameObject::OnEndPlay()
+{
+	for (auto& pComponent : m_OwnedComponents)
+	{
+		pComponent->OnEndPlay();
+	}
+}
+

@@ -12,6 +12,7 @@
 #include "WorldEditorDoc.h"
 #include "WorldEditorView.h"
 #include "../D2DRenderer/Factory.h"
+#include "../D2DRenderer/InputManager.h"
 
 
 
@@ -38,7 +39,7 @@ CWorldEditorApp::CWorldEditorApp() noexcept
 :m_PlayWorld("PlayWorld")
 {
 	m_bHiColorIcons = TRUE;
-	m_pTargetWorld = nullptr;
+	m_pCurrWorld = nullptr;
 	m_bPlayMode = false;
 	m_nAppLook = 0;
 	// 다시 시작 관리자 지원
@@ -209,23 +210,37 @@ END_MESSAGE_MAP()
 // 대화 상자를 실행하기 위한 응용 프로그램 명령입니다.
 
 
-void CWorldEditorApp::ChangeMode(bool PlayMode)
+void CWorldEditorApp::SetMode(bool PlayMode)
 {
 	CMainFrame* pMainFrame = (CMainFrame*)::AfxGetMainWnd();
 	CWorldEditorDoc* pDoc = (CWorldEditorDoc*)pMainFrame->GetActiveDocument();
-	if (!PlayMode)
-	{
-		m_bPlayMode = false;
-		m_pTargetWorld = &pDoc->m_EditWorld;
-	}
-	else
+
+	if (PlayMode)
 	{		
+		if (!m_bPlayMode)
+		{
+			pDoc->m_EditWorld.OnEndPlay();
+		}		
 		m_bPlayMode = true;
 		// Todo: 플레이모드일때는  pDoc->m_EditWorld의 내용을 복사해서 m_PlayWorld에 넣어줘야함
 		pDoc->m_EditWorld.Save(L"../Resource/Temp.WorldAsset");
 		m_PlayWorld.Clear();
-		m_PlayWorld.Load(L"../Resource/Temp.WorldAsset");
-		m_pTargetWorld = &m_PlayWorld;
+		m_PlayWorld.Load(L"../Resource/Temp.WorldAsset");		
+		m_PlayWorld.OnBeginPlay();
+		m_pCurrWorld = &m_PlayWorld;
+	}
+	else
+	{		
+		if (m_bPlayMode)
+			m_PlayWorld.OnEndPlay();
+
+		m_bPlayMode = false;
+		pDoc->m_EditWorld.OnBeginPlay();
+		// 에디트 모드일때는 기본 카메라로 설정한다.
+		pDoc->m_EditWorld.UpdateReferenceCameraComponent(-1);
+				
+
+		m_pCurrWorld = &pDoc->m_EditWorld;
 	}
 }
 
@@ -261,9 +276,9 @@ void CWorldEditorApp::Update()
 {
 	m_Timer.Tick();
 	CalculateFrameStats();
-	if (m_pTargetWorld != nullptr)
+	if (m_pCurrWorld != nullptr)
 	{
-		m_pTargetWorld->Update(m_Timer.DeltaTime());		
+		m_pCurrWorld->Update(m_Timer.DeltaTime());		
 	}
 
 }
@@ -272,16 +287,11 @@ void CWorldEditorApp::Render()
 {
 	m_Renderer.m_pRenderTarget->BeginDraw();
 	m_Renderer.m_pRenderTarget->Clear(D2D1::ColorF(0.0f, 0.0f, 0.0f, 1.0f));
-
-	/*
-	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(100, 100), 500, 500);
-	D2D1_COLOR_F color = D2D1::ColorF(1.0f, 1.0f, 0.0f, 1.0f);
-	m_Renderer.DrawEllipse(m_Renderer.m_pRenderTarget, ellipse, color);
-	*/
-
-	if (m_pTargetWorld != nullptr)
+	
+	// PlayWorld 또는 Doc의 EditWorld 가 될수 있다.
+	if (m_pCurrWorld != nullptr)
 	{		
-		m_pTargetWorld->Render(m_Renderer.m_pRenderTarget);
+		m_pCurrWorld->Render(m_Renderer.m_pRenderTarget);
 	}
 	m_Renderer.m_pRenderTarget->EndDraw();
 }
@@ -341,4 +351,12 @@ BOOL CWorldEditorApp::OnIdle(LONG lCount)
 	Update();
 	Render();
 	return TRUE;//CWinAppEx::OnIdle(lCount);
+}
+
+
+CDocument* CWorldEditorApp::OpenDocumentFile(LPCTSTR lpszFileName)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+
+	return CWinAppEx::OpenDocumentFile(lpszFileName);
 }

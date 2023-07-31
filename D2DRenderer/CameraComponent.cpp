@@ -40,3 +40,13 @@ void CameraComponent::SerializeIn(nlohmann::ordered_json& object)
 	m_CameraID = object["m_CameraID"].get<int>();
 }
 
+void CameraComponent::OnBeginPlay()
+{
+	GetOwner()->GetOwner()->AddCamera(this);
+}
+
+void CameraComponent::OnEndPlay()
+{
+	GetOwner()->GetOwner()->DelCamera(this);
+}
+

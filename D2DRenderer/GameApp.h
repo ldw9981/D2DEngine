@@ -36,8 +36,8 @@ public:
 
 	float m_previousTime;
 	float m_currentTime;
-	
-	World m_World;
+
+	World* m_pCurrentWorld;
 public:
 
 	virtual bool Initialize(UINT Width, UINT Height);
@@ -49,6 +49,8 @@ public:
 	BOOL GetClientRect(LPRECT lpRect);
 	int MessageBoxComError(HRESULT hr);
 	void CalculateFrameStats();
+
+	void ChangeWorld(World* pWorld);
 
 	virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);	
 };

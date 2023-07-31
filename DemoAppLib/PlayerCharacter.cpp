@@ -74,7 +74,7 @@ PlayerCharacter::PlayerCharacter()
 
 PlayerCharacter::~PlayerCharacter()
 {
-	GetOwnerWorld()->DelCamera(m_pCameraComponent);
+
 }
 
 void PlayerCharacter::Update(float DeltaTime)
@@ -135,7 +135,7 @@ void PlayerCharacter::OnAnimationEnd(AnimationComponent* pOwnedComponent, const 
 void PlayerCharacter::SerializeIn(nlohmann::ordered_json& object)
 {
 	__super::SerializeIn(object);
-	GetOwnerWorld()->AddCamera(m_pCameraComponent);
+
 }
 
 void PlayerCharacter::OnKeyDown(SHORT Key)

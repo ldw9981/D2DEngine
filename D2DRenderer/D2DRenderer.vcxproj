@@ -166,6 +166,7 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="BitmapComponent.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="framework.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="SideMovementComponent.h" />
     <ClInclude Include="SimpleMathHelper.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereComponent.h" />
     <ClInclude Include="TextComponent.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="BitmapComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -222,6 +225,7 @@
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="SideMovementComponent.cpp" />
     <ClCompile Include="SimpleMathHelper.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereComponent.cpp" />
     <ClCompile Include="TextComponent.cpp" />

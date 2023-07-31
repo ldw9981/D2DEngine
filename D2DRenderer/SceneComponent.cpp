@@ -133,3 +133,13 @@ void SceneComponent::SerializeIn(nlohmann::ordered_json& object)
 		m_BoundingBox.m_Extend.y = object["m_BoundingBox.m_Extend"][1];
 	}
 }
+
+void SceneComponent::OnBeginPlay()
+{
+
+}
+
+void SceneComponent::OnEndPlay()
+{
+
+}

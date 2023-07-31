@@ -454,7 +454,7 @@ void CMainFrame::OnButtonGameplay()
 		return;
 
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	pApp->ChangeMode(true);
+	pApp->SetMode(true);
 	m_wndStatusBar.SetPaneText(1, _T("Play"));
 }
 
@@ -466,6 +466,6 @@ void CMainFrame::OnButtonGamestop()
 		return;
 
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	pApp->ChangeMode(false);
+	pApp->SetMode(false);
 	m_wndStatusBar.SetPaneText(1, _T("Edit"));
 }

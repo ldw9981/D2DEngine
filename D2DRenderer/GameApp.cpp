@@ -15,7 +15,7 @@ LRESULT CALLBACK DefaultWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 }
 
 GameApp::GameApp(HINSTANCE hInstance)
-	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768}),m_World("TestWorld")
+	:m_hInstance(hInstance), m_szWindowClass(L"DefaultWindowCalss"), m_szTitle(L"GameApp"),m_ClientSize({1024,768}), m_pCurrentWorld(nullptr)
 {
 	m_previousTime =0.0f;
 	std::wstring str(__FUNCTIONW__);
@@ -112,7 +112,8 @@ void GameApp::Update()
 	// 어떤 게임이라도 시간업데이트는 한다.	
 	m_Timer.Tick();
 	CalculateFrameStats();	
-	m_World.Update(m_Timer.DeltaTime());
+	if(m_pCurrentWorld)
+		m_pCurrentWorld->Update(m_Timer.DeltaTime());
 }
 
 void GameApp::CalculateFrameStats()
@@ -153,11 +154,28 @@ void GameApp::CalculateFrameStats()
 	}
 }
 
+void GameApp::ChangeWorld(World* pNewWorld)
+{
+	if (m_pCurrentWorld)
+	{
+		m_pCurrentWorld->OnEndPlay();
+		m_pCurrentWorld->Clear();
+	}
+	if (pNewWorld)
+	{
+		pNewWorld->OnBeginPlay();
+	}	
+	m_pCurrentWorld = pNewWorld;
+}
+
 void GameApp::Render()
 {
 	D2DRenderer::m_pRenderTarget->BeginDraw();
 	D2DRenderer::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
-	m_World.Render(D2DRenderer::m_pRenderTarget);
+
+	if (m_pCurrentWorld)
+		m_pCurrentWorld->Render(D2DRenderer::m_pRenderTarget);
+
 	HRESULT hr = D2DRenderer::m_pRenderTarget->EndDraw();
 	// 그래픽 카드를 사용할수없을때 실패가 리턴되며
 	// 그래픽 카드가 정상화 된 이후에 렌더타겟과 렌더타겟이 생성한 리소스를 재성성해야한다.

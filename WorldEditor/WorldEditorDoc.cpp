@@ -12,6 +12,10 @@
 
 #include "WorldEditorDoc.h"
 #include "../D2DRenderer/Helper.h"
+#include "../D2DRenderer/Camera.h"
+#include "../D2DRenderer/CameraComponent.h"
+#include "../D2DRenderer/Bitmap.h"
+#include "MainFrm.h"
 #include <string>
 #include <propkey.h>
 
@@ -49,7 +53,15 @@ BOOL CWorldEditorDoc::OnNewDocument()
 	// SDI 문서는 이 문서를 다시 사용합니다.
 	CT2CA convertedString(m_strTitle);
 	m_EditWorld.SetName(convertedString.m_psz);
-	
+	// 기본 카메라 생성하고 ID는 -1로 설정한다.
+	Camera* pCamera = m_EditWorld.CreateGameObject<Camera>();
+	pCamera->SetCameraID(-1);
+	m_EditWorld.SetCameraID(pCamera->GetCameraID());
+	m_EditWorld.OnBeginPlay();
+
+	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
+	pApp->SetWorld(&m_EditWorld);
+
 	return TRUE;
 }
 
@@ -159,16 +171,43 @@ BOOL CWorldEditorDoc::OnSaveDocument(LPCTSTR lpszPathName)
 
 BOOL CWorldEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
+	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
+	if(pApp->m_bPlayMode)
+	{
+		::AfxMessageBox(L"정지후 로드",MB_OK);
+		return FALSE;
+	}
 	//if (!CDocument::OnOpenDocument(lpszPathName))
 	//	return FALSE;
 
 	// TODO:  여기에 특수화된 작성 코드를 추가합니다.	
+	m_EditWorld.OnEndPlay();
+	m_EditWorld.Clear();
 	if (!m_EditWorld.Load(lpszPathName))
 	{
 		return FALSE;
 	}
-	CWorldEditorApp* pApp = (CWorldEditorApp*)AfxGetApp();
-	pApp->SetTargetWorld(&m_EditWorld);
 
+	std::vector<GameObject*> out;
+	m_EditWorld.GetGameObject<Camera>(out);
+	Camera* pCameraFound = nullptr;
+	for (auto& p : out)
+	{
+		Camera* pCamera = (Camera*)p;
+		if (pCamera->GetCameraID() == -1)
+		{
+			pCameraFound = pCamera;
+			break;
+		}			
+	}
+
+	if (pCameraFound == nullptr)
+	{	
+	    //기본 카메라가 없으면 생성하고 ID는 -1로 설정한다.
+		pCameraFound = m_EditWorld.CreateGameObject<Camera>();
+		pCameraFound->SetCameraID(-1);
+	}	
+
+	pApp->SetMode(false);	
 	return TRUE;
 }
