@@ -5,7 +5,7 @@ class MyComponent4;
 
 class Deligate {
 public:
-	using CallbackFunction = std::function<void(int)>;
+	using CallbackFunction = std::function<void()>;
 	using CallbackMap = std::map<uintptr_t, CallbackFunction>;
 
 	template <typename Class>
@@ -13,16 +13,16 @@ public:
 		callbacks_.erase(reinterpret_cast<uintptr_t>(instance));
 	}
 
-	void InvokeCallbacks(int value) {
+	void InvokeCallbacks() {
 		for (const auto& pair : callbacks_) {
-			pair.second(value);
+			pair.second();
 		}
 	}
 
 	template <typename Class, typename Function>
 	void AddCallback(Class* instance, Function&& function) {
-		CallbackFunction callback = [instance, function](int value) {
-			(instance->*function)(value);
+		CallbackFunction callback = [instance, function]() {
+			(instance->*function)();
 		};
 		callbacks_[reinterpret_cast<uintptr_t>(instance)] = callback;
 	}
@@ -51,7 +51,7 @@ public:
 	template <typename Class, typename Function>
 	void AddCallback(Class* instance, Function&& function) {
 		CallbackFunction callback = [instance, function](T value) {
-			(instance->*function)(value);
+			(instance->*function)(value);				
 		};
 		callbacks_[reinterpret_cast<uintptr_t>(instance)] = callback;
 	}
@@ -80,7 +80,7 @@ public:
 	template <typename Class, typename Function>
 	void AddCallback(Class* instance, Function&& function) {
 		CallbackFunction callback = [instance, function](T1 value1,T2 value2) {
-			(instance->*function)(value1,value2);
+			(instance->*function)(value1, value2);
 		};
 		callbacks_[reinterpret_cast<uintptr_t>(instance)] = callback;
 	}
