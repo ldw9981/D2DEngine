@@ -36,4 +36,5 @@
 #include <queue>
 #include <set>
 #include <fstream>
+#include <nlohmann/json.hpp>
 #endif //PCH_H

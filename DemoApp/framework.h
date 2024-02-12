@@ -33,6 +33,7 @@
 #include <map>
 #include <string>
 #include <queue>
+#include <nlohmann/json.hpp>
 
 using namespace D2D1; 
 using namespace DirectX;
